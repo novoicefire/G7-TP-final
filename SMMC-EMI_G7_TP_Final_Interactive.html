@@ -1,0 +1,3693 @@
+<!doctype html>
+<html lang="zh-Hant" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SMMC-EMI G7 | Formosa Plastics Interactive Strategy Report</title>
+  <!-- Google Fonts: Inter and EB Garamond -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Inter:wght@100..900&display=swap" rel="stylesheet">
+  <style>
+    /* DESIGN SYSTEM TOKENS (DESIGN.md Compliance) */
+    :root {
+      --primary: #292524;
+      --primary-active: #0c0a09;
+      --ink: #0c0a09;
+      --body: #4e4e4e;
+      --body-strong: #292524;
+      --muted: #777169;
+      --muted-soft: #a8a29e;
+      --hairline: #e7e5e4;
+      --hairline-soft: #f0efed;
+      --hairline-strong: #d6d3d1;
+      --canvas: #f5f5f5;
+      --canvas-soft: #fafafa;
+      --canvas-deep: #0c0a09;
+      --surface-card: #ffffff;
+      --surface-strong: #f0efed;
+      --surface-dark: #0c0a09;
+      --surface-dark-elevated: #1c1917;
+      --on-primary: #ffffff;
+      --on-dark: #ffffff;
+      --on-dark-soft: #a8a29e;
+
+      /* Atmospheric Gradient Orbs (signature tokens) */
+      --gradient-mint: #a7e5d3;
+      --gradient-peach: #f4c5a8;
+      --gradient-lavender: #c8b8e0;
+      --gradient-sky: #a8c8e8;
+      --gradient-rose: #e8b8c4;
+
+      --semantic-error: #dc2626;
+      --semantic-success: #16a34a;
+
+      /* Geometry & Layout */
+      --radius-xs: 4px;
+      --radius-sm: 6px;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+      --radius-xl: 16px;
+      --radius-xxl: 24px;
+      --radius-pill: 9999px;
+      --radius-full: 9999px;
+
+      --spacing-xxs: 4px;
+      --spacing-xs: 8px;
+      --spacing-sm: 12px;
+      --spacing-base: 16px;
+      --spacing-md: 20px;
+      --spacing-lg: 24px;
+      --spacing-xl: 32px;
+      --spacing-xxl: 48px;
+      --spacing-section: 96px;
+
+      --container-max: 1200px;
+      
+      color-scheme: light;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    [data-theme="dark"] {
+      --primary: #f5f5f5;
+      --primary-active: #ffffff;
+      --ink: #f5f5f5;
+      --body: #d6d3d1;
+      --body-strong: #fafafa;
+      --muted: #a8a29e;
+      --muted-soft: #78716c;
+      --hairline: #292524;
+      --hairline-soft: #1c1917;
+      --hairline-strong: #44403c;
+      --canvas: #0c0a09;
+      --canvas-soft: #141211;
+      --surface-card: #1c1917;
+      --surface-strong: #292524;
+      --surface-dark: #000000;
+      --surface-dark-elevated: #0c0a09;
+      --on-primary: #0c0a09;
+      
+      color-scheme: dark;
+    }
+
+    /* BASE RESET */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--canvas);
+      color: var(--body);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.5;
+      letter-spacing: 0.16px;
+      overflow-x: hidden;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: -100px;
+      left: 0;
+      background: var(--primary);
+      color: var(--on-primary);
+      padding: 8px 16px;
+      z-index: 1000;
+      transition: top 0.2s;
+      border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+    /* TYPOGRAPHY */
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'EB Garamond', Georgia, "Times New Roman", serif;
+      font-weight: 300;
+      color: var(--ink);
+      line-height: 1.15;
+    }
+
+    h1 {
+      font-size: clamp(36px, 6vw, 64px);
+      letter-spacing: -1.92px;
+      line-height: 1.05;
+    }
+
+    h2 {
+      font-size: clamp(28px, 4vw, 36px);
+      letter-spacing: -0.36px;
+      line-height: 1.17;
+      margin-bottom: var(--spacing-md);
+    }
+
+    h3 {
+      font-size: clamp(20px, 3vw, 24px);
+      letter-spacing: -0.2px;
+      line-height: 1.25;
+      margin-bottom: var(--spacing-xs);
+    }
+
+    p {
+      margin-bottom: var(--spacing-base);
+      color: var(--body);
+    }
+
+    strong {
+      color: var(--body-strong);
+      font-weight: 600;
+    }
+
+    /* BADGE & LABELS */
+    .eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.96px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: var(--spacing-xs);
+      display: inline-block;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+      background-color: var(--surface-strong);
+      color: var(--ink);
+      border: 1px solid var(--hairline);
+    }
+
+    .badge--success {
+      background-color: rgba(22, 163, 74, 0.1);
+      color: var(--semantic-success);
+      border-color: rgba(22, 163, 74, 0.2);
+    }
+
+    .badge--error {
+      background-color: rgba(220, 38, 38, 0.1);
+      color: var(--semantic-error);
+      border-color: rgba(220, 38, 38, 0.2);
+    }
+
+    .badge--warning {
+      background-color: rgba(244, 197, 168, 0.2);
+      color: #c2410c;
+      border-color: rgba(244, 197, 168, 0.4);
+    }
+
+    /* BUTTONS */
+    .btn {
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 1;
+      height: 40px;
+      padding: 10px 20px;
+      border-radius: var(--radius-pill);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--spacing-xs);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      border: 1px solid transparent;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .btn--primary {
+      background-color: var(--primary);
+      color: var(--on-primary);
+    }
+    .btn--primary:hover {
+      background-color: var(--primary-active);
+      transform: translateY(-1px);
+    }
+
+    .btn--outline {
+      background-color: transparent;
+      color: var(--ink);
+      border-color: var(--hairline-strong);
+    }
+    .btn--outline:hover {
+      background-color: var(--surface-strong);
+      border-color: var(--ink);
+    }
+
+    .btn--text {
+      background-color: transparent;
+      color: var(--ink);
+      height: auto;
+      padding: 0;
+      border-radius: 0;
+    }
+    .btn--text:hover {
+      text-decoration: underline;
+    }
+
+    .btn--small {
+      height: 32px;
+      padding: 6px 14px;
+      font-size: 13px;
+    }
+
+    /* TOP NAV */
+    .top-nav {
+      height: 64px;
+      border-bottom: 1px solid var(--hairline);
+      background-color: var(--canvas);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      transition: background-color 0.3s ease;
+    }
+
+    .top-nav__container {
+      max-width: var(--container-max);
+      height: 100%;
+      margin: 0 auto;
+      padding: 0 var(--spacing-lg);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .top-nav__brand {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-xs);
+      text-decoration: none;
+      color: var(--ink);
+      font-family: 'EB Garamond', serif;
+      font-size: 20px;
+      font-weight: 500;
+      letter-spacing: -0.2px;
+    }
+
+    .top-nav__brand strong {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      background-color: var(--primary);
+      color: var(--on-primary);
+      padding: 2px 6px;
+      border-radius: var(--radius-xs);
+      letter-spacing: 0;
+    }
+
+    .top-nav__actions {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+    }
+
+    /* FOOTER DRAWER TRIGGERS */
+    .footer-triggers {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-sm);
+      margin-top: var(--spacing-md);
+    }
+
+    /* ORB BACKGROUND DECORATION */
+    .orb-container {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.45;
+      mix-blend-mode: multiply;
+      animation: drift 25s infinite alternate ease-in-out;
+    }
+
+    [data-theme="dark"] .orb {
+      opacity: 0.15;
+      mix-blend-mode: screen;
+    }
+
+    .orb--mint {
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, var(--gradient-mint), transparent 70%);
+      top: -100px;
+      right: -100px;
+    }
+
+    .orb--peach {
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, var(--gradient-peach), transparent 70%);
+      bottom: -150px;
+      left: -100px;
+      animation-delay: -5s;
+      animation-duration: 30s;
+    }
+
+    .orb--lavender {
+      width: 350px;
+      height: 350px;
+      background: radial-gradient(circle, var(--gradient-lavender), transparent 70%);
+      top: 50%;
+      right: 15%;
+      animation-delay: -10s;
+    }
+
+    @keyframes drift {
+      0% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(40px, 30px) scale(1.1); }
+      100% { transform: translate(-20px, -40px) scale(0.9); }
+    }
+
+    /* HERO BAND */
+    .hero-band {
+      position: relative;
+      padding: var(--spacing-section) var(--spacing-lg) calc(var(--spacing-section) / 2);
+      max-width: var(--container-max);
+      margin: 0 auto;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 1;
+    }
+
+    .hero-band__title {
+      font-size: clamp(36px, 5.5vw, 56px);
+      font-weight: 300;
+      letter-spacing: -1.5px;
+      line-height: 1.05;
+      max-width: 900px;
+      margin-bottom: var(--spacing-md);
+    }
+
+    .hero-band__copy {
+      font-size: 18px;
+      color: var(--body);
+      max-width: 700px;
+      margin-bottom: var(--spacing-lg);
+    }
+
+    /* PERSISTENT EXECUTIVE SUMMARY BAND */
+    .exec-summary-band {
+      max-width: var(--container-max);
+      margin: 0 auto var(--spacing-lg);
+      padding: 0 var(--spacing-lg);
+      position: relative;
+      z-index: 2;
+    }
+
+    .exec-summary-card {
+      background: var(--surface-card);
+      border: 1px solid var(--hairline-strong);
+      border-radius: var(--radius-xl);
+      padding: var(--spacing-lg);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+      display: flex;
+      gap: var(--spacing-lg);
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+
+    .exec-summary-card:hover {
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    }
+
+    .exec-summary-card__icon {
+      width: 56px;
+      height: 56px;
+      border-radius: var(--radius-full);
+      background-color: var(--surface-strong);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--ink);
+    }
+
+    .exec-summary-card__content h3 {
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .exec-summary-card__text {
+      font-size: 15px;
+      color: var(--body-strong);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* TAB NAV */
+    .tab-nav-wrapper {
+      position: sticky;
+      top: 64px;
+      z-index: 90;
+      background-color: rgba(245, 245, 245, 0.8);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--hairline);
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+    }
+
+    [data-theme="dark"] .tab-nav-wrapper {
+      background-color: rgba(12, 10, 9, 0.8);
+    }
+
+    .tab-nav {
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 12px var(--spacing-lg);
+      display: flex;
+      gap: var(--spacing-sm);
+      overflow-x: auto;
+      scrollbar-width: none; /* Firefox */
+    }
+
+    .tab-nav::-webkit-scrollbar {
+      display: none; /* Chrome/Safari */
+    }
+
+    .tab-btn {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 8px 18px;
+      border-radius: var(--radius-pill);
+      background: transparent;
+      color: var(--body);
+      border: 1px solid var(--hairline-strong);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .tab-btn:hover {
+      color: var(--ink);
+      border-color: var(--ink);
+      background-color: var(--surface-card);
+    }
+
+    .tab-btn[aria-selected="true"] {
+      background-color: var(--primary);
+      color: var(--on-primary);
+      border-color: var(--primary);
+    }
+
+    /* GRID & SECTIONリズム */
+    .tab-panel {
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: var(--spacing-lg) var(--spacing-lg) var(--spacing-section);
+      position: relative;
+      z-index: 2;
+    }
+
+    .section-block {
+      padding: var(--spacing-xxl) 0;
+      border-bottom: 1px solid var(--hairline);
+    }
+
+    .section-block:last-child {
+      border-bottom: none;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--spacing-lg);
+      margin-top: var(--spacing-lg);
+    }
+
+    .card-grid--2up {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .card-grid--4up {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    /* EDITORIAL CARDS */
+    .editorial-card {
+      background-color: var(--surface-card);
+      border: 1px solid var(--hairline);
+      border-radius: var(--radius-xl);
+      padding: var(--spacing-lg);
+      transition: box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+
+    .editorial-card:hover {
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+      transform: translateY(-2px);
+      border-color: var(--hairline-strong);
+    }
+
+    .editorial-card__meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .editorial-card__title {
+      font-size: 20px;
+      font-weight: 400;
+      margin-bottom: var(--spacing-sm);
+      color: var(--ink);
+    }
+
+    .editorial-card__desc {
+      font-size: 15px;
+      color: var(--body);
+      line-height: 1.5;
+    }
+
+    /* FLIP CARD (TP2 Resource Cards) */
+    .flip-card-container {
+      perspective: 1000px;
+      height: 220px;
+    }
+
+    .flip-card {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+    }
+
+    .flip-card-container:hover .flip-card {
+      transform: rotateY(180deg);
+    }
+
+    .flip-card-front, .flip-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--hairline);
+      padding: var(--spacing-lg);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .flip-card-front {
+      background-color: var(--surface-card);
+      color: var(--ink);
+    }
+
+    .flip-card-back {
+      background-color: var(--surface-strong);
+      color: var(--body);
+      transform: rotateY(180deg);
+      border-color: var(--hairline-strong);
+    }
+
+    .flip-card__hint {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* DRAWERS (Slide in from right) */
+    .drawer-overlay {
+      position: fixed;
+      inset: 0;
+      background-color: rgba(12, 10, 9, 0.4);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      opacity: 0;
+      visibility: hidden;
+      z-index: 998;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .drawer-overlay.is-active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: min(520px, 100vw);
+      background-color: var(--surface-card);
+      border-left: 1px solid var(--hairline-strong);
+      z-index: 999;
+      transform: translateX(100%);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: -10px 0 40px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .drawer.is-open {
+      transform: translateX(0);
+    }
+
+    .drawer__header {
+      padding: var(--spacing-lg);
+      border-bottom: 1px solid var(--hairline);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .drawer__close {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-full);
+      background-color: var(--surface-strong);
+      border: none;
+      color: var(--ink);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.2s;
+    }
+    .drawer__close:hover {
+      background-color: var(--hairline-strong);
+    }
+
+    .drawer__body {
+      padding: var(--spacing-lg);
+      overflow-y: auto;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-lg);
+    }
+
+    /* INTERACTIVE LAB */
+    .lab-control {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: var(--spacing-base);
+    }
+
+    .lab-control label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .lab-select {
+      height: 44px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--hairline-strong);
+      background-color: var(--surface-card);
+      color: var(--ink);
+      padding: 0 var(--spacing-base);
+      font-family: inherit;
+      font-size: 15px;
+      width: 100%;
+      cursor: pointer;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .lab-select:focus {
+      border-color: var(--ink);
+      border-width: 2px;
+    }
+
+    .lab-result {
+      background-color: var(--surface-strong);
+      border: 1px solid var(--hairline-strong);
+      border-radius: var(--radius-xl);
+      padding: var(--spacing-lg);
+      margin-top: var(--spacing-md);
+      transition: all 0.3s ease;
+    }
+
+    /* GLOSSARY LIST */
+    .glossary-item {
+      padding-bottom: var(--spacing-base);
+      border-bottom: 1px solid var(--hairline);
+    }
+    .glossary-item:last-child {
+      border-bottom: none;
+    }
+    .glossary-item h4 {
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+    .glossary-item p {
+      font-size: 14px;
+      color: var(--body);
+      margin: 0;
+    }
+
+    /* FINANCIAL CHART WIDGET */
+    .metric-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-xs);
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .metric-btn {
+      font-size: 13px;
+      padding: 6px 12px;
+      border-radius: var(--radius-pill);
+      background-color: var(--surface-strong);
+      color: var(--body);
+      border: 1px solid var(--hairline);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .metric-btn:hover {
+      background-color: var(--hairline-strong);
+      color: var(--ink);
+    }
+    .metric-btn[data-active="true"] {
+      background-color: var(--primary);
+      color: var(--on-primary);
+      border-color: var(--primary);
+    }
+
+    .chart-container-outer {
+      background-color: var(--surface-card);
+      border: 1px solid var(--hairline);
+      border-radius: var(--radius-xl);
+      padding: var(--spacing-lg);
+      position: relative;
+    }
+
+    .chart-tooltip {
+      position: absolute;
+      background-color: var(--surface-dark);
+      color: var(--on-dark);
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      font-size: 12px;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      z-index: 10;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    /* FIVE FORCES VISUALIZATION */
+    .five-forces-container {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-lg);
+      align-items: center;
+      margin-top: var(--spacing-lg);
+    }
+
+    .five-forces-center {
+      background-color: var(--primary);
+      color: var(--on-primary);
+      border-radius: var(--radius-full);
+      padding: var(--spacing-lg);
+      width: 180px;
+      height: 180px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      border: 4px solid var(--hairline-strong);
+    }
+
+    .five-forces-center h4 {
+      color: var(--on-primary);
+      font-size: 18px;
+    }
+
+    .five-forces-center span {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      opacity: 0.8;
+    }
+
+    /* CLICKABLE FLOW WIDGETS */
+    .flow-viz {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--spacing-sm);
+      background-color: var(--surface-card);
+      border: 1px solid var(--hairline);
+      border-radius: var(--radius-xl);
+      padding: var(--spacing-lg);
+      overflow-x: auto;
+      margin-top: var(--spacing-md);
+    }
+
+    .flow-node {
+      border: 1px solid var(--hairline-strong);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-base);
+      background-color: var(--canvas-soft);
+      cursor: pointer;
+      text-align: center;
+      flex: 1;
+      min-width: 160px;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .flow-node:hover {
+      border-color: var(--ink);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    }
+
+    .flow-node[data-active="true"] {
+      border-color: var(--primary);
+      background-color: var(--surface-strong);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .flow-node h4 {
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .flow-node .badge {
+      margin-top: 6px;
+    }
+
+    .flow-arrow {
+      color: var(--muted-soft);
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .flow-details-card {
+      background-color: var(--surface-card);
+      border: 1px solid var(--primary);
+      border-radius: var(--radius-xl);
+      padding: var(--spacing-lg);
+      margin-top: var(--spacing-base);
+      transition: all 0.3s ease;
+    }
+
+    /* M&A TIMELINE WIDGET */
+    .timeline-selector {
+      display: flex;
+      border-bottom: 2px solid var(--hairline);
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .timeline-tab {
+      padding: 12px 24px;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--body);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      position: relative;
+      transition: color 0.2s;
+    }
+    .timeline-tab:hover {
+      color: var(--ink);
+    }
+    .timeline-tab[data-active="true"] {
+      color: var(--ink);
+      font-weight: 600;
+    }
+    .timeline-tab[data-active="true"]::after {
+      content: "";
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background-color: var(--ink);
+    }
+
+    /* GLOBAL SITE FOOTER */
+    .site-footer {
+      background-color: var(--canvas);
+      border-top: 1px solid var(--hairline-strong);
+      padding: var(--spacing-section) var(--spacing-lg) var(--spacing-xxl);
+      position: relative;
+      z-index: 1;
+    }
+
+    .site-footer__container {
+      max-width: var(--container-max);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: var(--spacing-xxl);
+    }
+
+    .site-footer__brand h3 {
+      font-size: 24px;
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .site-footer__links h4 {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--muted);
+      margin-bottom: var(--spacing-base);
+    }
+
+    .site-footer__links ul {
+      list-style: none;
+    }
+
+    .site-footer__links li {
+      margin-bottom: 10px;
+    }
+
+    .site-footer__links a {
+      color: var(--body);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.2s;
+    }
+    .site-footer__links a:hover {
+      color: var(--ink);
+    }
+
+    .site-footer__bottom {
+      max-width: var(--container-max);
+      margin: var(--spacing-xxl) auto 0;
+      padding-top: var(--spacing-lg);
+      border-top: 1px solid var(--hairline);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--spacing-md);
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .site-footer__ai {
+      max-width: 600px;
+      font-style: italic;
+    }
+
+    /* AUDIO FLOATING CONTROLS */
+    .audio-controls {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-xs);
+      background-color: var(--surface-card);
+      border: 1px solid var(--hairline-strong);
+      border-radius: var(--radius-pill);
+      padding: 6px 16px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    }
+
+    .audio-status {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--muted);
+      max-width: 140px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .audio-btn-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: var(--radius-full);
+      background-color: var(--surface-strong);
+      border: none;
+      color: var(--ink);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    .audio-btn-icon:hover {
+      background-color: var(--hairline-strong);
+    }
+    .audio-btn-icon--playing {
+      background-color: var(--primary);
+      color: var(--on-primary);
+    }
+
+    .speech-voice-select {
+      font-family: inherit;
+      font-size: 11px;
+      border: 1px solid var(--hairline-strong);
+      background-color: var(--surface-card);
+      color: var(--ink);
+      border-radius: var(--radius-sm);
+      height: 24px;
+      padding: 0 4px;
+      cursor: pointer;
+      outline: none;
+    }
+
+    /* REFLECTION & CONCLUSION BOX */
+    .reflection-block {
+      background-color: var(--surface-strong);
+      border-left: 4px solid var(--primary);
+      border-radius: 0 var(--radius-xl) var(--radius-xl) 0;
+      padding: var(--spacing-lg);
+      margin-top: var(--spacing-xxl);
+    }
+
+    .reflection-block h3 {
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--muted);
+      margin-bottom: var(--spacing-xs);
+    }
+
+    .reflection-block p {
+      font-size: 15px;
+      color: var(--body-strong);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* RESPONSIVE MEDIA QUERIES */
+    @media (max-width: 1024px) {
+      .card-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .card-grid--4up {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .site-footer__container {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--spacing-xl);
+      }
+    }
+
+    @media (max-width: 640px) {
+      :root {
+        --spacing-section: 48px;
+      }
+      .card-grid, .card-grid--2up, .card-grid--4up {
+        grid-template-columns: 1fr;
+      }
+      .hero-band {
+        padding-top: var(--spacing-xl);
+      }
+      .exec-summary-card {
+        flex-direction: column;
+        text-align: center;
+        padding: var(--spacing-base);
+      }
+      .site-footer__container {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+      }
+      .site-footer__bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-sm);
+      }
+      .flow-viz {
+        flex-direction: column;
+      }
+      .flow-arrow {
+        transform: rotate(90deg);
+        padding: var(--spacing-xxs) 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="top-nav" role="banner">
+    <div class="top-nav__container">
+      <a class="top-nav__brand" href="#top">
+        SMMC-EMI G7 <strong>1301</strong>
+      </a>
+      
+      <div class="top-nav__actions">
+        <!-- Floating audio control bar -->
+        <div class="audio-controls" id="audio-panel">
+          <button class="audio-btn-icon" id="audio-play-btn" type="button" aria-label="Play Narration">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+          </button>
+          <span class="audio-status" id="audio-status-text">Narration Idle</span>
+          <select class="speech-voice-select" id="audio-voice-select" aria-label="Select Voice"></select>
+        </div>
+
+        <button class="btn btn--outline btn--small" id="lang-toggle" type="button">EN</button>
+        <button class="btn btn--outline btn--small" id="theme-toggle" type="button" aria-label="Toggle Theme">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <!-- Hero Band with drift atmospheric gradient orbs -->
+    <section class="hero-band" id="top">
+      <div class="orb-container">
+        <div class="orb orb--mint"></div>
+        <div class="orb orb--peach"></div>
+        <div class="orb orb--lavender"></div>
+      </div>
+      <p class="eyebrow" id="hero-eyebrow">Formosa Plastics Strategy Report</p>
+      <h1 class="hero-band__title" id="hero-title">Formosa Plastics: Scaling Global Strengths, Navigating Structural Renewal</h1>
+      <p class="hero-band__copy" id="hero-copy">A bilingual interactive four-tab strategic report spanning corporate design (DESIGN.md), macro-competencies, external networks, and FDI entry-mode toolkits.</p>
+    </section>
+
+    <!-- Persistent Top Summary Band -->
+    <section class="exec-summary-band">
+      <div class="exec-summary-card">
+        <div class="exec-summary-card__icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+        </div>
+        <div class="exec-summary-card__content">
+          <h3 id="summary-badge-title">Executive Summary</h3>
+          <p class="exec-summary-card__text" id="summary-text-val">Formosa Plastics (1301) stands at a critical historical turning point. In 2024, facing massive Chinese capacity oversupply and cross-strait tariff suspensions (ECFA), FPC recorded its first annual loss. To secure future competitive advantages, the company is shifting from traditional low-cost commodity expansion to concentric diversification (semiconductors, LFP batteries, specialty carbon fiber) and strict green/carbon cost internalization.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tab navigation -->
+    <div class="tab-nav-wrapper">
+      <nav class="tab-nav" id="tab-nav" aria-label="TP sections"></nav>
+    </div>
+
+    <!-- Active Tab Panel Content -->
+    <section class="tab-panel" id="tab-panel" aria-live="polite"></section>
+  </main>
+
+  <!-- Global Drawers (Slide-in side sheets) -->
+  <div class="drawer-overlay" id="drawer-overlay"></div>
+
+  <!-- Glossary Drawer -->
+  <aside class="drawer" id="glossary-drawer" aria-hidden="true">
+    <div class="drawer__header">
+      <h2 id="glossary-drawer-title">Glossary of Terms</h2>
+      <button class="drawer__close" data-close-drawer type="button" aria-label="Close glossary">&times;</button>
+    </div>
+    <div class="drawer__body" id="glossary-list-content"></div>
+  </aside>
+
+  <!-- Interactive Scenario Lab Drawer -->
+  <aside class="drawer" id="lab-drawer" aria-hidden="true">
+    <div class="drawer__header">
+      <h2 id="lab-drawer-title">Interactive Strategy Lab</h2>
+      <button class="drawer__close" data-close-drawer type="button" aria-label="Close lab">&times;</button>
+    </div>
+    <div class="drawer__body">
+      <p id="lab-intro-text">Simulate how macroeconomic shocks impact FPC's 1301 operating framework and get strategic emphasis guidelines.</p>
+      
+      <div class="lab-control">
+        <label for="lab-oil" id="lbl-oil">Oil Price Condition</label>
+        <select class="lab-select" id="lab-oil">
+          <option value="base">Base Oil Price (Stable spreads)</option>
+          <option value="low">Low Oil Price (Feedstock cost relief)</option>
+          <option value="high" selected>High Oil Price (Crude spike / cost pressure)</option>
+        </select>
+      </div>
+
+      <div class="lab-control">
+        <label for="lab-carbon" id="lbl-carbon">Carbon Fee Level</label>
+        <select class="lab-select" id="lab-carbon">
+          <option value="low">Low Carbon Fee (NT$50/t discount)</option>
+          <option value="medium">Medium Carbon Fee (NT$150/t standard)</option>
+          <option value="high" selected>High Carbon Fee (NT$300/t premium penalty)</option>
+        </select>
+      </div>
+
+      <div class="lab-control">
+        <label for="lab-supply" id="lbl-supply">China Oversupply Pressure</label>
+        <select class="lab-select" id="lab-supply">
+          <option value="low">Low (Supply cuts/tax adjustment)</option>
+          <option value="medium">Medium (Moderate dumping)</option>
+          <option value="high" selected>High (Aggressive commodity dumping)</option>
+        </select>
+      </div>
+
+      <div class="lab-control">
+        <label for="lab-focus" id="lbl-focus">FPC Strategic Focus</label>
+        <select class="lab-select" id="lab-focus">
+          <option value="cost">Cost Leadership (Traditional defense)</option>
+          <option value="specialty">Specialty Upgrading (Niche market target)</option>
+          <option value="green" selected>Green Energy & decarbonization (Transition focus)</option>
+          <option value="global">Global Footprint (FDI Diversification)</option>
+        </select>
+      </div>
+
+      <div class="lab-result" id="lab-result-card"></div>
+    </div>
+  </aside>
+
+  <!-- Sources Drawer -->
+  <aside class="drawer" id="sources-drawer" aria-hidden="true">
+    <div class="drawer__header">
+      <h2 id="sources-drawer-title">Verified Sources</h2>
+      <button class="drawer__close" data-close-drawer type="button" aria-label="Close sources">&times;</button>
+    </div>
+    <div class="drawer__body" id="sources-list-content"></div>
+  </aside>
+
+  <!-- AI Disclosure Drawer -->
+  <aside class="drawer" id="ai-drawer" aria-hidden="true">
+    <div class="drawer__header">
+      <h2 id="ai-drawer-title">Academic & AI Disclosure</h2>
+      <button class="drawer__close" data-close-drawer type="button" aria-label="Close AI disclosure">&times;</button>
+    </div>
+    <div class="drawer__body">
+      <p id="ai-body-1"><strong>Academic Integrity:</strong> All historical events, management personnel, financial metrics, and strategic actions embedded inside this learning webpage are derived directly from the official corporate disclosures, annual reports, ESG disclosures, and reputable industry news outlets listed in the sources index.</p>
+      <p id="ai-body-2"><strong>AI Utilization:</strong> Generative AI models were utilized strategically under a human-directed "Vibe Coding" paradigm. Factual data extraction, cross-tab JSON mapping, and CSS styling sheets were designed by AI and carefully reviewed by team members for deployment readiness. Human verification remains paramount for all factual assertions.</p>
+    </div>
+  </aside>
+
+  <!-- Team & Collaboration Drawer -->
+  <aside class="drawer" id="team-drawer" aria-hidden="true">
+    <div class="drawer__header">
+      <h2 id="team-drawer-title">G7 Research Team</h2>
+      <button class="drawer__close" data-close-drawer type="button" aria-label="Close team sheet">&times;</button>
+    </div>
+    <div class="drawer__body">
+      <h3 style="font-family:'Inter', sans-serif; font-size:16px; font-weight:600; margin-bottom:10px;" id="team-title-sec">Joint Collaboration</h3>
+      <p style="font-size:14px; line-height:1.6;" id="team-desc-val">Our group firmly believes that a comprehensive strategic report is a deeply integrated piece of cooperative research. Rather than mechanically fragmenting the analysis into isolated sections, we held joint review sessions to mesh the OLI framework, Concentric Diversification, and Williamson's transaction cost economics. All members take full joint responsibility for the visual and analytical quality of this interactive webpage.</p>
+      
+      <div style="display:flex; flex-direction:column; gap:16px; margin-top:20px;">
+        <div style="border:1px solid var(--hairline); padding:16px; border-radius:var(--radius-lg); background:var(--canvas-soft);">
+          <h4 style="font-family:'Inter',sans-serif; font-size:15px; font-weight:600;" id="mem1-name">Tina Wang (庭伃)</h4>
+          <p style="font-size:13px; color:var(--muted); margin:0;" id="mem1-role">Group Lead / TP0 Financial Analytics & TP3 Vertical Integration Lead</p>
+        </div>
+        <div style="border:1px solid var(--hairline); padding:16px; border-radius:var(--radius-lg); background:var(--canvas-soft);">
+          <h4 style="font-family:'Inter',sans-serif; font-size:15px; font-weight:600;" id="mem2-name">Julia Lin (泱慈)</h4>
+          <p style="font-size:13px; color:var(--muted); margin:0;" id="mem2-role">TP1 Industry Environment (PESTEL/Five Forces) & TP3 Concentric Diversification Lead</p>
+        </div>
+        <div style="border:1px solid var(--hairline); padding:16px; border-radius:var(--radius-lg); background:var(--canvas-soft);">
+          <h4 style="font-family:'Inter',sans-serif; font-size:15px; font-weight:600;" id="mem3-name">Miranda Wu (郁珊)</h4>
+          <p style="font-size:13px; color:var(--muted); margin:0;" id="mem3-role">TP2 Internal Resource Moat (VRIO) & TP3 Greenfield/M&A FDI Toolkit Analyst</p>
+        </div>
+        <div style="border:1px solid var(--hairline); padding:16px; border-radius:var(--radius-lg); background:var(--canvas-soft);">
+          <h4 style="font-family:'Inter',sans-serif; font-size:15px; font-weight:600;" id="mem4-name">Angela Chen (馥瑄)</h4>
+          <p style="font-size:13px; color:var(--muted); margin:0;" id="mem4-role">TP3 Strategic Alliances, Global Geographic Mapping & Multi-Mode Comparison Analyst</p>
+        </div>
+        <div style="border:1px solid var(--hairline); padding:16px; border-radius:var(--radius-lg); background:var(--canvas-soft);">
+          <h4 style="font-family:'Inter',sans-serif; font-size:15px; font-weight:600;" id="mem5-name">Alex Lo (承逸)</h4>
+          <p style="font-size:13px; color:var(--muted); margin:0;" id="mem5-role">TP3 Future Strategic Recommendations & Interactive Lab Scenario Designer</p>
+        </div>
+      </div>
+      
+      <p style="font-size:12px; color:var(--muted); font-style:italic; margin-top:20px;" id="team-video-note">Note: Individual D-ID AI-generated introduction videos have been updated to Version 2. As we choose to preserve absolute page integrity and avoid broken media links in offline packages, video clips are hosted externally and can be loaded dynamically upon staging.</p>
+    </div>
+  </aside>
+
+  <!-- Global Footer -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="site-footer__container">
+      <div class="site-footer__brand">
+        <h3 style="font-family:'EB Garamond',serif; font-weight:400;">SMMC-EMI G7</h3>
+        <p style="font-size:14px; max-width: 260px;" id="footer-brand-desc">Formosa Plastics Corporation 1301 Strategic Management Dashboard. Handcrafted under Prof. Shihmin Lo's supervision.</p>
+        <div class="footer-triggers">
+          <button class="btn btn--outline btn--small" data-open-drawer="team-drawer" type="button" id="ft-team">Team</button>
+          <button class="btn btn--outline btn--small" data-open-drawer="glossary-drawer" type="button" id="ft-glossary">Glossary</button>
+          <button class="btn btn--outline btn--small" data-open-drawer="lab-drawer" type="button" id="ft-lab">Interactive Lab</button>
+          <button class="btn btn--outline btn--small" data-open-drawer="sources-drawer" type="button" id="ft-sources">Sources</button>
+          <button class="btn btn--outline btn--small" data-open-drawer="ai-drawer" type="button" id="ft-ai">AI Disclosure</button>
+        </div>
+      </div>
+      <div class="site-footer__links">
+        <h4 id="footer-col-1-title">Frameworks</h4>
+        <ul>
+          <li><a href="javascript:void(0)" onclick="switchTab('tp1')">PESTEL & Five Forces</a></li>
+          <li><a href="javascript:void(0)" onclick="switchTab('tp2')">RBV & VRIO Matrix</a></li>
+          <li><a href="javascript:void(0)" onclick="switchTab('tp3')">OLI 折衷理論</a></li>
+          <li><a href="javascript:void(0)" onclick="switchTab('tp3')">Concentric Diversification</a></li>
+        </ul>
+      </div>
+      <div class="site-footer__links">
+        <h4 id="footer-col-2-title">Interactive Elements</h4>
+        <ul>
+          <li><a href="javascript:void(0)" onclick="switchTab('tp0')">Financial Line SVG Chart</a></li>
+          <li><a href="javascript:void(0)" onclick="switchTab('tp2')">VRIO Resource Flip Cards</a></li>
+          <li><a href="javascript:void(0)" onclick="switchTab('tp3')">Clickable Vertical Integration</a></li>
+          <li><a href="javascript:void(0)" onclick="document.getElementById('ft-lab').click()">Scenario Simulator Lab</a></li>
+        </ul>
+      </div>
+      <div class="site-footer__links">
+        <h4 id="footer-col-3-title">Contact & Course</h4>
+        <ul>
+          <li><a href="javascript:void(0)">Prof. Shihmin Lo</a></li>
+          <li><a href="javascript:void(0)">TA Tina Wang</a></li>
+          <li><a href="javascript:void(0)">TA Tina Lin</a></li>
+          <li><a href="javascript:void(0)">NCNU IM / SMMC-EMI</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="site-footer__bottom">
+      <p id="footer-instructor-text">Instructor: Prof. Shihmin Lo</p>
+      <p class="site-footer__ai" id="footer-ai-text">AI disclosure: AI tools were used for content extraction, organization, coding assistance, and interface generation. All factual claims should remain traceable to the source sections and listed references.</p>
+      <p>&copy; 2026 SMMC-EMI G7. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- EMBEDDED AUTHORITATIVE COMPACT SOURCE DATA -->
+  <script type="application/json" id="tp-data">
+  {
+    "glossary": [
+      { "term": "PESTEL", "zh": "總體外部環境分析，涵蓋政治、經濟、社會、技術、環境及法律六大維度，協助評估結構性機遇與外部威脅。", "en": "Macro-environmental analysis framework scanning Political, Economic, Social, Technological, Environmental, and Legal forces." },
+      { "term": "AMC", "zh": "競爭分析模型，從市場共同性（Market Commonality）與資源相似性（Resource Similarity）解構競爭對手的發動與回應模式。", "en": "A competitor analysis lens focusing on Awareness, Motivation, and Capability determined by market commonality and resource similarity." },
+      { "term": "RBV", "zh": "資源基礎觀點，主張企業核心競爭力源自擁有的珍貴、稀少、難以模仿、且具組織配合性的內生資源與能耐。", "en": "Resource-Based View, attributing sustained competitive advantage to rare, valuable, and inimitable firm resources." },
+      { "term": "VRIO", "zh": "評估核心資產競爭優勢的四重標準：價值性（Value）、稀少性（Rarity）、模仿屏障（Inimitability）與組織整合（Organization）。", "en": "Resource evaluation framework assessing Value, Rarity, Inimitability, and Organization to discover sustainable moats." },
+      { "term": "OLI", "zh": "Dunning 跨國折衷理論，分析所有權優勢（O）、區位優勢（L）及內部化優勢（I）如何共同促成對外直接投資（FDI）。", "en": "Dunning's eclectic paradigm evaluating Ownership, Location, and Internalization advantages as core determinants of FDI modes." },
+      { "term": "FDI", "zh": "外國直接投資，指企業跨國建立或控股實體生產基地，涉及高度資本投入與控制力權衡。", "en": "Foreign Direct Investment, involving establishing physical production or operational entities in foreign host countries." },
+      { "term": "ESG", "zh": "環境保護（Environment）、社會責任（Social）及公司治理（Governance）三面衡量指標，為當今跨國供應鏈的核心合規門檻。", "en": "Environmental, Social, and Governance criteria, now functioning as a high-stakes compliance requirement in global supply chains." },
+      { "term": "CBAM", "zh": "歐盟碳邊境調整機制，對進口高碳產品課徵碳關稅，將徹底改變跨國大宗塑化產品的出口利潤邊際。", "en": "Carbon Border Adjustment Mechanism, the EU tariff penalizing imported carbon-intensive goods, shifting global margins." },
+      { "term": "ECFA", "zh": "海峽兩岸經濟合作架構協議，其早期收穫清單部分中止直接衝擊台塑大宗塑膠的關稅競爭力。", "en": "Economic Cooperation Framework Agreement, a cross-strait trade pact whose tariff suspensions impact Taiwan petrochemical exports." },
+      { "term": "PVC", "zh": "聚氯乙烯，台塑最核心的塑膠大宗產品，市佔居亞洲主導地位。", "en": "Polyvinyl Chloride, a primary plastic polymer and FPC's core revenue-generating product line." },
+      { "term": "VCM", "zh": "氯乙烯單體，為 PVC 製造的關鍵上游化學中間物，由六輕體系高度自供。", "en": "Vinyl Chloride Monomer, the essential chemical monomer precursor for polymerizing PVC, highly integrated in FPC." },
+      { "term": "EVA", "zh": "乙烯-醋酸乙烯酯共聚物，主要應用於太陽能封裝膠膜與高級發泡材料，屬 FPC 近年高值化轉型核心。", "en": "Ethylene-Vinyl Acetate, a high-value copolymer key to solar encapsulation film, supporting FPC's margin recovery." },
+      { "term": "LFP", "zh": "磷酸鋰鐵電池材料，台塑新智能儲能核心布局，旨在切入 AI 與電動車綠色儲能鏈。", "en": "Lithium Iron Phosphate, the battery chemistry powering Formosa Smart Energy's new gigafactory and AI backup batteries." },
+      { "term": "ROE", "zh": "股東權益報酬率，衡量企業運用資本創造獲利效率的核心財務指標。", "en": "Return on Equity, reflecting a firm's efficiency in translating shareholder equity into net profits." },
+      { "term": "S&OP", "zh": "銷售與營運規劃流程，旨在協調供應鏈產能與市場銷售的預測平衡機制。", "en": "Sales and Operations Planning, a tactical planning process aligning capacity, inventories, and market demand." }
+    ],
+    "tabs": [
+      {
+        "id": "tp0",
+        "labelZh": "TP0 公司介紹與財務表現",
+        "labelEn": "TP0 Company & Financials",
+        "news": [
+          {
+            "zhTitle": "台塑美國廠乙烷裂解展現成本優勢",
+            "enTitle": "Formosa US Ethane Cracking Shows Cost Advantage",
+            "zhLead": "當亞洲以輕油裂解為主的乙烯成本因高油價上漲至每噸近1000美元時，台塑美國廠利用德州本土頁岩氣乙烷裂解，將成本壓制在520~530美元，支撐了集團在海外的防禦性獲利。",
+            "enLead": "As naphtha-based Asian ethylene surged to near $1,000/t, FPC's US operations utilized cheap shale ethane to drop production costs to $520-$530/t, maintaining highly defensive overseas profitability.",
+            "source": "UDN / 2026"
+          },
+          {
+            "zhTitle": "台灣塑膠粒供應緊張引發市場波動",
+            "enTitle": "Tight Plastic Pellet Sourcing Causes Local Fluctuations",
+            "zhLead": "受上游乙烯短缺與市場減供心理預期影響，台灣塑膠粒出貨一度吃緊。中油啟動四輕增加供應以緩和市場爭議，突顯台灣本地化原料供應鏈的不確定性。",
+            "enLead": "Driven by tight upstream ethylene supply, domestic plastic pellet sourcing experienced hoarding and price debates. CPC's cracker restart aimed to resolve local shortages.",
+            "source": "PTS / 2026"
+          }
+        ],
+        "timeline": [
+          { "year": "1954", "zhTitle": "起步：福懋塑膠創立", "enTitle": "Genesis: Fukutake Plastics Founded", "zhCopy": "王永慶與王永在兄弟創立福懋塑膠，後更名為台塑。早期在美援與台灣工業民營化背景下切入 PVC 生產，開啟了石化王國的起點。", "enCopy": "Founded by the Wang brothers under US aid. Renamed Formosa Plastics Corporation, starting PVC polymerization to establish a local manufacturing foothold." },
+          { "year": "1958", "zhTitle": "逆向整合解圍 PVC 滯銷", "enTitle": "Reverse Integration Counteracting Glut", "zhCopy": "面對早期 PVC 滯銷與產量過低，王永慶毅然成立南亞塑膠，跨足下游加工以自行消化 PVC 產量，開創「自產自銷、逆向整合」的產業鏈雛形。", "enCopy": "Faced with early gluts, FPC established Nan Ya Plastics to fabricate down-stream products. This absorbed polymer output, launching the FPG integrated architecture." },
+          { "year": "1986", "zhTitle": "六輕大計落地麥寮", "enTitle": "No. 6 Cracker Complex at Mailiao", "zhCopy": "為擺脫上游乙烯嚴重依賴進口的困境，經過十餘年力爭，六輕石化園區大計最終在雲林麥寮落地。一體化管線與超大規模生產，造就了台塑數十載的絕對成本優勢。", "enCopy": "To secure upstream feedstock sovereignty, the legendary No. 6 Naphtha Cracker was built on reclaimed land in Mailiao. Pipeline sharing unlocked absolute cost leadership." },
+          { "year": "1990s", "zhTitle": "跨國擴張：美國與寧波雙軸", "enTitle": "MNC Footprint: US & China Dual-Axis", "zhCopy": "台塑踏上國際化，一方面深耕美國德州，引進廉價頁岩氣裂解；另一方面在中國寧波獨資成立大型石化園區，貼近大陸龐大內需市場。", "enCopy": "FPC pursued rapid FDI: building shale-gas cracking in Texas for cost leadership while constructing solo-owned chemical clusters in Ningbo to capture mainland China's demand." },
+          { "year": "2024+", "zhTitle": "轉型戰略：成立轉型開發小組", "enTitle": "Renewal: Transformation Task Force", "zhCopy": "面對石化利差探底與淨零排放合規，台塑正式成立「轉型開發專案組」，聚焦 AI 智慧化、半導體高純特化材料與綠色新能源儲能。", "enCopy": "Responding to structural losses and carbon rules, FPC organized a task force to pivot from bulk chemicals toward AI, semiconductor-grade raw inputs, and green energy." }
+        ],
+        "financial": {
+          "years": ["2021", "2022", "2023", "2024", "2025"],
+          "metrics": {
+            "revenue": { "labelZh": "合併營業收入", "labelEn": "Consolidated Revenue", "unitZh": "億元", "unitEn": "100M NTD", "values": [2735.98, 2516.47, 1991.38, 2000.40, 1754.11] },
+            "pretax": { "labelZh": "合併稅前淨利", "labelEn": "Pretax Income", "unitZh": "億元", "unitEn": "100M NTD", "values": [859.57, 437.94, 69.97, -24.14, -102.15] },
+            "eps": { "labelZh": "每股稅後盈餘 (EPS)", "labelEn": "Earnings Per Share", "unitZh": "元/股", "unitEn": "NTD/Share", "values": [11.21, 5.68, 1.15, -0.19, -1.58] },
+            "roe": { "labelZh": "股東權益報酬率 (ROE)", "labelEn": "Return on Equity", "unitZh": "%", "unitEn": "%", "values": [19.40, 9.50, 2.08, -0.39, -3.08] },
+            "netMargin": { "labelZh": "稅後純益率", "labelEn": "Net Profit Margin", "unitZh": "%", "unitEn": "%", "values": [26.08, 14.36, 3.68, -0.62, -5.73] },
+            "receivablesTurnover": { "labelZh": "應收款項週轉率", "labelEn": "Receivables Turnover", "unitZh": "次", "unitEn": "Times", "values": [13.16, 12.14, 13.23, 13.95, 13.26] },
+            "inventoryTurnover": { "labelZh": "存貨週轉率", "labelEn": "Inventory Turnover", "unitZh": "次", "unitEn": "Times", "values": [9.58, 8.91, 8.63, 8.32, 8.18] },
+            "assetTurnover": { "labelZh": "總資產週轉率", "labelEn": "Total Asset Turnover", "unitZh": "次", "unitEn": "Times", "values": [0.53, 0.48, 0.38, 0.39, 0.33] },
+            "debtRatio": { "labelZh": "負債占資產比率", "labelEn": "Debt-to-Asset Ratio", "unitZh": "%", "unitEn": "%", "values": [25.84, 30.04, 34.55, 41.84, 34.85] },
+            "longTermCapitalPPE": { "labelZh": "長期資金占固定資產比率", "labelEn": "Long Capital to PPE", "unitZh": "%", "unitEn": "%", "values": [481.94, 387.07, 380.28, 313.12, 389.35] },
+            "currentRatio": { "labelZh": "流動比率", "labelEn": "Current Ratio", "unitZh": "%", "unitEn": "%", "values": [253.90, 167.76, 154.84, 90.77, 204.97] },
+            "interestCoverage": { "labelZh": "利息保障倍數", "labelEn": "Interest Coverage", "unitZh": "倍", "unitEn": "Times", "values": [92.03, 32.26, 3.67, -0.14, -2.20] },
+            "stockPrice": { "labelZh": "年底收盤股價", "labelEn": "Year-End Closing Price", "unitZh": "元/股", "unitEn": "NTD", "values": [104.0, 86.8, 79.2, 35.5, 39.0] }
+          }
+        }
+      },
+      {
+        "id": "tp1",
+        "labelZh": "TP1 外部環境與產業競爭",
+        "labelEn": "TP1 External & Industry",
+        "pestel": {
+          "zh": [
+            { "title": "政治法律 (Political & Legal)", "impact": "短空長多", "desc": "兩岸關係趨緊導致大陸中止 ECFA 部分塑化早期收穫清單，台塑面臨 2%~6.5% 關稅阻礙。然而，中國近期推動「去產能內捲」，加強小廠安全監管與稅務稽查，長期有利於淘汰劣質產能，協助老牌高效企業突圍。" },
+            { "title": "環境因素 (Environmental)", "impact": "高度成本壓力", "desc": "2026年台灣開徵碳費，對高能耗與高碳排的傳統石化業形成直接盈利挑戰。此外，歐盟CBAM正式實施、國際品牌對 PCR 與生物基塑料的強制比例合規限制，形成「無綠色便無訂單」的生存挑戰。" },
+            { "title": "經濟因素 (Economic)", "impact": "多空並存", "desc": "由於美國頁岩油生產旺盛與歐美降息循環，全球原油與主要化學品中間體（如乙烯）價格出現合理化回檔，有助於平抑原料購置成本。然而，全球高通膨殘餘與中國內需建材放緩，持續壓制下游的提貨力道。" },
+            { "title": "技術因素 (Technological)", "impact": "轉型新動能", "desc": "生成式 AI 與工業物聯網（IoT）的快速成熟，為連續式化工流程優化（配方調校、裂解溫控、故障預測）帶來可觀的節能空間；同時，半導體晶圓製造對超高純度特種化學品（電子級 IPA/雙氧水）的苛刻需求，為傳統化工廠指明了高值化方向。" }
+          ],
+          "en": [
+            { "title": "Political & Legal", "impact": "Short-term Pain, Long-term Gain", "desc": "Tensions led to cross-strait ECFA early-harvest tariff suspensions (2%-6.5% margins lost). However, China's efforts to curb 'industrial involution' via environmental and tax audits are driving out low-efficiency competitors." },
+            { "title": "Environmental", "impact": "Severe Capex Pressure", "desc": "Taiwan's formal carbon fee implementation in 2026 penalizes heavy emitters. Concurrently, EU's CBAM mandates internalizing carbon for exports, shifting chemical profitability paradigms." },
+            { "title": "Economic", "impact": "Mixed Cycle Signals", "desc": "Global shale-gas output stabilizes ethylene inputs, expanding potential spreads. However, high global inflation residues and China's property correction hold back bulk construction PVC consumption." },
+            { "title": "Technological", "impact": "High-Value Pivot", "desc": "Generative AI applications with NVIDIA streamline batch engineering and predictive maintenance. Advanced semiconductor nodes create premium demands for ultra-pure electronic inputs." }
+          ]
+        },
+        "fiveForces": {
+          "zh": [
+            { "name": "現有同業競爭", "level": "極高 (Extreme)", "desc": "亞洲特別是中國大陸新增大宗石化產能集中釋放，同質化嚴重。供過於求導致傳統 PVC/PP 利差探底，深陷紅海戰火。" },
+            { "name": "買方議價能力", "level": "M 型分化", "desc": "傳統泛用塑料（如管材建材 PVC）替代者眾多，買方議價力極強；然而半導體特化品（如電子級 IPA）認證期長達 2-3 年，一旦通過，買方黏著度極高且議價力弱。" },
+            { "name": "賣方議價能力", "level": "中偏高", "desc": "主要原油來源受制於 OPEC 地緣定價，但台塑具備六輕一貫化以及德州頁岩氣乙烷裂解產線，能有效分散與抗衡純外部原料購置風險。" },
+            { "name": "潛在進入者威脅", "level": "極低", "desc": "由於台灣環評規章嚴苛、碳費門檻、以及龐大的資本密集度，幾乎沒有新玩家能夠複製六輕一體化的重工業園區規模。" },
+            { "name": "替代品威脅", "level": "高且逐年攀升", "desc": "隨 ESG 法規升級，再生塑料（PCR）及生質基塑料成為高毛利大廠必選；此外，高強度碳纖維在新能源車及風電葉片中正快速取代傳統鋼鐵與塑料材料。" }
+          ],
+          "en": [
+            { "name": "Rivalry", "level": "Extreme", "desc": "Massive petrochemical capacity built in mainland China triggers structural oversupply and relentless pricing pressure on commodity polymers." },
+            { "name": "Buyer Power", "level": "M-Shaped", "desc": "High for generic packaging and piping plastics. Low for semiconductor-grade chemicals, which involve years of testing and customer stickiness." },
+            { "name": "Supplier Power", "level": "Medium-High", "desc": "Dependent on global crude indexes, but buffered by FPC's strong intra-group supply coordination with FPCC and domestic Texas shale cost advantages." },
+            { "name": "New Entrants", "level": "Negligible", "desc": "Heavy environmental review regulations, high entry capex, and mandatory carbon pricing systems successfully block new competitive entrants." },
+            { "name": "Substitutes", "level": "High & Rising", "desc": "Recycled PCR resins and bio-plastics increasingly compete for consumer brands, while high-strength carbon fiber replaces heavy metallic compounds." }
+          ]
+        }
+      },
+      {
+        "id": "tp2",
+        "labelZh": "TP2 資源與競爭優勢",
+        "labelEn": "TP2 Resources & Advantage",
+        "intro": {
+          "zh": {
+            "eyebrow": "公司策略與競爭優勢分析",
+            "title": "FORMOSA <span class=\"accent\">公司概覽</span>",
+            "desc": "本頁深度解析台塑公司之事業版圖、價值鏈、關鍵資源、核心能力與動態轉型策略。內容涵蓋塑膠與鹼氯體系、高值化研發、產學與技術合作，以及面對景氣下行、供應鏈風險與半導體材料需求時的轉型因應路徑。",
+            "scores": [
+              { "val": "5-7%", "label": "PVC 全球市佔率 (亞洲 Price Setter)" },
+              { "val": "25", "label": "2024 研發總支出 (億元)" },
+              { "val": "100.49", "label": "2025 淨損 (億元)" },
+              { "val": "419.85", "label": "2026 Q1 累計營收 (億元)" }
+            ]
+          },
+          "en": {
+            "eyebrow": "Corporate Strategy & Competitive Advantage",
+            "title": "FORMOSA <span class=\"accent\">Overview</span>",
+            "desc": "This dashboard analyzes Formosa Plastics Corporation through its business portfolio, value chain, key resources, core competencies, and transformation strategy. It covers the plastics and chlor-alkali businesses, high-value R&D, academic and technology partnerships, and strategic responses to weaker petrochemical cycles, supply-chain risk, and semiconductor-material demand.",
+            "scores": [
+              { "val": "5-7%", "label": "Global PVC Market Share (Asian Price Setter)" },
+              { "val": "25", "label": "2024 Total R&D Exp. (Billion TWD)" },
+              { "val": "10.049", "label": "2025 Net Loss (Billion TWD)" },
+              { "val": "41.985", "label": "2026 Q1 Revenue (Billion TWD)" }
+            ]
+          }
+        },
+        "portfolio": {
+          "zh": {
+            "eyebrow": "Business Portfolio",
+            "title": "Portfolio 核心事業",
+            "items": [
+              { "title": "塑膠事業", "sub": "營收 50-60%", "desc": "PVC 為核心，具亞洲報價影響力。PE/PP/EVA 為價格接受者(1-3%市佔)，但 EVA 受太陽能封裝膜帶動，具備高成長與較佳毛利。" },
+              { "title": "鹼氯與化學品", "sub": "營收 20-25%", "desc": "內外銷並存，包含液鹼、EDC/VCM。主要作為支撐 PVC 體系垂直整合的核心，成本控制為最大優勢。" },
+              { "title": "高階特殊材料", "sub": "營收 10-15%", "desc": "集團毛利最高區塊。碳纖維具備 AN 到碳纖維的垂直整合產線；SAP (高吸水性樹脂) 應用於尿布市場，市佔居中段。" },
+              { "title": "轉型與新能源", "sub": "營收 <5%", "desc": "包含半導體化學品 (電子級氫氟酸) 與 LFP 電池材料。為傳統石化轉型的關鍵指標。" }
+            ]
+          },
+          "en": {
+            "eyebrow": "Business Portfolio",
+            "title": "Core Portfolio",
+            "items": [
+              { "title": "Plastics", "sub": "Revenue 50-60%", "desc": "PVC is the core with Asian pricing influence. PE/PP/EVA are price takers, but EVA enjoys high growth and better margins driven by solar encapsulation films." },
+              { "title": "Chlor-Alkali & Chem", "sub": "Revenue 20-25%", "desc": "Domestic/export mix, including Liquid Alkali, EDC/VCM. Acts as the core supporting PVC vertical integration, with cost control as the biggest advantage." },
+              { "title": "High-End Special Materials", "sub": "Revenue 10-15%", "desc": "Highest gross margin group. Carbon fiber has vertical integration from AN; SAP is applied in diapers, holding a mid-tier market share." },
+              { "title": "Transformation & New Energy", "sub": "Revenue <5%", "desc": "Includes semiconductor chemicals and LFP battery materials. A key indicator for petrochemical transformation." }
+            ]
+          }
+        },
+        "valueChain": {
+          "zh": {
+            "eyebrow": "Value Chain Analysis",
+            "title": "Value Chain 價值鏈",
+            "primaryTitle": "主要活動 Primary Activities",
+            "supportTitle": "支持活動 Support Activities",
+            "primary": [
+              { "title": "研發 R&D", "desc": "2024 年研發總支出 25 億元，有效專利 343 件、專利獲證 42 件；開發 35 項新產品／技術，其中 16 項已商業化，創造營收 9,380.8 萬元。" },
+              { "title": "製造生產", "desc": "2024 年 PVC 粉產能 180.8 萬噸、產量 171.85 萬噸；VCM 產能 164.4 萬噸、產量 160.66 萬噸；PP 產能 101.6 萬噸、產量 83.63 萬噸。" },
+              { "title": "銷售／行銷", "desc": "2023 年 PVC 粉外銷 137.91 萬噸、內銷 28.72 萬噸；PP 外銷 58.44 萬噸、內銷 13.27 萬噸，顯示外銷比重高。" },
+              { "title": "營運成果", "desc": "2025 年營收 1,754.11 億元、營業損失 75.05 億元、淨損 100.49 億元；2026 年 1–3 月累計營收 419.85 億元、年減 11.05%。" }
+            ],
+            "support": [
+              { "title": "人力資源", "desc": "2024 合併員工數 7,306 人，平均年資 17.6 年。" },
+              { "title": "能源與製程效率", "desc": "2025 年完成 780 件節水節能與綠能改善，投資 11.49 億元，年改善效益 4.39 億元，減碳 109,478 噸／年。" },
+              { "title": "數位化／行政流程", "desc": "2025 年 RPA 文書流程自動化完成 64 案，可節省約 6,614 小時／年。" },
+              { "title": "資本與供應鏈支援", "desc": "2025 年發行國內無擔保普通公司債 100 億元，維持轉型投資與資金調度彈性；2026 年 3 月因上游原料供應不確定，啟動不可抗力通知與客戶協商。" }
+            ]
+          },
+          "en": {
+            "eyebrow": "Value Chain Analysis",
+            "title": "Value Chain",
+            "primaryTitle": "Primary Activities",
+            "supportTitle": "Support Activities",
+            "primary": [
+              { "title": "R&D", "desc": "2024 R&D spending was TWD 2.5B, with 343 valid patents and 42 newly granted patents. FPC developed 35 new products/technologies, 16 of which were commercialized, generating TWD 93.808M in revenue." },
+              { "title": "Manufacturing", "desc": "2024 PVC powder capacity was 1.808M tons and output was 1.7185M tons; VCM capacity was 1.644M tons and output was 1.6066M tons; PP capacity was 1.016M tons and output was 0.8363M tons." },
+              { "title": "Marketing & Sales", "desc": "In 2023, PVC powder exports reached 1.3791M tons and domestic sales reached 0.2872M tons; PP exports reached 0.5844M tons and domestic sales reached 0.1327M tons." },
+              { "title": "Operating Results", "desc": "2025 revenue was TWD 175.411B, operating loss was TWD 7.505B, and net loss was TWD 10.049B. 2026 Q1 cumulative revenue was TWD 41.985B, down 11.05% YoY." }
+            ],
+            "support": [
+              { "title": "Human Resources", "desc": "2024 employees: 7,306; avg tenure: 17.6 years." },
+              { "title": "Energy & Process Efficiency", "desc": "In 2025, FPC completed 780 water, energy, and green-power improvement projects, investing TWD 1.149B and generating TWD 439M in annual benefits." },
+              { "title": "Administrative Digitalization", "desc": "In 2025, FPC completed 64 RPA automation cases for administrative workflows, saving about 6,614 hours per year." },
+              { "title": "Capital & Supply Chain Support", "desc": "FPC issued TWD 10B in unsecured corporate bonds in 2025 to preserve funding flexibility, and initiated force-majeure notices and customer coordination in March 2026 amid upstream supply uncertainty." }
+            ]
+          }
+        },
+        "resources": {
+          "zh": {
+            "tangible": [
+              { "title": "生產基地規模經濟", "desc": "雲林麥寮六輕、中國寧波、美國德州及越南河靜鋼鐵基地，形成極具全球抗震力的實體固定資產網。" },
+              { "title": "高度垂直整合產線", "desc": "上游 VCM 直通中游 PVC，90%原料經集團管道一體化互聯供應，大幅削減多餘物流成本與外部購置風險。" },
+              { "title": "自主公用事業配套", "desc": "麥寮園區內自備高效率燃煤/燃氣發電機組、汽電共生廠及海水淡化設備，保障核心廠區能源成本高度受控。" },
+              { "title": "彈性財務資源儲備", "desc": "憑藉數十載雄厚盈利積累，負債比長年處於合理水平，擁有極佳的長期信用評級與無擔保公司債融資實力。" },
+              { "title": "自有物流設施配套", "desc": "自建麥寮工業專用港、化學品散裝船隊與散裝運輸貨卡，大幅優化全球大宗供應與出口通關效率。" }
+            ],
+            "intangible": [
+              { "title": "低成本運營 DNA", "desc": "「勤勞樸實」管理理念下，極致精準的製程去瓶頸、能耗管控與嚴密的人工成本管理能力。" },
+              { "title": "專利製程技術壁壘", "desc": "累積擁有逾340項有效專利。在PVC聚合反應釜大型化、碳纖維氧化溫控等領域掌握關鍵技術產能優勢。" },
+              { "title": "高黏著度B2B品牌", "desc": "作為亞洲 PVC「定價者」(Price Setter)，與下游數千家主流跨國加工企業維繫了長達數十年的戰略合約關係。" },
+              { "title": "跨事業群協同效應", "desc": "與台塑石化、南亞、台化等兄弟公司形成「產能互補、風險共攤」的石化防禦陣容，非外部單一小廠所能抗衡。" },
+              { "title": "工程導向精益管理", "desc": "由台塑核心高層直接督導的單元操作合理化改進，具備極強的基層執行力與敏捷的現場改進速度。" },
+              { "title": "一體化內部供應鏈", "desc": "與集團內台塑石化（FPCC）形成深度的一體化內部管道互聯，徹底規避外部市場交易成本的惡性敲竹槓（hold-up）風險。" }
+            ]
+          },
+          "en": {
+            "tangible": [
+              { "title": "Global Scale Assets", "desc": "Mailiao No.6 Cracker complex, U.S. Texas plants, and Ningbo clusters yield massive physical scale-economic moats." },
+              { "title": "Vertical Processing moats", "desc": "VCM precursor piping direct to PVC reactors bypasses external market transaction costs, creating cycle resilience." },
+              { "title": "Captive Energy Utilities", "desc": "FPG-owned power generation, desalinization, and steam pipes shelter core plants from volatile public utility pricing." },
+              { "title": "Defensive Financial Base", "desc": "Consistent operating cash flows and excellent credit ratings enable raising NT$10B in unsecured debt at low rates." },
+              { "title": "Owned Logistics Fleet", "desc": "Mailiao industrial harbor and proprietary bulk chemical transport vessel fleet slash ocean freight variables and clearance bottlenecks." }
+            ],
+            "intangible": [
+              { "title": "Low-Cost Sourcing DNA", "desc": "Extreme commitment to debottlenecking, high operations discipline, and granular yield metrics optimizing unit cost curves." },
+              { "title": "Intimate B2B Contracts", "desc": "Functioning as the de facto price setter in Asian PVC, holding decades-long supply relationships with global downstream leaders." },
+              { "title": "Proprietary R&D Patents", "desc": "Securing 343+ valid chemical patents, establishing hard-to-replicate polymerization process barriers." },
+              { "title": "Group Network Synergy", "desc": "Coordinating with FPCC, Nan Ya, and FCFC to co-insulate against petrochemical cycle shocks via internal allocations." },
+              { "title": "Operational Rationalization", "desc": "Granular execution metrics overseen by internal committees, forcing continuous cost audits and performance loops." },
+              { "title": "Captive Sourcing Networks", "desc": "Group mutual piping grids with FPCC bypass local asset specificity transaction costs, establishing TCE advantage." }
+            ]
+          }
+        },
+        "competencies": {
+          "zh": {
+            "eyebrow": "Core Competencies & Partners",
+            "title": "Competencies 核心能力",
+            "coreTitle": "內部核心能力",
+            "partnerTitle": "外部關鍵夥伴 (產學研)",
+            "core": [
+              "規模製造與垂直整合：產品鏈涵蓋 PVC、VCM、液鹼、PE、EVA、LLDPE、PP 等，第一層護城河是石化材料量產、連續製程管理與垂直整合。",
+              "國內市占與產品地位：PVC、VCM、液鹼、AE、SAP、AN、EVA 等產品具高國內市占率，代表台塑在台灣石化原料供應鏈中具關鍵地位。",
+              "高值化研發能力：2024 年研發支出 25 億元，開發 35 項新產品／技術，其中 16 項商業化，差別化產品營收占比 19.8%。",
+              "AI／數位製造能力：台塑與 NVIDIA 推動生成式 AI 在石化產業的應用，強化製程優化、品質管理、預測維修與研發效率。",
+              "半導體與節能減碳能力：2026 規劃電子級 IPA 廢液回收、電子級氫氟酸、電子級氫氣、ALD 釕金屬前驅物等；2025 完成 780 件節能改善。"
+            ],
+            "partners": [
+              { "name": "台塑石化", "desc": "上游原料供應關係企業。2026 年因乙烯、丙烯供應受美伊戰事影響，台塑跟進發出不可抗力通知。" },
+              { "name": "國立清華大學", "desc": "2022 年成立台塑清華聯合研發中心，合作 AI、環保製程、新型材料與綠色能源。" },
+              { "name": "長庚大學", "desc": "合作開發過氧化氫電極感測器，用於泌尿系統疾病快速篩檢與膀胱癌偵測儀。" },
+              { "name": "NVIDIA 輝達", "desc": "共同推動生成式 AI 在石化產業的應用，協助台塑提升研發、製程與營運決策效率。" },
+              { "name": "普瑞博生技", "desc": "台塑 2021 年認購普瑞博生技現金增資股票，並合作開發醫療級複合膠粒。" },
+              { "name": "台塑新智能科技", "desc": "台塑與南亞、台化、台塑石化、台塑生醫共同成立，支援能源轉型與儲能布局。" }
+            ]
+          },
+          "en": {
+            "eyebrow": "Core Competencies & Partners",
+            "title": "Competencies",
+            "coreTitle": "Internal Core Competencies",
+            "partnerTitle": "External Key Partners",
+            "core": [
+              "Scale manufacturing and vertical integration: FPC covers PVC, VCM, liquid alkali, PE, EVA, LLDPE, and PP, with its first moat coming from petrochemical scale production and continuous-process management.",
+              "Domestic share and product position: PVC, VCM, liquid alkali, AE, SAP, AN, and EVA hold high domestic market shares, making FPC a key supplier in Taiwan petrochemical inputs.",
+              "High-value R&D: 2024 R&D spending reached TWD 2.5B; 35 new products/technologies were developed, 16 commercialized, and differentiated-product revenue reached 19.8%.",
+              "AI and digital manufacturing: FPC and NVIDIA are applying generative AI to petrochemical use cases, strengthening process optimization, quality management, predictive maintenance, and R&D efficiency.",
+              "Semiconductor and decarbonization capabilities: 2026 plans include electronic-grade IPA waste-liquid recycling, electronic-grade hydrofluoric acid, electronic-grade hydrogen, and ALD ruthenium precursors; 780 energy-improvement projects were completed in 2025."
+            ],
+            "partners": [
+              { "name": "Formosa Petrochemical", "desc": "A key upstream affiliate supplying petrochemical feedstocks. The relationship is central to FPC's integrated value chain and supply stability." },
+              { "name": "National Tsing Hua Univ.", "desc": "The Formosa-NTHU Joint R&D Center was established in 2022 for AI, environmental processes, new materials, and green energy." },
+              { "name": "Chang Gung Univ.", "desc": "Collaborated on hydrogen-peroxide electrode sensors for urinary-system rapid screening and bladder-cancer detection." },
+              { "name": "NVIDIA", "desc": "A technology partner for generative-AI applications in petrochemical R&D, manufacturing, and operating decisions." },
+              { "name": "Plasmonic Biosensor", "desc": "FPC subscribed to its 2021 cash capital increase and collaborated on medical-grade composite pellets." },
+              { "name": "Formosa Smart Energy Tech", "desc": "Established with Nan Ya, FCFC, FPCC, and Formosa Biomedical to support energy-transition and storage initiatives." }
+            ]
+          }
+        },
+        "dynamics": {
+          "zh": {
+            "eyebrow": "Dynamic Capabilities",
+            "title": "Dynamics 動態轉型",
+            "items": [
+              { "t": "醫療、防護與衛生材料需求提升", "a": "2021 年投資 3.9 億元於高雄仁武廠設立醫療材料生產中心，將 PE、EVA、PP、PVC 等既有材料延伸至醫療與衛生應用。" },
+              { "t": "傳統製造邁向智慧化與高值化", "a": "仁武廠導入工業 4.0、AI 研發中心與複材中心；並與清大成立聯合研發中心，補強 AI、環保製程、新型材料與綠色能源研發。" },
+              { "t": "全球需求疲弱與中國產能擴張", "a": "2023–2024 年營運表現反映傳統石化利差承壓，台塑因此加速開發醫療、風電、EVA、PP 包材等高附加價值產品。" },
+              { "t": "2025 年虧損擴大，轉型壓力升高", "a": "2025 年營收 1,754.11 億元、營業損失 75.05 億元、淨損 100.49 億元，突顯公司需降低對大宗石化景氣循環的依賴。" },
+              { "t": "能源成本、碳排與組織效率壓力", "a": "2025 年完成 780 件節水節能與綠能改善，年減碳 109,478 噸、效益 4.39 億元；同時完成 64 件 RPA 自動化案，節省約 6,614 小時／年。" },
+              { "t": "供應鏈韌性與半導體材料需求", "a": "2026 年 3 月因上游供應不確定啟動不可抗力通知與客戶協商；並布局電子級 IPA 廢液回收、電子級氫氟酸、電子級氫氣與 ALD 釕金屬前驅物等材料。" }
+            ]
+          },
+          "en": {
+            "eyebrow": "Dynamic Capabilities",
+            "title": "Dynamics",
+            "items": [
+              { "t": "Rising demand for medical, protective, and hygiene materials", "a": "In 2021, FPC invested TWD 390M in a medical-material production center at Kaohsiung Renwu, extending PE, EVA, PP, and PVC into medical and hygiene applications." },
+              { "t": "Traditional manufacturing moving toward smart and high-value production", "a": "Renwu introduced Industry 4.0, an AI R&D center, and a composite-material center; FPC also formed a joint R&D center with NTHU to strengthen AI, environmental process, new-material, and green-energy research." },
+              { "t": "Weak global demand and Chinese capacity expansion", "a": "2023-2024 results show pressure on petrochemical spreads, pushing FPC to accelerate higher-value applications in medical materials, wind power, EVA, and PP packaging." },
+              { "t": "2025 losses increased the urgency of transformation", "a": "2025 revenue was TWD 175.411B, operating loss was TWD 7.505B, and net loss was TWD 10.049B, underscoring the need to reduce reliance on commodity petrochemical cycles." },
+              { "t": "Energy cost, carbon, and organizational-efficiency pressure", "a": "In 2025, FPC completed 780 water, energy, and green-power improvement projects, reducing emissions by 109,478 tons and generating TWD 439M in benefits; it also completed 64 RPA cases, saving about 6,614 hours/year." },
+              { "t": "Supply-chain resilience and semiconductor-material demand", "a": "In March 2026, FPC initiated force-majeure notices and customer coordination amid upstream supply uncertainty, while developing electronic-grade IPA recycling, hydrofluoric acid, hydrogen, and ALD ruthenium precursor materials." }
+            ]
+          }
+        }
+      },
+      {
+        "id": "tp3",
+        "labelZh": "TP3 國際策略與未來方向",
+        "labelEn": "TP3 International Strategy",
+        "voiceGuide": {
+          "zh": "【台塑1301 國際策略語音導覽】各位評審與同學好，我是本頁導覽員。本節聚焦台塑 1301 的三大國際策略維度：第一，垂直整合。台塑與台塑化形成緊密的內部化鏈條，將市場交易成本降至最低。第二，集中多角化。台塑不打盲目價格戰，而是利用既有化學合成與高分子優勢，向半導體特用化學（如台塑德山雙氧水）與新能源（台塑新智能儲能）進行 concentric 多角化轉型，構築 VRIO 壁壘。第三，FDI 進入模式。台塑依 OLI 優勢靈活配置工具：台灣技術合資、美國資源綠地、中國市場園區。面對 2024 年以來的虧損，我們建議加速碳治理與損益重整，將碳成本內生化。感謝收聽，請點選下方圖表以獲得深度策略剖析。",
+          "en": "[FPC 1301 International Strategy Audio Tour] Hello, welcome to our strategic review. This section dissects FPC's three core international strategy pillars: First, Vertical Integration. FPC internalizes feedstock transactions with FPCC to slash market friction. Second, Related/Concentric Diversification. Instead of pursuing commodity price wars, FPC redirects core polymer skills into high-value semiconductor reagents (Tokuyama JV) and green storage cells (Smart Energy), establishing new VRIO advantages. Third, FDI Entry Modes. FPC uses a dynamic OLI toolkit: technology-seeking JVs in Taiwan, resource-seeking greenfields in the U.S. using shale gas, and market-seeking clusters in Ningbo. To resolve the structural deficits since 2024, we recommend rigorous internal carbon pricing and product whitelist restructuring. Enjoy the interactive panels below."
+        },
+        "I18N": {
+          "zh": {
+            "nav.home": "首頁",
+            "nav.vertical": "垂直整合",
+            "nav.horizontal": "多角化",
+            "nav.global": "全球擴張",
+            "nav.ma": "併購",
+            "nav.greenfield": "綠地投資",
+            "nav.future": "未來挑戰",
+            "home.eyebrow": "SMMC-EMI · 國際策略管理 · G7 · TP3",
+            "home.title1": "台塑股份有限公司",
+            "home.title2": "1301 策略分析",
+            "home.lead": "本網站是 SMMC-EMI「國際策略管理」G7 · TP3 專題：以台塑 1301 為例，用理論—證據—分析三層架構，解析垂直整合、多角化轉型、跨國進入模式（合資／併購／綠地）與轉型挑戰，而非只做公司介紹。",
+            "lens.theory": "策略理論",
+            "lens.evidence": "實證／資料",
+            "lens.insight": "我們的分析",
+            "home.cta1": "開始：垂直整合",
+            "home.cta2": "跳至：未來建議",
+            "home.scrollHint": "向下滾動即可依序閱讀六個主題，或點上方導覽快速跳轉",
+            "home.meta1l": "研究對象",
+            "home.meta2l": "分析架構",
+            "home.meta2v": "理論 · 證據 · 分析",
+            "home.meta3l": "核心理論",
+            "home.meta3v": "OLI、交易成本、進入模式",
+            "home.meta4l": "指導教授",
+            "takeaway.label": "結論摘要",
+            "vertical.eyebrow": "主題 1",
+            "vertical.title": "垂直整合",
+            "vertical.intro": "從國際策略看，台塑四寶把塑化鏈「內部化」：1301 位於中游聚合，約六成原料來自 6505 台塑化——這是內部市場，不是一般外部採購關係。",
+            "vertical.researcher": "研究員：庭伃 Tina",
+            "vertical.conceptTitle": "概念說明",
+            "vertical.concept": "垂直整合指企業控制供應鏈多個階段。焦點在集團「內部」供料：1301 逾六成原料來自 6505 台塑化，相較仰賴中油的小塑化廠，大幅降低斷鏈風險。",
+            "vertical.diagramTitle": "集團內部垂直整合流程圖（點選節點）",
+            "vertical.internalBadge": "集團內部垂直整合",
+            "vertical.externalLabel": "外部採購（非集團核心）",
+            "vertical.vizTitle": "1301 產品矩陣",
+            "vertical.analysisTitle": "分析重點",
+            "vertical.takeaway": "結論：1301 的護城河來自集團內部化——在油價與中國低價傾銷下，內部供料與規模經濟仍是少數能維持議價與開工率的制度安排。",
+            "horizontal.eyebrow": "主題 2",
+            "horizontal.title": "多角化",
+            "horizontal.intro": "外部面臨中國產能過剩致傳統石化利潤惡化與 ESG 減碳浪潮，迫使台塑尋求低碳高產值的第二成長曲線；內部則立足高分子材料與化學合成能力，採取集中多角化策略。",
+            "horizontal.researcher": "研究員：泱慈 Julia",
+            "horizontal.conceptTitle": "概念說明",
+            "horizontal.concept": "台塑公司目前的轉型核心，是利用原本最擅長的「高分子材料」與「化學合成技術」，轉向開發半導體高階材料與新能源電池材料（如電解液、碳纖維）。因為新舊產品共用核心化工技術，所以是標準的「集中多角化」。\n\n註解：\n1. 集中多角化：企業以現有相關的技術，進入另一個新的目標市場。\n2. 水平多角化：企業以技術上不相關的新產品進入原市場，吸引舊有顧客。",
+            "horizontal.diagramTitle": "台塑 1301 集中多角化轉型架構圖",
+            "horizontal.hub": "核心技術",
+            "horizontal.hubSub": "高分子材料 · 化學合成",
+            "horizontal.vizTitle": "多角化轉型行動（點選圖表節點）",
+            "horizontal.analysisTitle": "分析重點",
+            "horizontal.takeaway": "結論：台塑的轉型並非盲目跨界，而是將既有核心技術（高分子與化學合成）轉化為高附加價值產品，在綠色經濟時代重塑全球競爭優勢。",
+            "global.eyebrow": "主題 3",
+            "global.title": "全球擴張",
+            "global.intro": "全球擴張是 FDI 組合拳：台灣用技術尋求型合資補能力缺口；美國用資源尋求型綠地拿頁岩氣；中國用市場尋求型園區貼近內需，並以集團內部分工複製麥寮模式。",
+            "global.researcher": "研究員：郁珊 Miranda",
+            "global.conceptTitle": "概念說明",
+            "global.concept": "地理擴張模式包含在地擴廠、東道國投資與合資。台塑依市場、資源與法規選擇獨資、合資或轉投資路徑。",
+            "global.diagramTitle": "全球擴張路徑示意",
+            "global.vizTitle": "區域策略重點",
+            "global.analysisTitle": "分析重點",
+            "global.takeaway": "結論：台塑的國際化不是「到哪都蓋一樣的廠」，而是依 OLI 優勢差異，配置合資、併購與綠地等不同進入工具。",
+            "ma.eyebrow": "主題 4",
+            "ma.title": "併購",
+            "ma.intro": "併購讓台塑快速取得東道國產能、客戶與執照；美國 1980 年代併購是海外立足關鍵，本土亦有同業整合案例。",
+            "ma.researcher": "研究員：郁珊 Miranda",
+            "ma.conceptTitle": "概念說明",
+            "ma.concept": "併購（M&A）透過收購既有資產縮短進入時間，適合需要迅速取得市場與設備的海外擴張，但需整合營運與文化。",
+            "ma.diagramTitle": "併購策略演進流程",
+            "ma.flow1": "美國立足",
+            "ma.flow2": "產能整合",
+            "ma.flow3": "本土擴張",
+            "ma.vizTitle": "事件詳情",
+            "ma.analysisTitle": "分析重點",
+            "ma.takeaway": "結論：併購是「用錢買時間」的進入模式；台塑在美國先併購立足，再以綠地深化垂直整合，呈現階段性、可學習的國際化路徑。",
+            "gf.eyebrow": "主題 5",
+            "gf.title": "綠地投資與策略聯盟",
+            "gf.intro": "綠地投資強調從零建廠、高度控制；策略聯盟則在技術、政治或財務風險較高時分攤資源。台塑兩者並用。",
+            "gf.researcher": "研究員：馥瑄 Angela",
+            "gf.conceptTitle": "概念說明",
+            "gf.concept": "綠地投資資本支出高但控制權完整；策略聯盟可互補技術與法規資源。台塑在核心石化偏好綠地，在跨業或高壁壘市場採聯盟。",
+            "gf.diagramTitle": "擴張模式決策流程",
+            "gf.decisionQ": "開展核心石化業務且需高度控制？",
+            "gf.branchYes": "是 → 綠地投資",
+            "gf.branchYesSub": "六輕、美國石化、寧波園區",
+            "gf.branchNo": "否 → 策略聯盟",
+            "gf.branchNoSub": "產學研發、越南鋼鐵、古雷合資",
+            "gf.vizTitle": "代表專案（點選）",
+            "gf.analysisTitle": "分析重點",
+            "gf.table.dim": "比較",
+            "gf.table.gf": "綠地",
+            "gf.table.sa": "聯盟",
+            "gf.row1": "控制",
+            "gf.row1a": "高",
+            "gf.row1b": "中低",
+            "gf.row2": "投入",
+            "gf.row2a": "極高",
+            "gf.row2b": "可分攤",
+            "gf.row3": "情境",
+            "gf.row3a": "美國石化",
+            "gf.row3b": "越南鋼鐵",
+            "gf.takeaway": "結論：進入模式是情境策略——核心石化、高控制需求→綠地；新領域、高制度風險→聯盟／合資分攤。"
+          },
+          "en": {
+            "nav.home": "Home",
+            "nav.vertical": "Vertical",
+            "nav.horizontal": "Diversification",
+            "nav.global": "Global",
+            "nav.ma": "M&A",
+            "nav.greenfield": "Greenfield",
+            "nav.future": "Future",
+            "home.eyebrow": "SMMC-EMI · International Strategy · G7 · TP3",
+            "home.title1": "Formosa Plastics Corp.",
+            "home.title2": "1301 Strategy Analysis",
+            "home.lead": "SMMC-EMI International Strategic Management, G7 · TP3: analyzing Formosa 1301 through theory–evidence–insight—covering integration, diversification, entry modes (JV/M&A/greenfield), and strategic renewal—not a corporate brochure.",
+            "lens.theory": "Theory",
+            "lens.evidence": "Evidence",
+            "lens.insight": "Our analysis",
+            "home.cta1": "Start: Vertical Integration",
+            "home.cta2": "Jump: Future Outlook",
+            "home.scrollHint": "Scroll down to read all six themes in order, or use the nav to jump",
+            "home.meta1l": "Subject",
+            "home.meta2l": "Framework",
+            "home.meta2v": "Theory · Evidence · Insight",
+            "home.meta3l": "Core frameworks",
+            "home.meta3v": "OLI, TCE, entry modes",
+            "home.meta4l": "Advisor",
+            "takeaway.label": "Key Takeaway",
+            "vertical.eyebrow": "Theme 1",
+            "vertical.title": "Vertical Integration",
+            "vertical.intro": "The Formosa four treasures integrate the petrochemical chain; 1301 sits in midstream polymers with heavy reliance on FPCC feedstock.",
+            "vertical.researcher": "Researcher: Tina (Vertical)",
+            "vertical.conceptTitle": "Concept",
+            "vertical.concept": "Vertical integration controls multiple stages. Focus here is intra-group supply: over 60% of 1301 feedstock comes from FPCC 6505, unlike smaller peers relying on CPC.",
+            "vertical.diagramTitle": "Intra-group vertical integration flow (click nodes)",
+            "vertical.internalBadge": "Intra-group vertical integration",
+            "vertical.externalLabel": "External procurement (non-core)",
+            "vertical.vizTitle": "1301 product matrix",
+            "vertical.analysisTitle": "Our analysis",
+            "vertical.takeaway": "Over 60% of 1301 feedstock comes from FPCC—stable supply, cost edge, and cycle resilience underpin its PVC leadership.",
+            "horizontal.eyebrow": "Theme 2",
+            "horizontal.title": "Diversification",
+            "horizontal.intro": "External pressures from Chinese overcapacity and ESG compliance force FPC to seek a second growth curve. Internally, FPC leverages polymer and chemical capabilities for related diversification.",
+            "horizontal.researcher": "Researcher: Julia (Diversification)",
+            "horizontal.conceptTitle": "Concept",
+            "horizontal.concept": "FPC's transition leverages its core polymer materials and chemical synthesis capabilities to develop advanced semiconductor and energy materials (electrolytes, carbon fiber). Since new and old products share core chemical technology, it represents concentric diversification.\n\nNote:\n1. Concentric Diversification: Enters a new market using related technologies.\n2. Horizontal Diversification: Enters original markets with unrelated new products to attract existing customers.",
+            "horizontal.diagramTitle": "FPC 1301 Concentric Diversification Architecture",
+            "horizontal.hub": "Core Tech",
+            "horizontal.hubSub": "Polymers · Chem Synthesis",
+            "horizontal.vizTitle": "Diversification Actions (click nodes)",
+            "horizontal.analysisTitle": "Key Analysis",
+            "horizontal.takeaway": "Takeaway: FPC's diversification is not random but related, transforming core chemical capabilities into high-value clean-tech assets to secure advantages in the green era.",
+            "global.eyebrow": "Theme 3",
+            "global.title": "Global Expansion",
+            "global.intro": "Expansion spans home-country JVs, U.S. M&A plus greenfield integration, and Ningbo greenfield with intra-group coordination.",
+            "global.researcher": "Researcher: Miranda (Expansion)",
+            "global.conceptTitle": "Concept",
+            "global.concept": "Geographic expansion uses local plants, host-country investment, and JVs chosen by market access, resources, and regulation.",
+            "global.diagramTitle": "Global expansion pathway",
+            "global.vizTitle": "Regional strategy focus",
+            "global.analysisTitle": "Our analysis",
+            "global.takeaway": "Expansion matches regional advantage: Taiwan for tech, U.S. for resources, China for market proximity.",
+            "ma.eyebrow": "Theme 4",
+            "ma.title": "Mergers & Acquisitions",
+            "ma.intro": "M&A quickly secures capacity, customers, and permits—1980s U.S. deals were pivotal; domestic deals expanded PP share.",
+            "ma.researcher": "Researcher: Miranda (M&A)",
+            "ma.conceptTitle": "Concept",
+            "ma.concept": "M&A shortens market entry by acquiring assets, ideal when speed matters, though integration risk remains.",
+            "ma.diagramTitle": "M&A strategy evolution flow",
+            "ma.flow1": "U.S. foothold",
+            "ma.flow2": "Capacity integration",
+            "ma.flow3": "Domestic scale-up",
+            "ma.vizTitle": "Event details",
+            "ma.analysisTitle": "Our analysis",
+            "ma.takeaway": "M&A opened the U.S. door; greenfield later deepened vertical integration—a dual-track overseas model.",
+            "gf.eyebrow": "Theme 5",
+            "gf.title": "Greenfield & Alliances",
+            "gf.intro": "Greenfield builds from scratch for control; alliances share tech and political risk. Formosa uses both.",
+            "gf.researcher": "Researcher: Angela (Greenfield)",
+            "gf.conceptTitle": "Concept",
+            "gf.concept": "Greenfield demands high capex but full control; alliances complement capabilities where barriers or risk are high.",
+            "gf.diagramTitle": "Expansion mode decision flow",
+            "gf.decisionQ": "Need high control in core business?",
+            "gf.branchYes": "Yes → Greenfield",
+            "gf.branchYesSub": "Mailiao, U.S. petrochem, Ningbo",
+            "gf.branchNo": "No → Strategic alliance",
+            "gf.branchNoSub": "R&D alliances, Vietnam steel, Gulei JV",
+            "gf.vizTitle": "Projects (click)",
+            "gf.analysisTitle": "Our analysis",
+            "gf.table.dim": "Dimension",
+            "gf.table.gf": "Greenfield",
+            "gf.table.sa": "Alliance",
+            "gf.row1": "Control",
+            "gf.row1a": "High",
+            "gf.row1b": "Medium/Low",
+            "gf.row2": "Investment",
+            "gf.row2a": "Very high",
+            "gf.row2b": "Shared",
+            "gf.row3": "Use case",
+            "gf.row3a": "U.S. petrochem",
+            "gf.row3b": "Vietnam steel",
+            "gf.takeaway": "Mailiao and Texas reflect scale/resource logic; academic and Vietnam JVs reflect risk-sharing.",
+            "future.eyebrow": "Theme 6",
+            "future.title": "Challenges & Recommendations",
+            "future.intro": "1301 faces carbon fees, energy transition, Asian overcapacity, and trade risk—first annual loss in 2024 signals structural pressure.",
+            "future.researcher": "Researcher: Alex (Future)",
+            "future.conceptTitle": "Status snapshot",
+            "future.stat1": "2024 revenue NT$200.0bn; exports 72%",
+            "future.stat2": "First annual pre-tax loss in 2024; wider loss in 2025Q2",
+            "future.stat3": "Scope 1–2 emissions down only 12.6% vs 2020",
+            "future.diagramTitle": "Recommended execution priorities",
+            "future.priA": "Priority A (0–12 mo.)",
+            "future.priASub": "Carbon governance, P&L reset, supply resilience",
+            "future.priB": "Priority B (6–18 mo.)",
+            "future.priBSub": "ESG transparency, AI platform, trade compliance",
+            "future.vizTitle": "Challenge vs. response (click)",
+            "future.analysisTitle": "Strategic response",
+            "future.takeaway": "Prioritize carbon pricing, portfolio P&L, and supply resilience; accelerate green power and low-carbon products with strict capex gates.",
+            "footer.line": "SMMC-EMI International Strategy · G7 · TP3 · Formosa 1301 · Advisor Prof. lolo",
+            "footer.col1": "Themes",
+            "footer.col2": "Strategy Tools",
+            "footer.col3": "Research Team",
+            "cta.title": "Rethinking Formosa's internationalization and transition.",
+            "cta.btn1": "Start from Theme 1",
+            "cta.btn2": "Back to Home",
+            "voice.hint": "Play to hear a guided tour of the current page and selected chart",
+            "voice.idle": "Press Play for this section",
+            "voice.playing": "Guide speaking…",
+            "voice.paused": "Paused"
+          }
+        },
+        "VERTICAL_FLOW": [
+          {
+            "id": "fpcc",
+            "code": "6505",
+            "focus": false,
+            "nameZh": "台塑化",
+            "nameEn": "FPCC",
+            "roleZh": "上游 · 裂解",
+            "roleEn": "Upstream · cracking",
+            "productsZh": "產出：乙烯、丙烯、丁二烯",
+            "productsEn": "Outputs: C2, C3, C4 monomers",
+            "detailZh": "集團內上游樞紐：進口原油與輕油（石油腦）於麥寮裂解，供應四寶基本原料。外部採購僅止於原油／輕油，裂解後即進入內部循環。",
+            "detailEn": "Group upstream hub: imports crude and naphtha, cracks at Mailiao, feeds all four treasures. Only crude/naphtha are external; post-cracking flows stay internal."
+          },
+          {
+            "id": "fpc",
+            "code": "1301",
+            "focus": true,
+            "nameZh": "台塑",
+            "nameEn": "FPC",
+            "roleZh": "中游 · 聚合（本報告焦點）",
+            "roleEn": "Midstream · polymers (focus)",
+            "productsZh": "PVC、HDPE/LDPE、PP",
+            "productsEn": "PVC, HDPE/LDPE, PP",
+            "internalZh": "約 62% 進貨來自台塑化",
+            "internalEn": "~62% purchases from FPCC",
+            "detailZh": "1301 接收集團內乙烯、丙烯後聚合成大宗塑化原料；原料逾六成來自 6505 內部供料，相較仰賴中油的小塑化廠具成本與斷鏈優勢。",
+            "detailEn": "1301 polymerizes intra-group monomers; ~62% feedstock from FPCC internally—structural edge vs. CPC-dependent peers."
+          },
+          {
+            "id": "nya",
+            "code": "1303",
+            "focus": false,
+            "nameZh": "南亞",
+            "nameEn": "Nan Ya",
+            "roleZh": "下游 · 加工應用",
+            "roleEn": "Downstream · fabrication",
+            "productsZh": "塑膠製品、電子材料、銅箔基板",
+            "productsEn": "Plastics, electronics, CCL",
+            "detailZh": "集團內下游：將樹脂加工為民生與電子材料，延伸至高附加價值科技供應鏈。",
+            "detailEn": "Internal downstream: converts resins into consumer and electronics materials."
+          },
+          {
+            "id": "fcfc",
+            "code": "1326",
+            "focus": false,
+            "nameZh": "台化",
+            "nameEn": "FCFC",
+            "roleZh": "下游 · 芳香烴／纖維",
+            "roleEn": "Downstream · aromatics/fibers",
+            "productsZh": "SM、PTA、PAN 前驅體",
+            "productsEn": "SM, PTA, PAN precursors",
+            "detailZh": "集團內下游：芳香烴與纖維原料，支援碳纖維與特用化學布局。",
+            "detailEn": "Internal downstream: aromatics and fiber inputs supporting carbon fiber and specialties."
+          }
+        ],
+        "STRATEGY_LENS": {
+          "vertical": {
+            "zh": {
+              "theory": "Williamson 的交易成本理論：資產專屬性高、市場不確定性大時，企業傾向垂直整合。Dunning 的 eclectic paradigm 亦強調，當知識與供應需內部保護時，應發揮 internalization advantage。",
+              "evidence": "台塑 1301 約 62.01% 進貨來自台塑化 6505；四寶形成上（裂解）—中（1301 聚合）—下（南亞、台化應用）的集團內部鏈結。",
+              "insight": "1301 的競爭力不是「會做 PVC」而已，而是被鎖定在集團內部市場中的成本、品質與開工率協調——這是制度性、難模仿的優勢。"
+            },
+            "en": {
+              "theory": "Transaction cost economics (Williamson): high asset specificity and uncertainty favor vertical integration. Dunning's OLI highlights internalization when knowledge and supply must stay in-house.",
+              "evidence": "~62% of 1301 purchases come from FPCC 6505; the four treasures form an intra-group upstream–midstream–downstream chain.",
+              "insight": "1301's edge is not merely PVC capacity but being embedded in an internal market that coordinates cost, quality, and utilization—an institutional, hard-to-imitate advantage."
+            }
+          },
+          "horizontal": {
+            "zh": {
+              "theory": "集中多角化（Concentric/Related Diversification）與資源重配置：企業憑藉核心能力（化學合成與高分子技術）跨入新領域。這與水平多角化（以不相關技術進入原市場吸引舊客）不同。",
+              "evidence": "台塑德山精密化學合資案（高雄雙氧水/異丙醇廠）；台塑新智能彰濱 LFP 電池芯與電解液項目；PAN 纖維升級至風電與儲氫瓶用高強度碳纖維。",
+              "insight": "多角化並非偏離本業，而是動態能力（Dynamic Capabilities）的體現。透過與日本德山合資分攤技術風險，並將核心化工優勢延伸，台塑在高價值半導體與新能源材料上，利用 VRIO 資源築起高模仿壁壘。"
+            },
+            "en": {
+              "theory": "Concentric/related diversification leverages core capabilities (chemical synthesis & polymer tech) for new markets, differing from horizontal diversification which targets existing customers with unrelated tech.",
+              "evidence": "FPC-Tokuyama JV for electronic chemicals; Formosa Smart Energy's Changbin LFP battery cell and electrolyte production; PAN fiber upgraded to specialized carbon fiber for wind power and hydrogen tanks.",
+              "insight": "Diversification exhibits dynamic capabilities. By sharing risks via JV and extending chemical resources, FPC establishes VRIO barriers in semiconductor and clean-tech material supply chains."
+            }
+          },
+          "global": {
+            "zh": {
+              "theory": "OLI／折衷理論：Ownership（技術、規模）、Location（資源、市場、制度）、Internalization（是否內部化供應與知識）共同決定 FDI 與進入模式。",
+              "evidence": "台灣：大金、旭化成、德山等技術尋求型合資；美國：1980 年代併購後德州／路易斯安那綠地；中國：寧波獨資園區＋集團內熱電與管線分工。",
+              "insight": "國際擴張是「工具箱」思維：缺技術→合資；要資源與控制→美國綠地；要市場與規模→中國園區——而非單一模式走遍全球。"
+            },
+            "en": {
+              "theory": "Dunning's OLI: ownership, location, and internalization advantages jointly shape FDI and entry mode choice.",
+              "evidence": "Taiwan: tech-seeking JVs; U.S.: 1980s M&A then shale-driven greenfield; China: Ningbo solo park plus intra-group utilities.",
+              "insight": "Internationalization is a toolkit: JV for technology, greenfield for resources/control, clustered parks for market scale—not one mode everywhere."
+            }
+          },
+          "ma": {
+            "zh": {
+              "theory": "市場進入模式：併購（M&A）以資本換取時間，快速獲得產能、客戶、執照；但須承擔整合、文化與負債風險（integration risk）。",
+              "evidence": "1981 特拉華 PVC 廠、Stauffer 塑料部門；本土永嘉化學 PP 產能整合。其後美國以綠地擴大垂直整合。",
+              "insight": "台塑在美國呈現「併購開門、綠地深化」的兩階段路徑——符合新興市場企業常見的漸進式國際化（incremental internationalization）。"
+            },
+            "en": {
+              "theory": "M&A buys speed—capacity, customers, permits—but raises integration and cultural risk.",
+              "evidence": "1981 Delaware PVC, Stauffer plastics assets, domestic Yung Chia PP deal; later U.S. greenfield deepened integration.",
+              "insight": "In the U.S., Formosa followed 'acquire to enter, build to integrate'—a phased, incremental internationalization path."
+            }
+          },
+          "greenfield": {
+            "zh": {
+              "theory": "進入模式權衡：綠地投資＝高控制、高資本、長回收期；策略聯盟／合資＝較低資本、共享風險，但控制與知識外流風險較高。",
+              "evidence": "綠地：麥寮六輕、美國石化、寧波園區、彰濱 LFP；聯盟：成大 CCUS 產學、越南河靜鋼鐵與中鋼／JFE 合資。",
+              "insight": "台塑在「核心石化＋高制度可預測」環境偏好綠地；在「跨業＋高政治／技術不確定」情境改用聯盟——這是理性的模式選擇，不是偏好問題。"
+            },
+            "en": {
+              "theory": "Greenfield trades capital for control; alliances trade shared risk against control and knowledge spillover.",
+              "evidence": "Greenfield: Mailiao, U.S. petrochem, Ningbo, Changbin LFP; alliances: NCKU CCUS, Ha Tinh steel with CSC/JFE.",
+              "insight": "Greenfield fits core petrochemicals in predictable institutions; alliances fit cross-industry, high-uncertainty bets—rational mode matching."
+            }
+          },
+          "future": {
+            "zh": {
+              "theory": "制度壓力與利害關係人理論：碳費、CBAM、客戶 ESG 要求改變「合法性与資源」；動態能力要求企業重配資源（Teece）。",
+              "evidence": "2024 首度全年虧損；外銷 72%；範疇一、二排放較 2020 年僅減 12.6%，低於 2025 年減 20% 目標；中國產能與 ECFA 變化。",
+              "insight": "1301 需把碳成本內生化為投資與定價變數，並以產品／地區損益紀律淘汰長虧通用料——同時以集中多角化（半導體化學、儲能、碳纖）開第二曲線。"
+            },
+            "en": {
+              "theory": "Institutional pressures (carbon fees, CBAM, ESG) reshape legitimacy and resources; dynamic capabilities require reconfiguration (Teece).",
+              "evidence": "First annual loss in 2024; exports 72%; emissions down only 12.6% vs 2020; China overcapacity and trade rule shifts.",
+              "insight": "1301 must internalize carbon into pricing/capex, enforce P&L discipline on commodity lines, and pursue related diversification for a second growth curve."
+            }
+          }
+        },
+        "MA_EVENTS": [
+          {
+            "year": "1981",
+            "titleZh": "美國特拉華 PVC 廠",
+            "titleEn": "Delaware PVC plant",
+            "detailZh": "併購現成 PVC 粉廠，正式打入美國本土市場。",
+            "detailEn": "Acquired Delaware PVC plant to enter the U.S. market."
+          },
+          {
+            "year": "1980s",
+            "titleZh": "Stauffer 塑料部門",
+            "titleEn": "Stauffer plastics unit",
+            "detailZh": "取得路易斯安那等地工廠、執照與客戶通路。",
+            "detailEn": "Gained Louisiana assets, permits, and customer channels."
+          },
+          {
+            "year": "—",
+            "titleZh": "永嘉化學（台灣）",
+            "titleEn": "Yung Chia (Taiwan)",
+            "detailZh": "收購股權擴大本土 PP 產能與市佔，屬母國同業整合。",
+            "detailEn": "Domestic acquisition expanding PP capacity and share."
+          }
+        ],
+        "CHALLENGES": [
+          {
+            "challengeZh": "碳費與能源轉型",
+            "challengeEn": "Carbon & Energy Shift",
+            "detailZh": "台塑 2024 年 carbon emissions 較 2020 年僅減 12.6%，未達 2025 年減 20% 的短期目標；且面臨台灣碳費啟動（一般費率 300 元，優惠 50/100 元）的成本壓力。此外，工安職災事故亦拉高社會許可成本。",
+            "challengeEn": "FPC's 2024 emissions fell only 12.6% vs 2020, missing the 2025 -20% target. FPC faces cost pressures from Taiwan's carbon fee (up to NT$300/t) and safety risks from occupational injuries.",
+            "recZh": "優先級 A；0-12 個月內導入內部碳價與產品別碳損益表，加速仁武與林園廠煤轉氣鍋爐、綠電 PPA 及 AI 智慧電廠建置。KPI 為 2027 前較 2020 減碳 20%、優惠費率覆蓋率 >80%。",
+            "recEn": "Priority A; Implement internal carbon pricing and product carbon P&Ls. Accelerate coal-to-gas, green PPAs, and AI plant deployment (NT$1.15bn capex in 2025). Target -20% vs 2020 by 2027."
+          },
+          {
+            "challengeZh": "原料韌性與低碳產品",
+            "challengeEn": "Feedstock & Green Demand",
+            "detailZh": "外銷高達 72%，極易受全球原料與運費波動干擾。同時，國際大廠與環保法規（如歐盟包裝回收新法）對低碳及再生產品要求升高。台塑雖已完成 82 項碳足跡，但綠色產品比率仍待提升。",
+            "detailEn": "Exports account for 72%, highly vulnerable to supply and freight shocks. Global demand shifts to bio/recycled products (e.g., EU 2030 packaging directive). FPC completed 82 carbon footprints but needs higher green share.",
+            "recZh": "優先級 A；0-18 個月建立關鍵原料雙來源、安全庫存與 S&OP 機制。將 PVC/PE/PP/EVA 劃分為傳統、差異化與低碳三線，加速綠色商業化。KPI 為單一來源依賴 <40%、OTIF >95%。",
+            "recEn": "Priority A; Build dual-sourcing & 90-day safety stocks. Segment PVC/PE/PP/EVA into commodity, specialty, and low-carbon lines. Target single-source reliance <40%, OTIF >95%."
+          },
+          {
+            "challengeZh": "產能競爭與損益重整",
+            "challengeEn": "Overcapacity & P&L Reset",
+            "detailZh": "面對中國大陸大宗塑化產能擴建、低價傾銷與 ECFA 優惠中止，台塑 2024 年面臨成立以來首度全年虧損，2025Q2 稅前虧損更擴至 68.71 億。而 1-Hexene 與碳纖等擴大案亦面臨大額資本支出考驗。",
+            "detailEn": "Massive overcapacity in China, price dumping, and suspended ECFA tariff cuts led to FPC's first annual pre-tax loss in 2024 (2025Q2 loss widened to NT$6.87bn) and massive capex funding pressure.",
+            "recZh": "優先級 A；即刻建立產品與地區別損益白名單，檢討長期虧損產線。設定三道嚴格資本支出門檻：IRR > WACC + 3%、評估財務模型納入碳價情境、且新建專案必須有非中國之增量客戶。",
+            "recEn": "Priority A; Set up a product-region P&L whitelist to review chronic loss lines. Enforce strict capex gates: require IRR > WACC + 3%, model carbon costs, and secure non-China incremental clients."
+          },
+          {
+            "challengeZh": "貿易風險與數位升級",
+            "challengeEn": "Trade Risks & Smart Mfg",
+            "detailZh": "外銷地廣泛，極易受地緣政治與關稅干擾；歐盟 CBAM 進入正式期，要求進口商申報內含排放。內部 AI 案年效益雖達 8.3 億，但專案仍偏零散且難以平台化，且 OT/IT 資安防護有待升級以防停工。",
+            "detailEn": "Global sales exposed to geopolitical and tariff shifts; EU CBAM enters formal phase. FPC's AI cases yield NT$830m/yr but are fragmented. OT/IT security needs upgrading to prevent operational shutdowns.",
+            "recZh": "優先級 B；0-18 個月內設立區域合規與定價中心，開發非中國市場。將 AI 專案集中收斂至能管、品質預測、預知保養與工安巡檢四大場景，並建置工業控制 OT 資安監控中心（SOC）。",
+            "recEn": "Priority B; Establish regional compliance and pricing hubs to diversify markets. Consolidate AI into utility management, quality prediction, predictive maintenance, and patrol, and build an OT SOC."
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <script>
+    /* GLOBAL APP STATE */
+    const state = {
+      lang: "zh",
+      theme: "light",
+      activeTab: "tp0",
+      activeMetric: "revenue",
+      activeStrategyLens: "vertical",
+      activeVerticalNode: "fpc",
+      activeMaEvent: "0",
+      activeChallengeIndex: 0,
+      
+      // Audio Guide state
+      speechSynth: window.speechSynthesis,
+      utterance: null,
+      isAudioPlaying: false,
+      isAudioPaused: false,
+      voices: []
+    };
+
+    let appData = {};
+
+    /* INITIALIZATION */
+    function init() {
+      // 1. Parse Embedded JSON
+      try {
+        const jsonText = document.getElementById("tp-data").textContent;
+        appData = JSON.parse(jsonText);
+      } catch (err) {
+        console.error("Failed to parse embedded data:", err);
+      }
+
+      // 2. Load Persisted Theme & Language
+      const savedTheme = localStorage.getItem("smmc-emi-final-theme") || "light";
+      setTheme(savedTheme);
+
+      // 3. Setup Navigation & Actions event listeners
+      document.getElementById("lang-toggle").addEventListener("click", toggleLanguage);
+      document.getElementById("theme-toggle").addEventListener("click", toggleTheme);
+      document.getElementById("audio-play-btn").addEventListener("click", toggleAudioGuide);
+      
+      // Setup Drawer listeners
+      document.querySelectorAll("[data-open-drawer]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          openDrawer(btn.dataset.openDrawer);
+        });
+      });
+      document.querySelectorAll("[data-close-drawer]").forEach(btn => {
+        btn.addEventListener("click", closeAllDrawers);
+      });
+      document.getElementById("drawer-overlay").addEventListener("click", closeAllDrawers);
+
+      // Lab interaction listeners
+      ["lab-oil", "lab-carbon", "lab-supply", "lab-focus"].forEach(id => {
+        document.getElementById(id).addEventListener("change", runLabSimulation);
+      });
+
+      // 4. Initialize Web Speech Voices
+      if (state.speechSynth) {
+        // Chrome loads voices asynchronously
+        state.speechSynth.onvoiceschanged = () => {
+          loadSpeechVoices();
+        };
+        loadSpeechVoices();
+      }
+
+      // 5. Initial Render
+      renderGlobalUI();
+      renderTabsNavigation();
+      renderActiveTabContent();
+    }
+
+    /* THEME MANAGEMENT */
+    function setTheme(theme) {
+      state.theme = theme;
+      document.documentElement.dataset.theme = theme;
+      localStorage.setItem("smmc-emi-final-theme", theme);
+      
+      const themeBtn = document.getElementById("theme-toggle");
+      if (theme === "dark") {
+        themeBtn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`;
+      } else {
+        themeBtn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`;
+      }
+    }
+
+    function toggleTheme() {
+      setTheme(state.theme === "light" ? "dark" : "light");
+      if (state.activeTab === "tp0") {
+        drawFinancialChart();
+      }
+    }
+
+    /* LANGUAGE TOGGLE */
+    function toggleLanguage() {
+      state.lang = state.lang === "zh" ? "en" : "zh";
+      document.documentElement.lang = state.lang === "zh" ? "zh-Hant" : "en";
+      document.getElementById("lang-toggle").textContent = state.lang === "zh" ? "EN" : "中文";
+
+      // Stop speech synthesizer on language switch to prevent voice collision
+      stopAudioGuide();
+
+      renderGlobalUI();
+      renderTabsNavigation();
+      renderActiveTabContent();
+      loadSpeechVoices(); // Reload voices tailored to active language
+    }
+
+    function switchTab(tabId) {
+      state.activeTab = tabId;
+      renderTabsNavigation();
+      renderActiveTabContent();
+      
+      // Smooth scroll to main panel view
+      document.getElementById("tab-panel").scrollIntoView({ behavior: 'smooth' });
+
+      // Automatically play narration hint change
+      stopAudioGuide();
+      updateAudioPanelUI();
+    }
+
+    /* GLOBAL DRAWERS ENGINE */
+    function openDrawer(drawerId) {
+      closeAllDrawers();
+      document.getElementById("drawer-overlay").classList.add("is-active");
+      const drawer = document.getElementById(drawerId);
+      if (drawer) {
+        drawer.classList.add("is-open");
+        drawer.setAttribute("aria-hidden", "false");
+      }
+    }
+
+    function closeAllDrawers() {
+      document.getElementById("drawer-overlay").classList.remove("is-active");
+      document.querySelectorAll(".drawer").forEach(drawer => {
+        drawer.classList.remove("is-open");
+        drawer.setAttribute("aria-hidden", "true");
+      });
+    }
+
+    /* WEB SPEECH AUDIO GUIDE INTEGRATION */
+    function loadSpeechVoices() {
+      if (!state.speechSynth) return;
+      state.voices = state.speechSynth.getVoices();
+      
+      const select = document.getElementById("audio-voice-select");
+      select.innerHTML = "";
+
+      // Filter based on active report language
+      const filteredVoices = state.voices.filter(v => {
+        if (state.lang === "zh") {
+          return v.lang.startsWith("zh") || v.lang.startsWith("zho");
+        } else {
+          return v.lang.startsWith("en");
+        }
+      });
+
+      if (filteredVoices.length === 0) {
+        // Fallback to all if empty
+        state.voices.forEach((v, index) => {
+          const opt = document.createElement("option");
+          opt.value = index;
+          opt.textContent = `${v.name} (${v.lang})`;
+          select.appendChild(opt);
+        });
+      } else {
+        filteredVoices.forEach(v => {
+          const opt = document.createElement("option");
+          opt.value = state.voices.indexOf(v);
+          
+          // Match nice names
+          let displayName = v.name;
+          if (v.name.includes("Yating")) displayName = "Taiwan Yating (Pro)";
+          if (v.name.includes("Taiwan")) displayName = "Traditional Mandarin (TW)";
+          if (v.name.includes("Daniel") || v.name.includes("George") || v.name.includes("Great Britain")) displayName = "British Male (EN-GB)";
+          
+          opt.textContent = `${displayName} (${v.lang})`;
+          
+          // Set default preferred voice
+          if (state.lang === "zh" && (v.name.includes("Yating") || v.name.includes("Taiwan") || v.lang.includes("TW"))) {
+            opt.selected = true;
+          } else if (state.lang === "en" && (v.name.includes("British") || v.name.includes("Daniel") || v.lang.includes("GB") || v.lang.includes("UK"))) {
+            opt.selected = true;
+          }
+
+          select.appendChild(opt);
+        });
+      }
+    }
+
+    function getNarrationScript() {
+      // Formulate script based on active tab
+      if (state.activeTab === "tp0") {
+        return state.lang === "zh"
+          ? "【台塑1301 財務與歷史導覽】您好，本節呈現台塑的創建與歷史轉折。從1954年王永慶先生在美援背景下創辦福懋塑膠，到1958年成立南亞解圍滯銷，再到六輕大計奠定數十載極致成本優勢。在財務圖表區，您可以點選14種指標查看2021至2025年的變化。例如稅前利益在2024與2025年已轉為虧損，流動比率甚至一度跌破百分之百，顯示傳統石化產品面臨極大的中國產能過剩與結構性競爭。請點選各年度小卡或財務指標進行互動。"
+          : "[FPC 1301 Financials & History Tour] Welcome. This section displays FPC's long history. Established in 1954 under US aid, Formosa initiated related integration in 1958 by forming Nan Ya Plastics. The reclamation of Mailiao No.6 Cracker complex cemented its low-cost DNA. Under the interactive chart, choose from 14 operational and liquidity metrics spanning 2021 to 2025. Pre-tax income turned negative in 2024, warning of heavy structural pressure and oversupply.";
+      } else if (state.activeTab === "tp1") {
+        return state.lang === "zh"
+          ? "【台塑1301 外部產業分析導覽】本節聚焦外部環境。在總體環境 PESTEL 部分，最核心的變數是關稅中止與環境壓力：2026年台灣正式繳交碳費，而中國大陸中止ECFA優惠帶來了直接關稅阻礙。在五力分析部分，現有同業競爭威脅被評估為極高，主因為亞洲新建產能集中釋放。然而在半導體特化材料、特種高強度碳纖維領域，客戶認證期長達數年，進入壁壘高，為台塑提供了絕佳避風港。請點選總體環境卡片與五力節點查看詳情。"
+          : "[FPC 1301 Industry Forces Tour] This section analyzes FPC's external environment. PESTEL factors reveal that Taiwan's 2026 carbon fee and suspended ECFA tariff exemptions constitute massive cost hurdles. Furthermore, Porter's Five Forces show extreme rivalry in commodity plastics. Yet high-barrier sectors like semiconductor reagents and wind-power carbon fibers provide FPC with a high-margin harbor.";
+      } else if (state.activeTab === "tp2") {
+        return state.lang === "zh"
+          ? "【台塑1301 關鍵資源與競爭優勢導覽】本節探討資源基礎觀點，即 RBV。台塑最難以複製的實體資源，是六輕一體化的垂直整合與自備熱電廠；而在無形資源上，極致精簡的低成本運營文化以及高黏著度的B2B客戶戰略關係，更是其第一道護城河。在下方的「資源 flip 卡」中，您可以將滑鼠移到卡片上，卡片將會自動翻轉，展示有形與無形資源的優劣對比；同時在右側，可以看到產學合作以及與輝達合作推動生成式 AI 輔助智慧化工製造的具體進程。"
+          : "[FPC 1301 RBV & VRIO Moat Tour] This section dissects the Resource-Based View. FPC's core physical moat is the vertical integration of its Mailiao cracker, public utility plants, and low-cost manufacturing DNA. Hover over the interactive resource cards below; they will automatically flip to contrast tangible and intangible VRIO assets. Also, explore FPC's strategic technology networks, including its latest generative AI cooperation with NVIDIA.";
+      } else {
+        // TP3 Tab Voice guide is highly specific and custom
+        return state.lang === "zh"
+          ? appData.tabs[3].voiceGuide.zh
+          : appData.tabs[3].voiceGuide.en;
+      }
+    }
+
+    function toggleAudioGuide() {
+      if (!state.speechSynth) {
+        alert("Web Speech API is not supported in this browser.");
+        return;
+      }
+
+      if (state.isAudioPlaying) {
+        if (state.isAudioPaused) {
+          state.speechSynth.resume();
+          state.isAudioPaused = false;
+          updateAudioPanelUI();
+        } else {
+          state.speechSynth.pause();
+          state.isAudioPaused = true;
+          updateAudioPanelUI();
+        }
+      } else {
+        startAudioGuide();
+      }
+    }
+
+    function startAudioGuide() {
+      if (!state.speechSynth) return;
+      state.speechSynth.cancel(); // Clear current speech queue
+
+      const script = getNarrationScript();
+      state.utterance = new SpeechSynthesisUtterance(script);
+      
+      // Get selected voice
+      const voiceIndex = document.getElementById("audio-voice-select").value;
+      if (voiceIndex && state.voices[voiceIndex]) {
+        state.utterance.voice = state.voices[voiceIndex];
+      }
+
+      state.utterance.onend = () => {
+        state.isAudioPlaying = false;
+        state.isAudioPaused = false;
+        updateAudioPanelUI();
+      };
+
+      state.utterance.onerror = (e) => {
+        console.error("Speech Synthesis Error:", e);
+        state.isAudioPlaying = false;
+        state.isAudioPaused = false;
+        updateAudioPanelUI();
+      };
+
+      state.isAudioPlaying = true;
+      state.isAudioPaused = false;
+      state.speechSynth.speak(state.utterance);
+      updateAudioPanelUI();
+    }
+
+    function stopAudioGuide() {
+      if (state.speechSynth) {
+        state.speechSynth.cancel();
+      }
+      state.isAudioPlaying = false;
+      state.isAudioPaused = false;
+      updateAudioPanelUI();
+    }
+
+    function stopAudioGuide() {
+      if (state.speechSynth) {
+        state.speechSynth.cancel();
+      }
+      state.isAudioPlaying = false;
+      state.isAudioPaused = false;
+      updateAudioPanelUI();
+    }
+
+    function updateAudioPanelUI() {
+      const playBtn = document.getElementById("audio-play-btn");
+      const statusText = document.getElementById("audio-status-text");
+
+      if (state.isAudioPlaying) {
+        if (state.isAudioPaused) {
+          playBtn.innerHTML = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>`;
+          statusText.textContent = state.lang === "zh" ? "語音導覽已暫停" : "Guide Paused";
+          playBtn.classList.remove("audio-btn-icon--playing");
+        } else {
+          playBtn.innerHTML = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="18" y2="18"></line><line x1="6" y1="6" x2="6" y2="18"></line></svg>`;
+          statusText.textContent = state.lang === "zh" ? "說明播放中..." : "Guide Speaking...";
+          playBtn.classList.add("audio-btn-icon--playing");
+        }
+      } else {
+        playBtn.innerHTML = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>`;
+        statusText.textContent = state.lang === "zh" ? "語音導覽閒置" : "Guide Idle";
+        playBtn.classList.remove("audio-btn-icon--playing");
+      }
+    }
+
+    /* GLOBAL BILINGUAL UI DICTIONARY */
+    const UI_TRANSLATIONS = {
+      zh: {
+        "hero-eyebrow": "SMMC-EMI 跨國企業策略研究與計分網頁",
+        "hero-title": "台塑公司國際化戰略：規模化佈局與結構性轉型分析",
+        "hero-copy": "基於「理論-證據-分析」架構，聚焦台塑1301的垂直整合內部化優勢、集中多角化（半導體/新能源）防禦障礙與FDI跨國進入模式選擇。",
+        "summary-badge-title": "執行摘要 Executive Summary",
+        "summary-text-val": "台塑公司（1301）正面臨成立以來最關鍵的轉型關卡。2024 年受到中國大陸大宗塑化產能爆發式過剩傾銷及 ECFA 優惠部分中止之雙重打擊，錄得首度年度虧損。為重塑全球競爭壁壘，公司加速從傳統低成本大宗擴充，轉移至以高分子及化學純化為核心的「集中多角化」（先進半導體化學、彰濱LFP儲能電芯、高強度碳纖），並落實嚴苛的碳成本內生化管理與資本預算控制。",
+        "glossary-drawer-title": "專業術語解釋 Glossary",
+        "lab-drawer-title": "情境策略模擬實驗室 Lab",
+        "lab-intro-text": "點選或調整不同的宏觀外部壓力因子，模擬台塑1301如何靈活配置其財務、運營、資源與全球擴張工具，獲得最優的轉型診斷建議。",
+        "sources-drawer-title": "引用官方來源 Sources",
+        "ai-drawer-title": "學術誠信與 AI 輔助聲明",
+        "team-drawer-title": "G7 團隊協作與組員分工",
+        "team-title-sec": "全體組員一體化協作聲明",
+        "team-desc-val": "本小組堅信，一份卓越的跨國策略管理分析需要的是深度的一體化整合與觀點互補，而非機械式的分工切割。我們召開多次集體討論，將 OLI 進入模式、Concentric 相關多角化以及交易成本分析融會貫通。小組全體成員對本報告之視覺美感與研究論點承擔完全共同責任。",
+        "team-video-note": "註：組員第二版個人 D-ID AI 數位影片已製作完畢。為確保單檔 html 離線部署時絕不出現破圖或瀏覽錯誤，影片連結採外部動態載入方式配置，供 staging 環境靈活呼叫展示。",
+        "lbl-oil": "模擬全球油價環境",
+        "lbl-carbon": "台灣碳費課徵水平",
+        "lbl-supply": "中國大陸產能過剩壓力",
+        "lbl-focus": "台塑策略應對重心",
+        "footer-brand-desc": "台灣塑膠工業股份有限公司 (1301) 國際策略管理專案網站。在國立暨南國際大學駱世民教授指導下，由 SMMC-EMI 第七組 handcrafted 呈現。",
+        "footer-col-1-title": "策略核心理論",
+        "footer-col-2-title": "互動視覺元件",
+        "footer-col-3-title": "指導與助教群",
+        "footer-instructor-text": "指導教授：駱世民 教授 (Prof. Shihmin Lo)",
+        "footer-ai-text": "AI 揭露聲明：本專案網頁在人類主導下，使用生成式 AI 工具進行大宗資料初步整理、中英翻譯校對、SPA 單檔 HTML/CSS/JS 程式架構生成與視覺美感微調，所有管理論點與數據事實均已由組員對照年報官方來源核實。",
+        "ft-team": "組員與協作",
+        "ft-glossary": "專業名詞",
+        "ft-lab": "策略實驗室",
+        "ft-sources": "引用文獻",
+        "ft-ai": "學術誠信"
+      },
+      en: {
+        "hero-eyebrow": "SMMC-EMI Multinational Corporate Strategy Project",
+        "hero-title": "Formosa Plastics Strategy: Global Arbitrage & Related Diversification Moats",
+        "hero-copy": "Structured around the 'Theory-Evidence-Insight' framework. Decoding FPC's 1301 vertical integration moats, concentric clean-tech pathways, and multinational FDI toolkits.",
+        "summary-badge-title": "Executive Summary",
+        "summary-text-val": "Formosa Plastics (1301) stands at a defining strategic crossroads. Structural oversupply in commodity plastics from mainland China combined with cross-strait ECFA tariff eliminations triggered FPC's first annual loss in 2024. In response, FPC is shifting capital from bulk expansion to Concentric Diversification (semiconductor chemicals, battery energy storage, carbon fiber) and strict internal carbon-pricing controls to adapt to green transition demands.",
+        "glossary-drawer-title": "Bilingual Glossary of Terms",
+        "lab-drawer-title": "Macro Scenario Strategy Lab",
+        "lab-intro-text": "Modify macroeconomic pressures below to simulate how FPC reallocates its corporate assets, operational capacities, and OLI FDI strategies to secure optimal performance.",
+        "sources-drawer-title": "Authoritative Reference Sources",
+        "ai-drawer-title": "Academic Integrity & AI Disclosure",
+        "team-drawer-title": "G7 Research Team & Collaboration",
+        "team-title-sec": "Joint Cooperative Commitment",
+        "team-desc-val": "Our research group believes that robust multinational strategic analysis demands seamless synthesis, not disjointed fragmentation. We organized continuous peer workshops to align Dunning's OLI paradigms, Concentric Diversification, and transaction cost economics. All group members take collective ownership of the visual quality and analytical rigor of this project.",
+        "team-video-note": "Note: Individual version 2 D-ID introduction videos are fully compiled. To ensure a bulletproof offline single HTML file with absolutely no broken embedded frames, these are hosted externally and dynamically loaded upon staging.",
+        "lbl-oil": "Oil Price Scenario",
+        "lbl-carbon": "Taiwan Carbon Fee Rate",
+        "lbl-supply": "China Oversupply Pressure",
+        "lbl-focus": "FPC Strategic Priority",
+        "footer-brand-desc": "Taiwan Plastics Corporation (1301) Strategic Management Dashboard. Handcrafted under Prof. Shihmin Lo's supervision.",
+        "footer-col-1-title": "Core Frameworks",
+        "footer-col-2-title": "Interactive Features",
+        "footer-col-3-title": "Advisor & TAs",
+        "footer-instructor-text": "Advisor: Prof. Shihmin Lo",
+        "footer-ai-text": "AI Disclosure: Under human strategic direction, generative AI models assisted with bulk text formatting, bilingual spelling checks, single-file HTML layout assembly, and CSS visual polish. All data facts and management insights have been checked against official investor records.",
+        "ft-team": "Team & Roles",
+        "ft-glossary": "Glossary",
+        "ft-lab": "Strategy Lab",
+        "ft-sources": "Sources List",
+        "ft-ai": "Integrity"
+      }
+    };
+
+    function renderGlobalUI() {
+      const trans = UI_TRANSLATIONS[state.lang];
+      for (const [id, value] of Object.entries(trans)) {
+        const el = document.getElementById(id);
+        if (el) el.innerHTML = value;
+      }
+      
+      // Render Glossary Drawer Content
+      const glossaryBody = document.getElementById("glossary-list-content");
+      glossaryBody.innerHTML = appData.glossary.map(item => `
+        <div class="glossary-item">
+          <h4>${item.term}</h4>
+          <p>${state.lang === 'zh' ? item.zh : item.en}</p>
+        </div>
+      `).join("");
+
+      // Render Sources Drawer Content
+      const sourcesBody = document.getElementById("sources-list-content");
+      sourcesBody.innerHTML = `
+        <div style="display:flex; flex-direction:column; gap:12px;">
+          ${appData.tabs[0].sources.map(src => `
+            <div style="border-bottom:1px solid var(--hairline); padding-bottom:10px;">
+              <h4 style="font-family:'Inter', sans-serif; font-size:14px; font-weight:600; color:var(--ink);">${state.lang === 'zh' ? src.title.zh : src.title.en}</h4>
+              <p style="font-size:12px; color:var(--muted); margin: 4px 0 6px;">${state.lang === 'zh' ? src.note.zh : src.note.en}</p>
+              <a href="${src.url}" target="_blank" class="btn btn--outline btn--small" style="height:26px; font-size:11px; padding: 4px 8px;">
+                ${state.lang === 'zh' ? '前往官方頁面' : 'Visit Official Page'} &rarr;
+              </a>
+            </div>
+          `).join("")}
+        </div>
+      `;
+
+      // Trigger Lab Simulation once to fill content
+      runLabSimulation();
+    }
+
+    /* LAB DYNAMIC SIMULATOR ENGINE */
+    function runLabSimulation() {
+      const oil = document.getElementById("lab-oil").value;
+      const carbon = document.getElementById("lab-carbon").value;
+      const supply = document.getElementById("lab-supply").value;
+      const focus = document.getElementById("lab-focus").value;
+
+      // Deterministic evaluation algorithm
+      let pressureScore = 0;
+      if (oil === "high") pressureScore += 1;
+      if (carbon === "high") pressureScore += 1;
+      if (supply === "high") pressureScore += 1;
+
+      let posture = "transition";
+      let postureZh = "結構穩健轉型";
+      let postureColor = "badge--warning";
+      
+      if (pressureScore >= 2) {
+        posture = "defensive";
+        postureZh = "極限防禦重整";
+        postureColor = "badge--error";
+      } else if (pressureScore <= 0 || focus === "green" || focus === "global") {
+        posture = "growth";
+        postureZh = "積極開拓擴張";
+        postureColor = "badge--success";
+      }
+
+      let recommendedTab = "tp3";
+      let tabNameZh = "TP3 國際策略 (Concentric多角化)";
+      let tabNameEn = "TP3 Strategy (Concentric Diversification)";
+      
+      if (focus === "cost") {
+        recommendedTab = "tp0";
+        tabNameZh = "TP0 財務韌性與資產週轉優化";
+        tabNameEn = "TP0 Financial Resilience & Asset Optimization";
+      } else if (focus === "specialty") {
+        recommendedTab = "tp2";
+        tabNameZh = "TP2 VRIO特殊高值化能力 leverage";
+        tabNameEn = "TP2 Leveraging High-Value VRIO Capabilities";
+      } else if (focus === "global") {
+        recommendedTab = "tp3";
+        tabNameZh = "TP3 全球擴張路徑與 OLI 資源配置";
+        tabNameEn = "TP3 Global FDI OLI Allocation";
+      }
+
+      const diagnosisZh = `在【${oil === 'high' ? '高油價成本壓力' : oil === 'low' ? '低油價原料紅利' : '基準油價震盪'}】與【${carbon === 'high' ? '高額碳費懲罰' : '低碳費影響'}】、中國【${supply === 'high' ? '低價大宗傾銷衝擊' : '競爭溫和'}】下，結合您設定的【${focus === 'green' ? '新能源綠色儲能' : focus === 'specialty' ? '特高值化升級' : focus === 'global' ? '全球FDI配置' : '大宗低成本防禦'}】重心：
+      台塑應即刻啟動【${postureZh}】姿態。建議資源優先對接【${tabNameZh}】進行重配與防禦。`;
+
+      const diagnosisEn = `Under [${oil === 'high' ? 'crude oil cost spikes' : 'stable oil bounds'}] and [${carbon === 'high' ? 'severe carbon fee NT$300 penalization' : 'minor carbon fees'}] with [${supply === 'high' ? 'intense Chinese bulk plastic dumping' : 'moderate rivalry'}], aligned with your strategic priority [${focus.toUpperCase()}]:
+      FPC must assume a [${posture.toUpperCase()}] posture. Reallocate corporate resources directly toward [${tabNameEn}] to secure competitive continuity.`;
+
+      const resultCard = document.getElementById("lab-result-card");
+      resultCard.innerHTML = `
+        <div style="display:flex; align-items:center; justify-content:between; margin-bottom:12px; flex-wrap:wrap; gap:8px;">
+          <span class="badge ${postureColor}">${state.lang === 'zh' ? postureZh : posture.toUpperCase()}</span>
+          <span class="badge" style="background:var(--primary); color:var(--on-primary);">${state.lang === 'zh' ? '建議優先級' : 'SUGGESTED FOCUS'}: ${state.lang === 'zh' ? tabNameZh : tabNameEn}</span>
+        </div>
+        <p style="font-size:14px; line-height:1.6; color:var(--body-strong); margin:0;">
+          ${state.lang === 'zh' ? diagnosisZh : diagnosisEn}
+        </p>
+        <button class="btn btn--primary btn--small" style="margin-top:12px; width:100%;" onclick="closeAllDrawers(); switchTab('${recommendedTab}');">
+          ${state.lang === 'zh' ? '立刻跳轉分析此區' : 'Jump Direct to This Tab'} &rarr;
+        </button>
+      `;
+    }
+
+    /* TABS RENDERING */
+    function renderTabsNavigation() {
+      const nav = document.getElementById("tab-nav");
+      nav.innerHTML = appData.tabs.map(tab => {
+        const isSelected = state.activeTab === tab.id;
+        const label = state.lang === "zh" ? tab.labelZh : tab.labelEn;
+        return `
+          <button class="tab-btn" type="button" role="tab" data-tab-id="${tab.id}" aria-selected="${isSelected}">
+            ${label}
+          </button>
+        `;
+      }).join("");
+
+      // Bind tab clicks
+      nav.querySelectorAll("[data-tab-id]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          switchTab(btn.dataset.tabId);
+        });
+      });
+    }
+
+    function renderActiveTabContent() {
+      const panel = document.getElementById("tab-panel");
+      panel.innerHTML = ""; // Clear current panel
+
+      if (state.activeTab === "tp0") {
+        renderTP0(panel);
+      } else if (state.activeTab === "tp1") {
+        renderTP1(panel);
+      } else if (state.activeTab === "tp2") {
+        renderTP2(panel);
+      } else if (state.activeTab === "tp3") {
+        renderTP3(panel);
+      }
+    }
+
+    /* RENDER TP0: COMPANY & FINANCIALS */
+    function renderTP0(container) {
+      const tabData = appData.tabs[0];
+      const fnData = tabData.financial;
+      
+      const title = state.lang === "zh" ? "公司歷史沿革與財務利差走勢" : "Company Evolution & Financial Trends";
+      const lead = state.lang === "zh" 
+        ? "本節解構台塑公司自1954年創立至今的重大歷史轉折，並提供2021至2025年核心財務比率的互動式SVG線圖分析，突顯大宗化學品面臨結構性週期的轉折壓力。"
+        : "Dissecting FPC's historical strategic milestones since 1954, paired with a custom SVG financial interactive line chart for years 2021-2025 across 14 vital metrics.";
+
+      let html = `
+        <div class="section-block">
+          <p class="eyebrow">TP0 · COMPANY HISTORY</p>
+          <h2>${title}</h2>
+          <p style="font-size:16px; color:var(--body); max-width:800px; margin-bottom:32px;">${lead}</p>
+          
+          <!-- News Highlights Grid -->
+          <div class="card-grid card-grid--2up">
+            ${tabData.news.map(n => `
+              <div class="editorial-card" style="border-left: 3px solid var(--primary);">
+                <div class="editorial-card__meta">
+                  <span class="badge">${n.source}</span>
+                  <span class="badge badge--warning">${state.lang === 'zh' ? '近期焦點' : 'HOT NEWS'}</span>
+                </div>
+                <h3 class="editorial-card__title">${state.lang === 'zh' ? n.zhTitle : n.enTitle}</h3>
+                <p class="editorial-card__desc">${state.lang === 'zh' ? n.zhLead : n.enLead}</p>
+              </div>
+            `).join("")}
+          </div>
+        </div>
+
+        <!-- Interactive SVF Line Chart Block -->
+        <div class="section-block">
+          <p class="eyebrow">Interactive SVG Charting</p>
+          <h2>${state.lang === 'zh' ? '五年度財務利差與運營指標線圖' : 'Five-Year Operational Spreads & Metrics'}</h2>
+          
+          <div class="metric-controls">
+            ${Object.entries(fnData.metrics).map(([key, m]) => {
+              const label = state.lang === 'zh' ? m.labelZh : m.labelEn;
+              return `<button class="metric-btn" type="button" data-metric-key="${key}" data-active="${state.activeMetric === key}">${label}</button>`;
+            }).join("")}
+          </div>
+
+          <div class="chart-container-outer">
+            <div class="chart-tooltip" id="chart-tooltip"></div>
+            <!-- SVG Interactive Chart Floor -->
+            <div id="chart-svg-placeholder" style="width:100%; min-height:360px;"></div>
+            
+            <div style="margin-top:20px; border-top:1px solid var(--hairline); padding-top:16px;">
+              <h4 id="chart-desc-title" style="font-family:'Inter',sans-serif; font-size:14px; font-weight:600; text-transform:uppercase; color:var(--muted); margin-bottom:6px;">Metric Analysis</h4>
+              <p id="chart-desc-text" style="font-size:14px; line-height:1.6; color:var(--body-strong); margin:0;"></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Timeline Stepper Grid -->
+        <div class="section-block">
+          <p class="eyebrow">Milestones Stepper</p>
+          <h2>${state.lang === 'zh' ? '台塑公司歷史重大里程碑' : 'FPC Corporate Historical Milestones'}</h2>
+          <div class="card-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+            ${tabData.timeline.map(time => `
+              <div class="editorial-card" style="display:flex; flex-direction:column; justify-content:between;">
+                <div>
+                  <span class="badge" style="font-size:16px; margin-bottom:12px; background:var(--primary); color:var(--on-primary);">${time.year}</span>
+                  <h3 class="editorial-card__title" style="font-size:18px;">${state.lang === 'zh' ? time.zhTitle : time.enTitle}</h3>
+                  <p class="editorial-card__desc" style="font-size:14px; line-height:1.5;">${state.lang === 'zh' ? time.zhCopy : time.enCopy}</p>
+                </div>
+              </div>
+            `).join("")}
+          </div>
+        </div>
+
+        <!-- Corporate Governance Snapshot -->
+        <div class="section-block">
+          <p class="eyebrow">Governance & Structure</p>
+          <h2>${state.lang === 'zh' ? '董事會治理與經理人考評制度' : 'Board Governance & Executive Appraisals'}</h2>
+          
+          <div class="card-grid">
+            <div class="editorial-card">
+              <h3 class="editorial-card__title">${state.lang === 'zh' ? '董事會改選與多樣性' : 'Board Seats & Diversity'}</h3>
+              <p class="editorial-card__desc" style="font-size:14px;">
+                ${state.lang === 'zh' 
+                  ? '2024 年 6 月完成改選，共 12 席，包含 4 席獨立董事（佔比提升至 33.3%）與 2 席女性董事。持股質押比率為極佳的 0%，出席率高達 95.56%。'
+                  : 'Board re-elected in June 2024 with 12 seats, including 4 independent directors (33.3%) and 2 female directors. Pledged share ratio stands at 0%, attendance at 95.56%.'}
+              </p>
+            </div>
+            <div class="editorial-card">
+              <h3 class="editorial-card__title">${state.lang === 'zh' ? '非財務 KPI 績效評估' : 'Non-Financial Executive KPIs'}</h3>
+              <p class="editorial-card__desc" style="font-size:14px;">
+                ${state.lang === 'zh' 
+                  ? '經理人考核除傳統損益(EBITDA)外，高度綁定轉型專案推進：包含 AI 推動件數、年度節能減碳率、環境工安無事故率等，落實綠色合規。'
+                  : 'Executive evaluation links beyond EBITDA to carbon reduction rates, clean process audits, and generative AI deployment cases.'}
+              </p>
+            </div>
+            <div class="editorial-card">
+              <h3 class="editorial-card__title">${state.lang === 'zh' ? '長期財務資本重整' : 'Long-Term Capital Strategy'}</h3>
+              <p class="editorial-card__desc" style="font-size:14px;">
+                ${state.lang === 'zh' 
+                  ? '面對虧損，2025年發行 100 億元無擔保普通公司債，鎖定中長期固定低利息，保障半導體特用化學品與新能源的充裕資本預算。'
+                  : 'Issued NT$10B in unsecured debt in 2025 to lock in low rates, insulating advanced R&D and clean-tech capex against petrochemical margin corrections.'}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Reflection Box -->
+        <div class="reflection-block">
+          <h3>${state.lang === 'zh' ? '財務反思與結論 Reflection' : 'Financial Reflections & Takeaway'}</h3>
+          <p>
+            ${state.lang === 'zh'
+              ? '從2021至2025的數據線圖可清晰看出，大宗商品石化工業的傳統模式正經受劇烈的結構性利差收縮。淨利在2024和2025兩度降為負值，利息保障倍數降至負二點二倍。這直接證明了「擴量、打價格戰」的模式在中國產能過剩面前已完全失效，台塑的生存必須完全託付給第二成長曲線的高附加價值集中多角化產品。'
+              : "FPC's 5-year financials demonstrate the severe limitations of bulk plastic volume play under Chinese overcapacity. Net profit margins and interest coverage plunged deep into negative territory. This quantitative trajectory proves that cost control in generic commoditized polymers is no longer sufficient; related concentric upgrades are mandatory for survival."}
+          </p>
+        </div>
+      `;
+
+      container.innerHTML = html;
+
+      // Bind metric buttons
+      container.querySelectorAll("[data-metric-key]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          state.activeMetric = btn.dataset.metricKey;
+          container.querySelectorAll("[data-metric-key]").forEach(b => b.setAttribute("data-active", "false"));
+          btn.setAttribute("data-active", "true");
+          drawFinancialChart();
+        });
+      });
+
+      // Render chart initial state
+      drawFinancialChart();
+    }
+
+    /* DYNAMIC INTERACTIVE SVG CHART GENERATOR */
+    function drawFinancialChart() {
+      const svgPlaceholder = document.getElementById("chart-svg-placeholder");
+      if (!svgPlaceholder) return;
+
+      const fnData = appData.tabs[0].financial;
+      const metric = fnData.metrics[state.activeMetric];
+      const years = fnData.years;
+      const values = metric.values;
+
+      // Update descriptive label text
+      const descEl = document.getElementById("chart-desc-text");
+      if (descEl) {
+        descEl.textContent = state.lang === 'zh' ? metric.summary?.zh : metric.summary?.en;
+      }
+
+      // Compute SVG sizes
+      const width = svgPlaceholder.clientWidth || 800;
+      const height = 360;
+      const paddingLeft = 60;
+      const paddingRight = 30;
+      const paddingTop = 40;
+      const paddingBottom = 45;
+
+      const minVal = Math.min(...values, 0) * 1.1; // Ensure 0 is included for contrast
+      const maxVal = Math.max(...values) * 1.1;
+      const valRange = maxVal - minVal;
+
+      function getX(index) {
+        return paddingLeft + (index / (years.length - 1)) * (width - paddingLeft - paddingRight);
+      }
+
+      function getY(val) {
+        return paddingTop + (1 - (val - minVal) / valRange) * (height - paddingTop - paddingBottom);
+      }
+
+      // Generate grid lines
+      let gridLines = "";
+      const gridCount = 5;
+      for (let i = 0; i <= gridCount; i++) {
+        const gridVal = minVal + (i / gridCount) * valRange;
+        const y = getY(gridVal);
+        gridLines += `
+          <line x1="${paddingLeft}" y1="${y}" x2="${width - paddingRight}" y2="${y}" stroke="var(--hairline)" stroke-width="1" stroke-dasharray="4,4" />
+          <text x="${paddingLeft - 10}" y="${y + 4}" font-size="11" fill="var(--muted)" text-anchor="end" font-family="Inter">${gridVal.toFixed(1)}</text>
+        `;
+      }
+
+      // Generate points and path
+      let pointsStr = "";
+      let dotsHtml = "";
+      let fillPointsStr = `${getX(0)},${getY(0)} `; // for gradient area
+
+      values.forEach((v, index) => {
+        const x = getX(index);
+        const y = getY(v);
+        pointsStr += `${x},${y} `;
+        
+        if (index === 0) {
+          fillPointsStr = `${x},${getY(0)} `;
+        }
+        fillPointsStr += `${x},${y} `;
+        if (index === values.length - 1) {
+          fillPointsStr += `${x},${getY(0)} `;
+        }
+
+        const label = state.lang === 'zh' ? metric.labelZh : metric.labelEn;
+        const unit = state.lang === 'zh' ? metric.unitZh : metric.unitEn;
+        
+        // Dot point HTML with hover events
+        dotsHtml += `
+          <circle cx="${x}" cy="${y}" r="6" fill="${metric.color || 'var(--primary)'}" stroke="var(--surface-card)" stroke-width="2" style="cursor:pointer;"
+                  onmouseover="showChartTooltip(event, '${years[index]}', ${v}, '${unit}', '${label}')"
+                  onmouseout="hideChartTooltip()" />
+          <text x="${x}" y="${height - 20}" font-size="12" font-weight="500" fill="var(--ink)" text-anchor="middle" font-family="Inter">${years[index]}</text>
+        `;
+      });
+
+      // Assemble full SVG
+      const svg = `
+        <svg width="100%" height="${height}" viewBox="0 0 ${width} ${height}" preserveAspectRatio="none" style="overflow:visible;">
+          <defs>
+            <linearGradient id="chart-grad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="${metric.color || 'var(--primary)'}" stop-opacity="0.2" />
+              <stop offset="100%" stop-color="${metric.color || 'var(--primary)'}" stop-opacity="0" />
+            </linearGradient>
+          </defs>
+          
+          <!-- Grid lines & Y Axis Labels -->
+          ${gridLines}
+
+          <!-- Filled gradient area -->
+          <polygon points="${fillPointsStr}" fill="url(#chart-grad)" />
+
+          <!-- Connection line -->
+          <polyline points="${pointsStr}" fill="none" stroke="${metric.color || 'var(--primary)'}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+
+          <!-- Interactive circle dots & X Axis labels -->
+          ${dotsHtml}
+        </svg>
+      `;
+
+      svgPlaceholder.innerHTML = svg;
+    }
+
+    /* TOOLTIP HELPERS FOR SVG CHART */
+    window.showChartTooltip = function(e, year, val, unit, label) {
+      const tooltip = document.getElementById("chart-tooltip");
+      if (!tooltip) return;
+      
+      const formatVal = val.toLocaleString();
+      tooltip.innerHTML = `<strong>${year}</strong> · ${label}: <span style="color:var(--gradient-peach); font-weight:600;">${formatVal}</span> ${unit}`;
+      tooltip.style.opacity = "1";
+      
+      // Compute relative cursor positioning
+      const containerRect = document.querySelector(".chart-container-outer").getBoundingClientRect();
+      const left = e.clientX - containerRect.left + 15;
+      const top = e.clientY - containerRect.top - 40;
+      
+      tooltip.style.left = `${left}px`;
+      tooltip.style.top = `${top}px`;
+    };
+
+    window.hideChartTooltip = function() {
+      const tooltip = document.getElementById("chart-tooltip");
+      if (tooltip) tooltip.style.opacity = "0";
+    };
+
+    /* RENDER TP1: EXTERNAL ENVIRONMENT */
+    function renderTP1(container) {
+      const tabData = appData.tabs[1];
+      const items = state.lang === "zh" ? tabData.pestel.zh : tabData.pestel.en;
+      const forces = state.lang === "zh" ? tabData.fiveForces.zh : tabData.fiveForces.en;
+
+      let html = `
+        <div class="section-block">
+          <p class="eyebrow">TP1 · PESTEL ANALYSIS</p>
+          <h2>${state.lang === 'zh' ? '總體外部環境與環境減碳挑戰' : 'Macro External Environmental Scans'}</h2>
+          
+          <div class="card-grid">
+            ${items.map(item => {
+              let badgeColor = "badge--warning";
+              if (item.impact.includes("長多") || item.impact.includes("正向") || item.impact.includes("Boost")) {
+                badgeColor = "badge--success";
+              } else if (item.impact.includes("壓力") || item.impact.includes("Negative")) {
+                badgeColor = "badge--error";
+              }
+              return `
+                <div class="editorial-card">
+                  <div class="editorial-card__meta">
+                    <span class="badge ${badgeColor}">${item.impact}</span>
+                  </div>
+                  <h3 class="editorial-card__title" style="font-size:18px;">${item.title}</h3>
+                  <p class="editorial-card__desc" style="font-size:14px; line-height:1.5;">${item.desc}</p>
+                </div>
+              `;
+            }).join("")}
+          </div>
+        </div>
+
+        <!-- Integrated Six Naphtha Cracker Value Chain -->
+        <div class="section-block">
+          <p class="eyebrow">PETROCHEMICAL VALUE CHAIN</p>
+          <h2>${state.lang === 'zh' ? '六輕一體化垂直整合與產業價值鏈' : 'No.6 Cracker Integration & Value Chain'}</h2>
+          <p style="font-size:15px; max-width:800px; color:var(--body); margin-bottom:24px;">
+            ${state.lang === 'zh'
+              ? '台塑集團獨創的「六輕一貫化一體化管線直供模式」，將上游裂解單體與中游高分子聚合完全閉鎖整合，徹底節省海運裝卸費用與防範供應中斷风险。'
+              : 'FPG utilizes the extreme cluster integration of the reclaimed Mailiao complex to pipe 90% of basic chemical inputs directly between affiliates, eliminating double taxation and shipping overheads.'}
+          </p>
+
+          <div class="card-grid">
+            <div class="editorial-card" style="border-top:3px solid var(--muted-soft);">
+              <span class="badge" style="margin-bottom:12px;">STAGE 1 · UPSTREAM</span>
+              <h3 class="editorial-card__title">${state.lang === 'zh' ? '上游：原油進口與石油腦裂解' : 'Upstream: Naphtha Cracking'}</h3>
+              <p class="editorial-card__desc" style="font-size:14px;">
+                ${state.lang === 'zh' 
+                  ? '【台塑化負責】自建麥寮深水港進口原油與石油腦，通過裂解反應產出乙烯、丙烯等氣態單體。台塑90%上游原料均依賴此管道管線直供，免除海運包裝。'
+                  : 'FPCC imports crude via Mailiao port and cracks it into basic ethylene and propylene. FPC acts as a close captive consumer, buying direct via intra-group pipes.'}
+              </p>
+            </div>
+            <div class="editorial-card" style="border-top:3px solid var(--primary);">
+              <span class="badge" style="margin-bottom:12px;">STAGE 2 · MIDSTREAM</span>
+              <h3 class="editorial-card__title">${state.lang === 'zh' ? '中游：聚合物化學合成' : 'Midstream: Polymerization'}</h3>
+              <p class="editorial-card__desc" style="font-size:14px;">
+                ${state.lang === 'zh' 
+                  ? '【台塑核心本業】將氣態單體聚合反應為 PVC 粉、HDPE/LLDPE 顆粒、PP 及特種 EVA。產量大且產線切換極具彈性，是亞洲最關鍵的大宗原料源。'
+                  : 'FPC polymerizes gaseous monomers into stable PVC powder, PE, and PP pellets. FPC maintains high-scale continuous-process efficiency.'}
+              </p>
+            </div>
+            <div class="editorial-card" style="border-top:3px solid var(--muted-soft);">
+              <span class="badge" style="margin-bottom:12px;">STAGE 3 · DOWNSTREAM</span>
+              <h3 class="editorial-card__title">${state.lang === 'zh' ? '下游：終端塑膠製品加工' : 'Downstream: Product Fabrication'}</h3>
+              <p class="editorial-card__desc" style="font-size:14px;">
+                ${state.lang === 'zh' 
+                  ? '【南亞與外部合約】下游廠商將大宗塑膠改質、射出成型為建材（管件/窗框）、醫療用膠粒或機能性纖維。台塑透過與下游戰略盟友保證合約滲透市場。'
+                  : 'Sister affiliate Nan Ya Plastics and external contractors mold resins into pipes, window frames, packaging films, and medical compound pellets.'}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Porter's Five Forces Diagram -->
+        <div class="section-block">
+          <p class="eyebrow">Industry Structure</p>
+          <h2>${state.lang === 'zh' ? '2026年塑膠產業五力分析診斷' : 'Porter’s Five Forces Structural Diagnosis'}</h2>
+          
+          <div class="five-forces-container">
+            <div class="five-forces-center">
+              <h4>${state.lang === 'zh' ? '台塑 1301' : 'FPC 1301'}</h4>
+              <span>${state.lang === 'zh' ? '產業核心' : 'Petrochemical Core'}</span>
+            </div>
+
+            <div class="card-grid" style="width:100%;">
+              ${forces.map(f => {
+                let colorClass = "badge--warning";
+                if (f.level.includes("極高") || f.level.includes("Extreme") || f.level.includes("M")) {
+                  colorClass = "badge--error";
+                } else if (f.level.includes("低") || f.level.includes("Low")) {
+                  colorClass = "badge--success";
+                }
+                return `
+                  <div class="editorial-card" style="padding:16px;">
+                    <div style="display:flex; justify-content:between; align-items:center; margin-bottom:8px;">
+                      <h4 style="font-family:'Inter',sans-serif; font-size:14px; font-weight:600; color:var(--ink); margin:0;">${f.name}</h4>
+                      <span class="badge ${colorClass}" style="font-size:10px;">${f.level}</span>
+                    </div>
+                    <p class="editorial-card__desc" style="font-size:13px; line-height:1.4; margin:0;">${f.desc}</p>
+                  </div>
+                `;
+              }).join("")}
+            </div>
+          </div>
+        </div>
+
+        <!-- AMC Competitor Strategy Matrix -->
+        <div class="section-block">
+          <p class="eyebrow">Competitor Dynamics</p>
+          <h2>${state.lang === 'zh' ? '基於 AMC 框架之競爭者威脅與台塑對策' : 'AMC Framework Competitor Strategy Matrix'}</h2>
+          <p style="font-size:14px; color:var(--body); max-width:800px; margin-bottom:24px;">
+            ${state.lang === 'zh'
+              ? '「市場共同性高、資源相似性強」的中國煉化一體化巨頭（如榮盛、恆力）對台塑泛用大宗塑料威脅最高；台塑對策是主動「戰略性撤退」泛用產能，將資產全力重配至歐美高利基特用材料與晶圓特規 IPA。'
+              : 'Confronting Chinese mega-refineries with high market commonality and resource similarity. FPC avoids generic price battles, retreating strategically to allocate capex for high-barrier advanced materials.'}
+          </p>
+
+          <div class="card-grid">
+            <div class="editorial-card" style="border-top:3px solid var(--gradient-rose);">
+              <span class="badge" style="margin-bottom:8px;">HIGH COMMONALITY / HIGH SIMILARITY</span>
+              <h3 class="editorial-card__title" style="font-size:16px;">${state.lang === 'zh' ? '競爭對手：中國石油煉化巨頭' : 'Target: China Megarefineries'}</h3>
+              <p class="editorial-card__desc" style="font-size:13px; line-height:1.5;">
+                <strong>${state.lang === 'zh' ? '對手攻勢' : 'Rival action'}:</strong> ${state.lang === 'zh' ? '憑藉超大規模裂解，低價大量傾銷泛用級 PVC 及 PE。' : 'Dumping generic plastics at extreme low costs to maintain high cracker run-rates.'}<br><br>
+                <strong>${state.lang === 'zh' ? '台塑應對' : 'FPC Response'}:</strong> ${state.lang === 'zh' ? '降低台灣及寧波舊廠產能利用率，擴大高規格醫療特種料以避開紅海戰。' : 'Moderate run-rates at generic lines, accelerating specialized medical grades to escape commoditization.'}
+              </p>
+            </div>
+            <div class="editorial-card" style="border-top:3px solid var(--gradient-mint);">
+              <span class="badge" style="margin-bottom:8px;">LOW COMMONALITY / HIGH SIMILARITY</span>
+              <h3 class="editorial-card__title" style="font-size:16px;">${state.lang === 'zh' ? '競爭對手：歐美特用化學大廠' : 'Target: Western Speciality Leaders'}</h3>
+              <p class="editorial-card__desc" style="font-size:13px; line-height:1.5;">
+                <strong>${state.lang === 'zh' ? '對手攻勢' : 'Rival action'}:</strong> ${state.lang === 'zh' ? '壟斷半導體先進製程高純化學品專利，極少涉足大宗石化。' : 'Monopolizing ultra-pure semiconductor patent inputs, ignoring commodity petrochemical cycles.'}<br><br>
+                <strong>${state.lang === 'zh' ? '台塑應對' : 'FPC Response'}:</strong> ${state.lang === 'zh' ? '與日本技術巨擘德山精密合資，引進純化配方，搶佔台灣先進晶圓供應鏈空窗期。' : 'International JV with Tokuyama to absorb purification patents, integrating directly into TSMC advanced nodes.'}
+              </p>
+            </div>
+            <div class="editorial-card" style="border-top:3px solid var(--gradient-sky);">
+              <span class="badge" style="margin-bottom:8px;">HIGH COMMONALITY / LOW SIMILARITY</span>
+              <h3 class="editorial-card__title" style="font-size:16px;">${state.lang === 'zh' ? '競爭對手：全球綠色生物塑料新創' : 'Target: Circular Bioplastics'}</h3>
+              <p class="editorial-card__desc" style="font-size:13px; line-height:1.5;">
+                <strong>${state.lang === 'zh' ? '對手攻勢' : 'Rival action'}:</strong> ${state.lang === 'zh' ? '利用農業廢料生產 PLA、PHA 等零碳塑料，高價獲取消費巨頭訂單。' : 'Using organic wastes to synthesize zero-carbon PLA, capturing high-premium consumer brand commitments.'}<br><br>
+                <strong>${state.lang === 'zh' ? '台塑應對' : 'FPC Response'}:</strong> ${state.lang === 'zh' ? '利用雄厚集團現金流，策略併購回收新創，發展生質/再生聚烯烴產品組合。' : 'Deploying FPG corporate cash flow to acquire bio-chemical ventures and scale FPC circular plastics.'}
+              </p>
+            </div>
+          </div>
+        </div>
+      `;
+
+      container.innerHTML = html;
+    }
+
+    /* RENDER TP2: KEY RESOURCES & ADVANTAGE (TP REMINDER 5 DIMENSIONS) */
+    function renderTP2(container) {
+      const tabData = appData.tabs[2];
+      const intro = tabData.intro[state.lang];
+      const portfolio = tabData.portfolio[state.lang];
+      const valueChain = tabData.valueChain[state.lang];
+      const resData = state.lang === "zh" ? tabData.resources.zh : tabData.resources.en;
+      const competencies = tabData.competencies[state.lang];
+      const dynamics = tabData.dynamics[state.lang];
+
+      let html = `
+        <!-- HEADER & KEY SCORES -->
+        <div class="section-block">
+          <p class="eyebrow">${intro.eyebrow}</p>
+          <h2>${intro.title}</h2>
+          <p style="font-size:16px; color:var(--body); max-width:800px; margin-bottom:24px;">
+            ${intro.desc}
+          </p>
+
+          <div class="score-card-grid" style="margin-bottom:48px;">
+            ${intro.scores.map(s => `
+              <div class="score-card">
+                <div class="score-card__value">${s.val}</div>
+                <div class="score-card__label">${s.label}</div>
+              </div>
+            `).join("")}
+          </div>
+        </div>
+
+        <!-- 1. CORE BUSINESSES & PRODUCT LINES -->
+        <div class="section-block">
+          <p class="eyebrow">${portfolio.eyebrow}</p>
+          <h2>${portfolio.title}</h2>
+          <p style="font-size:14px; color:var(--body); max-width:800px; margin-bottom:20px;">
+            ${state.lang === 'zh'
+              ? '台塑以 PVC 聚合體系為核心，發揮亞洲「定價權」優勢，並積極朝向半導體特用化學品與儲能新智能材料等高值化 Concentric 多角化轉型。'
+              : 'Dissecting FPC core revenue streams, Asian PVC pricing power, and concentric paths to ultra-pure advanced tech reagents.'}
+          </p>
+          
+          <div class="card-grid" style="margin-bottom:32px;">
+            ${portfolio.items.map((item, idx) => {
+              const colors = ["var(--gradient-rose)", "var(--gradient-mint)", "var(--gradient-sky)", "var(--gradient-amber)"];
+              return `
+                <div class="editorial-card" style="border-top: 3px solid ${colors[idx % colors.length]}; display:flex; flex-direction:column; justify-content:space-between; height:100%;">
+                  <div>
+                    <span class="badge" style="margin-bottom:8px;">${item.sub}</span>
+                    <h3 class="editorial-card__title" style="font-size:16px; margin:4px 0 8px 0;">${item.title}</h3>
+                    <p class="editorial-card__desc" style="font-size:13px; line-height:1.5; color:var(--body); margin:0;">${item.desc}</p>
+                  </div>
+                </div>
+              `;
+            }).join("")}
+          </div>
+        </div>
+
+        <!-- 2. CORPORATE VALUE CHAIN -->
+        <div class="section-block">
+          <p class="eyebrow">${valueChain.eyebrow}</p>
+          <h2>${valueChain.title}</h2>
+          <p style="font-size:14px; color:var(--body); max-width:800px; margin-bottom:20px;">
+            ${state.lang === 'zh'
+              ? '【企業價值鏈解構】涵蓋主要活動（研發、製造、銷售、營運成果）與支持活動（人資、能效、數位化、資本供應鏈支援），突顯極致精簡的營運效能。'
+              : 'Analyzing primary and support activities that drive Formosa operational rationalization and continuous unit-cost audits.'}
+          </p>
+
+          <div style="display:flex; flex-direction:column; gap:24px;">
+            <!-- Primary Activities -->
+            <div style="background:var(--surface); border:1px solid var(--hairline); padding:20px; border-radius:var(--radius-lg);">
+              <h3 style="font-family:'Inter', sans-serif; font-size:15px; font-weight:600; text-transform:uppercase; color:var(--primary); margin:0 0 16px 0; border-bottom:1px solid var(--hairline); padding-bottom:8px;">
+                ${valueChain.primaryTitle}
+              </h3>
+              <div class="card-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:16px;">
+                ${valueChain.primary.map(p => `
+                  <div style="background:var(--surface-strong); padding:14px; border-radius:var(--radius-md); border-left:3px solid var(--primary);">
+                    <h4 style="margin:0 0 8px 0; font-size:14px; font-weight:600; color:var(--ink);">${p.title}</h4>
+                    <p style="margin:0; font-size:12.5px; line-height:1.5; color:var(--body-strong);">${p.desc}</p>
+                  </div>
+                `).join("")}
+              </div>
+            </div>
+
+            <!-- Support Activities -->
+            <div style="background:var(--surface); border:1px solid var(--hairline); padding:20px; border-radius:var(--radius-lg);">
+              <h3 style="font-family:'Inter', sans-serif; font-size:15px; font-weight:600; text-transform:uppercase; color:var(--muted); margin:0 0 16px 0; border-bottom:1px solid var(--hairline); padding-bottom:8px;">
+                ${valueChain.supportTitle}
+              </h3>
+              <div class="card-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:16px;">
+                ${valueChain.support.map(s => `
+                  <div style="background:var(--surface-strong); padding:14px; border-radius:var(--radius-md); border-left:3px solid var(--muted);">
+                    <h4 style="margin:0 0 8px 0; font-size:14px; font-weight:600; color:var(--ink);">${s.title}</h4>
+                    <p style="margin:0; font-size:12.5px; line-height:1.5; color:var(--body-strong);">${s.desc}</p>
+                  </div>
+                `).join("")}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. KEY RESOURCES (VRIO FLIP CARDS) -->
+        <div class="section-block">
+          <p class="eyebrow">Key Resources & Moats</p>
+          <h2>${resData.title}</h2>
+          <p style="font-size:14px; color:var(--body); max-width:800px; margin-bottom:24px;">
+            ${state.lang === 'zh'
+              ? '【資源基礎觀點 RBV】請將滑鼠移到卡片上以自動翻面。台塑的有形資產（如麥寮電廠、管線一體化）易被模仿但需天文資本；而無形資產（低成本運營文化、大宗定價話語權）則構成高難度模仿壁壘。'
+              : 'Hover over the interactive VRIO Moat Cards below to flip them. Discover how FPC leverages massive physical scaling assets alongside invisible cost coordination culture to withstand market shocks.'}
+          </p>
+
+          <h3 style="font-family:'Inter', sans-serif; font-size:14px; font-weight:600; text-transform:uppercase; color:var(--muted); margin-bottom:12px;">有形關鍵資源 Tangible Resources</h3>
+          <div class="card-grid" style="margin-bottom:32px;">
+            ${resData.tangible.map((r, i) => `
+              <div class="flip-card-container">
+                <div class="flip-card">
+                  <div class="flip-card-front">
+                    <span class="badge" style="background:var(--primary); color:var(--on-primary); width:fit-content;">TANGIBLE 0${i+1}</span>
+                    <h4 style="font-family:'Inter', sans-serif; font-size:15px; font-weight:600; margin-top:16px; margin-bottom:0;">${r.title}</h4>
+                    <span class="flip-card__hint">Hover to Flip &rarr;</span>
+                  </div>
+                  <div class="flip-card-back">
+                    <span class="badge badge--success" style="width:fit-content;">VRIO DIAGNOSIS</span>
+                    <p style="font-size:13px; line-height:1.5; margin-top:12px; margin-bottom:0;">${r.desc}</p>
+                    <span class="flip-card__hint" style="color:var(--muted); font-size:10px;">Valuable, Rare, Hard to Imitate</span>
+                  </div>
+                </div>
+              </div>
+            `).join("")}
+          </div>
+
+          <h3 style="font-family:'Inter', sans-serif; font-size:14px; font-weight:600; text-transform:uppercase; color:var(--muted); margin-bottom:12px;">無形關鍵資源 Intangible Resources</h3>
+          <div class="card-grid" style="margin-bottom:32px;">
+            ${resData.intangible.map((r, i) => `
+              <div class="flip-card-container">
+                <div class="flip-card">
+                  <div class="flip-card-front">
+                    <span class="badge" style="background:var(--muted); color:var(--on-primary); width:fit-content;">INTANGIBLE 0${i+1}</span>
+                    <h4 style="font-family:'Inter', sans-serif; font-size:15px; font-weight:600; margin-top:16px; margin-bottom:0;">${r.title}</h4>
+                    <span class="flip-card__hint">Hover to Flip &rarr;</span>
+                  </div>
+                  <div class="flip-card-back">
+                    <span class="badge badge--success" style="width:fit-content;">VRIO DIAGNOSIS</span>
+                    <p style="font-size:13px; line-height:1.5; margin-top:12px; margin-bottom:0;">${r.desc}</p>
+                    <span class="flip-card__hint" style="color:var(--muted); font-size:10px;">Highly Inimitable Moat</span>
+                  </div>
+                </div>
+              </div>
+            `).join("")}
+          </div>
+        </div>
+
+        <!-- 4. CORE COMPETENCIES & KEY PARTNERS -->
+        <div class="section-block">
+          <p class="eyebrow">${competencies.eyebrow}</p>
+          <h2>${competencies.title}</h2>
+          <p style="font-size:14px; color:var(--body); max-width:800px; margin-bottom:24px;">
+            ${state.lang === 'zh'
+              ? '台塑在規模製造與連續製程管理、高值化研發上具備強大內部能力，並與全球半導體龍頭供應鏈、清華大學及 NVIDIA 等頂尖外部夥伴緊密合作。'
+              : 'Synthesizing FPC internal capabilities with critical industry and technology alliances (TSMC supply networks, NTHU R&D center, NVIDIA AI).'}
+          </p>
+
+          <div class="card-grid" style="align-items:start;">
+            <!-- Left: Internal Competencies -->
+            <div style="background:var(--surface); border:1px solid var(--hairline); padding:20px; border-radius:var(--radius-lg);">
+              <h3 style="font-family:'Inter', sans-serif; font-size:15px; font-weight:600; text-transform:uppercase; color:var(--primary); margin:0 0 16px 0; border-bottom:1px solid var(--hairline); padding-bottom:8px;">
+                ${competencies.coreTitle}
+              </h3>
+              <ul style="margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:12px;">
+                ${competencies.core.map((c, i) => `
+                  <li style="font-size:13.5px; line-height:1.5; color:var(--body-strong); display:flex; gap:8px; align-items:start;">
+                    <span style="display:inline-flex; align-items:center; justify-content:center; width:20px; height:20px; border-radius:50%; background:var(--primary); color:var(--on-primary); font-size:10.5px; font-weight:600; flex-shrink:0; margin-top:2px;">
+                      ${i+1}
+                    </span>
+                    <div>${c}</div>
+                  </li>
+                `).join("")}
+              </ul>
+            </div>
+
+            <!-- Right: External Partners Grid -->
+            <div style="background:var(--surface); border:1px solid var(--hairline); padding:20px; border-radius:var(--radius-lg);">
+              <h3 style="font-family:'Inter', sans-serif; font-size:15px; font-weight:600; text-transform:uppercase; color:var(--muted); margin:0 0 16px 0; border-bottom:1px solid var(--hairline); padding-bottom:8px;">
+                ${competencies.partnerTitle}
+              </h3>
+              <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap:12px;">
+                ${competencies.partners.map(p => `
+                  <div style="background:var(--surface-strong); padding:12px; border-radius:var(--radius-md); border:1px solid var(--hairline-strong);">
+                    <h4 style="margin:0 0 4px 0; font-size:13.5px; font-weight:600; color:var(--ink);">${p.name}</h4>
+                    <p style="margin:0; font-size:11.5px; line-height:1.4; color:var(--body-strong);">${p.desc}</p>
+                  </div>
+                `).join("")}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. DYNAMIC CAPABILITIES (INTERACTIVE TIMELINE) -->
+        <div class="section-block">
+          <p class="eyebrow">${dynamics.eyebrow}</p>
+          <h2>${dynamics.title}</h2>
+          <p style="font-size:14px; color:var(--body); max-width:800px; margin-bottom:20px;">
+            ${state.lang === 'zh'
+              ? '【動態轉型歷程】點選下方時間軸節點，分析台塑如何因應外部地緣政治、中國產能擴張與半導體供應鏈重整，展現敏捷的動態能耐。'
+              : 'Click nodes below to review FPC dynamic response timelines reacting to green regulations, cyclical losses, and semiconductor shifts.'}
+          </p>
+
+          <div class="timeline-selector" id="dynamics-timeline-header" style="margin-bottom:24px;"></div>
+          <div class="editorial-card" id="dynamics-detail-panel" style="border-left: 4px solid var(--primary);"></div>
+        </div>
+
+        <!-- SOURCES & DISCLOSURE -->
+        <div class="section-block" style="border-top:1px solid var(--hairline); padding-top:32px;">
+          <p class="eyebrow">References</p>
+          <h2>${state.lang === 'zh' ? '資料來源與 AI 聲明' : 'Sources & AI Disclosures'}</h2>
+          
+          <div class="card-grid" style="align-items:start; margin-top:16px;">
+            <div style="background:var(--surface); border:1px solid var(--hairline); padding:20px; border-radius:var(--radius-lg);">
+              <h3 style="font-family:'Inter', sans-serif; font-size:15px; font-weight:600; color:var(--ink); margin:0 0 12px 0;">
+                ${tabData.sources[state.lang].disclosureTitle}
+              </h3>
+              <ul style="margin:0; padding-left:20px; font-size:13px; line-height:1.6; color:var(--body-strong);">
+                ${tabData.sources[state.lang].disclosureBody.map(b => `<li>${b}</li>`).join("")}
+              </ul>
+            </div>
+
+            <div style="background:var(--surface); border:1px solid var(--hairline); padding:20px; border-radius:var(--radius-lg);">
+              <h3 style="font-family:'Inter', sans-serif; font-size:15px; font-weight:600; color:var(--ink); margin:0 0 12px 0;">
+                ${state.lang === 'zh' ? '權威數據來源清單' : 'Verified Reference Citations'}
+              </h3>
+              <div style="display:flex; flex-direction:column; gap:8px;">
+                ${tabData.sources.list.map((s, i) => `
+                  <a href="${s.url}" target="_blank" style="font-size:13px; color:var(--primary); text-decoration:none; display:flex; gap:6px; align-items:center;">
+                    <span>&bull;</span>
+                    <span style="text-decoration:underline;">[${i+1}] ${s.name}</span>
+                  </a>
+                `).join("")}
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      container.innerHTML = html;
+
+      // Render the interactive dynamics timeline
+      renderDynamicsTimeline();
+    }
+
+    /* WIDGET: DYNAMICS TIMELINE */
+    function renderDynamicsTimeline() {
+      const header = document.getElementById("dynamics-timeline-header");
+      if (!header) return;
+
+      const tabData = appData.tabs[2];
+      const dynamics = tabData.dynamics[state.lang];
+      const items = dynamics.items;
+
+      // Define visual labels for timeline headers
+      const years = ["2021", "2022", "2023-24", "2025 Loss", "2025 ESG", "2026 Res"];
+
+      header.innerHTML = items.map((it, index) => {
+        const isActive = state.activeDynamicsIndex === index;
+        return `
+          <button class="timeline-tab" type="button" data-dyn-index="${index}" data-active="${isActive}" style="font-size:13px; padding:8px 12px;">
+            ${years[index]}
+          </button>
+        `;
+      }).join("");
+
+      header.querySelectorAll("[data-dyn-index]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          state.activeDynamicsIndex = Number(btn.dataset.dynIndex);
+          renderDynamicsTimeline();
+          updateDynamicsDetails();
+        });
+      });
+
+      updateDynamicsDetails();
+    }
+
+    function updateDynamicsDetails() {
+      const panel = document.getElementById("dynamics-detail-panel");
+      if (!panel) return;
+
+      const tabData = appData.tabs[2];
+      const dynamics = tabData.dynamics[state.lang];
+      const activeItem = dynamics.items[state.activeDynamicsIndex] || dynamics.items[0];
+
+      panel.innerHTML = `
+        <span class="badge badge--warning" style="margin-bottom:8px;">DYNAMIC CAPABILITY FOCUS</span>
+        <h3 style="font-family:'Inter',sans-serif; font-size:17px; font-weight:600; margin-bottom:12px; color:var(--ink);">${activeItem.t}</h3>
+        <div style="background:var(--surface-strong); border-radius:var(--radius-lg); padding:16px; border:1px solid var(--hairline-strong);">
+          <span class="badge badge--success" style="margin-bottom:8px;">${state.lang === 'zh' ? '集團應對行動與最近進展' : 'Corporate Action & Latest Results'}</span>
+          <p style="font-size:14px; line-height:1.6; color:var(--body-strong); margin:0;">${activeItem.a}</p>
+        </div>
+      `;
+    }
+
+    /* RENDER TP3: INTERNATIONAL STRATEGY & FDI */
+    function renderTP3(container) {
+      // Setup detailed HTML with interactive widgets
+      const tabData = appData.tabs[3];
+      const i18n = appData.tabs[3].I18N[state.lang];
+      
+      let html = `
+        <div class="section-block">
+          <p class="eyebrow">${i18n["home.eyebrow"]}</p>
+          <h2>${state.lang === 'zh' ? '國際化策略折衷 OLI 理論與 Concentric 多角化' : 'OLI Eclectic FDI Toolkits & Concentric Pathways'}</h2>
+          <p style="font-size:16px; max-width:800px; color:var(--body); margin-bottom:24px;">
+            ${i18n["home.lead"]}
+          </p>
+
+          <!-- Interactive Strategy Lens Selector -->
+          <div class="editorial-card" style="border: 1px solid var(--ink); margin-bottom:48px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--hairline); padding-bottom:16px; flex-wrap:wrap; gap:12px;">
+              <h3 style="margin:0; font-family:'Inter',sans-serif; font-size:15px; font-weight:600; text-transform:uppercase;">
+                ${state.lang === 'zh' ? '學術透鏡：理論 · 證據 · 分析三層架構' : 'Analytical Lens: Theory · Evidence · Insight'}
+              </h3>
+              <div style="display:flex; gap:6px;">
+                <button class="btn btn--outline btn--small" id="lens-btn-vertical" data-lens-id="vertical">01 Vertical</button>
+                <button class="btn btn--outline btn--small" id="lens-btn-horizontal" data-lens-id="horizontal">02 Related Div</button>
+                <button class="btn btn--outline btn--small" id="lens-btn-global" data-lens-id="global">03 FDI OLI</button>
+                <button class="btn btn--outline btn--small" id="lens-btn-ma" data-lens-id="ma">04 FDI M&A</button>
+                <button class="btn btn--outline btn--small" id="lens-btn-greenfield" data-lens-id="greenfield">05 Greenfield</button>
+                <button class="btn btn--outline btn--small" id="lens-btn-future" data-lens-id="future">06 Challenges</button>
+              </div>
+            </div>
+            
+            <div style="padding-top:20px; display:flex; flex-direction:column; gap:20px;">
+              <div>
+                <span class="badge badge--warning" style="margin-bottom:6px;">${i18n["lens.theory"]}</span>
+                <p id="lens-theory-text" style="font-size:15px; color:var(--body-strong); line-height:1.6; margin:0;"></p>
+              </div>
+              <div>
+                <span class="badge" style="margin-bottom:6px;">${i18n["lens.evidence"]}</span>
+                <p id="lens-evidence-text" style="font-size:15px; color:var(--body-strong); line-height:1.6; margin:0;"></p>
+              </div>
+              <div style="background:var(--surface-strong); padding:16px; border-radius:var(--radius-lg);">
+                <span class="badge badge--success" style="margin-bottom:6px;">${i18n["lens.insight"]}</span>
+                <p id="lens-insight-text" style="font-size:15px; font-weight:500; color:var(--ink); line-height:1.6; margin:0;"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Vertical Integration Clickable Flow -->
+        <div class="section-block">
+          <p class="eyebrow">Interactive Vertical Flow</p>
+          <h2>${state.lang === 'zh' ? '台塑集團一體化內部交易流程' : 'FPG Intra-Group Captive Monomer Pipelines'}</h2>
+          <p style="font-size:14px; color:var(--body); max-width:800px; margin-bottom:16px;">
+            ${state.lang === 'zh' 
+              ? '【點選下方流程圖節點】分析集團如何將交易成本（TCE）內部化。1301逾六成基本原料均向6505台塑化訂購，直供管線免除敲竹槓（hold-up）風險。' 
+              : 'Click nodes below to dissect how FPC coordinates internal monomer allocation to mitigate high asset specificity transaction costs.'}
+          </p>
+
+          <div class="flow-viz" id="flow-viz-panel"></div>
+          <div class="flow-details-card" id="flow-node-details"></div>
+        </div>
+
+        <!-- Concentric Related Diversification Grid -->
+        <div class="section-block">
+          <p class="eyebrow">Strategic Transition</p>
+          <h2>${state.lang === 'zh' ? '利用「高分子材料核心技術」之集中多角化' : 'Concentric Diversification Leveraging Polymer Base'}</h2>
+          
+          <div class="card-grid">
+            <div class="editorial-card" style="border-top:3px solid var(--gradient-rose);">
+              <span class="badge" style="margin-bottom:8px;">SEMICONDUCTORS</span>
+              <h3 class="editorial-card__title" style="font-size:16px;">${state.lang === 'zh' ? '先進半導體高純特用化學品' : 'Ultra-pure TSMC reagents'}</h3>
+              <p class="editorial-card__desc" style="font-size:13px; line-height:1.5;">
+                ${state.lang === 'zh'
+                  ? '與日本德山（Tokuyama）合資建廠，在高雄生產半導體先進製程專用超高純度電子級 IPA 與雙氧水，直接切入台積電晶圓供應網。'
+                  : 'JV with Japanese Tokuyama to purity reagents in Kaohsiung, integrating direct into advanced foundry nodes.'}
+              </p>
+            </div>
+            <div class="editorial-card" style="border-top:3px solid var(--gradient-mint);">
+              <span class="badge" style="margin-bottom:8px;">NEW ENERGY STORAGE</span>
+              <h3 class="editorial-card__title" style="font-size:16px;">${state.lang === 'zh' ? '彰濱 LFP 儲能大廠與電解液' : 'Changbin LFP Cells & Electrolytes'}</h3>
+              <p class="editorial-card__desc" style="font-size:13px; line-height:1.5;">
+                ${state.lang === 'zh'
+                  ? '整合四寶資源成立「台塑新智能」，興建全台最大規模鋰鐵電池芯廠。憑藉化學合成優勢，自行調配並量產鋰電池高規格電解液。'
+                  : 'Formed Formosa Smart Energy to construct gigafactories in Changbin, compounding battery electrolytes in-house.'}
+              </p>
+            </div>
+            <div class="editorial-card" style="border-top:3px solid var(--gradient-sky);">
+              <span class="badge" style="margin-bottom:8px;">ADVANCED FIBERS</span>
+              <h3 class="editorial-card__title" style="font-size:16px;">${state.lang === 'zh' ? '特種碳纖維航太與新能源應用' : 'Specialty wind-turbine Carbon Fiber'}</h3>
+              <p class="editorial-card__desc" style="font-size:13px; line-height:1.5;">
+                ${state.lang === 'zh'
+                  ? '將丙烯腈技術向上重整，開發專供風電大葉片、儲氫高壓瓶及電動車輕量複合底盤的高強度 PAN 碳纖維，構築 VRIO 壁壘。'
+                  : 'Upgraded basic polyacrylonitrile threads into advanced high-strength fibers for structural hydrogen tanks.'}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- M&A Interactive Timeline -->
+        <div class="section-block">
+          <p class="eyebrow">FDI Entry Modes M&A</p>
+          <h2>${state.lang === 'zh' ? '海外直接投資 (FDI) 併購歷程' : 'FDI Mergers & Acquisitions Strategy'}</h2>
+          
+          <div class="timeline-selector" id="timeline-tab-header"></div>
+          <div class="editorial-card" id="timeline-details-panel"></div>
+        </div>
+
+        <!-- Future Challenges Interactive Selector -->
+        <div class="section-block">
+          <p class="eyebrow">Strategic Handoff</p>
+          <h2>${state.lang === 'zh' ? '台塑面臨的四大未來挑戰與執行建議' : 'Four Core Future Challenges & Priorities'}</h2>
+          
+          <div class="card-grid card-grid--4up" id="challenges-button-grid" style="margin-bottom:24px;"></div>
+          <div class="editorial-card" id="challenge-detail-display" style="border-left: 4px solid var(--primary);"></div>
+        </div>
+
+        <!-- Audio narration template preview -->
+        <div class="reflection-block">
+          <h3>${state.lang === 'zh' ? '本頁語音導覽 Narrator Script' : 'Audio Tour script'}</h3>
+          <p style="font-style:italic; font-size:14px; line-height:1.6;">
+            "${state.lang === 'zh' ? tabData.voiceGuide.zh : tabData.voiceGuide.en}"
+          </p>
+        </div>
+      `;
+
+      container.innerHTML = html;
+
+      // Bind Lens Buttons
+      const lensIds = ["vertical", "horizontal", "global", "ma", "greenfield", "future"];
+      lensIds.forEach(id => {
+        const btn = document.getElementById(`lens-btn-${id}`);
+        if (btn) {
+          btn.addEventListener("click", () => {
+            state.activeStrategyLens = id;
+            updateStrategyLensUI();
+          });
+        }
+      });
+
+      updateStrategyLensUI();
+      renderVerticalFlowNodes();
+      renderMaTimelineSelector();
+      renderChallengesSelector();
+    }
+
+    /* WIDGET: STRATEGY LENS ENGINE */
+    function updateStrategyLensUI() {
+      const i18n = appData.tabs[3].I18N[state.lang];
+      const lensIds = ["vertical", "horizontal", "global", "ma", "greenfield", "future"];
+      
+      // Update buttons active attribute
+      lensIds.forEach(id => {
+        const btn = document.getElementById(`lens-btn-${id}`);
+        if (btn) {
+          if (state.activeStrategyLens === id) {
+            btn.setAttribute("data-active", "true");
+            btn.style.backgroundColor = "var(--primary)";
+            btn.style.color = "var(--on-primary)";
+          } else {
+            btn.setAttribute("data-active", "false");
+            btn.style.backgroundColor = "transparent";
+            btn.style.color = "var(--ink)";
+          }
+        }
+      });
+
+      const lensData = appData.tabs[3].STRATEGY_LENS[state.activeStrategyLens][state.lang];
+      
+      document.getElementById("lens-theory-text").textContent = lensData.theory;
+      document.getElementById("lens-evidence-text").textContent = lensData.evidence;
+      document.getElementById("lens-insight-text").textContent = lensData.insight;
+    }
+
+    /* WIDGET: VERTICAL FLOW NODES RENDERER */
+    function renderVerticalFlowNodes() {
+      const flowPanel = document.getElementById("flow-viz-panel");
+      if (!flowPanel) return;
+
+      const nodes = appData.tabs[3].VERTICAL_FLOW;
+
+      flowPanel.innerHTML = nodes.map((node, index) => {
+        const isFocus = node.id === state.activeVerticalNode;
+        const name = state.lang === 'zh' ? node.nameZh : node.nameEn;
+        const role = state.lang === 'zh' ? node.roleZh : node.roleEn;
+        
+        let arrowHtml = "";
+        if (index < nodes.length - 1) {
+          arrowHtml = `<div class="flow-arrow">&rarr;</div>`;
+        }
+
+        return `
+          <div class="flow-node" data-node-id="${node.id}" data-active="${isFocus}">
+            <h4>${name}</h4>
+            <span style="font-size:12px; color:var(--muted);">${role}</span><br>
+            <span class="badge badge--small">${node.code}</span>
+          </div>
+          ${arrowHtml}
+        `;
+      }).join("");
+
+      // Bind node clicks
+      flowPanel.querySelectorAll("[data-node-id]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          state.activeVerticalNode = btn.dataset.nodeId;
+          renderVerticalFlowNodes();
+          updateVerticalFlowNodeDetails();
+        });
+      });
+
+      updateVerticalFlowNodeDetails();
+    }
+
+    function updateVerticalFlowNodeDetails() {
+      const detailCard = document.getElementById("flow-node-details");
+      if (!detailCard) return;
+
+      const nodes = appData.tabs[3].VERTICAL_FLOW;
+      const activeNode = nodes.find(n => n.id === state.activeVerticalNode) || nodes[1];
+
+      const name = state.lang === 'zh' ? activeNode.nameZh : activeNode.nameEn;
+      const products = state.lang === 'zh' ? activeNode.productsZh : activeNode.productsEn;
+      const details = state.lang === 'zh' ? activeNode.detailZh : activeNode.detailEn;
+      
+      const internalLabel = state.lang === 'zh' 
+        ? (activeNode.internalZh || "集團管道互連直供") 
+        : (activeNode.internalEn || "Direct in-group utility piping");
+
+      detailCard.innerHTML = `
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+          <h3 style="margin:0; font-family:'Inter',sans-serif; font-size:16px; font-weight:600; color:var(--primary);">${name} (Stock Code: ${activeNode.code})</h3>
+          <span class="badge badge--success">${internalLabel}</span>
+        </div>
+        <p style="font-size:14px; line-height:1.6; color:var(--body-strong); margin-bottom:8px;">
+          <strong>${state.lang === 'zh' ? '核心業務與產品' : 'Core outputs'}:</strong> ${products}
+        </p>
+        <p style="font-size:14px; line-height:1.6; color:var(--body); margin:0;">
+          <strong>${state.lang === 'zh' ? '戰略管理分析' : 'Strategic Insight'}:</strong> ${details}
+        </p>
+      `;
+    }
+
+    /* WIDGET: M&A TIMELINE WIDGET */
+    function renderMaTimelineSelector() {
+      const header = document.getElementById("timeline-tab-header");
+      if (!header) return;
+
+      const events = appData.tabs[3].MA_EVENTS;
+      header.innerHTML = events.map((ev, index) => {
+        const isActive = state.activeMaEvent === String(index);
+        return `
+          <button class="timeline-tab" type="button" data-ma-index="${index}" data-active="${isActive}">
+            ${ev.year}
+          </button>
+        `;
+      }).join("");
+
+      header.querySelectorAll("[data-ma-index]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          state.activeMaEvent = btn.dataset.maIndex;
+          renderMaTimelineSelector();
+          updateMaTimelineDetails();
+        });
+      });
+
+      updateMaTimelineDetails();
+    }
+
+    function updateMaTimelineDetails() {
+      const panel = document.getElementById("timeline-details-panel");
+      if (!panel) return;
+
+      const events = appData.tabs[3].MA_EVENTS;
+      const ev = events[Number(state.activeMaEvent)] || events[0];
+
+      const title = state.lang === 'zh' ? ev.titleZh : ev.titleEn;
+      const details = state.lang === 'zh' ? ev.detailZh : ev.detailEn;
+
+      panel.innerHTML = `
+        <span class="badge badge--warning" style="margin-bottom:8px;">FDI ENTRY MODE · M&A EVENT</span>
+        <h3 style="font-family:'Inter',sans-serif; font-size:18px; font-weight:600; margin-bottom:12px; color:var(--ink);">${title} (${ev.year})</h3>
+        <p style="font-size:14px; line-height:1.6; color:var(--body-strong); margin:0;">${details}</p>
+        
+        <div style="margin-top:16px; border-top:1px solid var(--hairline); padding-top:12px; display:flex; gap:16px; flex-wrap:wrap;">
+          <div style="font-size:12px; color:var(--muted);">
+            &bull; ${state.lang === 'zh' ? '用資本換取海外進入時間' : 'Slashes global time to market'}
+          </div>
+          <div style="font-size:12px; color:var(--muted);">
+            &bull; ${state.lang === 'zh' ? '規避當地法規執照壁壘' : 'Evades local license regulatory gates'}
+          </div>
+        </div>
+      `;
+    }
+
+    /* WIDGET: FUTURE CHALLENGES SELECTOR */
+    function renderChallengesSelector() {
+      const grid = document.getElementById("challenges-button-grid");
+      if (!grid) return;
+
+      const challenges = appData.tabs[3].CHALLENGES;
+      
+      grid.innerHTML = challenges.map((ch, index) => {
+        const isActive = state.activeChallengeIndex === index;
+        const title = state.lang === 'zh' ? ch.challengeZh : ch.challengeEn;
+        
+        return `
+          <button class="btn ${isActive ? 'btn--primary' : 'btn--outline'}" type="button" data-challenge-index="${index}" style="width:100%;">
+            ${title}
+          </button>
+        `;
+      }).join("");
+
+      grid.querySelectorAll("[data-challenge-index]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          state.activeChallengeIndex = Number(btn.dataset.challengeIndex || btn.getAttribute('data-challenge-index'));
+          renderChallengesSelector();
+          updateChallengeDetailsDisplay();
+        });
+      });
+
+      updateChallengeDetailsDisplay();
+    }
+
+    function updateChallengeDetailsDisplay() {
+      const display = document.getElementById("challenge-detail-display");
+      if (!display) return;
+
+      const challenges = appData.tabs[3].CHALLENGES;
+      const ch = challenges[state.activeChallengeIndex] || challenges[0];
+
+      const title = state.lang === 'zh' ? ch.challengeZh : ch.challengeEn;
+      const details = state.lang === 'zh' ? ch.detailZh : ch.detailEn;
+      const rec = state.lang === 'zh' ? ch.recZh : ch.recEn;
+
+      display.innerHTML = `
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+          <h3 style="margin:0; font-family:'Inter',sans-serif; font-size:16px; font-weight:600; color:var(--primary);">${title}</h3>
+          <span class="badge badge--error">${state.lang === 'zh' ? '長期轉型關卡' : 'TRANSITION RISK'}</span>
+        </div>
+        <p style="font-size:14px; line-height:1.6; color:var(--body); margin-bottom:16px;">
+          <strong>${state.lang === 'zh' ? '挑戰現況分析' : 'Status Assessment'}:</strong> ${details}
+        </p>
+        <div style="background:var(--surface-strong); border-radius:var(--radius-lg); padding:16px; border:1px solid var(--hairline-strong);">
+          <span class="badge badge--success" style="margin-bottom:8px;">${state.lang === 'zh' ? '小組執行建議 Priority Recommendation' : 'G7 Recommended Timelines'}</span>
+          <p style="font-size:14px; line-height:1.6; color:var(--body-strong); margin:0;">${rec}</p>
+        </div>
+      `;
+    }
+
+    // Run app on DOM Load
+    document.addEventListener("DOMContentLoaded", init);
+  </script>
+</body>
+</html>
