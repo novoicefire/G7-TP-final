@@ -1004,6 +1004,274 @@
       background-color: var(--ink);
     }
 
+    /* === TP1 INTERACTIVE WIDGETS === */
+    .tp1-stage-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .tp1-stage-node {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 18px 24px;
+      background: var(--surface-card);
+      border: 1px solid var(--hairline);
+      border-radius: var(--radius-lg);
+      cursor: pointer;
+      position: relative;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      text-align: center;
+    }
+    .tp1-stage-node:hover {
+      transform: translateY(-2px);
+      border-color: var(--muted);
+      box-shadow: var(--shadow-card);
+    }
+    .tp1-stage-node[data-active="true"] {
+      border-color: var(--primary);
+      background: linear-gradient(145deg, var(--surface-card), var(--hairline));
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+    }
+    .tp1-stage-node[data-active="true"]::after {
+      content: "";
+      position: absolute;
+      bottom: -6px;
+      left: 50%;
+      transform: translateX(-50%) rotate(45deg);
+      width: 12px;
+      height: 12px;
+      background: var(--surface-card);
+      border-right: 1px solid var(--primary);
+      border-bottom: 1px solid var(--primary);
+    }
+    .tp1-stage-step {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      color: var(--muted);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+    .tp1-stage-name {
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--ink);
+    }
+    .tp1-stage-arrow {
+      font-size: 20px;
+      color: var(--muted-soft);
+      user-select: none;
+    }
+    .tp1-details-card {
+      background: var(--surface-card);
+      border: 1px solid var(--hairline);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: var(--shadow-card);
+      margin-bottom: 40px;
+      position: relative;
+      animation: fadeIn 0.4s ease-out;
+    }
+    .tp1-details-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 28px;
+    }
+    .tp1-details-meta {
+      border-right: 1px solid var(--hairline);
+      padding-right: 28px;
+    }
+    .tp1-details-meta h4 {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .tp1-details-meta p {
+      font-size: 15px;
+      color: var(--ink);
+      font-weight: 500;
+      margin-bottom: 16px;
+    }
+    .tp1-details-content h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    .tp1-details-content p {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--body);
+    }
+
+    /* AMC Matrix widgets */
+    .tp1-amc-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+    .tp1-amc-card {
+      padding: 20px;
+      background: var(--surface-card);
+      border: 1px solid var(--hairline);
+      border-radius: var(--radius-lg);
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+    }
+    .tp1-amc-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-card);
+    }
+    .tp1-amc-card[data-active="true"] {
+      border-color: var(--primary);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+      background: linear-gradient(145deg, var(--surface-card), var(--hairline));
+    }
+    .tp1-amc-card[data-active="true"]::after {
+      content: "";
+      position: absolute;
+      bottom: -6px;
+      left: 50%;
+      transform: translateX(-50%) rotate(45deg);
+      width: 12px;
+      height: 12px;
+      background: var(--surface-card);
+      border-right: 1px solid var(--primary);
+      border-bottom: 1px solid var(--primary);
+    }
+    .tp1-strategy-board {
+      background: var(--surface-card);
+      border: 1px solid var(--hairline);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: var(--shadow-card);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-bottom: 40px;
+      animation: fadeIn 0.4s ease-out;
+    }
+    .tp1-strategy-col {
+      padding: 4px;
+    }
+    .tp1-strategy-col h4 {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .tp1-strategy-col p {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--body-strong);
+      margin: 0;
+    }
+
+    /* Lifecycle and news styling */
+    .tp1-lifecycle-meter {
+      background: var(--surface-card);
+      border: 1px solid var(--hairline);
+      border-radius: var(--radius-lg);
+      padding: 24px 28px;
+      margin-bottom: 28px;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .tp1-lifecycle-bar-outer {
+      flex: 1;
+      height: 10px;
+      background: var(--hairline-strong);
+      border-radius: 99px;
+      position: relative;
+      overflow: visible;
+    }
+    .tp1-lifecycle-bar-inner {
+      height: 100%;
+      width: 75%;
+      background: linear-gradient(90deg, var(--muted) 0%, var(--primary) 70%, var(--gradient-rose) 100%);
+      border-radius: 99px;
+    }
+    .tp1-lifecycle-marker {
+      position: absolute;
+      top: -6px;
+      left: 75%;
+      transform: translateX(-50%);
+      width: 22px;
+      height: 22px;
+      background: var(--surface-card);
+      border: 4px solid var(--primary);
+      border-radius: 50%;
+      box-shadow: 0 0 12px rgba(13, 211, 197, 0.4);
+      z-index: 2;
+    }
+    .tp1-lifecycle-label {
+      position: absolute;
+      top: 24px;
+      left: 75%;
+      transform: translateX(-50%);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--primary);
+      white-space: nowrap;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    @media (max-width: 768px) {
+      .tp1-stage-container {
+        flex-direction: column;
+        gap: 12px;
+      }
+      .tp1-stage-arrow {
+        transform: rotate(90deg);
+        margin: 4px 0;
+      }
+      .tp1-stage-node[data-active="true"]::after {
+        display: none;
+      }
+      .tp1-details-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      .tp1-details-meta {
+        border-right: none;
+        border-bottom: 1px solid var(--hairline);
+        padding-right: 0;
+        padding-bottom: 20px;
+      }
+      .tp1-amc-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .tp1-amc-card[data-active="true"]::after {
+        display: none;
+      }
+      .tp1-strategy-board {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     /* GLOBAL SITE FOOTER */
     .site-footer {
       background-color: var(--canvas);
@@ -1314,6 +1582,201 @@
       }
     }
 
+    /* === TP0 HORIZONTAL SCROLL TIMELINE === */
+    .milestone-timeline-container {
+      position: relative;
+      width: 100%;
+      overflow-x: auto;
+      scrollbar-width: thin;
+      scrollbar-color: var(--muted-soft) transparent;
+      padding: 20px 0;
+      margin-top: var(--spacing-lg);
+    }
+    
+    .milestone-timeline-container::-webkit-scrollbar {
+      height: 6px;
+    }
+    
+    .milestone-timeline-container::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    
+    .milestone-timeline-container::-webkit-scrollbar-thumb {
+      background-color: var(--muted-soft);
+      border-radius: var(--radius-pill);
+    }
+    
+    .milestone-timeline-wrapper {
+      position: relative;
+      width: fit-content;
+      min-width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 60px 40px;
+    }
+    
+    .milestone-timeline-svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+    
+    .milestone-timeline-path {
+      filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.05));
+    }
+    
+    .milestone-timeline-track {
+      display: flex;
+      gap: 48px;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .milestone-timeline-card {
+      flex: 0 0 320px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+      border-color: var(--hairline-strong);
+      background-color: var(--surface-card);
+    }
+    
+    .milestone-timeline-card:hover {
+      transform: translateY(var(--hover-translate)) scale(1.03) !important;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+      border-color: var(--primary);
+    }
+    
+    /* High-Low Stagger (一高一低錯落) */
+    .milestone-timeline-card:nth-child(odd) {
+      transform: translateY(-40px);
+      --hover-translate: -50px;
+    }
+    
+    .milestone-timeline-card:nth-child(even) {
+      transform: translateY(40px);
+      --hover-translate: 30px;
+    }
+
+    @media (max-width: 640px) {
+      .milestone-timeline-wrapper {
+        padding: 40px 20px;
+      }
+      .milestone-timeline-card {
+        flex: 0 0 280px;
+      }
+    /* === TP1 NEWS HORIZONTAL TIMELINE === */
+    .tp1-news-timeline-container {
+      width: 100%;
+      overflow-x: auto;
+      scrollbar-width: thin;
+      scrollbar-color: var(--muted-soft) transparent;
+      padding: 12px 0 16px;
+      margin-top: 16px;
+      margin-bottom: 24px;
+    }
+    
+    .tp1-news-timeline-container::-webkit-scrollbar {
+      height: 4px;
+    }
+    
+    .tp1-news-timeline-container::-webkit-scrollbar-thumb {
+      background-color: var(--muted-soft);
+      border-radius: var(--radius-pill);
+    }
+    
+    .tp1-news-timeline-track {
+      display: flex;
+      gap: 20px;
+      width: max-content;
+      min-width: 100%;
+      padding-bottom: 8px;
+      position: relative;
+    }
+
+    .tp1-news-timeline-track::before {
+      content: "";
+      position: absolute;
+      top: 24px;
+      left: 10%;
+      right: 10%;
+      height: 2px;
+      background: var(--hairline-strong);
+      z-index: 1;
+    }
+    
+    .tp1-news-node {
+      flex: 1;
+      min-width: 180px;
+      background: var(--surface-card);
+      border: 1px solid var(--hairline);
+      border-radius: var(--radius-lg);
+      padding: 12px 16px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    .tp1-news-node:hover {
+      transform: translateY(-2px);
+      border-color: var(--muted);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+    }
+    
+    .tp1-news-node[data-active="true"] {
+      border-color: var(--primary);
+      background: var(--surface-strong);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    }
+    
+    .tp1-news-node::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--muted-soft);
+      margin-bottom: 8px;
+      transition: all 0.3s ease;
+      border: 2px solid var(--surface-card);
+      box-sizing: content-box;
+    }
+    
+    .tp1-news-node[data-active="true"]::before {
+      background: var(--primary);
+      transform: scale(1.3);
+      box-shadow: 0 0 8px var(--primary);
+    }
+    
+    .tp1-news-date {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+      letter-spacing: 0.5px;
+    }
+    
+    .tp1-news-tag {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-top: 4px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      width: 100%;
+    }
+
   </style>
 </head>
 
@@ -1323,6 +1786,16 @@
   <header class="top-nav" role="banner">
     <div class="top-nav__container">
       <a class="top-nav__brand" href="#top">
+        <svg class="top-nav__logo" width="28" height="28" viewBox="0 0 120 80" fill="currentColor" style="display: inline-block; vertical-align: middle; margin-right: 4px;">
+          <!-- Outer top curve -->
+          <path d="M 5 40 Q 30 40 40 20 A 25 25 0 0 1 80 20 Q 90 40 115 40" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" />
+          <!-- Outer bottom curve -->
+          <path d="M 5 40 Q 30 40 40 60 A 25 25 0 0 0 80 60 Q 90 40 115 40" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" />
+          <!-- Upper inner block with triangular hole -->
+          <path d="M 35 36 L 85 36 C 75 36 68 25 65 17 L 55 17 C 52 25 45 36 35 36 Z M 60 20 L 52 31 L 68 31 Z" fill-rule="evenodd" />
+          <!-- Lower inner block with inverted triangular hole -->
+          <path d="M 35 44 L 85 44 C 75 44 68 55 65 63 L 55 63 C 52 55 45 44 35 44 Z M 60 60 L 52 49 L 68 49 Z" fill-rule="evenodd" />
+        </svg>
         SMMC-EMI G7 <strong>1301</strong>
       </a>
 
@@ -1709,21 +2182,167 @@
             { "title": "Technological", "impact": "High-Value Pivot", "desc": "Generative AI applications with NVIDIA streamline batch engineering and predictive maintenance. Advanced semiconductor nodes create premium demands for ultra-pure electronic inputs." }
           ]
         },
+        "valueChain": {
+          "zh": {
+            "title": "產業價值鏈與六輕一體化",
+            "desc": "台塑集團透過「六輕一體化」大幅降低運輸成本並達到能源互補，展現強大抗風險能力。",
+            "stages": [
+              {
+                "name": "上游：原料供應與煉製",
+                "role": "原油進口、煉製與輕油裂解",
+                "products": "乙烯、丙烯等基礎原料",
+                "participation": "低 (由姊妹公司台塑化負責)",
+                "details": "台塑本身不煉油，90% 基礎原料由台塑化管線直供，確保穩定且具議價優勢。"
+              },
+              {
+                "name": "中游：聚合物與化學中間產物",
+                "role": "加工為塑膠顆粒或化學纖維",
+                "products": "PVC, PE, PP, EVA 等",
+                "participation": "極高 (核心業務)",
+                "details": "全球最大 PVC 生產商之一，具備高產能與廣產品線，能彈性調整產能。"
+              },
+              {
+                "name": "下游：終端產品加工",
+                "role": "製造社會大眾使用之商品",
+                "products": "建材、包裝、汽車零件",
+                "participation": "中/低 (交由南亞或外部)",
+                "details": "透過集團南亞塑膠及長期合約，深度滲透下游市場。"
+              }
+            ]
+          },
+          "en": {
+            "title": "Industry Value Chain & Integration",
+            "desc": "FPC utilizes the 'Sixth Naphtha Cracker Complex' for extreme integration, minimizing transport costs and maximizing energy synergy.",
+            "stages": [
+              {
+                "name": "Upstream: Refining",
+                "role": "Crude import & Steam Cracking",
+                "products": "Ethylene, Propylene",
+                "participation": "Low (Handled by FPCC)",
+                "details": "FPC doesn't refine; 90%+ of raw materials are piped directly from sister company FPCC, ensuring stability."
+              },
+              {
+                "name": "Midstream: Polymers",
+                "role": "Processing into plastic pellets",
+                "products": "PVC, PE, PP, EVA",
+                "participation": "Very High (Core Business)",
+                "details": "One of the world's largest PVC producers with massive capacity and flexible production capabilities."
+              },
+              {
+                "name": "Downstream: Processing",
+                "role": "Manufacturing end-consumer goods",
+                "products": "Pipes, Packaging, Auto parts",
+                "participation": "Low/Med (Handled by Nan Ya)",
+                "details": "Penetrates downstream via Nan Ya Plastics and long-term client contracts."
+              }
+            ]
+          }
+        },
+        "competitors": {
+          "zh": {
+            "title": "競爭者與動態分析 (AMC 分析)",
+            "swot": {
+              "strengths": [
+                "集團防禦性現金流",
+                "合規與環保先發優勢",
+                "美國德州廠地緣避險"
+              ],
+              "weaknesses": [
+                "重資產轉型慣性 (製造業思維)",
+                "亞洲舊廠泛用樹脂折舊包袱"
+              ]
+            },
+            "matrix": [
+              {
+                "type": "高共同性 / 高相似性",
+                "competitor": "中國煉化巨頭 (榮盛、恆力)",
+                "action": "【傾銷】為攤提設備折舊，無底線傾銷泛用塑膠。",
+                "response": "【戰略撤退】不打價格戰，降舊廠稼動率，重心轉移美國德州廠避開紅海。"
+              },
+              {
+                "type": "低共同性 / 高相似性",
+                "competitor": "歐美特化大廠 (Dow, Westlake)",
+                "action": "【升級】全面升級高毛利特規塑膠，暫無攻擊亞洲動機。",
+                "response": "【搶佔利基】趁空窗期，將資源 100% 投入醫療、太陽能用之特規塑膠。"
+              },
+              {
+                "type": "高共同性 / 低相似性",
+                "competitor": "全球綠色新創 (NatureWorks)",
+                "action": "【替代】改用農業廢料製造零碳塑膠，搶攻國際大廠訂單。",
+                "response": "【防禦性併購】動用現金流併購生質技術新創，獲取綠色定價權。"
+              }
+            ]
+          },
+          "en": {
+            "title": "Competitor Dynamics (AMC Analysis)",
+            "swot": {
+              "strengths": [
+                "Strong Cash Flow",
+                "ESG & Compliance Pioneer",
+                "US Texas Plant Geopolitics"
+              ],
+              "weaknesses": [
+                "Heavy Asset Culture",
+                "Depreciation burden of Asian plants"
+              ]
+            },
+            "matrix": [
+              {
+                "type": "High Market / High Resource",
+                "competitor": "China Giants (Rongsheng, Hengli)",
+                "action": "[Dumping] Price wars to cover equipment depreciation.",
+                "response": "[Retreat] No price wars. Lower Asian utilization, shift focus to U.S. Texas plant to avoid red ocean."
+              },
+              {
+                "type": "Low Market / High Resource",
+                "competitor": "U.S./EU Giants (Dow, Westlake)",
+                "action": "[Upgrade] Shifted to premium plastics, currently ignoring Asian commodity market.",
+                "response": "[Niche Grab] Seize the window; dedicate R&D to medical and solar premium plastics."
+              },
+              {
+                "type": "High Market / Low Resource",
+                "competitor": "Green Startups (NatureWorks)",
+                "action": "[Substitute] Bio-plastics taking orders from global brands (Apple, Nike).",
+                "response": "[M&A Defense] Use cash flow to acquire recycling channels and green startups."
+              }
+            ]
+          }
+        },
         "fiveForces": {
           "zh": [
             { "name": "現有同業競爭", "level": "極高 (Extreme)", "desc": "亞洲特別是中國大陸新增大宗石化產能集中釋放，同質化嚴重。供過於求導致傳統 PVC/PP 利差探底，深陷紅海戰火。" },
             { "name": "買方議價能力", "level": "M 型分化", "desc": "傳統泛用塑料（如管材建材 PVC）替代者眾多，買方議價力極強；然而半導體特化品（如電子級 IPA）認證期長達 2-3 年，一旦通過，買方黏著度極高且議價力弱。" },
             { "name": "賣方議價能力", "level": "中偏高", "desc": "主要原油來源受制於 OPEC 地緣定價，但台塑具備六輕一貫化以及德州頁岩氣乙烷裂解產線，能有效分散與抗衡純外部原料購置風險。" },
             { "name": "潛在進入者威脅", "level": "極低", "desc": "由於台灣環評規章嚴苛、碳費門檻、以及龐大的資本密集度，幾乎沒有新玩家能夠複製六輕一體化的重工業園區規模。" },
-            { "name": "替代品威脅", "level": "高且逐年攀升", "desc": "隨 ESG 法規升級，再生塑料（PCR）及生質基塑料成為高毛利大廠必選；此外，高強度碳纖維在新能源車及風電葉片中正快速取代傳統鋼鐵與塑料材料。" }
+            { "name": "替代品威脅", "level": "高且逐年攀飛", "desc": "隨 ESG 法規升級，再生塑料（PCR）及生質基塑料成為高毛利大廠必選；此外，高強度碳纖維在新能源車及風電葉片中正快速取代傳統鋼鐵與塑料材料。" }
           ],
           "en": [
-            { "name": "Rivalry", "level": "Extreme", "desc": "Massive petrochemical capacity built in mainland China triggers structural oversupply and relentless pricing pressure on commodity polymers." },
-            { "name": "Buyer Power", "level": "M-Shaped", "desc": "High for generic packaging and piping plastics. Low for semiconductor-grade chemicals, which involve years of testing and customer stickiness." },
-            { "name": "Supplier Power", "level": "Medium-High", "desc": "Dependent on global crude indexes, but buffered by FPC's strong intra-group supply coordination with FPCC and domestic Texas shale cost advantages." },
-            { "name": "New Entrants", "level": "Negligible", "desc": "Heavy environmental review regulations, high entry capex, and mandatory carbon pricing systems successfully block new competitive entrants." },
-            { "name": "Substitutes", "level": "High & Rising", "desc": "Recycled PCR resins and bio-plastics increasingly compete for consumer brands, while high-strength carbon fiber replaces heavy metallic compounds." }
+            { "name": "Rivalry", "level": "Extreme", "desc": "Massive petrochemical capacity built in mainland China triggers overcapacity and pricing pressure." },
+            { "name": "Buyer Power", "level": "M-Shaped", "desc": "High for generic packaging and piping plastics. Low for semiconductor-grade chemicals." },
+            { "name": "Supplier Power", "level": "Medium-High", "desc": "Dependent on global crude indexes, but buffered by FPC's strong intra-group supply coordination with FPCC." },
+            { "name": "New Entrants", "level": "Negligible", "desc": "Heavy environmental review regulations, high entry capex, and mandatory carbon pricing systems block entry." },
+            { "name": "Substitutes", "level": "High & Rising", "desc": "Recycled PCR resins and bio-plastics increasingly compete, while high-strength carbon fiber replaces steel/plastics." }
           ]
+        },
+        "lifecycle": {
+          "zh": {
+            "stage": "成熟期 (Maturity) 並趨向「結構性轉型」",
+            "news": [
+              { "date": "2026/04", "zhTitle": "地緣政治刺激第一季獲利", "enTitle": "Q1 Profit Rebound via Geopolitics", "zhDesc": "美伊戰爭致原油飆漲，下游囤貨。Q1台塑四寶賺441億（年增10.8倍），3月營收月增61.6%。", "enDesc": "US-Iran conflict spiked oil prices. Q1 profits of the FPG Four surged to NT$44.1B (10.8× YoY); March revenue up 61.6% MoM.", "tag": "獲利爆發" },
+              { "date": "2026/04", "zhTitle": "產能利用率低谷徘徊", "enTitle": "Capacity Utilization at Historic Low", "zhDesc": "戰爭波及供應鏈，Q1平均稼動率僅56%，部分廠甚至降至32%，凸顯產能過剩根本問題未解。", "enDesc": "Despite the profit surge, Q1 average utilization fell to 56% (some plants to 32%) due to supply chain disruptions—revealing structural overcapacity.", "tag": "稼動率低" },
+              { "date": "2026/01", "zhTitle": "AI 驅動的電子材料轉型", "enTitle": "AI-Driven Electronic Materials Pivot", "zhDesc": "南亞獲利完全由 AI 需求支撐，帶動台塑積極布局電子級化學品與特化材料，目標 2025 年電子材料營收佔比提升至 15%。", "enDesc": "Nan Ya's profitability is entirely AI-driven, pushing FPC to ramp up electronic-grade chemicals. Target: raise electronics revenue share to 15% by 2025.", "tag": "AI轉型" },
+              { "date": "2026/04", "zhTitle": "綠色儲能認證突破", "enTitle": "Green Energy Storage Certification", "zhDesc": "台塑新智能儲能系統通過大型燃燒安規認證，搶攻 AI 資料中心備援電力市場，目標 2030 年轉型效益達 386 億元。", "enDesc": "Formosa Smart Energy's storage systems gained major combustion safety certifications, targeting AI data-center backup power. Goal: NT$38.6B green revenue by 2030.", "tag": "綠能突破" }
+            ]
+          },
+          "en": {
+            "stage": "Maturity shifting to 'Structural Transformation'",
+            "news": [
+              { "date": "Apr 2026", "zhTitle": "地緣政治刺激第一季獲利", "enTitle": "Q1 Profit Rebound via Geopolitics", "zhDesc": "美伊戰爭致原油飆漲，下游囤貨。Q1台塑四寶賺441億（年增10.8倍），3月營收月增61.6%。", "enDesc": "US-Iran conflict spiked oil prices. Q1 profits of the FPG Four surged to NT$44.1B (10.8× YoY); March revenue up 61.6% MoM.", "tag": "Profit Surge" },
+              { "date": "Apr 2026", "zhTitle": "產能利用率低谷徘徊", "enTitle": "Capacity Utilization at Historic Low", "zhDesc": "戰爭波及供應鏈，Q1平均稼動率僅56%，部分廠甚至降至32%，凸顯產能過剩根本問題未解。", "enDesc": "Despite the profit surge, Q1 average utilization fell to 56% (some plants to 32%) due to supply chain disruptions—revealing structural overcapacity.", "tag": "Low Utilization" },
+              { "date": "Jan 2026", "zhTitle": "AI 驅動的電子材料轉型", "enTitle": "AI-Driven Electronic Materials Pivot", "zhDesc": "南亞獲利完全由 AI 需求支撐，帶動台塑積極布局電子級化學品與特化材料，目標 2025 年電子材料營收佔比提升至 15%。", "enDesc": "Nan Ya's profitability is entirely AI-driven, pushing FPC to ramp up electronic-grade chemicals. Target: raise electronics revenue share to 15% by 2025.", "tag": "AI Pivot" },
+              { "date": "Apr 2026", "zhTitle": "綠色儲能認證突破", "enTitle": "Green Energy Storage Certification", "zhDesc": "台塑新智能儲能系統通過大型燃燒安規認證，搶攻 AI 資料中心備援電力市場，目標 2030 年轉型效益達 386 億元。", "enDesc": "Formosa Smart Energy's storage systems gained major combustion safety certifications, targeting AI data-center backup power. Goal: NT$38.6B green revenue by 2030.", "tag": "Green Breakthrough" }
+            ]
+          }
         }
       },
       {
@@ -2411,6 +3030,11 @@
         activeVerticalNode: "fpc",
         activeMaEvent: "0",
         activeChallengeIndex: 0,
+        activeValueChainIndex: 0,
+        activeTP2DynamicIndex: 0,
+        activeValueChainStage: 0,
+        activeCompetitorType: 0,
+        activeTP1NewsIndex: 0,
 
         // Audio Guide state
         speechSynth: window.speechSynthesis,
@@ -2937,19 +3561,38 @@
           </div>
         </div>
 
-        <div class="section-block">
+        <div class="section-block" style="position: relative; overflow: visible;">
           <p class="eyebrow">Milestones Stepper</p>
           <h2>${state.lang === 'zh' ? '台塑公司歷史重大里程碑' : 'FPC Corporate Historical Milestones'}</h2>
-          <div class="card-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
-            ${tabData.timeline.map(time => `
-              <div class="editorial-card" style="display:flex; flex-direction:column; justify-content:between;">
-                <div>
-                  <span class="badge" style="font-size:16px; margin-bottom:12px; background:var(--primary); color:var(--on-primary);">${time.year}</span>
-                  <h3 class="editorial-card__title" style="font-size:18px;">${state.lang === 'zh' ? time.zhTitle : time.enTitle}</h3>
-                  <p class="editorial-card__desc" style="font-size:14px; line-height:1.5;">${state.lang === 'zh' ? time.zhCopy : time.enCopy}</p>
-                </div>
+          
+          <div class="milestone-timeline-container">
+            <div class="milestone-timeline-wrapper">
+              <!-- SVG wave line goes behind the cards -->
+              <svg class="milestone-timeline-svg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 1000 300">
+                <defs>
+                  <linearGradient id="wave-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="var(--gradient-mint)" />
+                    <stop offset="25%" stop-color="var(--gradient-peach)" />
+                    <stop offset="50%" stop-color="var(--gradient-lavender)" />
+                    <stop offset="75%" stop-color="var(--gradient-sky)" />
+                    <stop offset="100%" stop-color="var(--gradient-rose)" />
+                  </linearGradient>
+                </defs>
+                <path class="milestone-timeline-path" d="M 0,150 C 50,150 50,70 100,70 C 200,70 200,230 300,230 C 400,230 400,70 500,70 C 600,70 600,230 700,230 C 800,230 800,70 900,70 C 950,70 950,150 1000,150" fill="none" stroke="url(#wave-grad)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="10,6" />
+              </svg>
+              
+              <div class="milestone-timeline-track">
+                ${tabData.timeline.map((time, idx) => `
+                  <div class="milestone-timeline-card editorial-card">
+                    <div>
+                      <span class="badge" style="font-size:16px; margin-bottom:12px; background:var(--primary); color:var(--on-primary);">${time.year}</span>
+                      <h3 class="editorial-card__title" style="font-size:18px;">${state.lang === 'zh' ? time.zhTitle : time.enTitle}</h3>
+                      <p class="editorial-card__desc" style="font-size:14px; line-height:1.5; margin:0;">${state.lang === 'zh' ? time.zhCopy : time.enCopy}</p>
+                    </div>
+                  </div>
+                `).join("")}
               </div>
-            `).join("")}
+            </div>
           </div>
         </div>
 
@@ -3129,146 +3772,301 @@
       /* RENDER TP1: EXTERNAL ENVIRONMENT */
       function renderTP1(container) {
         const tabData = appData.tabs[1];
-        const items = state.lang === "zh" ? tabData.pestel.zh : tabData.pestel.en;
+        
+        // 1. PESTEL items
+        const pestelItems = state.lang === "zh" ? tabData.pestel.zh : tabData.pestel.en;
+        
+        // 2. Value Chain variables
+        const vcData = state.lang === "zh" ? tabData.valueChain.zh : tabData.valueChain.en;
+        const activeStage = vcData.stages[state.activeValueChainStage];
+        
+        // 3. Competitor SWOT & AMC Matrix variables
+        const compData = state.lang === "zh" ? tabData.competitors.zh : tabData.competitors.en;
+        const swot = compData.swot;
+        const matrix = compData.matrix;
+        const activeMatrixItem = matrix[state.activeCompetitorType];
+        
+        // 4. Five Forces
         const forces = state.lang === "zh" ? tabData.fiveForces.zh : tabData.fiveForces.en;
+        
+        // 5. Lifecycle & News
+        const lcData = state.lang === "zh" ? tabData.lifecycle.zh : tabData.lifecycle.en;
 
         let html = `
+        <!-- SECTION 1: PESTEL -->
         <div class="section-block">
           <p class="eyebrow">TP1 · PESTEL ANALYSIS</p>
-          <h2>${state.lang === 'zh' ? '總體外部環境與環境減碳挑戰' : 'Macro External Environmental Scans'}</h2>
+          <h2>${state.lang === 'zh' ? '總體外部環境與減碳轉型挑戰' : 'Macro External Environmental Factors'}</h2>
+          <p style="font-size:15px; color:var(--body); max-width:800px; margin-bottom:24px;">
+            ${state.lang === 'zh'
+              ? '剖析台塑面臨的政治法律、環境、經濟與技術四大總體外部環境動態，特別是關稅壁壘與碳費徵收所帶來的直接衝擊與長遠轉機。'
+              : 'Analyze the political, environmental, economic, and technological macro dynamics facing FPC, highlighting the raw impact and hidden opportunities of tariffs and carbon pricing.'}
+          </p>
           
-          <div class="card-grid">
-            ${items.map(item => {
-          let badgeColor = "badge--warning";
-          if (item.impact.includes("長多") || item.impact.includes("正向") || item.impact.includes("Boost")) {
-            badgeColor = "badge--success";
-          } else if (item.impact.includes("壓力") || item.impact.includes("Negative")) {
-            badgeColor = "badge--error";
-          }
-          return `
-                <div class="editorial-card">
-                  <div class="editorial-card__meta">
-                    <span class="badge ${badgeColor}">${item.impact}</span>
+          <div class="card-grid" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));">
+            ${pestelItems.map(item => {
+              let badgeColor = "badge--warning";
+              if (item.impact.includes("長多") || item.impact.includes("正向") || item.impact.includes("Boost") || item.impact.includes("長遠轉機") || item.impact.includes("Long-term Gain")) {
+                badgeColor = "badge--success";
+              } else if (item.impact.includes("壓力") || item.impact.includes("Negative") || item.impact.includes("挑戰") || item.impact.includes("Pain")) {
+                badgeColor = "badge--error";
+              }
+              return `
+                <div class="editorial-card" style="display:flex; flex-direction:column; justify-content:between;">
+                  <div>
+                    <div class="editorial-card__meta">
+                      <span class="badge ${badgeColor}">${item.impact}</span>
+                    </div>
+                    <h3 class="editorial-card__title" style="font-size:16px; margin-top:8px;">${item.title}</h3>
+                    <p class="editorial-card__desc" style="font-size:13px; line-height:1.5; margin-top:6px;">${item.desc}</p>
                   </div>
-                  <h3 class="editorial-card__title" style="font-size:18px;">${item.title}</h3>
-                  <p class="editorial-card__desc" style="font-size:14px; line-height:1.5;">${item.desc}</p>
                 </div>
               `;
-        }).join("")}
+            }).join("")}
           </div>
         </div>
 
+        <!-- SECTION 2: VALUE CHAIN & INTEGRATION -->
         <div class="section-block">
           <p class="eyebrow">PETROCHEMICAL VALUE CHAIN</p>
           <h2>${state.lang === 'zh' ? '六輕一體化垂直整合與產業價值鏈' : 'No.6 Cracker Integration & Value Chain'}</h2>
           <p style="font-size:15px; max-width:800px; color:var(--body); margin-bottom:24px;">
             ${state.lang === 'zh'
-            ? '台塑集團獨創的「六輕一貫化一體化管線直供模式」，將上游裂解單體與中游高分子聚合完全閉鎖整合，徹底節省海運裝卸費用與防範供應中斷风险。'
-            : 'FPG utilizes the extreme cluster integration of the reclaimed Mailiao complex to pipe 90% of basic chemical inputs directly between affiliates, eliminating double taxation and shipping overheads.'}
+              ? '【點選下方主要階段】剖析台塑如何透過「六輕一體化」大幅降低多餘物流裝卸成本，並建立上中下游的高度閉鎖式互聯，對抗外部供需斷鏈風險。'
+              : 'Click the nodes below to dissect how FPC coordinates Upstream Refining, Midstream Polymers, and Downstream Processing to streamline raw feedstocks and insulate margins.'}
           </p>
 
-          <div class="card-grid">
-            <div class="editorial-card" style="border-top:3px solid var(--muted-soft);">
-              <span class="badge" style="margin-bottom:12px;">STAGE 1 · UPSTREAM</span>
-              <h3 class="editorial-card__title">${state.lang === 'zh' ? '上游：原油進口與石油腦裂解' : 'Upstream: Naphtha Cracking'}</h3>
-              <p class="editorial-card__desc" style="font-size:14px;">
-                ${state.lang === 'zh'
-            ? '【台塑化負責】自建麥寮深水港進口原油與石油腦，通過裂解反應產出乙烯、丙烯等氣態單體。台塑90%上游原料均依賴此管道管線直供，免除海運包裝。'
-            : 'FPCC imports crude via Mailiao port and cracks it into basic ethylene and propylene. FPC acts as a close captive consumer, buying direct via intra-group pipes.'}
-              </p>
-            </div>
-            <div class="editorial-card" style="border-top:3px solid var(--primary);">
-              <span class="badge" style="margin-bottom:12px;">STAGE 2 · MIDSTREAM</span>
-              <h3 class="editorial-card__title">${state.lang === 'zh' ? '中游：聚合物化學合成' : 'Midstream: Polymerization'}</h3>
-              <p class="editorial-card__desc" style="font-size:14px;">
-                ${state.lang === 'zh'
-            ? '【台塑核心本業】將氣態單體聚合反應為 PVC 粉、HDPE/LLDPE 顆粒、PP 及特種 EVA。產量大且產線切換極具彈性，是亞洲最關鍵的大宗原料源。'
-            : 'FPC polymerizes gaseous monomers into stable PVC powder, PE, and PP pellets. FPC maintains high-scale continuous-process efficiency.'}
-              </p>
-            </div>
-            <div class="editorial-card" style="border-top:3px solid var(--muted-soft);">
-              <span class="badge" style="margin-bottom:12px;">STAGE 3 · DOWNSTREAM</span>
-              <h3 class="editorial-card__title">${state.lang === 'zh' ? '下游：終端塑膠製品加工' : 'Downstream: Product Fabrication'}</h3>
-              <p class="editorial-card__desc" style="font-size:14px;">
-                ${state.lang === 'zh'
-            ? '【南亞與外部合約】下游廠商將大宗塑膠改質、射出成型為建材（管件/窗框）、醫療用膠粒或機能性纖維。台塑透過與下游戰略盟友保證合約滲透市場。'
-            : 'Sister affiliate Nan Ya Plastics and external contractors mold resins into pipes, window frames, packaging films, and medical compound pellets.'}
-              </p>
+          <div class="tp1-stage-container">
+            <button class="tp1-stage-node" type="button" data-tp1-stage-idx="0" data-active="${state.activeValueChainStage === 0}">
+              <span class="tp1-stage-step">${state.lang==='zh'?'階段 1 · 上游':'STAGE 1 · UPSTREAM'}</span>
+              <span class="tp1-stage-name">${state.lang==='zh'?'原料供應與煉製':'Refining & Cracking'}</span>
+            </button>
+            <div class="tp1-stage-arrow">&rarr;</div>
+            <button class="tp1-stage-node" type="button" data-tp1-stage-idx="1" data-active="${state.activeValueChainStage === 1}">
+              <span class="tp1-stage-step">${state.lang==='zh'?'階段 2 · 中游':'STAGE 2 · MIDSTREAM'}</span>
+              <span class="tp1-stage-name">${state.lang==='zh'?'聚合物與中間產物':'Polymerization'}</span>
+            </button>
+            <div class="tp1-stage-arrow">&rarr;</div>
+            <button class="tp1-stage-node" type="button" data-tp1-stage-idx="2" data-active="${state.activeValueChainStage === 2}">
+              <span class="tp1-stage-step">${state.lang==='zh'?'階段 3 · 下游':'STAGE 3 · DOWNSTREAM'}</span>
+              <span class="tp1-stage-name">${state.lang==='zh'?'終端產品加工':'Product Fabrication'}</span>
+            </button>
+          </div>
+
+          <div class="tp1-details-card">
+            <div class="tp1-details-grid">
+              <div class="tp1-details-meta">
+                <h4>${state.lang === 'zh' ? '階段角色' : 'STAGE ROLE'}</h4>
+                <p>${activeStage.role}</p>
+                <h4>${state.lang === 'zh' ? '主要產品' : 'PRIMARY PRODUCTS'}</h4>
+                <p>${activeStage.products}</p>
+                <h4>${state.lang === 'zh' ? '台塑參與度' : 'FPC PARTICIPATION'}</h4>
+                <span class="badge ${activeStage.participation.includes('極高') || activeStage.participation.includes('Very') ? 'badge--success' : 'badge--muted'}" style="font-size:12px; font-weight:600; padding:4px 8px;">
+                  ${activeStage.participation}
+                </span>
+              </div>
+              <div class="tp1-details-content">
+                <h3>${activeStage.name}</h3>
+                <p style="font-size:14px; line-height:1.6; color:var(--body-strong); margin:0;">${activeStage.details}</p>
+              </div>
             </div>
           </div>
         </div>
 
+        <!-- SECTION 3: COMPETITOR DYNAMICS (SWOT & AMC MATRIX) -->
+        <div class="section-block">
+          <p class="eyebrow">Competitor Dynamics</p>
+          <h2>${state.lang === 'zh' ? '競爭力 SWOT 與基於 AMC 框架之競爭應對策略' : 'SWOT Matrix & Competitor AMC Dynamic Framework'}</h2>
+          <p style="font-size:15px; color:var(--body); max-width:800px; margin-bottom:24px;">
+            ${state.lang === 'zh'
+              ? '透過 SWOT 解構台塑的防禦性資產與劣勢，並藉由 AMC 矩陣（市場共同性與資源相似性）將競爭者分類，對症下藥，擬定精準的高值化防禦與避險策略。'
+              : 'Combine internal SWOT constraints with an external AMC framework to segment key rivals, developing specific tactics (specialty premium pivots, M&A) to counter low-cost capacity floods.'}
+          </p>
+
+          <!-- SWOT Grid -->
+          <div class="card-grid" style="grid-template-columns: 1fr 1fr; margin-bottom:32px;">
+            <div class="editorial-card" style="border-left: 3px solid var(--primary);">
+              <span class="badge badge--success" style="margin-bottom:12px; font-weight:700;">${state.lang === 'zh' ? '內部優勢 STRENGTHS' : 'INTERNAL STRENGTHS'}</span>
+              <ul style="padding-left:18px; margin:0; font-size:13px; color:var(--body-strong); line-height:1.7;">
+                ${swot.strengths.map(s => `<li>${s}</li>`).join("")}
+              </ul>
+            </div>
+            <div class="editorial-card" style="border-left: 3px solid var(--gradient-rose);">
+              <span class="badge badge--error" style="margin-bottom:12px; font-weight:700;">${state.lang === 'zh' ? '內部劣勢 WEAKNESSES' : 'INTERNAL WEAKNESSES'}</span>
+              <ul style="padding-left:18px; margin:0; font-size:13px; color:var(--body-strong); line-height:1.7;">
+                ${swot.weaknesses.map(w => `<li>${w}</li>`).join("")}
+              </ul>
+            </div>
+          </div>
+
+          <h3 style="font-family:'Inter', sans-serif; font-size:14px; font-weight:600; text-transform:uppercase; color:var(--muted); margin-bottom:16px;">
+            ${state.lang === 'zh' ? '▸ 點選下方競爭對手卡片查看戰略應對' : '▸ Click a competitor class below to analyze strategic actions'}
+          </h3>
+
+          <!-- AMC Competitor Selector -->
+          <div class="tp1-amc-grid">
+            ${matrix.map((item, idx) => `
+              <div class="tp1-amc-card" data-tp1-comp-idx="${idx}" data-active="${state.activeCompetitorType === idx}">
+                <span class="badge" style="font-size:10px; margin-bottom:8px; background:var(--hairline-strong); color:var(--ink); border:none;">${item.type}</span>
+                <h4 style="font-family:'Inter', sans-serif; font-size:16px; font-weight:600; margin-top:8px; color:var(--ink);">${item.competitor}</h4>
+              </div>
+            `).join("")}
+          </div>
+
+          <!-- Strategy Output Board -->
+          <div class="tp1-strategy-board">
+            <div class="tp1-strategy-col" style="border-right: 1px solid var(--hairline); padding-right: 24px;">
+              <h4>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--gradient-rose)" stroke-width="2.5"><path d="M12 2L2 22h20L12 2z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                ${state.lang === 'zh' ? '敵方攻勢 / 動態' : 'Rival Actions'}
+              </h4>
+              <p style="font-size:14px; line-height:1.6; color:var(--body-strong); font-weight:500;">${activeMatrixItem.action}</p>
+            </div>
+            <div class="tp1-strategy-col" style="padding-left: 8px;">
+              <h4>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.5"><polygon points="12 2 2 7 12 12 22 7 12 2z"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                ${state.lang === 'zh' ? '台塑應對策略' : 'FPC Strategic Response'}
+              </h4>
+              <p style="font-size:14px; line-height:1.6; color:var(--body-strong); font-weight:500;">${activeMatrixItem.response}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 4: FIVE FORCES -->
         <div class="section-block">
           <p class="eyebrow">Industry Structure</p>
-          <h2>${state.lang === 'zh' ? '2026年塑膠產業五力分析診斷' : 'Porter’s Five Forces Structural Diagnosis'}</h2>
-          
-          <div class="five-forces-container">
-            <div class="five-forces-center">
-              <h4>${state.lang === 'zh' ? '台塑 1301' : 'FPC 1301'}</h4>
-              <span>${state.lang === 'zh' ? '產業核心' : 'Petrochemical Core'}</span>
-            </div>
+          <h2>${state.lang === 'zh' ? '2026年石化產業結構五力分析與壓力診斷' : 'Porter’s Five Forces Structural Diagnosis'}</h2>
+          <p style="font-size:15px; color:var(--body); max-width:800px; margin-bottom:24px;">
+            ${state.lang === 'zh'
+              ? '透過麥可·波特五力框架，對照 2026 年大宗石化品的產能分布、替代品威脅以及高門檻碳費規章，進行深度的競爭壓力評級與診斷。'
+              : 'Map competitive intensity through Porter’s Five Forces, assessing supply gluts, ESG regulations, and high-barrier semiconductor inputs.'}
+          </p>
 
-            <div class="card-grid" style="width:100%;">
-              ${forces.map(f => {
+          <div class="card-grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
+            ${forces.map(f => {
               let colorClass = "badge--warning";
-              if (f.level.includes("極高") || f.level.includes("Extreme") || f.level.includes("M")) {
+              if (f.level.includes("極高") || f.level.includes("Extreme") || f.level.includes("M") || f.level.includes("攀升")) {
                 colorClass = "badge--error";
-              } else if (f.level.includes("低") || f.level.includes("Low")) {
+              } else if (f.level.includes("低") || f.level.includes("Low") || f.level.includes("Negligible")) {
                 colorClass = "badge--success";
               }
               return `
-                  <div class="editorial-card" style="padding:16px;">
-                    <div style="display:flex; justify-content:between; align-items:center; margin-bottom:8px;">
-                      <h4 style="font-family:'Inter',sans-serif; font-size:14px; font-weight:600; color:var(--ink); margin:0;">${f.name}</h4>
-                      <span class="badge ${colorClass}" style="font-size:10px;">${f.level}</span>
+                <div class="editorial-card" style="padding:22px; display:flex; flex-direction:column; justify-content:between;">
+                  <div>
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                      <h4 style="font-family:'Inter',sans-serif; font-size:15px; font-weight:600; color:var(--ink); margin:0;">${f.name}</h4>
+                      <span class="badge ${colorClass}" style="font-size:11px; font-weight:700; padding:2px 8px;">${f.level}</span>
                     </div>
-                    <p class="editorial-card__desc" style="font-size:13px; line-height:1.4; margin:0;">${f.desc}</p>
+                    <p class="editorial-card__desc" style="font-size:13px; line-height:1.5; margin:0; color:var(--body);">${f.desc}</p>
                   </div>
-                `;
+                </div>
+              `;
             }).join("")}
-            </div>
           </div>
         </div>
 
+        <!-- SECTION 5: LIFECYCLE & NEWS -->
         <div class="section-block">
-          <p class="eyebrow">Competitor Dynamics</p>
-          <h2>${state.lang === 'zh' ? '基於 AMC 框架之競爭者威脅與台塑對策' : 'AMC Framework Competitor Strategy Matrix'}</h2>
-          <p style="font-size:14px; color:var(--body); max-width:800px; margin-bottom:24px;">
+          <p class="eyebrow">Industry Lifecycle &amp; News</p>
+          <h2>${state.lang === 'zh' ? '產業生命週期狀態與近期焦點新聞' : 'Industry Lifecycle Phase & Recent Financial News'}</h2>
+          <p style="font-size:15px; color:var(--body); max-width:800px; margin-bottom:24px;">
             ${state.lang === 'zh'
-            ? '「市場共同性高、資源相似性強」的中國煉化一體化巨頭（如榮盛、恆力）對台塑泛用大宗塑料威脅最高；台塑對策是主動「戰略性撤退」泛用產能，將資產全力重配至歐美高利基特用材料與晶圓特規 IPA。'
-            : 'Confronting Chinese mega-refineries with high market commonality and resource similarity. FPC avoids generic price battles, retreating strategically to allocate capex for high-barrier advanced materials.'}
+              ? '台塑所處之傳統石化產業已邁入成熟期，面臨產能利用率偏低及減碳成本高企的結構性利差收縮；唯有仰賴 AI 高值化轉型與綠能儲能開闢第二成長曲線。'
+              : 'FPC operates in a classic mature industry shifting to low utilization and high ESG carbon fees, demanding dynamic digital pivots and battery storage.'}
           </p>
 
-          <div class="card-grid">
-            <div class="editorial-card" style="border-top:3px solid var(--gradient-rose);">
-              <span class="badge" style="margin-bottom:8px;">HIGH COMMONALITY / HIGH SIMILARITY</span>
-              <h3 class="editorial-card__title" style="font-size:16px;">${state.lang === 'zh' ? '競爭對手：中國石油煉化巨頭' : 'Target: China Megarefineries'}</h3>
-              <p class="editorial-card__desc" style="font-size:13px; line-height:1.5;">
-                <strong>${state.lang === 'zh' ? '對手攻勢' : 'Rival action'}:</strong> ${state.lang === 'zh' ? '憑藉超大規模裂解，低價大量傾銷泛用級 PVC 及 PE。' : 'Dumping generic plastics at extreme low costs to maintain high cracker run-rates.'}<br><br>
-                <strong>${state.lang === 'zh' ? '台塑應對' : 'FPC Response'}:</strong> ${state.lang === 'zh' ? '降低台灣及寧波舊廠產能利用率，擴大高規格醫療特種料以避開紅海戰。' : 'Moderate run-rates at generic lines, accelerating specialized medical grades to escape commoditization.'}
-              </p>
+          <!-- Lifecycle visual meter -->
+          <div class="tp1-lifecycle-meter" style="margin-bottom: 32px;">
+            <div style="min-width: 160px;">
+              <h4 style="font-size:12px; font-weight:700; color:var(--muted); text-transform:uppercase; margin-bottom:4px;">${state.lang === 'zh' ? '當前所處階段' : 'LIFECYCLE PHASE'}</h4>
+              <p style="font-size:16px; font-weight:700; color:var(--primary); margin:0;">${lcData.stage}</p>
             </div>
-            <div class="editorial-card" style="border-top:3px solid var(--gradient-mint);">
-              <span class="badge" style="margin-bottom:8px;">LOW COMMONALITY / HIGH SIMILARITY</span>
-              <h3 class="editorial-card__title" style="font-size:16px;">${state.lang === 'zh' ? '競爭對手：歐美特用化學大廠' : 'Target: Western Speciality Leaders'}</h3>
-              <p class="editorial-card__desc" style="font-size:13px; line-height:1.5;">
-                <strong>${state.lang === 'zh' ? '對手攻勢' : 'Rival action'}:</strong> ${state.lang === 'zh' ? '壟斷半導體先進製程高純化學品專利，極少涉足大宗石化。' : 'Monopolizing ultra-pure semiconductor patent inputs, ignoring commodity petrochemical cycles.'}<br><br>
-                <strong>${state.lang === 'zh' ? '台塑應對' : 'FPC Response'}:</strong> ${state.lang === 'zh' ? '與日本技術巨擘德山精密合資，引進純化配方，搶佔台灣先進晶圓供應鏈空窗期。' : 'International JV with Tokuyama to absorb purification patents, integrating directly into TSMC advanced nodes.'}
-              </p>
+            <div class="tp1-lifecycle-bar-outer">
+              <div class="tp1-lifecycle-bar-inner"></div>
+              <div class="tp1-lifecycle-marker"></div>
+              <div class="tp1-lifecycle-label">${state.lang === 'zh' ? '結構性轉型' : 'TRANSFORMATION'}</div>
             </div>
-            <div class="editorial-card" style="border-top:3px solid var(--gradient-sky);">
-              <span class="badge" style="margin-bottom:8px;">HIGH COMMONALITY / LOW SIMILARITY</span>
-              <h3 class="editorial-card__title" style="font-size:16px;">${state.lang === 'zh' ? '競爭對手：全球綠色生物塑料新創' : 'Target: Circular Bioplastics'}</h3>
-              <p class="editorial-card__desc" style="font-size:13px; line-height:1.5;">
-                <strong>${state.lang === 'zh' ? '對手攻勢' : 'Rival action'}:</strong> ${state.lang === 'zh' ? '利用農業廢料生產 PLA、PHA 等零碳塑料，高價獲取消費巨頭訂單。' : 'Using organic wastes to synthesize zero-carbon PLA, capturing high-premium consumer brand commitments.'}<br><br>
-                <strong>${state.lang === 'zh' ? '台塑應對' : 'FPC Response'}:</strong> ${state.lang === 'zh' ? '利用勢足集團現金流，策略併購回收新創，發展生質/再生聚烯烴產品組合。' : 'Deploying FPG corporate cash flow to acquire bio-chemical ventures and scale FPC circular plastics.'}
-              </p>
+          </div>
+
+          <!-- Timeline header instruction -->
+          <h3 style="font-family:'Inter', sans-serif; font-size:14px; font-weight:600; text-transform:uppercase; color:var(--muted); margin-bottom:12px;">
+            ${state.lang === 'zh' ? '▸ 點選時間軸節點或新聞卡片進行聚焦互動' : '▸ Click timeline nodes or cards to inspect events'}
+          </h3>
+
+          <!-- News horizontal timeline -->
+          <div class="tp1-news-timeline-container">
+            <div class="tp1-news-timeline-track">
+              ${[...lcData.news].sort((a,b) => a.date.localeCompare(b.date)).map((n, idx) => {
+                const isActive = state.activeTP1NewsIndex === idx;
+                return `
+                  <div class="tp1-news-node" data-news-idx="${idx}" data-active="${isActive}">
+                    <span class="tp1-news-date">${n.date}</span>
+                    <span class="tp1-news-tag">${n.tag}</span>
+                  </div>
+                `;
+              }).join("")}
             </div>
+          </div>
+
+          <!-- Sorted News editorial cards with focus state -->
+          <div class="card-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+            ${[...lcData.news].sort((a,b) => a.date.localeCompare(b.date)).map((n, idx) => {
+              const isActive = state.activeTP1NewsIndex === idx;
+              const borderStyle = isActive 
+                ? "border-left: 4px solid var(--primary); box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08); background: linear-gradient(145deg, var(--surface-card), var(--hairline-soft)); border-color: var(--primary);" 
+                : "border-left: 3px solid var(--muted-soft); opacity: 0.6; filter: grayscale(10%);";
+              return `
+                <div class="editorial-card" data-news-card-idx="${idx}" style="display:flex; flex-direction:column; justify-content:between; transition: all 0.3s ease; cursor:pointer; ${borderStyle}">
+                  <div>
+                    <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px;">
+                      <span class="badge badge--muted" style="font-size:11px; font-weight:700;">${n.date}</span>
+                      <span class="badge ${n.tag.includes('低') || n.tag.includes('Historic') || n.tag.includes('Low') || n.tag.includes('低谷') ? 'badge--warning' : 'badge--success'}" style="font-size:10px; font-weight:700; border:none; padding:2px 6px;">
+                        ${n.tag}
+                      </span>
+                    </div>
+                    <h3 class="editorial-card__title" style="font-size:17px; margin-bottom:8px; font-weight:600; color:var(--ink);">${state.lang === 'zh' ? n.zhTitle : n.enTitle}</h3>
+                    <p class="editorial-card__desc" style="font-size:13px; line-height:1.5; color:var(--body);">${state.lang === 'zh' ? n.zhDesc : n.enDesc}</p>
+                  </div>
+                </div>
+              `;
+            }).join("")}
           </div>
         </div>
       `;
 
         container.innerHTML = html;
+
+        // Attach Value Chain Node clicks
+        container.querySelectorAll("[data-tp1-stage-idx]").forEach(btn => {
+          btn.addEventListener("click", () => {
+            state.activeValueChainStage = parseInt(btn.dataset.tp1StageIdx, 10);
+            renderTP1(container);
+          });
+        });
+
+        // Attach AMC Competitor Card clicks
+        container.querySelectorAll("[data-tp1-comp-idx]").forEach(btn => {
+          btn.addEventListener("click", () => {
+            state.activeCompetitorType = parseInt(btn.dataset.tp1CompIdx, 10);
+            renderTP1(container);
+          });
+        });
+
+        // Attach News Timeline Node clicks
+        container.querySelectorAll("[data-news-idx]").forEach(btn => {
+          btn.addEventListener("click", () => {
+            state.activeTP1NewsIndex = parseInt(btn.dataset.newsIdx, 10);
+            renderTP1(container);
+          });
+        });
+
+        // Attach News Card clicks
+        container.querySelectorAll("[data-news-card-idx]").forEach(card => {
+          card.addEventListener("click", () => {
+            state.activeTP1NewsIndex = parseInt(card.dataset.newsCardIdx, 10);
+            renderTP1(container);
+          });
+        });
       }
 
       /* RENDER TP2: KEY RESOURCES & MOAT */
@@ -3310,6 +4108,41 @@
               </div>
             `).join('')}
           </div>
+        </div>
+
+        <div class="section-block">
+          <p class="eyebrow">TP2 · CORE PORTFOLIO</p>
+          <h2>${state.lang === 'zh' ? '四大核心事業與產品線佈局' : 'Four Core Portfolio Divisions & Product Lines'}</h2>
+          <p style="font-size:15px; color:var(--body); max-width:800px; margin-bottom:24px;">
+            ${state.lang === 'zh'
+              ? '台塑以大宗石化塑膠為基底，持續延伸產品價值鏈至高利潤特用化學品與新能源材料，構建多元化的核心營收支柱。'
+              : 'Formosa Plastics leverages its petrochemical foundation, expanding into high-margin specialty chemicals and battery materials to build multiple core revenue pillars.'}
+          </p>
+          <div class="card-grid">
+            ${tabData.portfolio[state.lang].items.map((item, idx) => {
+              const borders = ["var(--gradient-mint)", "var(--gradient-peach)", "var(--gradient-rose)", "var(--gradient-sky)"];
+              return `
+                <div class="editorial-card" style="border-top: 3px solid ${borders[idx % 4]};">
+                  <span class="badge badge--success" style="margin-bottom:8px;">${item.sub}</span>
+                  <h3 class="editorial-card__title" style="font-size:16px;">${item.title}</h3>
+                  <p class="editorial-card__desc" style="font-size:13px; line-height:1.5;">${item.desc}</p>
+                </div>
+              `;
+            }).join("")}
+          </div>
+        </div>
+
+        <div class="section-block">
+          <p class="eyebrow">TP2 · VALUE CHAIN ANALYSIS</p>
+          <h2>${state.lang === 'zh' ? '企業價值鏈：主要活動與協同支持體系' : 'FPC Corporate Value Chain & Internal Synergies'}</h2>
+          <p style="font-size:15px; color:var(--body); max-width:800px; margin-bottom:16px;">
+            ${state.lang === 'zh'
+              ? '【點選下方價值鏈環節】解析台塑的主要營運流程如何與人力資源、綠能製程、自動化與資本融資等支持活動無縫協同，建立難以模仿的系統性壁壘。'
+              : 'Click nodes below to dissect how FPC coordinates primary logistics and operations with support activities to secure system-wide competitive moats.'}
+          </p>
+
+          <div class="flow-viz" id="tp2-value-chain-panel"></div>
+          <div class="flow-details-card" id="tp2-value-chain-details"></div>
         </div>
 
         <div class="section-block">
@@ -3363,39 +4196,210 @@
         </div>
 
         <div class="section-block">
-          <p class="eyebrow">Strategic Sourcing & Tech Alliances</p>
-          <h2>${state.lang === 'zh' ? '產學研發網絡與 NVIDIA 智慧化工製造' : 'Technology Networks & GenAI with NVIDIA'}</h2>
-          
-          <div class="card-grid">
-            <div class="editorial-card">
-              <h3 class="editorial-card__title">${state.lang === 'zh' ? '台塑-清華聯合研發中心' : 'Formosa-NTHU R&D Hub'}</h3>
-              <p class="editorial-card__desc" style="font-size:14px;">
-                ${state.lang === 'zh'
-            ? '2022 年成立，專注開發低溫電化學減碳製程、生質基生物可分解材料、新型耐高壓儲氫碳複合材料，補強中長期低碳高值技術缺口。'
-            : 'Established in 2022. Developing zero-carbon electro-chemical reactions, bio-polymer compounds, and next-generation composite structures.'}
-              </p>
+          <p class="eyebrow">TP2 · CORE COMPETENCIES & NETWORKS</p>
+          <h2>${state.lang === 'zh' ? '內部核心能耐與全球產學研合作網絡' : 'Core Competencies & Global Sourcing Networks'}</h2>
+          <p style="font-size:15px; color:var(--body); max-width:800px; margin-bottom:24px;">
+            ${state.lang === 'zh'
+              ? '結合內部大型連續製程管理、專利研發能耐，並透過外部關係資產（與 NVIDIA、清華大學等龍頭合作）補強高值化轉型關鍵缺口。'
+              : 'FPC compounds internal continuous-flow scaling and R&D patents with relational assets (JVs, NVIDIA and Tsing Hua Univ. academic ties) to catalyze high-value pivots.'}
+          </p>
+
+          <div class="card-grid card-grid--2up" style="margin-bottom: 32px;">
+            <div style="background: var(--surface-card); border: 1px solid var(--hairline); border-radius: var(--radius-xl); padding: 24px;">
+              <h3 style="margin-top: 0; color: var(--primary); font-size: 16px; font-weight: 600; margin-bottom: 16px;">
+                ${tabData.competencies[state.lang].coreTitle}
+              </h3>
+              <ul style="padding-left: 20px; margin: 0; display: flex; flex-direction: column; gap: 12px; font-size: 13.5px; line-height: 1.6; color: var(--body-strong);">
+                ${tabData.competencies[state.lang].core.map(c => `<li>${c}</li>`).join("")}
+              </ul>
             </div>
-            <div class="editorial-card">
-              <h3 class="editorial-card__title">${state.lang === 'zh' ? '生成式 AI 輔助製造 (NVIDIA 合作)' : 'Generative AI with NVIDIA'}</h3>
-              <p class="editorial-card__desc" style="font-size:14px;">
+
+            <div style="background: var(--surface-card); border: 1px solid var(--hairline); border-radius: var(--radius-xl); padding: 24px;">
+              <h3 style="margin-top: 0; color: var(--ink); font-size: 16px; font-weight: 600; margin-bottom: 16px;">
+                ${state.lang === 'zh' ? '核心能耐戰略意涵' : 'Strategic Implications of Core Competencies'}
+              </h3>
+              <p style="font-size:13.5px; line-height:1.6; color:var(--body); margin: 0 0 12px 0;">
                 ${state.lang === 'zh'
-            ? '攜手 NVIDIA 導入生成式 AI 與數位雙生(Digital Twin)技術，對複雜裂解塔及溫控設備進行全真模擬優化，AI 年預測性維護效益高達 8.3 億元。'
-            : 'Partnering with NVIDIA to integrate generative AI and digital twin modules into continuous chemical cracking runs. AI preventive diagnostics save NT$830M annually.'}
+                  ? '台塑在年報中揭露的核心能耐，構成了防禦大宗化學品景氣波動的第一層護城河。'
+                  : 'FPC\'s core capabilities disclosed in annual reports form the first defensive moat against cyclical bulk spreads compression.'}
               </p>
-            </div>
-            <div class="editorial-card">
-              <h3 class="editorial-card__title">${state.lang === 'zh' ? '醫療與生醫高階複合膠粒' : 'Advanced Medical Compound Pellets'}</h3>
-              <p class="editorial-card__desc" style="font-size:14px;">
+              <div style="background: var(--surface-strong); padding: 12px; border-radius: var(--radius-lg); font-size: 13px; line-height: 1.5; color: var(--ink);">
+                <strong>${state.lang === 'zh' ? 'VRIO 診斷分析' : 'VRIO Strategic Diagnostic'}</strong><br>
                 ${state.lang === 'zh'
-            ? '投資普瑞博生技，將泛用 PVC 聚合改良，產出具備白血球過濾、抗凝血之高級醫療透析袋及醫學耗材，毛利率跳脫傳統五倍以上。'
-            : 'FPC subscribed to Plasmonic Biosensor capital, modifying generic PVC into high-value dialysis materials, multiplying unit margins five-fold.'}
-              </p>
+                  ? '其製程去瓶頸技術與大型連續聚合反應釜管理屬於價值性高、稀有且難以模仿的「暫時性至長期競爭優勢」。近年導入 NVIDIA 生成式 AI，更將優勢延伸至智慧製造領域。'
+                  : 'Debottlenecking skills and reactor scale controls yield high-value, rare and inimitable advantages. Integrating NVIDIA generative AI expands these into smart manufacturing.'}
+              </div>
             </div>
           </div>
+
+          <h3 style="font-family:'Inter', sans-serif; font-size:14px; font-weight:600; text-transform:uppercase; color:var(--muted); margin-bottom:12px;">
+            ${tabData.competencies[state.lang].partnerTitle}
+          </h3>
+          <div class="card-grid">
+            ${tabData.competencies[state.lang].partners.map((partner, idx) => `
+              <div class="editorial-card">
+                <span class="badge" style="margin-bottom:8px; background-color: var(--canvas-soft); color: var(--ink);">PARTNER 0${idx + 1}</span>
+                <h4 style="font-family:'Inter', sans-serif; font-size:15px; font-weight:600; margin: 0 0 8px 0; color: var(--ink);">${partner.name}</h4>
+                <p style="font-size:13px; line-height:1.5; margin:0; color:var(--body);">${partner.desc}</p>
+              </div>
+            `).join("")}
+          </div>
+        </div>
+
+        <div class="section-block">
+          <p class="eyebrow">TP2 · DYNAMIC STRATEGIC RENEWAL</p>
+          <h2>${state.lang === 'zh' ? '動態能耐轉型：環境衝擊與戰略重整時間軸' : 'Dynamic Capabilities & Strategic Renewal Timeline'}</h2>
+          <p style="font-size:15px; color:var(--body); max-width:800px; margin-bottom:16px;">
+            ${state.lang === 'zh'
+              ? '【點選下方轉型時間軸】追蹤台塑自 2021 年起，如何靈活調整產能、引入 NVIDIA AI 數位化、並在 2025-2026 年快速應對虧損利差與地緣政治原料斷鏈危機。'
+              : 'Click the chronological nodes to track how FPC adaptive structures shifted under global spreads pressure, introducing AI tools and handling force-majeure shocks.'}
+          </p>
+
+          <div class="flow-viz" id="tp2-dynamics-panel"></div>
+          <div class="flow-details-card" id="tp2-dynamics-details"></div>
         </div>
       `;
 
         container.innerHTML = html;
+
+        // Draw Sub-flow components
+        renderTP2ValueChainFlow();
+        renderTP2DynamicsTimelineFlow();
+      }
+
+      /* WIDGET: VALUE CHAIN FLOW WIDGET */
+      function renderTP2ValueChainFlow() {
+        const vcPanel = document.getElementById("tp2-value-chain-panel");
+        if (!vcPanel) return;
+
+        const lang = state.lang;
+        const vcData = appData.tabs[2].valueChain[lang];
+        const primary = vcData.primary;
+
+        vcPanel.innerHTML = primary.map((node, index) => {
+          const isFocus = index === state.activeValueChainIndex;
+          
+          let arrowHtml = "";
+          if (index < primary.length - 1) {
+            arrowHtml = `<div class="flow-arrow">&rarr;</div>`;
+          }
+
+          return `
+            <div class="flow-node" data-vc-index="${index}" data-active="${isFocus}">
+              <h4>${node.title}</h4>
+              <span class="badge badge--small" style="background-color: var(--primary); color: var(--on-primary); font-size: 10px;">PRIMARY 0${index + 1}</span>
+            </div>
+            ${arrowHtml}
+          `;
+        }).join("");
+
+        vcPanel.querySelectorAll("[data-vc-index]").forEach(btn => {
+          btn.addEventListener("click", () => {
+            state.activeValueChainIndex = parseInt(btn.dataset.vcIndex);
+            renderTP2ValueChainFlow();
+          });
+        });
+
+        updateTP2ValueChainDetails();
+      }
+
+      function updateTP2ValueChainDetails() {
+        const detailCard = document.getElementById("tp2-value-chain-details");
+        if (!detailCard) return;
+
+        const lang = state.lang;
+        const vcData = appData.tabs[2].valueChain[lang];
+        const activePrimary = vcData.primary[state.activeValueChainIndex];
+        const activeSupport = vcData.support[state.activeValueChainIndex];
+
+        detailCard.innerHTML = `
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:8px;">
+            <h3 style="margin:0; font-family:'Inter',sans-serif; font-size:16px; font-weight:600; color:var(--primary);">
+              ${activePrimary.title}
+            </h3>
+            <span class="badge badge--success">${lang === 'zh' ? '主要價值活動' : 'Primary Activity'}</span>
+          </div>
+          
+          <p style="font-size:14px; line-height:1.6; color:var(--body-strong); margin-bottom:16px;">
+            ${activePrimary.desc}
+          </p>
+
+          <div style="background:var(--surface-strong); padding:16px; border-radius:var(--radius-lg); border-left:4px solid var(--primary);">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; flex-wrap:wrap; gap:8px;">
+              <span class="badge badge--warning" style="font-size:11px;">
+                ${lang === 'zh' ? '協同支持活動' : 'Linked Support Activity'}
+              </span>
+              <strong style="font-size:13px; color:var(--ink);">${activeSupport.title}</strong>
+            </div>
+            <p style="font-size:13px; line-height:1.5; color:var(--body); margin:0;">
+              ${activeSupport.desc}
+            </p>
+          </div>
+        `;
+      }
+
+      /* WIDGET: DYNAMICS TIMELINE FLOW WIDGET */
+      function renderTP2DynamicsTimelineFlow() {
+        const dynPanel = document.getElementById("tp2-dynamics-panel");
+        if (!dynPanel) return;
+
+        const lang = state.lang;
+        const dynData = appData.tabs[2].dynamics[lang];
+        const items = dynData.items;
+
+        const timelineLabels = lang === 'zh'
+          ? ["2021 醫療物資", "2022 智慧製造", "2023-24 產能過剩", "2025 虧損考驗", "2025-26 減碳效能", "2026.03 原料斷鏈"]
+          : ["2021 Medical", "2022 Smart Mfg", "2023-24 Glut Shift", "2025 Deficit", "2025-26 Carbon Fee", "2026.03 Supply Crisis"];
+
+        dynPanel.innerHTML = items.map((node, index) => {
+          const isFocus = index === state.activeTP2DynamicIndex;
+          
+          let arrowHtml = "";
+          if (index < items.length - 1) {
+            arrowHtml = `<div class="flow-arrow">&rarr;</div>`;
+          }
+
+          return `
+            <div class="flow-node" data-dyn-index="${index}" data-active="${isFocus}">
+              <h4 style="font-size:13px; font-weight:600; margin-bottom:4px;">${timelineLabels[index]}</h4>
+              <span class="badge badge--small" style="background-color: var(--muted); color: var(--on-primary); font-size: 10px;">PHASE 0${index + 1}</span>
+            </div>
+            ${arrowHtml}
+          `;
+        }).join("");
+
+        dynPanel.querySelectorAll("[data-dyn-index]").forEach(btn => {
+          btn.addEventListener("click", () => {
+            state.activeTP2DynamicIndex = parseInt(btn.dataset.dynIndex);
+            renderTP2DynamicsTimelineFlow();
+          });
+        });
+
+        updateTP2DynamicsDetails();
+      }
+
+      function updateTP2DynamicsDetails() {
+        const detailCard = document.getElementById("tp2-dynamics-details");
+        if (!detailCard) return;
+
+        const lang = state.lang;
+        const dynData = appData.tabs[2].dynamics[lang];
+        const activeItem = dynData.items[state.activeTP2DynamicIndex];
+
+        detailCard.innerHTML = `
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:8px;">
+            <h3 style="margin:0; font-family:'Inter',sans-serif; font-size:16px; font-weight:600; color:var(--ink);">
+              ${activeItem.t}
+            </h3>
+            <span class="badge badge--danger">${lang === 'zh' ? '動態能耐轉型' : 'Dynamic Adjustment'}</span>
+          </div>
+          
+          <div style="background:var(--canvas-soft); padding:16px; border-radius:var(--radius-lg); border-top:3px solid var(--primary); margin-top:8px;">
+            <p style="font-size:14px; line-height:1.6; color:var(--body-strong); margin:0;">
+              <strong>${lang === 'zh' ? '戰略應對與投資' : 'Strategic Action'}:</strong> ${activeItem.a}
+            </p>
+          </div>
+        `;
       }
 
       /* RENDER TP3: INTERNATIONAL STRATEGY & FDI */
