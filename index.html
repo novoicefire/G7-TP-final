@@ -4532,13 +4532,6 @@
           <div class="card-grid card-grid--4up" id="challenges-button-grid" style="margin-bottom:24px;"></div>
           <div class="editorial-card" id="challenge-detail-display" style="border-left: 4px solid var(--primary);"></div>
         </div>
-
-        <div class="reflection-block">
-          <h3>${state.lang === 'zh' ? '本頁語音導覽 Narrator Script' : 'Audio Tour script'}</h3>
-          <p style="font-style:italic; font-size:14px; line-height:1.6;">
-            "${state.lang === 'zh' ? tabData.voiceGuide.zh : tabData.voiceGuide.en}"
-          </p>
-        </div>
       `;
 
         container.innerHTML = html;
