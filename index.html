@@ -69,6 +69,11 @@
 
       color-scheme: light;
       transition: background-color 0.3s ease, color 0.3s ease;
+
+      /* Advisor badge G7 luxury warm amber variables */
+      --advisor-bg: rgba(217, 119, 6, 0.06);
+      --advisor-color: #b45309;
+      --advisor-border: rgba(217, 119, 6, 0.18);
     }
 
     [data-theme="dark"] {
@@ -91,6 +96,11 @@
       --on-primary: #0c0a09;
 
       color-scheme: dark;
+
+      /* Advisor badge Dark mode overrides */
+      --advisor-bg: rgba(245, 158, 11, 0.1);
+      --advisor-color: #fbbf24;
+      --advisor-border: rgba(245, 158, 11, 0.25);
     }
 
     /* BASE RESET */
@@ -1346,99 +1356,208 @@
     .audio-controls {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 16px;
       background-color: var(--surface-card);
       border: 1px solid var(--hairline-strong);
-      border-radius: var(--radius-pill);
-      padding: 5px 14px 5px 6px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      border-radius: 20px;
+      padding: 10px 18px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04), 0 2px 8px rgba(0, 0, 0, 0.02);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+      min-width: 620px;
+      max-width: 100%;
+    }
+
+    [data-theme="dark"] .audio-controls {
+      background-color: rgba(28, 25, 23, 0.85);
+      border-color: var(--hairline);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2), 0 2px 8px rgba(0, 0, 0, 0.1);
     }
 
     .audio-controls:hover {
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06), 0 2px 6px rgba(0, 0, 0, 0.03);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.03);
       border-color: var(--muted-soft);
+      transform: translateY(-1px);
     }
 
-    .audio-status {
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--body);
-      max-width: 140px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      letter-spacing: 0.1px;
-      transition: color 0.2s ease;
-    }
-
-    .audio-btn-icon {
-      width: 32px;
-      height: 32px;
-      border-radius: var(--radius-full);
-      background-color: var(--hairline-soft);
+    /* Pager Arrows */
+    .audio-arrow-btn {
+      background: transparent;
       border: none;
-      color: var(--ink);
+      color: var(--muted-soft);
+      font-size: 26px;
+      font-weight: 300;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
+      padding: 0 4px;
+      transition: all 0.2s ease;
+      user-select: none;
+    }
+
+    .audio-arrow-btn:hover {
+      color: var(--ink);
+      transform: scale(1.2);
+    }
+
+    .audio-arrow-btn:active {
+      transform: scale(0.95);
+    }
+
+    /* Deep Black Play Button */
+    .audio-btn-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background-color: #1a1a1a;
+      border: none;
+      color: #ffffff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    [data-theme="dark"] .audio-btn-icon {
+      background-color: #f5f5f5;
+      color: #0c0a09;
+      box-shadow: 0 4px 10px rgba(255, 255, 255, 0.15);
+    }
+
+    .audio-btn-icon svg {
+      fill: currentColor;
+      width: 14px;
+      height: 14px;
+      margin-left: 2px;
+      transition: transform 0.2s ease;
+    }
+
+    .audio-btn-icon--playing svg {
+      margin-left: 0;
     }
 
     .audio-btn-icon:hover {
-      background-color: var(--hairline-strong);
-      transform: scale(1.06);
+      background-color: #000000;
+      transform: scale(1.08);
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
+    }
+
+    [data-theme="dark"] .audio-btn-icon:hover {
+      background-color: #ffffff;
+      box-shadow: 0 6px 14px rgba(255, 255, 255, 0.25);
     }
 
     .audio-btn-icon:active {
       transform: scale(0.95);
     }
 
-    .audio-btn-icon--playing {
-      background-color: var(--primary);
-      color: var(--on-primary);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    /* Text Block (Bilingual Title & Subtitle) */
+    .audio-meta {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      flex-grow: 1;
+      min-width: 150px;
+      gap: 3px;
     }
 
-    .audio-btn-icon--playing:hover {
-      background-color: var(--primary-active);
+    .audio-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.2;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .audio-subtitle {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--muted);
+      line-height: 1.2;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Waveform Capsule Bars */
+    .audio-waveform {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      flex-shrink: 0;
+      margin-right: 4px;
+    }
+
+    .wave-bar {
+      display: inline-block;
+      border-radius: 99px;
+      background-color: #555555;
+      opacity: 0.85;
+      transition: background-color 0.3s ease, height 0.3s ease;
+    }
+
+    [data-theme="dark"] .wave-bar {
+      background-color: #a8a29e;
+    }
+
+    /* Pulse/Bounce Waveform Animation during Playback */
+    @keyframes wave-bounce {
+      0%, 100% {
+        transform: scaleY(1);
+      }
+      50% {
+        transform: scaleY(1.5);
+      }
+    }
+    
+    .audio-waveform.is-playing .wave-bar {
+      animation: wave-bounce 1.2s ease-in-out infinite;
+      background-color: var(--primary);
+    }
+    
+    .audio-waveform.is-playing .wave-bar:nth-child(2n) {
+      animation-delay: 0.15s;
+      animation-duration: 0.8s;
+    }
+    
+    .audio-waveform.is-playing .wave-bar:nth-child(3n) {
+      animation-delay: 0.3s;
+      animation-duration: 1.3s;
+    }
+    
+    .audio-waveform.is-playing .wave-bar:nth-child(4n) {
+      animation-delay: 0.45s;
+      animation-duration: 1.0s;
+    }
+
+    /* RESPONSIVE BREAKPOINT SPECIFICS */
+    @media (max-width: 768px) {
+      .audio-controls {
+        min-width: unset;
+        width: 100%;
+        gap: 10px;
+        padding: 8px 12px;
+      }
+      .audio-waveform {
+        display: none;
+      }
     }
 
     .speech-voice-select {
-      font-family: inherit;
-      font-size: 12px;
-      font-weight: 500;
-      border: 1px solid var(--hairline-strong);
-      background-color: var(--canvas-soft);
-      color: var(--ink);
-      border-radius: var(--radius-pill);
-      height: 30px;
-      padding: 0 28px 0 12px;
-      cursor: pointer;
-      outline: none;
-      appearance: none;
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-      background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23777169' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 10px center;
-      background-size: 10px;
+      display: none;
     }
 
-    .speech-voice-select:hover {
-      border-color: var(--muted-soft);
-      background-color: var(--surface-strong);
-    }
-
-    .speech-voice-select:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 2px rgba(41, 37, 36, 0.08);
-      background-color: var(--surface-card);
+    .audio-status {
+      display: none;
     }
 
     /* REFLECTION & CONCLUSION BOX */
@@ -1713,6 +1832,8 @@
       .milestone-timeline-card {
         flex: 0 0 280px;
       }
+    }
+
     /* === TP1 NEWS HORIZONTAL TIMELINE === */
     .tp1-news-timeline-container {
       width: 100%;
@@ -1818,6 +1939,447 @@
       width: 100%;
     }
 
+    /* TP0 DATA SOURCES STYLING */
+    .sources-block {
+      background-color: var(--surface-card);
+      border: 1px solid var(--hairline-strong);
+      border-radius: var(--radius-xl);
+      padding: var(--spacing-lg);
+      margin-top: var(--spacing-xxl);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+      transition: all 0.3s ease;
+    }
+    
+    .sources-block:hover {
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+      border-color: var(--muted-soft);
+    }
+
+    .sources-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-sm);
+      margin-top: var(--spacing-md);
+    }
+    
+    .source-item-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      background-color: var(--canvas-soft);
+      border: 1px solid var(--hairline);
+      border-radius: var(--radius-lg);
+      text-decoration: none;
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 500;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    .source-item-link:hover {
+      background-color: var(--surface-strong);
+      border-color: var(--ink);
+      transform: translateY(-1px);
+    }
+    
+    .source-icon-wrap {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background-color: var(--surface-card);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      flex-shrink: 0;
+      transition: all 0.2s;
+    }
+    
+    .source-item-link:hover .source-icon-wrap {
+      background-color: var(--primary);
+      color: var(--on-primary);
+    }
+
+    @media (max-width: 768px) {
+      .sources-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Hero advisor container centering wrapper */
+    .hero-advisor-container {
+      display: flex; 
+      justify-content: center; 
+      margin-top: 8px; 
+      z-index: 2;
+    }
+
+    /* Hover effects for video cards */
+    .video-card:hover .video-thumbnail-img {
+      transform: scale(1.05);
+    }
+    
+    .video-card:hover .video-overlay {
+      background: rgba(0, 0, 0, 0.45) !important;
+    }
+    
+    .video-card:hover .video-play-btn {
+      transform: scale(1.1);
+      background: var(--primary) !important;
+    }
+    
+    .video-card:hover .video-play-btn svg {
+      color: var(--on-primary) !important;
+    }
+
+    /* ============================================================
+       COMPREHENSIVE RWD MOBILE STYLESHEET — G7-TP-FINAL
+       Breakpoints: ≤480px (phone), ≤640px (small), ≤768px (tablet)
+       ============================================================ */
+
+    /* ── TOP NAV: collapse on mobile ─────────────────────────── */
+    @media (max-width: 768px) {
+      .top-nav {
+        height: auto;
+        min-height: 56px;
+      }
+
+      .top-nav__container {
+        flex-wrap: wrap;
+        gap: 6px;
+        padding: 10px var(--spacing-base);
+        align-items: center;
+      }
+
+      .top-nav__brand {
+        font-size: 16px;
+        flex: 1 1 auto;
+      }
+
+      /* Hide the wide audio panel completely; show only play btn */
+      .audio-controls {
+        display: none;
+      }
+
+      .top-nav__actions {
+        gap: 8px;
+      }
+    }
+
+    /* ── HERO BAND ────────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .hero-band {
+        padding: 48px var(--spacing-base) 32px;
+      }
+
+      .hero-band__title {
+        font-size: clamp(26px, 8vw, 40px);
+        letter-spacing: -0.8px;
+      }
+
+      .hero-band__copy {
+        font-size: 15px;
+      }
+
+      /* Member pills wrap nicely */
+      .hero-team-container {
+        gap: 6px;
+        max-width: 100%;
+        padding: 0 var(--spacing-xs);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-band {
+        padding: 36px var(--spacing-sm) 24px;
+      }
+
+      .hero-band__title {
+        font-size: clamp(22px, 7vw, 32px);
+      }
+
+      .hero-band__copy {
+        font-size: 14px;
+      }
+    }
+
+    /* ── EXECUTIVE SUMMARY ───────────────────────────────────── */
+    @media (max-width: 640px) {
+      .exec-summary-band {
+        padding: 0 var(--spacing-sm);
+      }
+
+      .exec-summary-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-sm);
+        padding: var(--spacing-base);
+      }
+
+      .exec-summary-card__icon {
+        width: 44px;
+        height: 44px;
+      }
+    }
+
+    /* ── TAB NAVIGATION ──────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .tab-nav-wrapper {
+        top: 56px;
+      }
+
+      .tab-nav {
+        padding: 8px var(--spacing-sm);
+        gap: 8px;
+      }
+
+      .tab-btn {
+        font-size: 12px;
+        padding: 6px 12px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .tab-btn {
+        font-size: 11px;
+        padding: 5px 10px;
+      }
+    }
+
+    /* ── TAB PANEL CONTENT ───────────────────────────────────── */
+    @media (max-width: 768px) {
+      .tab-panel {
+        padding: var(--spacing-base) var(--spacing-sm) var(--spacing-xxl);
+      }
+
+      .section-block {
+        padding: var(--spacing-xl) 0;
+      }
+    }
+
+    /* ── CARD GRIDS ──────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .card-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: var(--spacing-base);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .card-grid,
+      .card-grid--2up,
+      .card-grid--4up {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-sm);
+      }
+    }
+
+    /* ── EDITORIAL CARDS ─────────────────────────────────────── */
+    @media (max-width: 480px) {
+      .editorial-card {
+        padding: var(--spacing-base);
+      }
+
+      .editorial-card__title {
+        font-size: 16px;
+      }
+
+      .editorial-card__desc {
+        font-size: 13px;
+      }
+    }
+
+    /* ── FLIP CARDS (TP2 resource) ───────────────────────────── */
+    @media (max-width: 640px) {
+      .flip-card-container {
+        height: 260px;
+      }
+    }
+
+    /* ── TP2 KPI GRID ────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .tp2-kpi-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: var(--spacing-base);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .tp2-kpi-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: var(--spacing-xs);
+      }
+
+      .tp2-kpi-card {
+        padding: var(--spacing-base) var(--spacing-sm);
+        border-radius: var(--radius-xl);
+      }
+
+      .tp2-kpi-value {
+        font-size: 22px;
+      }
+
+      .tp2-kpi-label {
+        font-size: 11px;
+      }
+
+      .tp2-kpi-icon,
+      .tp2-kpi-svg {
+        width: 28px !important;
+        height: 28px !important;
+      }
+    }
+
+    /* ── TP1 SPECIFIC ────────────────────────────────────────── */
+    @media (max-width: 480px) {
+      .tp1-stage-container {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .tp1-stage-node {
+        width: 100%;
+        text-align: center;
+      }
+
+      .tp1-strategy-board {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .tp1-strategy-col {
+        border-right: none !important;
+        padding-right: 0 !important;
+        border-bottom: 1px solid var(--hairline);
+        padding-bottom: 16px;
+      }
+
+      .tp1-strategy-col:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+        padding-left: 0 !important;
+      }
+
+      .tp1-amc-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ── VIDEO CARDS (成員自我介紹) ────────────────────────────── */
+    @media (max-width: 768px) {
+      /* Video grid — keep 2 columns on tablets */
+      .video-card {
+        min-width: 0;
+      }
+    }
+
+    @media (max-width: 480px) {
+      /* Stack video cards vertically */
+      .card-grid:has(.video-card) {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ── SOURCES GRID ────────────────────────────────────────── */
+    @media (max-width: 640px) {
+      .sources-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .source-item-link {
+        font-size: 12px;
+        padding: 10px 12px;
+      }
+    }
+
+    /* ── DRAWERS ─────────────────────────────────────────────── */
+    @media (max-width: 640px) {
+      .drawer {
+        width: 100vw;
+      }
+
+      .drawer__header h2 {
+        font-size: 20px;
+      }
+    }
+
+    /* ── SITE FOOTER ─────────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .site-footer__container {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--spacing-xl);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .site-footer {
+        padding: var(--spacing-xxl) var(--spacing-base) var(--spacing-xl);
+      }
+
+      .site-footer__container {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+      }
+
+      .site-footer__bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-sm);
+        font-size: 12px;
+      }
+    }
+
+    /* ── MILESTONE TIMELINE ──────────────────────────────────── */
+    @media (max-width: 480px) {
+      .milestone-timeline-card {
+        flex: 0 0 240px;
+      }
+
+      .milestone-timeline-wrapper {
+        padding: 30px 16px;
+      }
+
+      /* Flatten the stagger effect on very small screens */
+      .milestone-timeline-card:nth-child(odd),
+      .milestone-timeline-card:nth-child(even) {
+        transform: translateY(0);
+      }
+    }
+
+    /* ── HEADINGS SCALE DOWN on small phones ─────────────────── */
+    @media (max-width: 480px) {
+      h1 {
+        font-size: clamp(24px, 8vw, 36px);
+        letter-spacing: -0.8px;
+      }
+
+      h2 {
+        font-size: clamp(20px, 6vw, 28px);
+        letter-spacing: -0.2px;
+      }
+
+      h3 {
+        font-size: clamp(17px, 5vw, 22px);
+      }
+
+      .eyebrow {
+        font-size: 11px;
+      }
+    }
+
+    /* ── MISC OVERFLOW GUARDS ────────────────────────────────── */
+    @media (max-width: 768px) {
+      img, video, iframe {
+        max-width: 100%;
+      }
+
+      /* Prevent horizontal overflow on main containers only */
+      body {
+        overflow-x: hidden;
+      }
+    }
+
   </style>
 </head>
 
@@ -1843,14 +2405,39 @@
       <div class="top-nav__actions">
         <!-- Floating audio control bar -->
         <div class="audio-controls" id="audio-panel">
+          <button class="audio-arrow-btn" id="audio-prev-btn" type="button" aria-label="Previous Voice">&lsaquo;</button>
+          
           <button class="audio-btn-icon" id="audio-play-btn" type="button" aria-label="Play Narration">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-              stroke-linecap="round" stroke-linejoin="round">
-              <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+              <polygon points="6 4 20 12 6 20 6 4"></polygon>
             </svg>
           </button>
-          <span class="audio-status" id="audio-status-text">Narration Idle</span>
-          <select class="speech-voice-select" id="audio-voice-select" aria-label="Select Voice"></select>
+          
+          <div class="audio-meta">
+            <span class="audio-title" id="audio-voice-title">Rachel — calm narrator</span>
+            <span class="audio-subtitle" id="audio-voice-subtitle">English (American) · Adult · Studio</span>
+          </div>
+          
+          <div class="audio-waveform">
+            <span class="wave-bar" style="width: 18px; height: 10px;"></span>
+            <span class="wave-bar" style="width: 12px; height: 10px;"></span>
+            <span class="wave-bar" style="width: 32px; height: 14px;"></span>
+            <span class="wave-bar" style="width: 16px; height: 10px;"></span>
+            <span class="wave-bar" style="width: 8px; height: 8px;"></span>
+            <span class="wave-bar" style="width: 44px; height: 16px;"></span>
+            <span class="wave-bar" style="width: 24px; height: 12px;"></span>
+            <span class="wave-bar" style="width: 12px; height: 10px;"></span>
+            <span class="wave-bar" style="width: 28px; height: 14px;"></span>
+            <span class="wave-bar" style="width: 18px; height: 10px;"></span>
+            <span class="wave-bar" style="width: 36px; height: 14px;"></span>
+            <span class="wave-bar" style="width: 12px; height: 10px;"></span>
+            <span class="wave-bar" style="width: 22px; height: 10px;"></span>
+          </div>
+          
+          <select class="speech-voice-select" id="audio-voice-select" aria-label="Select Voice" style="display: none;"></select>
+          <span class="audio-status" id="audio-status-text" style="display: none;">Narration Idle</span>
+          
+          <button class="audio-arrow-btn" id="audio-next-btn" type="button" aria-label="Next Voice">&rsaquo;</button>
         </div>
 
         <button class="btn btn--outline btn--small" id="lang-toggle" type="button">EN</button>
@@ -1878,6 +2465,12 @@
       <p class="hero-band__copy" id="hero-copy">A bilingual interactive four-tab strategic report spanning corporate
         design (DESIGN.md), macro-competencies, external networks, and FDI entry-mode toolkits.</p>
 
+      <!-- Group Label -->
+      <div class="hero-group-label-container" style="display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 16px; margin-bottom: 4px; z-index: 2;">
+        <span style="display: inline-block; width: 6px; height: 6px; border-radius: 50%; background-color: var(--advisor-color); opacity: 0.8;"></span>
+        <span id="hero-group-label" style="font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted);"></span>
+      </div>
+
       <!-- Team Members Banner -->
       <div class="hero-team-container" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; max-width: 900px; margin-top: 8px; z-index: 2;">
         <span class="badge" id="mem-pill-1" style="background: rgba(41, 37, 36, 0.05); color: var(--ink); border: 1px solid var(--hairline-strong); padding: 6px 12px; font-size: 12px; border-radius: var(--radius-pill); font-family: 'Inter', sans-serif; font-weight: 500;"></span>
@@ -1886,6 +2479,11 @@
         <span class="badge" id="mem-pill-4" style="background: rgba(41, 37, 36, 0.05); color: var(--ink); border: 1px solid var(--hairline-strong); padding: 6px 12px; font-size: 12px; border-radius: var(--radius-pill); font-family: 'Inter', sans-serif; font-weight: 500;"></span>
         <span class="badge" id="mem-pill-5" style="background: rgba(41, 37, 36, 0.05); color: var(--ink); border: 1px solid var(--hairline-strong); padding: 6px 12px; font-size: 12px; border-radius: var(--radius-pill); font-family: 'Inter', sans-serif; font-weight: 500;"></span>
         <span class="badge" id="mem-pill-6" style="background: rgba(41, 37, 36, 0.05); color: var(--ink); border: 1px solid var(--hairline-strong); padding: 6px 12px; font-size: 12px; border-radius: var(--radius-pill); font-family: 'Inter', sans-serif; font-weight: 500;"></span>
+      </div>
+
+      <!-- Advisor Banner -->
+      <div class="hero-advisor-container">
+        <span class="badge" id="advisor-pill" style="background: var(--advisor-bg); color: var(--advisor-color); border: 1px solid var(--advisor-border); padding: 6px 12px; font-size: 12px; border-radius: var(--radius-pill); font-family: 'Inter', sans-serif; font-weight: 500; transition: all 0.3s ease;"></span>
       </div>
     </section>
 
@@ -2294,33 +2892,45 @@
             "title": "競爭者與動態分析 (AMC 分析)",
             "swot": {
               "strengths": [
-                "集團防禦性現金流",
-                "合規與環保先發優勢",
-                "美國德州廠地緣避險"
+                "PVC 亞洲龍頭與產能規模領先",
+                "六輕一體化垂直整合之強大抗風險力",
+                "半導體超高純特種化學品（電子級氫氟酸市占 > 55%）",
+                "美國廠乙烷裂解之低頁岩氣原料成本優勢"
               ],
               "weaknesses": [
-                "重資產轉型慣性 (製造業思維)",
-                "亞洲舊廠泛用樹脂折舊包袱"
+                "大宗產品過度集中（PVC 營收佔比高達 34.4%）",
+                "2026 Q1 毛利率探底至 3.7%（同業最低）",
+                "2026 Q1 本業營運虧損達 13 億元（唯一虧損之同業）"
+              ],
+              "opportunities": [
+                "中國取消 13% PVC 出口退稅，台塑面臨 600 萬噸替代契機",
+                "半導體特化品與 AI 需求爆發（如電子材料與綠色儲能轉型）",
+                "藉「轉型開發專案組」加速 concentric（同心圓）高值化布局"
+              ],
+              "threats": [
+                "中國石化巨頭（榮盛、恆力）3,000 萬噸產能過剩傾銷內捲",
+                "兩岸 ECFA 中止致部分塑化產品面臨 2% ~ 6.5% 關稅障礙",
+                "中國業者在 AMC 框架下具備「高意識、高動機、高能力」之極高威脅"
               ]
             },
             "matrix": [
               {
-                "type": "高共同性 / 高相似性",
-                "competitor": "中國煉化巨頭 (榮盛、恆力)",
-                "action": "【傾銷】為攤提設備折舊，無底線傾銷泛用塑膠。",
-                "response": "【戰略撤退】不打價格戰，降舊廠稼動率，重心轉移美國德州廠避開紅海。"
+                "type": "第一層：主要競爭者",
+                "competitor": "中國塑化巨頭 (中石化/萬華/榮盛/恆力)",
+                "action": "【傾銷內捲】中國 PVC 產能約 3,000 萬噸/年，過剩 20% 且面臨 13% 出口退稅取消，產能過剩壓力持續向亞洲外溢，以政府補貼低價傾銷泛用塑料。",
+                "response": "【高值避險】降載或關閉亞洲低效泛用產能，避開紅海價格戰；擴大美國德州廠乙烷裂解成本優勢，並加速發展半導體高純特化材料與電子級氫氟酸等利基市場。"
               },
               {
-                "type": "低共同性 / 高相似性",
-                "competitor": "歐美特化大廠 (Dow, Westlake)",
-                "action": "【升級】全面升級高毛利特規塑膠，暫無攻擊亞洲動機。",
-                "response": "【搶佔利基】趁空窗期，將資源 100% 投入醫療、太陽能用之特規塑膠。"
+                "type": "第二層：次要競爭者",
+                "competitor": "台灣次要同業 (國塑/南亞/台化/台聚/華夏/國喬)",
+                "action": "【同業分化】同屬高折舊、低毛利（台塑 2026 Q1 毛利率 3.7% 為同業最低）壓力，但南亞（毛利率 11.94%）與台化（7.74%）因電子材料或芳香烴有撐，本業唯一虧損 13 億的台塑面臨落後危機。",
+                "response": "【集團協同與彈性】與南亞、台化深化六輕一體化管線與能源協同，並針對 EVA、特規 HDPE 進行產線差異化調度，避免同門內耗與惡性價格踩踏。"
               },
               {
-                "type": "高共同性 / 低相似性",
-                "competitor": "全球綠色新創 (NatureWorks)",
-                "action": "【替代】改用農業廢料製造零碳塑膠，搶攻國際大廠訂單。",
-                "response": "【防禦性併購】動用現金流併購生質技術新創，獲取綠色定價權。"
+                "type": "第三層：長期競爭者",
+                "competitor": "國際化學大廠 (長春集團/LG化學/印度信實)",
+                "action": "【特化壁壘】國際大廠（如長春、LG化學）專精於特用化學品與電子材料，築起極高技術與專利壁壘，掌握高度定價權與高毛利。",
+                "response": "【技術追趕與認證】趁中國取消 PVC 出口退稅 13% 釋放的 600 萬噸替代窗口，擴大全球佈局，並積極投入綠能儲能（台塑新智能）與高階材料客戶認證。"
               }
             ]
           },
@@ -2328,33 +2938,45 @@
             "title": "Competitor Dynamics (AMC Analysis)",
             "swot": {
               "strengths": [
-                "Strong Cash Flow",
-                "ESG & Compliance Pioneer",
-                "US Texas Plant Geopolitics"
+                "Asian PVC leader with substantial scale and capacity advantages",
+                "Strong vertical integration via No. 6 Naphtha Cracker Complex",
+                "High-purity semiconductor specialty chemicals (Electronic HF share >55%)",
+                "Low shale-ethane raw feedstock cost advantages in US plants"
               ],
               "weaknesses": [
-                "Heavy Asset Culture",
-                "Depreciation burden of Asian plants"
+                "Excessive bulk commodity concentration (PVC accounts for 34.4%)",
+                "Historically low Q1 2026 gross margin of 3.7% (lowest among peers)",
+                "Q1 2026 core operating deficit of NT$1.3B (sole loss-maker in Taiwan)"
+              ],
+              "opportunities": [
+                "China's 13% PVC export tax rebate suspension, opening a 6M-ton substitute window",
+                "AI-driven high-value pivot and specialty chemicals upgrade path (e.g. green storage)",
+                "Leverage 'Transformation Task Force' to accelerate related concentric diversification"
+              ],
+              "threats": [
+                "China giants (Sinopec, Wanhua) supply involution & dumping (30M t/yr capacity)",
+                "Cross-strait ECFA tariff exemptions suspended (tariffs of 2%-6.5% reinstated)",
+                "Extreme threat from Chinese rivals (High Awareness, Motivation, Capability)"
               ]
             },
             "matrix": [
               {
-                "type": "High Market / High Resource",
-                "competitor": "China Giants (Rongsheng, Hengli)",
-                "action": "[Dumping] Price wars to cover equipment depreciation.",
-                "response": "[Retreat] No price wars. Lower Asian utilization, shift focus to U.S. Texas plant to avoid red ocean."
+                "type": "Tier 1: Primary Rivals",
+                "competitor": "China Petrochemical Giants (Sinopec/Wanhua/Rongsheng)",
+                "action": "[Dumping & Overcapacity] China's PVC capacity reaches 30M t/yr (40%+ global share) with a 20% glut. Fearing a 13% export rebate cut, they dump bulk polymers into Asia at subsidized low prices.",
+                "response": "[Niche Hedging] Decrease capacity utilization at low-efficiency Asian commodity plants to avoid red-ocean price wars. Expand low-cost US shale advantages and accelerate semiconductor inputs like electronic HF."
               },
               {
-                "type": "Low Market / High Resource",
-                "competitor": "U.S./EU Giants (Dow, Westlake)",
-                "action": "[Upgrade] Shifted to premium plastics, currently ignoring Asian commodity market.",
-                "response": "[Niche Grab] Seize the window; dedicate R&D to medical and solar premium plastics."
+                "type": "Tier 2: Secondary Rivals",
+                "competitor": "Taiwanese Peers (Nan Ya/FCFC/CGPC/Grand Pacific)",
+                "action": "[Peer Divergence] All suffer from low commodity margins, but Nan Ya (11.94% margin) and FCFC (7.74% margin) are sustained by electronics or aromatics. FPC (3.7% margin, NT$1.3B operating loss) faces severe laggard risk.",
+                "response": "[Synergy & Flexibility] Deepen Mailiao pipeline integration and energy synergy with Nan Ya and FCFC. Coordinate product portfolios to prioritize high-margin EVA and specialty HDPE, preventing internal margin erosion."
               },
               {
-                "type": "High Market / Low Resource",
-                "competitor": "Green Startups (NatureWorks)",
-                "action": "[Substitute] Bio-plastics taking orders from global brands (Apple, Nike).",
-                "response": "[M&A Defense] Use cash flow to acquire recycling channels and green startups."
+                "type": "Tier 3: Long-term Rivals",
+                "competitor": "Global Giants (Chang Chun/LG Chem/Reliance)",
+                "action": "[Specialty Barriers] Global giants like Chang Chun and LG Chem specialize in premium electronic inputs and battery materials, building high technical/patent barriers and securing strong pricing power.",
+                "response": "[Technological Catch-up] Leverage the 6M-ton replacement window opened by China's 13% PVC tax rebate cut, expand low-cost US shale-ethane advantages, and heavily invest in green storage (Formosa Smart Energy) and specialty chemical certifications."
               }
             ]
           }
@@ -3075,7 +3697,7 @@
       const state = {
         lang: "zh",
         theme: "light",
-        activeTab: "tp0",
+        activeTab: "tp-intro",
         activeMetric: "revenue",
         activeStrategyLens: "vertical",
         activeVerticalNode: "fpc",
@@ -3115,6 +3737,16 @@
         document.getElementById("lang-toggle").addEventListener("click", toggleLanguage);
         document.getElementById("theme-toggle").addEventListener("click", toggleTheme);
         document.getElementById("audio-play-btn").addEventListener("click", toggleAudioGuide);
+        
+        // Redesigned Audio Panel Events
+        document.getElementById("audio-prev-btn").addEventListener("click", () => cycleVoice(-1));
+        document.getElementById("audio-next-btn").addEventListener("click", () => cycleVoice(1));
+        document.getElementById("audio-voice-select").addEventListener("change", () => {
+          updateSelectedVoiceDisplay();
+          if (state.isAudioPlaying && !state.isAudioPaused) {
+            startAudioGuide();
+          }
+        });
 
         // Setup Drawer listeners
         document.querySelectorAll("[data-open-drawer]").forEach(btn => {
@@ -3246,19 +3878,76 @@
 
             opt.textContent = `${displayName} (${v.lang})`;
 
-            if (state.lang === "zh" && (v.name.includes("Yating") || v.name.includes("Taiwan") || v.lang.includes("TW"))) {
-              opt.selected = true;
-            } else if (state.lang === "en" && (v.name.includes("British") || v.name.includes("Daniel") || v.lang.includes("GB") || v.lang.includes("UK"))) {
-              opt.selected = true;
-            }
-
             select.appendChild(opt);
           });
         }
+        updateSelectedVoiceDisplay();
+      }
+
+      function updateSelectedVoiceDisplay() {
+        const select = document.getElementById("audio-voice-select");
+        if (!select) return;
+        const selectedOpt = select.options[select.selectedIndex];
+        if (!selectedOpt) return;
+        
+        const voiceIndex = selectedOpt.value;
+        const voice = state.voices[voiceIndex];
+        if (!voice) return;
+        
+        // 1. Format Voice Title
+        let title = voice.name;
+        // Clean up common system voice prefixes/suffixes for sleek aesthetics
+        title = title.replace(/Microsoft|Google|Apple|Natural/gi, "").trim();
+        title = title.replace(/^\-+|\-+$/g, "").trim(); // clean dashes
+        if (title.indexOf(" -") !== -1) {
+          title = title.split(" -")[0];
+        } else if (title.indexOf(" (") !== -1) {
+          title = title.split(" (")[0];
+        }
+        title = title.trim() || voice.name;
+        
+        // 2. Format Voice Subtitle
+        let subtitle = "";
+        const langUpper = voice.lang.toUpperCase();
+        if (langUpper.startsWith("ZH-TW") || langUpper.startsWith("ZH-HK")) {
+          subtitle = state.lang === "zh" ? "繁體中文 · 成人聲音 · 標準" : "Traditional Chinese · Adult · Standard";
+        } else if (langUpper.startsWith("ZH")) {
+          subtitle = state.lang === "zh" ? "普通話 · 成人聲音 · 標準" : "Mandarin Chinese · Adult · Standard";
+        } else if (langUpper.startsWith("EN-US")) {
+          subtitle = state.lang === "zh" ? "英語 (美國) · 成人聲音 · 錄音室" : "English (American) · Adult · Studio";
+        } else if (langUpper.startsWith("EN-GB") || langUpper.startsWith("EN-UK")) {
+          subtitle = state.lang === "zh" ? "英語 (英國) · 成人聲音 · 錄音室" : "English (British) · Adult · Studio";
+        } else if (langUpper.startsWith("EN")) {
+          subtitle = state.lang === "zh" ? "英語 · 成人聲音 · 標準" : "English · Adult · Standard";
+        } else {
+          subtitle = `${voice.lang} · ${state.lang === "zh" ? "系統內建語音" : "System Engine"}`;
+        }
+        
+        document.getElementById("audio-voice-title").textContent = title;
+        document.getElementById("audio-voice-subtitle").textContent = subtitle;
+      }
+
+      function cycleVoice(direction) {
+        const select = document.getElementById("audio-voice-select");
+        if (!select || select.options.length <= 1) return;
+        
+        let newIndex = select.selectedIndex + direction;
+        if (newIndex < 0) {
+          newIndex = select.options.length - 1;
+        } else if (newIndex >= select.options.length) {
+          newIndex = 0;
+        }
+        
+        select.selectedIndex = newIndex;
+        select.dispatchEvent(new Event("change"));
       }
 
       function getNarrationScript() {
-        if (state.activeTab === "tp0") {
+        if (state.activeTab === "tp-intro") {
+          return state.lang === "zh"
+            ? "【成員自我介紹導覽】您好，本節為第七組全體研究小組組員的影音自我介紹專區。我們共製作了六支簡介影片，內容涵蓋每位組員的專案分工與策略管理研究心得。點擊任何一位成員卡片上的影片封面，即可在新視窗中播放對應的 YouTube 影片。請欣賞我們的自我介紹。"
+            : "[Team Introductions Tour] Welcome. This page features video self-introductions from all members of Research Group Seven. We have created six overview clips detailing our research modules and analytical workloads. Click any thumbnail cover card to open and watch their YouTube presentation in a new tab.";
+        } else if (state.activeTab === "tp0") {
           return state.lang === "zh"
             ? "【台塑1301 財務與歷史導覽】您好，本節呈現台塑的創建與歷史轉折。從1954年王永慶先生在美援背景下創辦福懋塑膠，到1958年成立南亞解圍滯銷，再到六輕大計奠定數十載極致成本優勢。在財務圖表區，您可以點選14種指標查看2021至2025年的變化。例如稅前利益在2024與2025年已轉為虧損，流動比率甚至一度跌破百分之百，顯示傳統石化產品面臨極大的中國產能過剩與結構性競爭。請點選各年度小卡或財務指標進行互動。"
             : "[FPC 1301 Financials & History Tour] Welcome. This section displays FPC's long history. Established in 1954 under US aid, Formosa initiated related integration in 1958 by forming Nan Ya Plastics. The reclamation of Mailiao No.6 Cracker complex cemented its low-cost DNA. Under the interactive chart, choose from 14 operational and liquidity metrics spanning 2021 to 2025. Pre-tax income turned negative in 2024, warning of heavy structural pressure and oversupply.";
@@ -3341,21 +4030,25 @@
       function updateAudioPanelUI() {
         const playBtn = document.getElementById("audio-play-btn");
         const statusText = document.getElementById("audio-status-text");
+        const waveform = document.querySelector(".audio-waveform");
 
         if (state.isAudioPlaying) {
           if (state.isAudioPaused) {
-            playBtn.innerHTML = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>`;
-            statusText.textContent = state.lang === "zh" ? "語音導覽已暫停" : "Guide Paused";
+            playBtn.innerHTML = `<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"></polygon></svg>`;
+            if (statusText) statusText.textContent = state.lang === "zh" ? "語音導覽已暫停" : "Guide Paused";
             playBtn.classList.remove("audio-btn-icon--playing");
+            if (waveform) waveform.classList.remove("is-playing");
           } else {
-            playBtn.innerHTML = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="18" y2="18"></line><line x1="6" y1="6" x2="6" y2="18"></line></svg>`;
-            statusText.textContent = state.lang === "zh" ? "說明播放中..." : "Guide Speaking...";
+            playBtn.innerHTML = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="5" x2="18" y2="19"></line><line x1="6" y1="5" x2="6" y2="19"></line></svg>`;
+            if (statusText) statusText.textContent = state.lang === "zh" ? "說明播放中..." : "Guide Speaking...";
             playBtn.classList.add("audio-btn-icon--playing");
+            if (waveform) waveform.classList.add("is-playing");
           }
         } else {
-          playBtn.innerHTML = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>`;
-          statusText.textContent = state.lang === "zh" ? "語音導覽閒置" : "Guide Idle";
+          playBtn.innerHTML = `<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"></polygon></svg>`;
+          if (statusText) statusText.textContent = state.lang === "zh" ? "語音導覽閒置" : "Guide Idle";
           playBtn.classList.remove("audio-btn-icon--playing");
+          if (waveform) waveform.classList.remove("is-playing");
         }
       }
 
@@ -3391,12 +4084,14 @@
           "ft-lab": "策略實驗室",
           "ft-sources": "引用文獻",
           "ft-ai": "學術誠信",
-          "mem-pill-1": "林亭伃 <span style=\"color: var(--muted); font-size: 11px; margin-left: 2px;\">113212016</span>",
+          "mem-pill-1": "林庭伃 <span style=\"color: var(--muted); font-size: 11px; margin-left: 2px;\">113212016</span>",
           "mem-pill-2": "王怡婷 <span style=\"color: var(--muted); font-size: 11px; margin-left: 2px;\">112212015</span>",
           "mem-pill-3": "楊承逸 <span style=\"color: var(--muted); font-size: 11px; margin-left: 2px;\">112212007</span>",
           "mem-pill-4": "顏郁珊 <span style=\"color: var(--muted); font-size: 11px; margin-left: 2px;\">1112120225</span>",
           "mem-pill-5": "邱泱慈 <span style=\"color: var(--muted); font-size: 11px; margin-left: 2px;\">112212023</span>",
-          "mem-pill-6": "劉馥瑄 <span style=\"color: var(--muted); font-size: 11px; margin-left: 2px;\">112212082</span>"
+          "mem-pill-6": "劉馥瑄 <span style=\"color: var(--muted); font-size: 11px; margin-left: 2px;\">112212082</span>",
+          "advisor-pill": "指導教授 駱世民",
+          "hero-group-label": "國策管第7組"
         },
         en: {
           "hero-eyebrow": "SMMC-EMI Multinational Corporate Strategy Project",
@@ -3433,7 +4128,9 @@
           "mem-pill-3": "Alex Yang <span style=\"color: var(--muted); font-size: 11px; margin-left: 2px;\">112212007</span>",
           "mem-pill-4": "Miranda <span style=\"color: var(--muted); font-size: 11px; margin-left: 2px;\">1112120225</span>",
           "mem-pill-5": "Julia <span style=\"color: var(--muted); font-size: 11px; margin-left: 2px;\">112212023</span>",
-          "mem-pill-6": "Angela <span style=\"color: var(--muted); font-size: 11px; margin-left: 2px;\">112212082</span>"
+          "mem-pill-6": "Angela <span style=\"color: var(--muted); font-size: 11px; margin-left: 2px;\">112212082</span>",
+          "advisor-pill": "Prof.Lo",
+          "hero-group-label": "G7"
         }
       };
 
@@ -3540,7 +4237,17 @@
       /* TABS RENDERING */
       function renderTabsNavigation() {
         const nav = document.getElementById("tab-nav");
-        nav.innerHTML = appData.tabs.map(tab => {
+        
+        const isIntroSelected = state.activeTab === "tp-intro";
+        const introLabel = state.lang === "zh" ? "成員自我介紹" : "Team Introductions";
+        
+        let navHtml = `
+          <button class="tab-btn" type="button" role="tab" data-tab-id="tp-intro" aria-selected="${isIntroSelected}">
+            ${introLabel}
+          </button>
+        `;
+        
+        navHtml += appData.tabs.map(tab => {
           const isSelected = state.activeTab === tab.id;
           const label = state.lang === "zh" ? tab.labelZh : tab.labelEn;
           return `
@@ -3549,6 +4256,8 @@
           </button>
         `;
         }).join("");
+
+        nav.innerHTML = navHtml;
 
         nav.querySelectorAll("[data-tab-id]").forEach(btn => {
           btn.addEventListener("click", () => {
@@ -3561,7 +4270,9 @@
         const panel = document.getElementById("tab-panel");
         panel.innerHTML = "";
 
-        if (state.activeTab === "tp0") {
+        if (state.activeTab === "tp-intro") {
+          renderTPIntro(panel);
+        } else if (state.activeTab === "tp0") {
           renderTP0(panel);
         } else if (state.activeTab === "tp1") {
           renderTP1(panel);
@@ -3570,6 +4281,113 @@
         } else if (state.activeTab === "tp3") {
           renderTP3(panel);
         }
+      }
+
+      /* RENDER TP-INTRO: MEMBERS VIDEO INTRODUCTIONS */
+      function renderTPIntro(container) {
+        const title = state.lang === "zh" ? "第七組全體組員自我介紹" : "G7 Research Team Video Self-Introductions";
+        const lead = state.lang === "zh"
+          ? "本頁面彙整小組全體成員之影音自我介紹。點擊下方任一組員卡片之影片封面圖即可另開新視窗線上瀏覽該組員之 YouTube 完整影片。"
+          : "This index aggregates the strategic video self-introductions for all G7 research members. Click any thumbnail cover card to watch their YouTube video in a new window.";
+
+        const videos = [
+          {
+            nameZh: "Angela 劉馥瑄",
+            nameEn: "Angela Chen (劉馥瑄)",
+            id: "112212082",
+            videoId: "IJUdxkn7E9A",
+            url: "https://youtu.be/IJUdxkn7E9A",
+            roleZh: "跨國企業策略分析與聯盟定位 (TP3)",
+            roleEn: "Strategic Alliances & Global Entry Modes"
+          },
+          {
+            nameZh: "Tina Wang 王怡婷",
+            nameEn: "Tina Wang (王怡婷)",
+            id: "112212015",
+            videoId: "N7V0fcwVZsI",
+            url: "https://youtu.be/N7V0fcwVZsI",
+            roleZh: "財務比率診斷與垂直整合交易成本 (TP0/TP3)",
+            roleEn: "Financial Auditing & TCE Vertical Integration"
+          },
+          {
+            nameZh: "Tina Lin 林庭伃",
+            nameEn: "Tina Lin (林庭伃)",
+            id: "113212016",
+            videoId: "EnPkUirJ1i8",
+            url: "https://www.youtube.com/watch?v=EnPkUirJ1i8",
+            roleZh: "小組長 / 營運利差線圖與歷史沿革 (TP0)",
+            roleEn: "Research Group Lead / Financial Line Graph"
+          },
+          {
+            nameZh: "Alex 楊承逸",
+            nameEn: "Alex Yang (楊承逸)",
+            id: "112212007",
+            videoId: "p_xiqRoxXtE",
+            url: "https://www.youtube.com/watch?v=p_xiqRoxXtE",
+            roleZh: "制度性限制、未來轉型KPI與策略模擬 (TP3/Lab)",
+            roleEn: "Institutional Pressures & Lab Simulator Design"
+          },
+          {
+            nameZh: "Julia 邱泱慈",
+            nameEn: "Julia Qiu (邱泱慈)",
+            id: "112212023",
+            videoId: "IG1NRMUJAQQ",
+            url: "https://www.youtube.com/watch?v=IG1NRMUJAQQ",
+            roleZh: "總體環境 PESTEL 與特值集中多角化 (TP1/TP3)",
+            roleEn: "PESTEL Scanning & Concentric Clean-tech Pathways"
+          },
+          {
+            nameZh: "Miranda 顏郁珊",
+            nameEn: "Miranda Yen (顏郁珊)",
+            id: "1112120225",
+            videoId: "lw-7xPK1ZGs",
+            url: "https://www.youtube.com/watch?v=lw-7xPK1ZGs&t=2s",
+            roleZh: "VRIO有形無形能耐與海外直接投資進入 (TP2/TP3)",
+            roleEn: "VRIO Tangible Moats & Overseas FDI Acquisitions"
+          }
+        ];
+
+        let html = `
+        <div class="section-block">
+          <p class="eyebrow">RESEARCH TEAM · INTRODUCTIONS</p>
+          <h2>${title}</h2>
+          <p style="font-size:16px; color:var(--body); max-width:800px; margin-bottom:32px;">${lead}</p>
+          
+          <div class="card-grid">
+            ${videos.map(v => {
+              const name = state.lang === "zh" ? v.nameZh : v.nameEn;
+              const role = state.lang === "zh" ? v.roleZh : v.roleEn;
+              const thumbUrl = `https://img.youtube.com/vi/${v.videoId}/hqdefault.jpg`;
+              
+              return `
+              <div class="editorial-card video-card" style="display:flex; flex-direction:column; gap:0; padding:0; overflow:hidden; border-radius:var(--radius-xl); border:1px solid var(--hairline-strong); background-color:var(--surface-card); transition:all 0.3s cubic-bezier(0.16, 1, 0.3, 1);">
+                <!-- Cover Image Container -->
+                <a href="${v.url}" target="_blank" style="position:relative; display:block; width:100%; aspect-ratio:16/9; overflow:hidden; background-color:#000;">
+                  <img src="${thumbUrl}" alt="${name} Video" style="width:100%; height:100%; object-fit:cover; transition:transform 0.5s ease;" class="video-thumbnail-img">
+                  <div style="position:absolute; inset:0; background:rgba(0,0,0,0.18); display:flex; align-items:center; justify-content:center; transition:background 0.3s;" class="video-overlay">
+                    <div style="width:48px; height:48px; border-radius:50%; background:rgba(255,255,255,0.9); display:flex; align-items:center; justify-content:center; box-shadow:0 6px 20px rgba(0,0,0,0.25); transition:all 0.3s;" class="video-play-btn">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="color:#000; margin-left:2px;">
+                        <polygon points="6 4 20 12 6 20 6 4"></polygon>
+                      </svg>
+                    </div>
+                  </div>
+                </a>
+                
+                <!-- Video details container -->
+                <div style="padding:16px 20px 20px 20px; display:flex; flex-direction:column; gap:4px;">
+                  <h3 style="font-family:'Inter', sans-serif; font-size:16px; font-weight:700; color:var(--ink); margin:0;">
+                    <strong>${name}</strong>
+                  </h3>
+                  <span style="font-size:12px; font-weight:600; color:var(--muted); letter-spacing:0.5px;">學號 Student ID: ${v.id}</span>
+                </div>
+              </div>
+              `;
+            }).join("")}
+          </div>
+        </div>
+        `;
+
+        container.innerHTML = html;
       }
 
       /* RENDER TP0: COMPANY & FINANCIALS */
@@ -3698,6 +4516,288 @@
             ? '從2021至2025的數據線圖可清晰看出，大宗商品石化工業的傳統模式正經受劇烈的結構性利差收縮。淨利在2024和2025兩度降為負值，利息保障倍數降至負二點二倍。這直接證明了「擴量、打價格戰」的模式在中國產能過剩面前已完全失效，台塑的生存必須完全託付給第二成長曲線的高附加價值集中多角化產品。'
             : "FPC's 5-year financials demonstrate the severe limitations of bulk plastic volume play under Chinese overcapacity. Net profit margins and interest coverage plunged deep into negative territory. This quantitative trajectory proves that cost control in generic commoditized polymers is no longer sufficient; related concentric upgrades are mandatory for survival."}
           </p>
+        </div>
+
+        <!-- TP0 DATA SOURCES SECTION -->
+        <div class="sources-block">
+          <h3 style="font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted); margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 2px;">
+              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+            </svg>
+            ${state.lang === 'zh' ? '資料來源與學術文獻專區' : 'Data Sources & References Hub'}
+          </h3>
+          <p style="font-size: 13.5px; color: var(--body); margin-bottom: var(--spacing-sm); line-height: 1.5;">
+            ${state.lang === 'zh' 
+              ? '本策略專案（TP0 公司介紹與財務表現）所引用之官方事實、新聞報導及財務數據，其權威來源連結彙整如下（點擊卡片即可另開新分頁瀏覽）：' 
+              : 'The authoritative references, news archives, and financial datasets cited throughout our TP0 strategic assessment are indexed below (click cards to visit):'}
+          </p>
+          
+          <div class="sources-grid">
+            <a href="https://udn.com/news/story/7241/9386427" target="_blank" class="source-item-link" title="https://udn.com/news/story/7241/9386427">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【焦點新聞】' : '【Hot News】'} UDN 聯合新聞網</strong>
+                <span>${state.lang === 'zh' ? '台塑美國乙烷裂解頁岩氣成本優勢分析' : 'FPC US Ethane Shale Gas Cost Analysis'}</span>
+              </div>
+            </a>
+            
+            <a href="https://news.pts.org.tw/article/801635" target="_blank" class="source-item-link" title="https://news.pts.org.tw/article/801635">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【公共媒體】' : '【Public Media】'} PTS 公視新聞網</strong>
+                <span>${state.lang === 'zh' ? '台灣大宗塑膠原料產銷鏈與中油四輕爭端' : 'FPC Domestic Feedstock Sourcing & CPC Cracker Dispute'}</span>
+              </div>
+            </a>
+
+            <a href="https://www.thenewslens.com/article/101291" target="_blank" class="source-item-link" title="https://www.thenewslens.com/article/101291">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【產業故事】' : '【Industry Story】'} The News Lens 關鍵評論網</strong>
+                <span>${state.lang === 'zh' ? '王永慶的逆向整合戰略與南亞塑膠創立歷程' : 'YC Wang Reverse Integration & Nan Ya Founder Story'}</span>
+              </div>
+            </a>
+
+            <a href="http://www2.fpg.com.tw/html/mgz/abu/abu_buo_lst.htm" target="_blank" class="source-item-link" title="http://www2.fpg.com.tw/html/mgz/abu/abu_buo_lst.htm">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【集團期刊】' : '【FPG Bi-Monthly】'} FPG 台塑企業雙月刊</strong>
+                <span>${state.lang === 'zh' ? '各廠區管理優化與生產據點介紹列表' : 'Plant Facilities, Offices & Site Introductions'}</span>
+              </div>
+            </a>
+
+            <a href="http://www2.fpg.com.tw/html/mgz/Mgz_epaper/155/46-5p123-128.pdf" target="_blank" class="source-item-link" title="http://www2.fpg.com.tw/html/mgz/Mgz_epaper/155/46-5p123-128.pdf">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【企業月刊】' : '【Corporate Journal】'} FPG 台塑月刊 PDF</strong>
+                <span>${state.lang === 'zh' ? '德州廠頁岩氣開採與產能規模分析專文' : 'FPC Texas Shale Gas Operations Report PDF'}</span>
+              </div>
+            </a>
+
+            <a href="https://www.fpg.com.tw/uploads/images/media-center/ebook-top/2020企業簡介(繁體版).pdf" target="_blank" class="source-item-link" title="https://www.fpg.com.tw/uploads/images/media-center/ebook-top/2020企業簡介(繁體版).pdf">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【官方手冊】' : '【Official E-Book】'} FPG 企業簡介官方電子書</strong>
+                <span>${state.lang === 'zh' ? '2020 台塑企業整體營運結構說明' : '2020 FPG Corporate Overview E-Book PDF'}</span>
+              </div>
+            </a>
+
+            <a href="https://www.fpg.com.tw/tw/about/info" target="_blank" class="source-item-link" title="https://www.fpg.com.tw/tw/about/info">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【集團官網】' : '【FPG Profile】'} FPG 台塑企業入口網</strong>
+                <span>${state.lang === 'zh' ? '關於台塑集團、創始精神與企業沿革' : 'About FPG, Founder Values & Core Milestones'}</span>
+              </div>
+            </a>
+
+            <a href="https://www.fpc.com.tw/fpcw/index.php" target="_blank" class="source-item-link" title="https://www.fpc.com.tw/fpcw/index.php">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【子公司官網】' : '【FPC Site】'} FPC 台灣塑膠工業</strong>
+                <span>${state.lang === 'zh' ? '台塑公司 1301 官方入口首頁' : 'Formosa Plastics Corp 1301 Homepage'}</span>
+              </div>
+            </a>
+
+            <a href="https://csr.fpc.com.tw/FPC_CSR/home.aspx" target="_blank" class="source-item-link" title="https://csr.fpc.com.tw/FPC_CSR/home.aspx">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【永續官方】' : '// FPC ESG Hub'} FPC 永續與碳管理平台</strong>
+                <span>${state.lang === 'zh' ? '台塑 ESG 行動計畫、環境監測與節能數據' : 'FPC Sustainability, ESG Audits & Energy Saving'}</span>
+              </div>
+            </a>
+
+            <a href="https://ericcpa.co/2018/06/15/使命、願景、價值觀/" target="_blank" class="source-item-link" title="https://ericcpa.co/2018/06/15/使命、願景、價值觀/">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【專業筆記】' : '【Academic Notes】'} Eric CPA Notes</strong>
+                <span>${state.lang === 'zh' ? '經營管理思維：使命、願景、價值觀與策略地圖' : 'Fostering Alignment: Mission, Vision, and Values'}</span>
+              </div>
+            </a>
+
+            <a href="https://www.fpg.com.tw/uploads/images/media-center/ebook-top/FPG%20Introduction2018_zh-tw.pdf" target="_blank" class="source-item-link" title="https://www.fpg.com.tw/uploads/images/media-center/ebook-top/FPG Introduction2018_zh-tw.pdf">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【官方手冊】' : '【Official Brochure】'} FPG 企業介紹官方手冊</strong>
+                <span>${state.lang === 'zh' ? '2018 台塑集團中文官方簡介手冊 PDF' : '2018 FPG Corporate Brochure PDF'}</span>
+              </div>
+            </a>
+
+            <a href="https://www.fpg.taipei/uploads/images/about/download/FPG_Plant(0108).pdf" target="_blank" class="source-item-link" title="https://www.fpg.taipei/uploads/images/about/download/FPG_Plant(0108).pdf">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【廠區分布】' : '【Global Footprint】'} FPG 全球廠區分布</strong>
+                <span>${state.lang === 'zh' ? '台塑集團全球生產基地與營運據點分布 PDF' : 'FPG Global Manufacturing Operations Map PDF'}</span>
+              </div>
+            </a>
+
+            <a href="https://www.fpc.com.tw/fpcw/index.php?op=res&id=3" target="_blank" class="source-item-link" title="https://www.fpc.com.tw/fpcw/index.php?op=res&id=3">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【產品規格】' : '【Product Guide】'} FPC 產品手冊專區</strong>
+                <span>${state.lang === 'zh' ? '聚氯乙烯、聚乙烯、聚丙烯大宗料規格' : 'PVC, PE, PP Bulk Plastics Specs'}</span>
+              </div>
+            </a>
+
+            <a href="https://www.fpc.com.tw/fpcw/index.php?op=res&id=11" target="_blank" class="source-item-link" title="https://www.fpc.com.tw/fpcw/index.php?op=res&id=11">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【一體化流程】' : '【Process Flow】'} FPC 生產流程與一體化管線</strong>
+                <span>${state.lang === 'zh' ? '六輕麥寮廠區垂直整合一體化流程說明' : 'Mailiao Cracker Production Flows & pipelines'}</span>
+              </div>
+            </a>
+
+            <a href="https://www.fpc.com.tw/fpcw/index.php?op=res&id=13&c=54" target="_blank" class="source-item-link" title="https://www.fpc.com.tw/fpcw/index.php?op=res&id=13&c=54">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【材料科學】' : '【Specialty Polymers】'} FPC 特規與高值化材料</strong>
+                <span>${state.lang === 'zh' ? '碳纖維及高溫耐候聚合物規格應用' : 'Carbon Fiber & Specialty Plastics Details'}</span>
+              </div>
+            </a>
+
+            <a href="https://csr.fpc.com.tw/FPC_CSR/download/csr_report/FPC_2024_ESG_TW.pdf" target="_blank" class="source-item-link" title="https://csr.fpc.com.tw/FPC_CSR/download/csr_report/FPC_2024_ESG_TW.pdf">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【環境永續】' : '【Sustainability Report】'} FPC 2024 永續報告書</strong>
+                <span>${state.lang === 'zh' ? '碳中和政策、減碳排放目標與綠電比率' : 'FPC 2024 ESG Corporate Sustainability Report'}</span>
+              </div>
+            </a>
+
+            <a href="https://www.fpg.com.tw/tw/about/ir/report" target="_blank" class="source-item-link" title="https://www.fpg.com.tw/tw/about/ir/report">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【財務資訊】' : '// IR Center'} FPG 投資人關係</strong>
+                <span>${state.lang === 'zh' ? '母集團各季盈餘報告書與會計申報下載' : 'FPG Joint Financial Reports & Quarterly Performance'}</span>
+              </div>
+            </a>
+
+            <a href="https://www.fpg.com.tw/tw" target="_blank" class="source-item-link" title="https://www.fpg.com.tw/tw">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【集團門戶】' : '【FPG Homepage】'} FPG 台塑企業入口網</strong>
+                <span>${state.lang === 'zh' ? '台塑集團官方中文網頁主頁面' : 'Formosa Plastics Group FPG Portal Mainpage'}</span>
+              </div>
+            </a>
+
+            <a href="https://www.google.com/search?q=https://www.fpg.com.tw/tw/sustainability" target="_blank" class="source-item-link" title="https://www.google.com/search?q=https://www.fpg.com.tw/tw/sustainability">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【綠色政策】' : '【Search Registry】'} FPG 永續發展政策搜尋</strong>
+                <span>${state.lang === 'zh' ? '台塑集團綠色能源轉型與社會許可議題' : 'FPG ESG Green Transition Policies and Studies'}</span>
+              </div>
+            </a>
+
+            <a href="https://www.google.com/search?q=https://www.fpg.com.tw/tw/about/business/new-smart-energy" target="_blank" class="source-item-link" title="https://www.google.com/search?q=https://www.fpg.com.tw/tw/about/business/new-smart-energy">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【新能布局】' : '【Search Registry】'} 台塑新智能發展規畫搜尋</strong>
+                <span>${state.lang === 'zh' ? '台塑新智能彰濱電芯廠與儲能供應鏈' : 'Formosa Smart Energy Battery gigafactory info'}</span>
+              </div>
+            </a>
+
+            <a href="https://mops.twse.com.tw/mops/web/index" target="_blank" class="source-item-link" title="https://mops.twse.com.tw/mops/web/index">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【交易所申報】' : '【TWSE MOPS】'} MOPS 公開資訊觀測站入口</strong>
+                <span>${state.lang === 'zh' ? '台灣上市石化同業財務月報與季報檢索' : 'Official TWSE Listing Public Disclosure Portal'}</span>
+              </div>
+            </a>
+
+            <a href="https://www.fpc.com.tw/fpcwuploads/files/2023_annual%20report(2).pdf" target="_blank" class="source-item-link" title="https://www.fpc.com.tw/fpcwuploads/files/2023_annual report(2).pdf">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【財務年報】' : '【2023 Annual Report】'} 台塑 2023 股東會年報 PDF</strong>
+                <span>${state.lang === 'zh' ? '2023 年度營業報告書與個體合併會計表' : 'FPC 2023 Consolidated Annual Audited Statement'}</span>
+              </div>
+            </a>
+
+            <a href="https://www.fpc.com.tw/fpcwuploads/files/2024_annual%20report.pdf" target="_blank" class="source-item-link" title="https://www.fpc.com.tw/fpcwuploads/files/2024_annual report.pdf">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【財務年報】' : '【2024 Annual Report】'} 台塑 2024 股東會年報 PDF</strong>
+                <span>${state.lang === 'zh' ? '2024 年度營業報告書與個體合併會計表' : 'FPC 2024 Consolidated Annual Audited Statement'}</span>
+              </div>
+            </a>
+
+            <a href="https://www.fpc.com.tw/fpcwuploads/files/2024%20Q4%20FS-CH.pdf" target="_blank" class="source-item-link" title="https://www.fpc.com.tw/fpcwuploads/files/2024 Q4 FS-CH.pdf">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【季度財報】' : '【2024 Q4 Statement】'} 台塑 2024Q4 財務報告書</strong>
+                <span>${state.lang === 'zh' ? '2024 年度第四季會計師核閱之合併財務報表' : 'FPC 2024 Q4 Financial Accounts'}</span>
+              </div>
+            </a>
+
+            <a href="https://www.fpc.com.tw/fpcwuploads/files/2025%20Q4%20FS-CH(4).pdf" target="_blank" class="source-item-link" title="https://www.fpc.com.tw/fpcwuploads/files/2025 Q4 FS-CH(4).pdf">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【季度財報】' : '【2025 Q4 Statement】'} 台塑 2025Q4 財務報告書</strong>
+                <span>${state.lang === 'zh' ? '2025 年度第四季會計師核閱之合併財務報表' : 'FPC 2025 Q4 Financial Accounts'}</span>
+              </div>
+            </a>
+
+            <a href="https://www.fpc.com.tw/fpcw/index.php?op=res&id=13&c=20" target="_blank" class="source-item-link" title="https://www.fpc.com.tw/fpcw/index.php?op=res&id=13&c=20">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【技術規格】' : '【PE & PP Data】'} 台塑 PE 與 PP 規格手冊</strong>
+                <span>${state.lang === 'zh' ? '泛用塑膠 PE/PP 等射出擠壓成型物理手冊' : 'Polyethylene & Polypropylene Industrial Sheets'}</span>
+              </div>
+            </a>
+
+            <a href="https://www.fpc.com.tw/fpcw/index.php?op=res&id=13&c=22" target="_blank" class="source-item-link" title="https://www.fpc.com.tw/fpcw/index.php?op=res&id=13&c=22">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【半導體特用】' : '【Semi chemicals】'} 電子級化學品與半導體特化手冊</strong>
+                <span>${state.lang === 'zh' ? '晶圓洗淨高純 IPA、超純過氧化氫規格介紹' : 'Wafer-grade IPA & semiconductor chemicals catalog'}</span>
+              </div>
+            </a>
+
+            <a href="https://www.fpc.com.tw/fpcwuploads/files/2025Q4M.pdf" target="_blank" class="source-item-link" title="https://www.fpc.com.tw/fpcwuploads/files/2025Q4M.pdf">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【業績法說會】' : '【Investor Briefings】'} 台塑 2025Q4 法說會簡報</strong>
+                <span>${state.lang === 'zh' ? '2025 全年營運檢討與 2026 第一季展望簡報' : 'FPC Q4 2025 Investor Conference Presentation'}</span>
+              </div>
+            </a>
+
+            <a href="https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20211230&type=ALLBUT0999&response=json" target="_blank" class="source-item-link" title="https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20211230&type=ALLBUT0999&response=json">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【大盤行情 API】' : '【Trading Index API】'} 臺灣證交所 2021 年底交易資訊</strong>
+                <span>${state.lang === 'zh' ? '2021/12/30 台股收盤與上市公司收盤數據 JSON' : 'TWSE Closing Index API (Dec 30, 2021)'}</span>
+              </div>
+            </a>
+
+            <a href="https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20221230&type=ALLBUT0999&response=json" target="_blank" class="source-item-link" title="https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20221230&type=ALLBUT0999&response=json">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【大盤行情 API】' : '【Trading Index API】'} 臺灣證交所 2022 年底交易資訊</strong>
+                <span>${state.lang === 'zh' ? '2022/12/30 台股收盤與上市公司收盤數據 JSON' : 'TWSE Closing Index API (Dec 30, 2022)'}</span>
+              </div>
+            </a>
+
+            <a href="https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20231229&type=ALLBUT0999&response=json" target="_blank" class="source-item-link" title="https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20231229&type=ALLBUT0999&response=json">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【大盤行情 API】' : '【Trading Index API】'} 臺灣證交所 2023 年底交易資訊</strong>
+                <span>${state.lang === 'zh' ? '2023/12/29 台股收盤與上市公司收盤數據 JSON' : 'TWSE Closing Index API (Dec 29, 2023)'}</span>
+              </div>
+            </a>
+
+            <a href="https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20241231&type=ALLBUT0999&response=json" target="_blank" class="source-item-link" title="https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20241231&type=ALLBUT0999&response=json">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【大盤行情 API】' : '【Trading Index API】'} 臺灣證交所 2024 年底交易資訊</strong>
+                <span>${state.lang === 'zh' ? '2024/12/31 台股收盤與上市公司收盤數據 JSON' : 'TWSE Closing Index API (Dec 31, 2024)'}</span>
+              </div>
+            </a>
+
+            <a href="https://www.twse.com.tw/rwd/zh" target="_blank" class="source-item-link" title="https://www.twse.com.tw/rwd/zh">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【大盤官網】' : '【TWSE Homepage】'} 臺灣證券交易所官方網頁</strong>
+                <span>${state.lang === 'zh' ? '臺灣上市公司資訊揭露、市場公告與大盤即時板' : 'Taiwan Stock Exchange Market Announcements Homepage'}</span>
+              </div>
+            </a>
+          </div>
         </div>
       `;
 
@@ -3946,19 +5046,43 @@
               : 'Combine internal SWOT constraints with an external AMC framework to segment key rivals, developing specific tactics (specialty premium pivots, M&A) to counter low-cost capacity floods.'}
           </p>
 
-          <!-- SWOT Grid -->
-          <div class="card-grid" style="grid-template-columns: 1fr 1fr; margin-bottom:32px;">
-            <div class="editorial-card" style="border-left: 3px solid var(--primary);">
-              <span class="badge badge--success" style="margin-bottom:12px; font-weight:700;">${state.lang === 'zh' ? '內部優勢 STRENGTHS' : 'INTERNAL STRENGTHS'}</span>
-              <ul style="padding-left:18px; margin:0; font-size:13px; color:var(--body-strong); line-height:1.7;">
-                ${swot.strengths.map(s => `<li>${s}</li>`).join("")}
-              </ul>
+          <!-- SWOT Grid (Upgraded to 2x2 Responsive Grid) -->
+          <div class="card-grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-bottom:32px;">
+            <!-- Strengths -->
+            <div class="editorial-card" style="border-left: 3px solid var(--semantic-success); display: flex; flex-direction: column; justify-content: space-between; padding: 22px;">
+              <div>
+                <span class="badge badge--success" style="margin-bottom:12px; font-weight:700;">${state.lang === 'zh' ? '內部優勢 STRENGTHS' : 'INTERNAL STRENGTHS'}</span>
+                <ul style="padding-left:18px; margin:0; font-size:13px; color:var(--body-strong); line-height:1.7;">
+                  ${swot.strengths.map(s => `<li>${s}</li>`).join("")}
+                </ul>
+              </div>
             </div>
-            <div class="editorial-card" style="border-left: 3px solid var(--gradient-rose);">
-              <span class="badge badge--error" style="margin-bottom:12px; font-weight:700;">${state.lang === 'zh' ? '內部劣勢 WEAKNESSES' : 'INTERNAL WEAKNESSES'}</span>
-              <ul style="padding-left:18px; margin:0; font-size:13px; color:var(--body-strong); line-height:1.7;">
-                ${swot.weaknesses.map(w => `<li>${w}</li>`).join("")}
-              </ul>
+            <!-- Weaknesses -->
+            <div class="editorial-card" style="border-left: 3px solid var(--semantic-error); display: flex; flex-direction: column; justify-content: space-between; padding: 22px;">
+              <div>
+                <span class="badge badge--error" style="margin-bottom:12px; font-weight:700;">${state.lang === 'zh' ? '內部劣勢 WEAKNESSES' : 'INTERNAL WEAKNESSES'}</span>
+                <ul style="padding-left:18px; margin:0; font-size:13px; color:var(--body-strong); line-height:1.7;">
+                  ${swot.weaknesses.map(w => `<li>${w}</li>`).join("")}
+                </ul>
+              </div>
+            </div>
+            <!-- Opportunities -->
+            <div class="editorial-card" style="border-left: 3px solid var(--gradient-sky); display: flex; flex-direction: column; justify-content: space-between; padding: 22px;">
+              <div>
+                <span class="badge" style="margin-bottom:12px; font-weight:700; background: rgba(168, 200, 232, 0.15); color: #1e3a8a; border: 1px solid rgba(168, 200, 232, 0.4);">${state.lang === 'zh' ? '外部機會 OPPORTUNITIES' : 'EXTERNAL OPPORTUNITIES'}</span>
+                <ul style="padding-left:18px; margin:0; font-size:13px; color:var(--body-strong); line-height:1.7;">
+                  ${swot.opportunities.map(o => `<li>${o}</li>`).join("")}
+                </ul>
+              </div>
+            </div>
+            <!-- Threats -->
+            <div class="editorial-card" style="border-left: 3px solid var(--gradient-peach); display: flex; flex-direction: column; justify-content: space-between; padding: 22px;">
+              <div>
+                <span class="badge" style="margin-bottom:12px; font-weight:700; background: rgba(244, 197, 168, 0.15); color: #c2410c; border: 1px solid rgba(244, 197, 168, 0.4);">${state.lang === 'zh' ? '外部威脅 THREATS' : 'EXTERNAL THREATS'}</span>
+                <ul style="padding-left:18px; margin:0; font-size:13px; color:var(--body-strong); line-height:1.7;">
+                  ${swot.threats.map(t => `<li>${t}</li>`).join("")}
+                </ul>
+              </div>
             </div>
           </div>
 
@@ -4095,6 +5219,120 @@
             }).join("")}
           </div>
         </div>
+
+        <!-- TP1 DATA SOURCES SECTION -->
+        <div class="sources-block" style="margin-top: 36px;">
+          <h3 style="font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted); margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 2px;">
+              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+            </svg>
+            ${state.lang === 'zh' ? '資料來源與競爭分析文獻' : 'Data Sources & Competitor Studies'}
+          </h3>
+          <p style="font-size: 13.5px; color: var(--body); margin-bottom: var(--spacing-sm); line-height: 1.5;">
+            ${state.lang === 'zh' 
+              ? '本策略專案（TP1 外部環境與產業競爭）所引用之關稅變更、裂解廠協議及產業轉型事實，其權威來源連結彙整如下（點擊卡片即可另開新分頁瀏覽）：' 
+              : 'The authoritative news coverages, sector briefs, and policy documents supporting our TP1 external scan are indexed below (click cards to visit):'}
+          </p>
+          
+          <div class="sources-grid">
+            <a href="https://money.udn.com/money/story/10871/9434073" target="_blank" class="source-item-link" title="https://money.udn.com/money/story/10871/9434073">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【關稅衝擊】' : '【Tariff Impact】'} UDN 經濟日報</strong>
+                <span>${state.lang === 'zh' ? '兩岸關稅調整衝擊與台塑大宗塑膠外銷壓力分析' : 'Tariff Adjustments & FPC Export Margin Pressure Report'}</span>
+              </div>
+            </a>
+            
+            <a href="https://www.taisounds.com/news/content/76/250814" target="_blank" class="source-item-link" title="https://www.taisounds.com/news/content/76/250814">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【產能協議】' : '【Cracker Agreement】'} 太報 Taisounds</strong>
+                <span>${state.lang === 'zh' ? '台塑與中油輕油裂解產能供給協議深度分析' : 'FPC & CPC Cracker Yield Coordination Report'}</span>
+              </div>
+            </a>
+
+            <a href="https://www.wealth.com.tw/articles/3a4d26ac-6507-4ea2-9da5-95b935e28e5e" target="_blank" class="source-item-link" title="https://www.wealth.com.tw/articles/3a4d26ac-6507-4ea2-9da5-95b935e28e5e">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【產業巨變】' : '【Green Pivot】'} 財訊 Wealth Magazine</strong>
+                <span>${state.lang === 'zh' ? '台塑轉型先進綠能與超高純度特用半導體化學品' : 'Wafer-grade semiconductor inputs & green smart energy pivot'}</span>
+              </div>
+            </a>
+
+            <a href="https://money.udn.com/money/story/5648/9461006" target="_blank" class="source-item-link" title="https://money.udn.com/money/story/5648/9461006">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【戰略升級】' : '【Global Involution】'} UDN 經濟日報</strong>
+                <span>${state.lang === 'zh' ? '全球大宗石化內捲與台塑先進高值化材料策略' : 'Global plastic pricing dynamics & FPC high-value strategy'}</span>
+              </div>
+            </a>
+
+            <a href="https://www.peoplenews.tw/articles/economic-news/19845" target="_blank" class="source-item-link" title="https://www.peoplenews.tw/articles/economic-news/19845">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【產業診斷】' : '【Sector Diagnosis】'} 民報 People News</strong>
+                <span>${state.lang === 'zh' ? '中國產能外溢與台灣傳統石化業去產能內捲挑戰' : 'Mainland China overcapacity & Taiwan petrochemical challenges'}</span>
+              </div>
+            </a>
+
+            <a href="https://tw.stock.yahoo.com/news/%E7%94%A2%E6%A5%AD%E5%88%86%E6%9E%90-%E5%8F%B0%E5%A1%91%E5%9B%9B%E5%AF%B6%E7%9C%8B2026-%E4%BB%8A%E5%B9%B4%E4%BB%8D%E8%8B%A6-%E6%98%8E%E5%B9%B4%E6%8B%9C%E6%94%B9%E5%96%8B-2-081801044.html" target="_blank" class="source-item-link" title="https://tw.stock.yahoo.com/news/產業分析-台塑四寶看2026-今年仍苦-明年拚改善-2-081801044.html">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【市場前景】' : '【Market Outlook】'} Yahoo! 奇摩股市</strong>
+                <span>${state.lang === 'zh' ? '台塑四寶看2026年本業展望與結構轉型痛點' : 'Formosa Four Treasures outlook & structural upgrade pain points'}</span>
+              </div>
+            </a>
+
+            <a href="https://franchisee.twmec.com/tag/amc%E5%88%86%E6%9E%90%E6%B3%95/" target="_blank" class="source-item-link" title="https://franchisee.twmec.com/tag/amc分析法/">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【策略工具】' : '【Strategy Tool】'} 台灣連鎖加盟知識網</strong>
+                <span>${state.lang === 'zh' ? 'AMC 競爭者行為分析框架：意識、動機與能力評估法' : 'AMC competitive framework: Awareness, Motivation, Capability'}</span>
+              </div>
+            </a>
+
+            <a href="https://cmnews.com.tw/article/cmoneyaicurator-e4ef092b-5036-11f1-9e90-37332b02bbd5" target="_blank" class="source-item-link" title="https://cmnews.com.tw/article/cmoneyaicurator-e4ef092b-5036-11f1-9e90-37332b02bbd5">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【獲利預警】' : '【Earnings Alert】'} CMoney 財經焦點</strong>
+                <span>${state.lang === 'zh' ? '2026年大宗塑化產品利差探底與台塑本業虧損壓力分析' : 'Plastics spread compression & FPC Q1 operating deficit analysis'}</span>
+              </div>
+            </a>
+
+            <a href="https://cmnews.com.tw/article/cmoneyaicurator-0439efab-4dd3-11f1-96ba-77e677241f91" target="_blank" class="source-item-link" title="https://cmnews.com.tw/article/cmoneyaicurator-0439efab-4dd3-11f1-96ba-77e677241f91">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【同業對比】' : '【Peer Comparison】'} CMoney 財經焦點</strong>
+                <span>${state.lang === 'zh' ? '台塑、南亞、台化毛利率與EPS表現分化深度解讀' : 'Margin & EPS divergence between FPC, Nan Ya, and FCFC'}</span>
+              </div>
+            </a>
+
+            <a href="https://cmnews.com.tw/article/cmoneyaicurator-2fef8673-4abf-11f1-8c8b-649184d71628" target="_blank" class="source-item-link" title="https://cmnews.com.tw/article/cmoneyaicurator-2fef8673-4abf-11f1-8c8b-649184d71628">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【產能警訊】' : '【Capacity Alert】'} CMoney 財經焦點</strong>
+                <span>${state.lang === 'zh' ? '全球 PVC 供過於求 20% 與中國業者補貼價格戰威脅' : 'Global PVC supply glut & subsidized China price war threat'}</span>
+              </div>
+            </a>
+
+            <a href="https://ww2.money-link.com.tw/RealtimeNews/NewsContent.aspx?SN=2349428002&PU=0010" target="_blank" class="source-item-link" title="https://ww2.money-link.com.tw/RealtimeNews/NewsContent.aspx?SN=2349428002&PU=0010">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【市場動態】' : '【Market Dynamics】'} Money-Link 富聯網</strong>
+                <span>${state.lang === 'zh' ? '亞洲 PVC 大宗樹脂報價動向與進口替代機會' : 'Asian PVC resin pricing dynamics & import substitution'}</span>
+              </div>
+            </a>
+
+            <a href="https://readmo.cmoney.tw/article/83d317a1-e0b5-477a-83b9-c9536a833d4c" target="_blank" class="source-item-link" title="https://readmo.cmoney.tw/article/83d317a1-e0b5-477a-83b9-c9536a833d4c">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【轉型指引】' : '【Upgrade Guide】'} CMoney 閱讀專區</strong>
+                <span>${state.lang === 'zh' ? '台塑高附加價值電子級化學品與半導體特規材料升級路徑' : 'Formosa high-purity semiconductor specialty chemicals pivot'}</span>
+              </div>
+            </a>
+          </div>
+        </div>
       `;
 
         container.innerHTML = html;
@@ -4137,18 +5375,61 @@
         const tabData = appData.tabs[2];
         const resData = state.lang === "zh" ? tabData.resources.zh : tabData.resources.en;
 
+        // Custom premium SVGs for KPI cards
+        const svgGlobe = `
+          <svg class="tp2-kpi-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width: 36px; height: 36px; margin: 0 auto; display: block; color: var(--ink);">
+            <circle cx="12" cy="12" r="10" stroke-dasharray="2 2" opacity="0.4" />
+            <circle cx="12" cy="12" r="10" />
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+            <path d="M2 12h20" />
+            <path d="M12 2v20" />
+          </svg>
+        `;
+        const svgMolecule = `
+          <svg class="tp2-kpi-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width: 36px; height: 36px; margin: 0 auto; display: block; color: var(--ink);">
+            <path d="M12 2l7 4v8l-7 4-7-4V6z" />
+            <circle cx="12" cy="2" r="2" fill="var(--surface-card)" />
+            <circle cx="19" cy="6" r="2" fill="var(--surface-card)" />
+            <circle cx="19" cy="14" r="2" fill="var(--surface-card)" />
+            <circle cx="12" cy="18" r="2" fill="var(--surface-card)" />
+            <circle cx="5" cy="14" r="2" fill="var(--surface-card)" />
+            <circle cx="5" cy="6" r="2" fill="var(--surface-card)" />
+            <path d="M12 6v6l4.5 2.5" />
+            <circle cx="12" cy="12" r="1.5" fill="currentColor" />
+          </svg>
+        `;
+        const svgLoss = `
+          <svg class="tp2-kpi-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width: 36px; height: 36px; margin: 0 auto; display: block; color: var(--ink);">
+            <path d="M3 6l6 6 4-4 8 8" />
+            <path d="M21 10v6h-6" />
+            <rect x="2" y="18" width="20" height="2" rx="1" fill="currentColor" opacity="0.3" />
+            <circle cx="18" cy="7" r="3" stroke="var(--semantic-error)" stroke-width="1" stroke-dasharray="2 1" />
+            <path d="M18 6.5v1M18 9h.01" stroke="var(--semantic-error)" stroke-width="1.2" />
+          </svg>
+        `;
+        const svgChart = `
+          <svg class="tp2-kpi-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width: 36px; height: 36px; margin: 0 auto; display: block; color: var(--ink);">
+            <rect x="3" y="12" width="3" height="8" rx="1" />
+            <rect x="9" y="8" width="3" height="12" rx="1" />
+            <rect x="15" y="14" width="3" height="6" rx="1" />
+            <rect x="21" y="6" width="3" height="14" rx="1" />
+            <path d="M3 14c4-2 8-5 12-1 4-4 6-6 6-6" opacity="0.65" stroke-dasharray="2 2" />
+            <path d="M21 6h-4M21 6v4" opacity="0.8" />
+          </svg>
+        `;
+
         const kpiCards = state.lang === 'zh'
           ? [
-              { value: "5–7%",    label: "PVC 全球市佔率",        sub: "亞洲 Price Setter",         icon: "🌐", color: "var(--gradient-mint)" },
-              { value: "25億",    label: "2024 研發總支出",        sub: "開發 35 項新技術",           icon: "🔬", color: "var(--gradient-lavender)" },
-              { value: "100.49億",label: "2025 淨損 (億元)",       sub: "轉型壓力歷史新高",           icon: "📉", color: "var(--gradient-rose)" },
-              { value: "419.85億",label: "2026 Q1 累計營收 (億元)",sub: "年減 11.05%",               icon: "📊", color: "var(--gradient-peach)" }
+              { value: "5–7%",    label: "PVC 全球市佔率",        sub: "亞洲 Price Setter",         icon: svgGlobe, color: "var(--gradient-mint)" },
+              { value: "25億",    label: "2024 研發總支出",        sub: "開發 35 項新技術",           icon: svgMolecule, color: "var(--gradient-lavender)" },
+              { value: "100.49億",label: "2025 淨損 (億元)",       sub: "轉型壓力歷史新高",           icon: svgLoss, color: "var(--gradient-rose)" },
+              { value: "419.85億",label: "2026 Q1 累計營收 (億元)",sub: "年減 11.05%",               icon: svgChart, color: "var(--gradient-peach)" }
             ]
           : [
-              { value: "5–7%",    label: "Global PVC Market Share",  sub: "Asian Price Setter",           icon: "🌐", color: "var(--gradient-mint)" },
-              { value: "NT$2.5B", label: "2024 Total R&D Expenditure",sub: "35 New Technologies Developed", icon: "🔬", color: "var(--gradient-lavender)" },
-              { value: "NT$10.05B",label: "2025 Net Loss",           sub: "Record High Transformation Cost",icon: "📉", color: "var(--gradient-rose)" },
-              { value: "NT$41.99B",label: "2026 Q1 Cumulative Revenue",sub: "–11.05% YoY",               icon: "📊", color: "var(--gradient-peach)" }
+              { value: "5–7%",    label: "Global PVC Market Share",  sub: "Asian Price Setter",           icon: svgGlobe, color: "var(--gradient-mint)" },
+              { value: "NT$2.5B", label: "2024 Total R&D Expenditure",sub: "35 New Technologies Developed", icon: svgMolecule, color: "var(--gradient-lavender)" },
+              { value: "NT$10.05B",label: "2025 Net Loss",           sub: "Record High Transformation Cost",icon: svgLoss, color: "var(--gradient-rose)" },
+              { value: "NT$41.99B",label: "2026 Q1 Cumulative Revenue",sub: "–11.05% YoY",               icon: svgChart, color: "var(--gradient-peach)" }
             ];
 
         let html = `
@@ -4319,7 +5600,153 @@
           </p>
 
           <div class="flow-viz" id="tp2-dynamics-panel"></div>
-          <div class="flow-details-card" id="tp2-dynamics-details"></div>
+           <div class="flow-details-card" id="tp2-dynamics-details"></div>
+        </div>
+
+        <!-- TP2 DATA SOURCES SECTION -->
+        <div class="sources-block" style="margin-top: 36px;">
+          <h3 style="font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted); margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 2px;">
+              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+            </svg>
+            ${state.lang === 'zh' ? '資料來源與企業資源文獻' : 'Data Sources & Corporate Moat Studies'}
+          </h3>
+          <p style="font-size: 13.5px; color: var(--body); margin-bottom: var(--spacing-sm); line-height: 1.5;">
+            ${state.lang === 'zh' 
+              ? '本策略專案（TP2 資源與競爭優勢）所引用之 VRIO 有形無形資產、NVIDIA 智慧製造及全球產學研網絡事實，其權威來源連結彙整如下（已進行重複過濾，點擊卡片即可另開新分頁瀏覽）：' 
+              : 'The authoritative corporate disclosures, process files, and smart manufacturing studies supporting our TP2 resource moat analysis are indexed below (duplicates removed, click cards to visit):'}
+          </p>
+          
+          <div class="sources-grid">
+            <a href="https://csr.fpc.com.tw/FPC_CSR/download/csr_report/FPC_2024_ESG_TW.pdf" target="_blank" class="source-item-link" title="https://csr.fpc.com.tw/FPC_CSR/download/csr_report/FPC_2024_ESG_TW.pdf">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【永續年報】' : '【ESG Report】'} FPC 2024 永續報告書 PDF</strong>
+                <span>${state.lang === 'zh' ? '企業社會責任、能源互補效率與水資源管理政策' : 'FPC 2024 ESG Corporate Sustainability Report'}</span>
+              </div>
+            </a>
+            
+            <a href="https://www.fpc.com.tw/fpcw/index.php?c=27&id=4&op=res" target="_blank" class="source-item-link" title="https://www.fpc.com.tw/fpcw/index.php?c=27&id=4&op=res">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【戰略定位】' : '【Strategic Vision】'} FPC 企業經營願景</strong>
+                <span>${state.lang === 'zh' ? '台塑官方網站：核心理念、轉型目標與管理策略' : 'FPC Official Site: Core Values & Transition Pathways'}</span>
+              </div>
+            </a>
+
+            <a href="https://www.fpc.com.tw/fpcw/index.php?c=14&id=12&op=res" target="_blank" class="source-item-link" title="https://www.fpc.com.tw/fpcw/index.php?c=14&id=12&op=res">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【有形資產】' : '【PVC Specs】'} FPC 聚氯乙烯 (PVC) 規格</strong>
+                <span>${state.lang === 'zh' ? 'PVC 各級牌號物性、配方與連續去瓶頸製程手冊' : 'PVC Resin Technical Catalog & Extrusion Methods'}</span>
+              </div>
+            </a>
+
+            <a href="https://www.fpc.com.tw/fpcw/index.php?c=15&id=12&op=res" target="_blank" class="source-item-link" title="https://www.fpc.com.tw/fpcw/index.php?c=15&id=12&op=res">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【產品研發】' : '【PE Specifications】'} FPC 聚乙烯 (PE) 技術手冊</strong>
+                <span>${state.lang === 'zh' ? '高密度及低密度聚乙烯、EVA 膠膜規格物理手冊' : 'PE/LDPE/EVA Technical Specifications'}</span>
+              </div>
+            </a>
+
+            <a href="https://www.fpc.com.tw/fpcw/index.php?f=1&op=proL&s=12" target="_blank" class="source-item-link" title="https://www.fpc.com.tw/fpcw/index.php?f=1&op=proL&s=12">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【產品總覽】' : '【Product Catalog】'} FPC 全系列高聚物檢索</strong>
+                <span>${state.lang === 'zh' ? '台塑全系列石化與特種化學品目錄官方清單' : 'FPC Polymer Product Line Index Database'}</span>
+              </div>
+            </a>
+
+            <a href="https://www.moneydj.com/kmdj/news/newsviewer.aspx?a=2af67fde-0fda-4edd-87fb-af79ad67fd37" target="_blank" class="source-item-link" title="https://www.moneydj.com/kmdj/news/newsviewer.aspx?a=2af67fde-0fda-4edd-87fb-af79ad67fd37">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【綠能轉型】' : '【Clean Tech】'} MoneyDJ 理財網報導</strong>
+                <span>${state.lang === 'zh' ? '台塑新智能彰濱 gigafactory 儲能電芯布局分析' : 'Formosa Smart Energy Battery gigafactory Launch'}</span>
+              </div>
+            </a>
+
+            <a href="https://news.cnyes.com/news/id/6415380" target="_blank" class="source-item-link" title="https://news.cnyes.com/news/id/6415380">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【法說焦點】' : '【Investor News】'} CNYES 鉅亨網報導</strong>
+                <span>${state.lang === 'zh' ? '台塑Q1法說會大宗料利差及半導體特化展望分析' : 'FPC Q1 Earnings and Semiconductor Materials growth'}</span>
+              </div>
+            </a>
+
+            <a href="https://www.fpc.com.tw/fpcw/index.php?c=16&id=12&op=res" target="_blank" class="source-item-link" title="https://www.fpc.com.tw/fpcw/index.php?c=16&id=12&op=res">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【高值化工】' : '【PP Specifications】'} FPC 聚丙烯 (PP) 規格手冊</strong>
+                <span>${state.lang === 'zh' ? '高純度食品包裝及醫療級聚丙烯物理特性指標' : 'PP Copolymer Grades & Technical Guidelines'}</span>
+              </div>
+            </a>
+
+            <a href="https://csr.fpc.com.tw/FPC_CSR/environment/greenhouse_gas.aspx" target="_blank" class="source-item-link" title="https://csr.fpc.com.tw/FPC_CSR/environment/greenhouse_gas.aspx">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【碳盤查】' : '【GHG Auditing】'} FPC 溫室氣體監測</strong>
+                <span>${state.lang === 'zh' ? '台塑 ESG 官網：範疇一與範疇二碳排放年減指標' : 'FPC GHG Emissions Disclosures Scope 1 & 2'}</span>
+              </div>
+            </a>
+
+            <a href="https://csr.fpc.com.tw/FPC_CSR/talent/benefits.aspx" target="_blank" class="source-item-link" title="https://csr.fpc.com.tw/FPC_CSR/talent/benefits.aspx">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【留才制度】' : '// Welfare & Salary'} FPC 員工薪酬與福利</strong>
+                <span>${state.lang === 'zh' ? '台塑 ESG 官網：經理人考評制度與健康留才專案' : 'FPC Employee Incentive Systems and Social Indicators'}</span>
+              </div>
+            </a>
+
+            <a href="https://www.fpc.com.tw/fpcw/index.php?id=2&op=res" target="_blank" class="source-item-link" title="https://www.fpc.com.tw/fpcw/index.php?id=2&op=res">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【公司治理】' : '【Governance】'} FPC 經理團隊與董事會</strong>
+                <span>${state.lang === 'zh' ? '台塑官網：董事出席率、質押比率與多元化名單' : 'FPC Board Seats, Attendance Rates & Executive Profiles'}</span>
+              </div>
+            </a>
+
+            <a href="https://www.cna.com.tw/news/afe/202603100283.aspx" target="_blank" class="source-item-link" title="https://www.cna.com.tw/news/afe/202603100283.aspx">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【重磅擴產】' : '【Global Expansion】'} CNA 中央社報導</strong>
+                <span>${state.lang === 'zh' ? '台塑公司啟動 538 億元跨國產線與綠能升級計畫' : 'FPC Launching NT$53.8B Greenfield & Concentric Projects'}</span>
+              </div>
+            </a>
+
+            <a href="https://news.cnyes.com/news/id/5607691" target="_blank" class="source-item-link" title="https://news.cnyes.com/news/id/5607691">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【碳關稅】' : '【Carbon Tariff】'} CNYES 鉅亨網報導</strong>
+                <span>${state.lang === 'zh' ? '歐盟 CBAM 碳關稅上路對台塑大宗塑膠外銷衝擊' : 'EU CBAM Impact & FPC Related Related Diversification'}</span>
+              </div>
+            </a>
+
+            <a href="https://www.fpg.com.tw/tw/issue-news/2026/603" target="_blank" class="source-item-link" title="https://www.fpg.com.tw/tw/issue-news/2026/603">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【AI升級】' : '【AI Integration】'} FPG 官網新聞中心</strong>
+                <span>${state.lang === 'zh' ? '台塑與 NVIDIA 產學合作推動生成式 AI 智慧製造' : 'FPC cooperating with NVIDIA for Smart Manufacturing'}</span>
+              </div>
+            </a>
+
+            <a href="https://www.nthu.edu.tw/hotNews/content/1103" target="_blank" class="source-item-link" title="https://www.nthu.edu.tw/hotNews/content/1103">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【外部網絡】' : '【R&D Alliance】'} 國立清華大學校友網</strong>
+                <span>${state.lang === 'zh' ? '清華與台塑成立減碳製程卓越產學研發中心' : 'NTHU Partnering with FPC for Decarbonization R&D'}</span>
+              </div>
+            </a>
+
+            <a href="https://tw.stock.yahoo.com/news/%E5%A1%91%E8%86%A0%E8%82%A1-%E5%8F%B0%E5%A1%91%E6%96%A5%E8%B3%87538%E5%84%84-%E5%95%9F%E5%8B%95%E5%85%A8%E7%90%83%E6%93%B4%E7%94%A2-%E6%96%B0%E4%BA%8B%E6%A5%AD-%E6%96%B0%E7%94%A2%E5%93%81%E8%BD%89%E5%9E%8B%E8%A8%88%E7%95%AB-063949778.html" target="_blank" class="source-item-link" title="https://tw.stock.yahoo.com/news/塑膠股-台塑斥資538億-啟動全球擴產-新事業-新產品轉型計畫-063949778.html">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【跨國轉型】' : '【Strategic Moat】'} Yahoo 股市行情新聞</strong>
+                <span>${state.lang === 'zh' ? '台塑斥資538億啟動特高值化與新能源轉型計畫' : 'FPC related related diversification under structural changes'}</span>
+              </div>
+            </a>
+          </div>
         </div>
       `;
 
@@ -4572,6 +5999,312 @@
           
           <div class="card-grid card-grid--4up" id="challenges-button-grid" style="margin-bottom:24px;"></div>
           <div class="editorial-card" id="challenge-detail-display" style="border-left: 4px solid var(--primary);"></div>
+        </div>
+
+        <!-- TP3 DATA SOURCES SECTION -->
+        <div class="sources-block">
+          <h3 style="font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted); margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 2px;">
+              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+            </svg>
+            ${state.lang === 'zh' ? '資料來源與學術文獻專區' : 'Data Sources & References Hub'}
+          </h3>
+          <p style="font-size: 13.5px; color: var(--body); margin-bottom: var(--spacing-sm); line-height: 1.5;">
+            ${state.lang === 'zh' 
+              ? '本策略專案（TP3 國際策略與未來方向）所引用之官方事實、新聞報導、學術研究及法規文獻，其權威來源連結彙整如下（點擊卡片即可另開新分頁瀏覽，已排除重複連結）：' 
+              : 'The authoritative references, international research, and climate regulations cited throughout our TP3 strategic assessment are indexed below (click cards to visit, duplicates omitted):'}
+          </p>
+          
+          <div class="sources-grid">
+            <a href="https://money.udn.com/money/story/5612/9531615?from=edn_maintab_cate" target="_blank" class="source-item-link" title="https://money.udn.com/money/story/5612/9531615?from=edn_maintab_cate">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【焦點新聞】' : '【Hot News】'} 聯合經濟網 - 泛用塑膠與新能源策略</strong>
+                <span>${state.lang === 'zh' ? '分析大宗原料關稅、供需以及台塑新能源升級' : 'Analyzing bulk material tariffs, supply and demand, and FPC\'s energy upgrades'}</span>
+              </div>
+            </a>
+
+            <a href="https://www.ctee.com.tw/news/20260313700083-439901" target="_blank" class="source-item-link" title="https://www.ctee.com.tw/news/20260313700083-439901">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【產業動態】' : '【Sector Insight】'} 工商時報 - 台塑全球布局與營運展望</strong>
+                <span>${state.lang === 'zh' ? '探討產能過剩、地緣政治對石化業跨國投資之衝擊' : 'Impact of overcapacity and geopolitics on petrochemical investments'}</span>
+              </div>
+            </a>
+
+            <a href="http://www.besland.com.tw/portal_i1_page.php?cnt_id=513" target="_blank" class="source-item-link" title="http://www.besland.com.tw/portal_i1_page.php?cnt_id=513">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【特用材料】' : '【Specialty Chemicals】'} 北勝化學 - 電子級特用化學品供應鏈</strong>
+                <span>${state.lang === 'zh' ? '提供先進半導體高純度IPA與超純過氧化氫配方' : 'Advanced high-purity IPA & ultra-pure hydrogen peroxide formulas'}</span>
+              </div>
+            </a>
+
+            <a href="https://cset.cgu.edu.tw/p/16-1031-112737.php?Lang=zh-tw" target="_blank" class="source-item-link" title="https://cset.cgu.edu.tw/p/16-1031-112737.php?Lang=zh-tw">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【產學研究】' : '【Academic R&D】'} 長庚大學 - 永續能源與綠碳技術中心</strong>
+                <span>${state.lang === 'zh' ? '產學研發合作與高溫碳捕捉、封存技術' : 'Academic-industry R&D collaboration on carbon capture & storage'}</span>
+              </div>
+            </a>
+
+            <a href="https://www.fpg.com.tw/tw/issue-news/2025/525" target="_blank" class="source-item-link" title="https://www.fpg.com.tw/tw/issue-news/2025/525">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【氣候聲明】' : '【Climate Statement】'} 台塑企業 - 2025年社會永續與氣候聲明</strong>
+                <span>${state.lang === 'zh' ? '麥寮六輕低碳製程優化與氣候變遷因應策略' : 'Mailiao cracker low-carbon optimization & climate actions'}</span>
+              </div>
+            </a>
+
+            <a href="http://showroom.pidc.org.tw/fpg2025" target="_blank" class="source-item-link" title="http://showroom.pidc.org.tw/fpg2025">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【研發展覽】' : '【Green Materials】'} PIDC 塑膠中心 - 2025台塑綠色材料特展</strong>
+                <span>${state.lang === 'zh' ? '展出生質塑膠、低碳複材與高強度碳纖維最新研發' : 'Presenting bio-plastics, low-carbon composites & advanced fibers'}</span>
+              </div>
+            </a>
+
+            <a href="https://money.udn.com/money/story/5612/9530665?from=edn_newestlist_rank" target="_blank" class="source-item-link" title="https://money.udn.com/money/story/5612/9530665?from=edn_newestlist_rank">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【永續轉型】' : '【Sustainability Policy】'} 經濟日報 - 石化產業減碳合規與綠色轉型</strong>
+                <span>${state.lang === 'zh' ? '追踪碳費、能源管理與集中多角化高值材料進展' : 'Tracking carbon fees, utility management, and concentric material progress'}</span>
+              </div>
+            </a>
+
+            <a href="https://www.cmoney.tw/learn/course/tockreport/topic/2176" target="_blank" class="source-item-link" title="https://www.cmoney.tw/learn/course/tockreport/topic/2176">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【財務分析】' : '【Financial Analysis】'} CMoney 投資網 - 台塑財務槓桿與週轉分析</strong>
+                <span>${state.lang === 'zh' ? '解讀流動比率、負債比與資產報酬率(ROA)之歷史脈絡' : 'Analyzing historical liquidity ratios, debt profiles, and ROA trends'}</span>
+              </div>
+            </a>
+
+            <a href="https://statementdog.com/blog/archives/2391" target="_blank" class="source-item-link" title="https://statementdog.com/blog/archives/2391">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【毛利評估】' : '【Margin Assessment】'} 財報狗 - 石化毛利與集中多角化財務關聯</strong>
+                <span>${state.lang === 'zh' ? '大宗聚合物毛利衰退對公司債發行與融資成本之影響' : 'Impact of polymer margin declines on debt issuance & funding costs'}</span>
+              </div>
+            </a>
+
+            <a href="https://readmo.cmoney.tw/article/f6cbd893-bac7-4c19-b4d6-5e08c2273c38" target="_blank" class="source-item-link" title="https://readmo.cmoney.tw/article/f6cbd893-bac7-4c19-b4d6-5e08c2273c38">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【高值化】' : '【High Value Shift】'} CMoney 閱讀誌 - 傳統石化大宗到高值化特化的跨越</strong>
+                <span>${state.lang === 'zh' ? '探討先進半導體合資案(德山)與新能源(台塑新智能)發展' : 'Discussing high-barrier semiconductor JVs and green battery units'}</span>
+              </div>
+            </a>
+
+            <a href="https://allenscashflow.substack.com/p/4a9" target="_blank" class="source-item-link" title="https://allenscashflow.substack.com/p/4a9">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【現金流】' : '【Cash Flow Audit】'} 艾倫現金流 - 1301台塑股利政策與營運現金流</strong>
+                <span>${state.lang === 'zh' ? '剖析低開工率下的自由現金流與資本支出紀律' : 'Dissecting free cash flow & capex discipline under low utilization'}</span>
+              </div>
+            </a>
+
+            <a href="https://www.fpg.com.tw/tw/group/12" target="_blank" class="source-item-link" title="https://www.fpg.com.tw/tw/group/12">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【海外板塊】' : '【Global Footprint】'} 台塑企業 - 集團海外直接投資與跨國子公司</strong>
+                <span>${state.lang === 'zh' ? '美國、中國大陸與越南等區域核心據點營運分佈' : 'Regional footprint across the US, China, and Vietnam'}</span>
+              </div>
+            </a>
+
+            <a href="https://www.fpc.com.tw/fpcw/index.php?op=res&id=6" target="_blank" class="source-item-link" title="https://www.fpc.com.tw/fpcw/index.php?op=res&id=6">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【人資治理】' : '【HR Governance】'} 台塑公司 - 人力資源管理與優化考核</strong>
+                <span>${state.lang === 'zh' ? '董事會改選多樣性、員工流動與非財務KPI考核' : 'Board diversity, talent retention, and non-financial KPI appraisal'}</span>
+              </div>
+            </a>
+
+            <a href="https://www.tmmfsupplier.com.tw/tw/product/supplier/%E5%8F%B0%E5%A1%91%E6%97%AD%E5%BD%88%E6%80%A7%E7%BA%96%E7%B6%AD%E5%85%AC%E5%8F%B8" target="_blank" class="source-item-link" title="https://www.tmmfsupplier.com.tw/tw/product/supplier/台塑旭彈性纖維公司">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【合資材料】' : '【JV Spandex】'} 台塑旭彈性纖維 - 高端彈性體與紡織材料</strong>
+                <span>${state.lang === 'zh' ? '台塑與日本旭化成合資開發之高端特用纖維' : 'Advanced fibers co-developed by FPC & Asahi Kasei JV'}</span>
+              </div>
+            </a>
+
+            <a href="http://www.fpcusa.com/" target="_blank" class="source-item-link" title="http://www.fpcusa.com/">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【美洲投資】' : '【US Investment】'} 台塑美國公司 - 美國頁岩氣與大宗聚合物基底</strong>
+                <span>${state.lang === 'zh' ? '德州與路易斯安那州綠地投資及乙烷裂解廠運營' : 'Greenfield operations and ethane cracker systems in TX and LA'}</span>
+              </div>
+            </a>
+
+            <a href="https://mopsov.twse.com.tw/mops/web/index" target="_blank" class="source-item-link" title="https://mopsov.twse.com.tw/mops/web/index">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【資訊觀測】' : '【Public filings】'} 台灣證券交易所 - 公開資訊觀測站</strong>
+                <span>${state.lang === 'zh' ? '台塑及同業上市公司各期重大訊息與ESG治理申報' : 'Regulatory financial and ESG governance declarations for FPC'}</span>
+              </div>
+            </a>
+
+            <a href="https://www.fpc.com.tw/fpcwuploads/files/2024_annual%20report%282%29.pdf" target="_blank" class="source-item-link" title="https://www.fpc.com.tw/fpcwuploads/files/2024_annual report(2).pdf">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【財務年報】' : '【Annual Report】'} 台塑公司 - 2024年度股東常會年報</strong>
+                <span>${state.lang === 'zh' ? '包含個體與合併財務報告書、營業利益及轉型細節' : 'Consolidated financial statements, operating incomes & transition details'}</span>
+              </div>
+            </a>
+
+            <a href="https://csr.fpc.com.tw/FPC_CSR/coporate_governance/operation_risk.aspx" target="_blank" class="source-item-link" title="https://csr.fpc.com.tw/FPC_CSR/coporate_governance/operation_risk.aspx">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【風險控管】' : '【Risk Audit】'} 台塑永續網 - 企業營運風險控管</strong>
+                <span>${state.lang === 'zh' ? '氣候風險、供應鏈中斷及市場波動因應機制' : 'Addressing climate risk, supply chain breaks, and market shocks'}</span>
+              </div>
+            </a>
+
+            <a href="https://csr.fpc.com.tw/" target="_blank" class="source-item-link" title="https://csr.fpc.com.tw/">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【ESG門戶】' : '【ESG Portal】'} 台塑永續發展 - 企業社會責任主頁面</strong>
+                <span>${state.lang === 'zh' ? '彙整環境保護(E)、社會責任(S)與公司治理(G)總體績效' : 'Overview of environmental, social, and corporate governance metrics'}</span>
+              </div>
+            </a>
+
+            <a href="https://csr.fpc.com.tw/FPC_CSR/download/tcfd_report/FPC_2023_TCFD_CH.pdf" target="_blank" class="source-item-link" title="https://csr.fpc.com.tw/FPC_CSR/download/tcfd_report/FPC_2023_TCFD_CH.pdf">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【氣候財務】' : '【TCFD Report】'} 台塑公司 - 2023氣候相關財務揭露報告書</strong>
+                <span>${state.lang === 'zh' ? '氣候變遷物理與轉型風險分析、溫室氣體減量軌跡' : 'Climate change physical/transition risks and carbon pathways'}</span>
+              </div>
+            </a>
+
+            <a href="https://csr.fpc.com.tw/FPC_CSR/coporate_governance/message.aspx" target="_blank" class="source-item-link" title="https://csr.fpc.com.tw/FPC_CSR/coporate_governance/message.aspx">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【經營承諾】' : '【Chairman Message】'} 台塑永續網 - 董事長永續致詞與變革方針</strong>
+                <span>${state.lang === 'zh' ? '面臨第一年淨損下的結構調整與新能源長遠藍圖' : 'Core structural transformations and new energy vision under net deficit'}</span>
+              </div>
+            </a>
+
+            <a href="https://csr.fpc.com.tw/FPC_CSR/environment/protection.aspx" target="_blank" class="source-item-link" title="https://csr.fpc.com.tw/FPC_CSR/environment/protection.aspx">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【環保循環】' : '【Eco Circularity】'} 台塑永續網 - 環境保護與循環經濟</strong>
+                <span>${state.lang === 'zh' ? '水資源回收再利用率、減廢與防汙染投資' : 'Water recycling rates, waste reduction, and eco-investments'}</span>
+              </div>
+            </a>
+
+            <a href="https://csr.fpc.com.tw/FPC_CSR/environment/greenhouse_gas.aspx" target="_blank" class="source-item-link" title="https://csr.fpc.com.tw/FPC_CSR/environment/greenhouse_gas.aspx">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【溫室氣體】' : '【Emissions Target】'} 台塑永續網 - 溫室氣體排放與碳中和規劃</strong>
+                <span>${state.lang === 'zh' ? '範疇一、二盤查與內部碳費引進軌跡' : 'Scope 1 & 2 carbon accounting and internal pricing integration'}</span>
+              </div>
+            </a>
+
+            <a href="https://www.fpc.com.tw/fpcwuploads/files/2025Q1M.pdf" target="_blank" class="source-item-link" title="https://www.fpc.com.tw/fpcwuploads/files/2025Q1M.pdf">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【營運申報】' : '【Operations Report】'} 台塑公司 - 2025年第一季合併營運申報</strong>
+                <span>${state.lang === 'zh' ? '第一季產銷量、毛利比對與海內外營收組成' : 'Q1 sales volumes, margin analysis, and overseas revenue shares'}</span>
+              </div>
+            </a>
+
+            <a href="https://www.fpc.com.tw/fpcwuploads/files/2025Q2M.pdf" target="_blank" class="source-item-link" title="https://www.fpc.com.tw/fpcwuploads/files/2025Q2M.pdf">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【營運申報】' : '【Operations Report】'} 台塑公司 - 2025年第二季合併營運申報</strong>
+                <span>${state.lang === 'zh' ? '面臨大宗低價衝擊下的第二季營收赤字與開工率分析' : 'Q2 revenue deficits & plant utilizations under overcapacity shocks'}</span>
+              </div>
+            </a>
+
+            <a href="https://csr.fpc.com.tw/FPC_CSR/csr_download.aspx" target="_blank" class="source-item-link" title="https://csr.fpc.com.tw/FPC_CSR/csr_download.aspx">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【報告下載】' : '【ESG Compendium】'} 台塑永續網 - 歷年ESG報告下載專區</strong>
+                <span>${state.lang === 'zh' ? '提供歷年企業社會責任與環境績效白皮書' : 'Compendium of historical CSR & environment performance records'}</span>
+              </div>
+            </a>
+
+            <a href="https://csr.fpc.com.tw/FPC_CSR/supply_chain/procurement.aspx" target="_blank" class="source-item-link" title="https://csr.fpc.com.tw/FPC_CSR/supply_chain/procurement.aspx">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【責任採購】' : '【Green Sourcing】'} 台塑永續網 - 綠色採購與在地供應機制</strong>
+                <span>${state.lang === 'zh' ? '優化上下游原物料碳含量與責任供應鏈' : 'Optimizing carbon footprint of suppliers & upstream partners'}</span>
+              </div>
+            </a>
+
+            <a href="https://csr.fpc.com.tw/FPC_CSR/supply_chain/supplier.aspx" target="_blank" class="source-item-link" title="https://csr.fpc.com.tw/FPC_CSR/supply_chain/supplier.aspx">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【供應商管理】' : '【Supplier Screen】'} 台塑永續網 - 供應商人權與環境合規評估</strong>
+                <span>${state.lang === 'zh' ? '對外合資及在地夥伴 ESG 資格審查制度' : 'Systemic environmental and social screening for trade partners'}</span>
+              </div>
+            </a>
+
+            <a href="https://csr.fpc.com.tw/FPC_CSR/healthy_workplace/prevention.aspx" target="_blank" class="source-item-link" title="https://csr.fpc.com.tw/FPC_CSR/healthy_workplace/prevention.aspx">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【職業安全】' : '【Workplace Safety】'} 台塑永續網 - 健康職場與職業安全預防</strong>
+                <span>${state.lang === 'zh' ? '職業災害零事故率推動方針與安全稽核實務' : 'Guidelines for zero-injury workplaces and safety audits'}</span>
+              </div>
+            </a>
+
+            <a href="https://csr.fpc.com.tw/FPC_CSR/coporate_governance/intellectual_property.aspx" target="_blank" class="source-item-link" title="https://csr.fpc.com.tw/FPC_CSR/coporate_governance/intellectual_property.aspx">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【智慧財產】' : '【IP Governance】'} 台塑永續網 - 智慧財產與技術研發治理</strong>
+                <span>${state.lang === 'zh' ? '佈局高端碳纖、電化學與高分子材料專利壁壘' : 'patent barriers in advanced fibers, electrochemistry & polymers'}</span>
+              </div>
+            </a>
+
+            <a href="https://www.cca.gov.tw/laws-and-regulations/climate-legislation/25826.html" target="_blank" class="source-item-link" title="https://www.cca.gov.tw/laws-and-regulations/climate-legislation/25826.html">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【氣候法規】' : '【Climate Laws】'} 氣候法規網 - 台灣氣候變遷因應法規</strong>
+                <span>${state.lang === 'zh' ? '涵蓋國家碳費課徵、排放量申報與減量效益額度辦法' : 'Compulsory carbon fees, emissions audit schemes & offset mechanisms'}</span>
+              </div>
+            </a>
+
+            <a href="https://enews.moenv.gov.tw/Page/3B3C62C78849F32F/3a0a408a-33e5-4a0d-9939-23e8222c5284" target="_blank" class="source-item-link" title="https://enews.moenv.gov.tw/Page/3B3C62C78849F32F/3a0a408a-33e5-4a0d-9939-23e8222c5284">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【環境部新聞】' : '【MoEnv Release】'} 環境部新聞 - 台灣溫室氣體碳收費優惠審查</strong>
+                <span>${state.lang === 'zh' ? '說明自主減量計畫申報與優惠費率(50/100元)門檻' : 'Detailing voluntary carbon reductions & premium discount gates'}</span>
+              </div>
+            </a>
+
+            <a href="https://taxation-customs.ec.europa.eu/carbon-border-adjustment-mechanism_en" target="_blank" class="source-item-link" title="https://taxation-customs.ec.europa.eu/carbon-border-adjustment-mechanism_en">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【碳關稅】' : '【Tariff CBAM】'} 歐盟稅務總署 - 碳邊境調整機制 (CBAM)</strong>
+                <span>${state.lang === 'zh' ? '追蹤外銷鋼鐵、高分子與化學品之進口碳稅憑證申報' : 'Rules for reporting embedded emissions in European chemical imports'}</span>
+              </div>
+            </a>
+
+            <a href="https://www.oecd.org/content/dam/oecd/en/publications/reports/2024/10/policy-scenarios-for-eliminating-plastic-pollution-by-2040_28eb9536/76400890-en.pdf" target="_blank" class="source-item-link" title="https://www.oecd.org/content/dam/oecd/en/publications/reports/2024/10/policy-scenarios-for-eliminating-plastic-pollution-by-2040_28eb9536/76400890-en.pdf">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【國際政策】' : '【Global Plastics Plan】'} OECD 報告 - 2040年消除全球塑料污染政策情境</strong>
+                <span>${state.lang === 'zh' ? '全球生質塑料、包裝減量法規對傳統大宗聚合物之挑戰' : 'Challenges to bulk polymers from bio-degradable & recycled mandates'}</span>
+              </div>
+            </a>
+
+            <a href="https://www.reuters.com/markets/commodities/china-refiners-stoke-petchem-glut-market-share-war-demand-flags-2023-06-25/" target="_blank" class="source-item-link" title="https://www.reuters.com/markets/commodities/china-refiners-stoke-petchem-glut-market-share-war-demand-flags-2023-06-25/">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【大宗產能】' : '【Reuters Commod.】'} 路透社 - 中國精煉廠產能爆發與石化戰略過剩</strong>
+                <span>${state.lang === 'zh' ? '解構亞洲產能過剩下的市場份額爭奪戰與毛利壓縮' : 'Market share wars & margin compressions in regional polymer gluts'}</span>
+              </div>
+            </a>
+
+            <a href="https://www.reuters.com/world/europe/eu-reaches-deal-reduce-plastic-waste-packaging-2024-03-05/" target="_blank" class="source-item-link" title="https://www.reuters.com/world/europe/eu-reaches-deal-reduce-plastic-waste-packaging-2024-03-05/">
+              <span class="source-icon-wrap">&rarr;</span>
+              <div>
+                <strong style="display:block; font-size:12px; color:var(--muted);">${state.lang === 'zh' ? '【包裝限令】' : '【Reuters Europe】'} 路透社 - 歐盟減少塑料包裝與垃圾歷史性協議</strong>
+                <span>${state.lang === 'zh' ? '2030年起歐盟對一次性塑膠包裝及回收率之強制法規衝氣' : 'Structural impacts of 2030 packaging directives on plastic exports'}</span>
+              </div>
+            </a>
+          </div>
         </div>
       `;
 
