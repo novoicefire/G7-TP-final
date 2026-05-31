@@ -5570,6 +5570,26 @@
             ];
 
         let html = `
+        <div class="section-block" style="margin-bottom: 24px; padding-bottom: 0;">
+          <div style="background:var(--surface-strong); border: 1px solid var(--hairline-strong); border-radius:var(--radius-lg); padding:12px 16px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--muted); flex-shrink:0;">
+                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+              </svg>
+              <span style="font-size:13px; font-weight:500; color:var(--body-strong);">
+                ${state.lang === 'zh' ? 'TP2 網頁原網址：' : 'Original TP2 Website:'}
+              </span>
+              <a href="https://s113212016-ops.github.io/1142SMMC-EMI-TP/index.html#intro" target="_blank" style="font-size:13px; font-weight:600; color:var(--ink); text-decoration:underline;">
+                s113212016-ops.github.io/1142SMMC-EMI-TP/index.html#intro
+              </a>
+            </div>
+            <a href="https://s113212016-ops.github.io/1142SMMC-EMI-TP/index.html#intro" target="_blank" class="btn btn--outline btn--small" style="padding: 4px 10px; font-size:12px;">
+              ${state.lang === 'zh' ? '前往原網址' : 'Visit Original'} &rarr;
+            </a>
+          </div>
+        </div>
+
         <div class="section-block" style="padding-bottom:0; border-bottom:none;">
           <p class="eyebrow">TP2 · KEY DATA AT A GLANCE</p>
           <h2>${state.lang === 'zh' ? '台塑核心數據總覽' : 'Formosa Plastics Key Figures'}</h2>
