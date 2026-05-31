@@ -2428,6 +2428,14 @@
       }
     }
 
+    /* ── CONCLUSION GRID RWD FIX ─────────────────────────────── */
+    @media (max-width: 768px) {
+      .conclusion-grid {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+      }
+    }
+
     /* ── MISC OVERFLOW GUARDS ────────────────────────────────── */
     @media (max-width: 768px) {
       img, video, iframe {
@@ -4374,6 +4382,15 @@
         `;
         }).join("");
 
+        // CONCLUSION tab right next to TP3
+        const isConclusionSelected = state.activeTab === "tp-conclusion";
+        const conclusionLabel = state.lang === "zh" ? "總結與展望" : "Conclusion & Vision";
+        navHtml += `
+          <button class="tab-btn" type="button" role="tab" data-tab-id="tp-conclusion" aria-selected="${isConclusionSelected}">
+            ${conclusionLabel}
+          </button>
+        `;
+
         nav.innerHTML = navHtml;
 
         nav.querySelectorAll("[data-tab-id]").forEach(btn => {
@@ -4397,6 +4414,8 @@
           renderTP2(panel);
         } else if (state.activeTab === "tp3") {
           renderTP3(panel);
+        } else if (state.activeTab === "tp-conclusion") {
+          renderTPConclusion(panel);
         }
       }
 
@@ -6524,6 +6543,130 @@
         renderVerticalFlowNodes();
         renderMaTimelineSelector();
         renderChallengesSelector();
+      }
+
+      /* RENDER CONCLUSION: STRATEGIC SYNTHESIS */
+      function renderTPConclusion(container) {
+        const title = state.lang === "zh" ? "台塑集團永續轉型與全球化戰略總結" : "FPC Strategic Synthesis & Future Outlook";
+        const lead = state.lang === "zh"
+          ? "本節全面整合 TP0 至 TP3 的核心研究發現，針對大宗石化週期的財政衝擊、碳費與貿易壁壘外部威脅、資源高值化轉型及國際 OLI 佈局進行系統性總結，提出台塑邁向 2030-2050 碳中和的策略藍圖。"
+          : "Synthesizing research milestones from TP0 to TP3 across downcycle finance, tariff/carbon external shocks, high-value specialty pivot, and OLI-based global captive pipelines to outline FPC's 2030-2050 sustainable transition roadmap.";
+
+        let html = `
+        <div class="section-block">
+          <p class="eyebrow">TP0-TP3 Synthesis & Vision</p>
+          <h2>${title}</h2>
+          <p style="font-size:16px; color:var(--body); max-width:800px; margin-bottom:32px;">${lead}</p>
+
+          <div style="display:grid; grid-template-columns: 2fr 1fr; gap:24px; margin-bottom:48px;" class="conclusion-grid">
+            <!-- Left Side: Section-by-Section Takeaways -->
+            <div style="display:flex; flex-direction:column; gap:20px;">
+              
+              <!-- TP0 Card -->
+              <div class="editorial-card" style="border-left: 4px solid var(--gradient-rose); padding:20px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                  <span class="badge" style="background:rgba(232, 184, 196, 0.2); color:var(--ink);">${state.lang === 'zh' ? 'TP0 · 歷史與財務' : 'TP0 · Finance & Milestones'}</span>
+                  <strong style="color:var(--semantic-error); font-size:13px;">${state.lang === 'zh' ? '歷史虧損警訊' : 'Financial Strain'}</strong>
+                </div>
+                <h3 style="font-size:16px; font-weight:600; margin-bottom:8px;">
+                  ${state.lang === 'zh' ? '大宗石化週期下行與財政赤字' : 'Bulk Downcycles & Operational Pressures'}
+                </h3>
+                <p style="font-size:13.5px; line-height:1.6; color:var(--body); margin:0;">
+                  ${state.lang === 'zh' 
+                    ? '2025年台塑創下歷史性淨損 100.49 億元，大宗石化品高毛利利差時代宣告終結。歷史沿革證明大宗化學品的高度週期波動性已成為主要財務隱憂，迫使集團必須全面啟動資產重整與研發轉型。' 
+                    : 'The historical NT$10.05B net loss in 2025 marked the structural end of bulk petrochemical high-spread eras. FPC corporate history highlights that reliance on volatile polymer cycles now demands decisive asset restructuring and specialization.'}
+                </p>
+              </div>
+
+              <!-- TP1 Card -->
+              <div class="editorial-card" style="border-left: 4px solid var(--gradient-peach); padding:20px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                  <span class="badge" style="background:rgba(244, 197, 168, 0.2); color:var(--ink);">${state.lang === 'zh' ? 'TP1 · 外部環境分析' : 'TP1 · Macro Environment'}</span>
+                  <strong style="color:var(--advisor-color); font-size:13px;">${state.lang === 'zh' ? '關稅與碳費衝擊' : 'Double External Shocks'}</strong>
+                </div>
+                <h3 style="font-size:16px; font-weight:600; margin-bottom:8px;">
+                  ${state.lang === 'zh' ? '關稅壁壘與台灣/國際碳費雙重夾擊' : 'Tariff Barriers & Global Carbon Taxation'}
+                </h3>
+                <p style="font-size:13.5px; line-height:1.6; color:var(--body); margin:0;">
+                  ${state.lang === 'zh' 
+                    ? '中國關稅壁壘（ECFA 優惠終止）與台灣氣候變遷因應法每噸 300 元碳費申報，加上歐盟 CBAM 碳邊境關稅，嚴重壓縮傳統出口競爭力。台塑必須取得「自主減量計畫」核定以爭取 50-100 元優惠費率，減緩轉型期財政衝擊。' 
+                    : 'The twin threats of tariff protectionism (loss of China ECFA benefits) and carbon taxation (Taiwan Climate Act, EU CBAM) erode mass export margins. Securing voluntary carbon reduction credits to achieve discounted fee rates (NT$50-100/ton) is a tactical survival imperative.'}
+                </p>
+              </div>
+
+              <!-- TP2 Card -->
+              <div class="editorial-card" style="border-left: 4px solid var(--gradient-mint); padding:20px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                  <span class="badge" style="background:rgba(167, 229, 211, 0.2); color:var(--ink);">${state.lang === 'zh' ? 'TP2 · 資源與價值鏈' : 'TP2 · Resource Capability'}</span>
+                  <strong style="color:var(--semantic-success); font-size:13px;">${state.lang === 'zh' ? '核心技術高值化' : 'VRIO Competence'}</strong>
+                </div>
+                <h3 style="font-size:16px; font-weight:600; margin-bottom:8px;">
+                  ${state.lang === 'zh' ? '高分子技術優勢集中多角化擴展' : 'Concentric Diversification Leveraging Polymer base'}
+                </h3>
+                <p style="font-size:13.5px; line-height:1.6; color:var(--body); margin:0;">
+                  ${state.lang === 'zh' 
+                    ? '憑藉強大的高分子合成技術（VRIO 核心能力），集中多角化切入台積電電子級 IPA / 雙氧水供應鏈（與德山合資）、彰濱 LFP 儲能電池芯廠（台塑新智能）及風電用航太級碳纖維，成功將基礎原料優勢轉化為高附加價值新台柱。' 
+                    : 'Leveraging core polymer synthesis assets, FPC drives high-value concentric diversification: semiconductor reagents (Tokuyama JV), massive LFP battery cells (Formosa Smart Energy), and specialty wind-turbine carbon fibers, transforming raw monomers into high-margin products.'}
+                </p>
+              </div>
+
+              <!-- TP3 Card -->
+              <div class="editorial-card" style="border-left: 4px solid var(--gradient-sky); padding:20px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                  <span class="badge" style="background:rgba(168, 200, 232, 0.2); color:var(--ink);">${state.lang === 'zh' ? 'TP3 · 國際化策略' : 'TP3 · FDI & Pipeline TCE'}</span>
+                  <strong style="color:var(--ink); opacity:0.8; font-size:13px;">${state.lang === 'zh' ? 'OLI 國際佈局' : 'OLI Ownership Shifting'}</strong>
+                </div>
+                <h3 style="font-size:16px; font-weight:600; margin-bottom:8px;">
+                  ${state.lang === 'zh' ? 'OLI 理論與一體化直供交易成本內部化' : 'Ethane Cost Cracking & Internal Monomer Flows'}
+                </h3>
+                <p style="font-size:13.5px; line-height:1.6; color:var(--body); margin:0;">
+                  ${state.lang === 'zh' 
+                    ? '以折衷 OLI 優勢驅動海外直接投資（如美國德州乙烷裂解廠以低成本頁岩氣打擊區域對手）。在國內，六成原料向台塑化直供管線免除資產專屬性帶來的「敲竹槓風險」，透過組織內部交易極小化外部交易成本（TCE）。' 
+                    : 'Dissecting overseas FDI (e.g. US Texas Ethane cracking utilizing shale gas advantages to out-compete oil-based crackers). Domestically, direct pipeline setups with Formosa Petrochemical internalize asset specificity, saving huge transaction costs (TCE).'}
+                </p>
+              </div>
+
+            </div>
+
+            <!-- Right Side: Ultimate Strategic Outlook -->
+            <div style="display:flex; flex-direction:column; gap:20px;">
+              <div class="editorial-card" style="background:var(--surface-strong); border:1px solid var(--ink); padding:24px; display:flex; flex-direction:column; gap:16px; position:sticky; top:20px;">
+                <span class="badge badge--warning" style="width:max-content; margin-bottom:4px;">${state.lang === 'zh' ? '2030-2050 戰略願景' : 'FPC 2030-2050 Vision'}</span>
+                
+                <h3 style="font-family:'EB Garamond',serif; font-size:24px; font-weight:300; line-height:1.2; color:var(--ink);">
+                  ${state.lang === 'zh' ? '「高值化特材」與「綠能科技」雙輪驅動' : 'Twin Engines: High-Value Specialization & Green Tech'}
+                </h3>
+                
+                <div style="width:100%; height:1px; background:var(--hairline-strong);"></div>
+                
+                <p style="font-size:13.5px; line-height:1.6; color:var(--body-strong); margin:0;">
+                  <strong>${state.lang === 'zh' ? '減碳即是競爭力：' : 'Carbon Abatement is Competitiveness:'}</strong><br>
+                  ${state.lang === 'zh' 
+                    ? '在全球 2040 消除塑料污染的國際政策（如 OECD 與歐盟強制回收塑料法規）與碳費常態化下，台塑必須徹底擺脫傳統一次性聚合物定位，爭取成為綠色半導體與高階新能源系統的特用材料霸主。'
+                    : 'Under strict global carbon charges and the 2040 global plastics elimination mandate, survival hinges on shedding one-way disposable polymer frameworks, pivoting permanently to premium green semiconductor and LFP battery supply chains.'}
+                </p>
+
+                <p style="font-size:13.5px; line-height:1.6; color:var(--body-strong); margin:0;">
+                  <strong>${state.lang === 'zh' ? '永續轉型落實方針：' : 'Sustainable Milestones:'}</strong><br>
+                  ${state.lang === 'zh' 
+                    ? '1. 取得自主減量計畫爭取碳費優惠費率。<br>2. 擴大先進半導體高純度電子級特化產能。<br>3. 加速儲能與鋰鐵電池 Gigafactory 電解液在地自主供應。<br>4. 深耕航太級碳纖維專利壁壘。'
+                    : '1. Establish corporate carbon abatement targets to secure NT$50 carbon fee rates.<br>2. Scale high-purity TSMC reagent production capacities.<br>3. Accelerate Changbin LFP battery electrolyte localization.<br>4. Leverage VRIO patent barriers in wind turbine carbon fibers.'}
+                </p>
+                
+                <div style="background:var(--canvas); border-left:3px solid var(--primary); padding:12px; border-radius:var(--radius-sm); margin-top:8px;">
+                  <p style="font-size:12.5px; line-height:1.5; color:var(--muted); font-style:italic; margin:0;">
+                    ${state.lang === 'zh'
+                      ? '本研究由 SMMC-EMI 專案第七組傾力製作，旨在以跨學門分析，為台塑集團在面臨低碳轉型與國際變局時，繪製出可行且具高度前瞻性之整合戰略。'
+                      : 'This interactive strategy report was developed by G7 research team, providing multidimensional strategic foresight for Formosa Plastics sustainable transition.'}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        `;
+
+        container.innerHTML = html;
       }
 
       /* WIDGET: STRATEGY LENS ENGINE */
