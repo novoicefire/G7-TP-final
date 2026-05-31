@@ -2368,6 +2368,27 @@
       }
     }
 
+    /* ── LENS TABS SCROLLABLE RWD FIX ─────────────────────────── */
+    .lens-tabs-container {
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      max-width: 100%;
+      scrollbar-width: none; /* Hide scrollbar for Firefox */
+      -ms-overflow-style: none;  /* Hide scrollbar for IE/Edge */
+    }
+    .lens-tabs-container::-webkit-scrollbar {
+      display: none; /* Hide scrollbar for Chrome, Safari and Opera */
+    }
+    
+    @media (max-width: 768px) {
+      .lens-tabs-container {
+        width: 100%;
+        margin-top: 8px;
+        padding-bottom: 6px;
+      }
+    }
+
     /* ── MISC OVERFLOW GUARDS ────────────────────────────────── */
     @media (max-width: 768px) {
       img, video, iframe {
@@ -5910,13 +5931,15 @@
               <h3 style="margin:0; font-family:'Inter',sans-serif; font-size:15px; font-weight:600; text-transform:uppercase;">
                 ${state.lang === 'zh' ? '學術透鏡：理論 · 證據 · 分析三層架構' : 'Analytical Lens: Theory · Evidence · Insight'}
               </h3>
-              <div style="display:flex; gap:6px;">
-                <button class="btn btn--outline btn--small" id="lens-btn-vertical" data-lens-id="vertical">01 Vertical</button>
-                <button class="btn btn--outline btn--small" id="lens-btn-horizontal" data-lens-id="horizontal">02 Related Div</button>
-                <button class="btn btn--outline btn--small" id="lens-btn-global" data-lens-id="global">03 FDI OLI</button>
-                <button class="btn btn--outline btn--small" id="lens-btn-ma" data-lens-id="ma">04 FDI M&A</button>
-                <button class="btn btn--outline btn--small" id="lens-btn-greenfield" data-lens-id="greenfield">05 Greenfield</button>
-                <button class="btn btn--outline btn--small" id="lens-btn-future" data-lens-id="future">06 Challenges</button>
+              <div class="lens-tabs-container">
+                <div style="display:flex; gap:6px; flex-shrink:0; min-width:max-content; padding-bottom:2px;">
+                  <button class="btn btn--outline btn--small" id="lens-btn-vertical" data-lens-id="vertical">01 Vertical</button>
+                  <button class="btn btn--outline btn--small" id="lens-btn-horizontal" data-lens-id="horizontal">02 Related Div</button>
+                  <button class="btn btn--outline btn--small" id="lens-btn-global" data-lens-id="global">03 FDI OLI</button>
+                  <button class="btn btn--outline btn--small" id="lens-btn-ma" data-lens-id="ma">04 FDI M&A</button>
+                  <button class="btn btn--outline btn--small" id="lens-btn-greenfield" data-lens-id="greenfield">05 Greenfield</button>
+                  <button class="btn btn--outline btn--small" id="lens-btn-future" data-lens-id="future">06 Challenges</button>
+                </div>
               </div>
             </div>
             
