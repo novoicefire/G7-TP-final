@@ -2436,6 +2436,87 @@
       }
     }
 
+    /* ── STRATEGIC QUIZ LAB CLASSES ──────────────────────────── */
+    .lab-option-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background-color: var(--surface-card);
+      border: 1px solid var(--hairline-strong);
+      border-radius: var(--radius-md);
+      padding: 12px 16px;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      user-select: none;
+    }
+    
+    .lab-option-card:hover {
+      border-color: var(--muted);
+      background-color: var(--canvas-soft);
+      transform: translateY(-1px);
+    }
+    
+    .lab-option-circle {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 1px solid var(--hairline-strong);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted);
+      background-color: var(--canvas);
+      flex-shrink: 0;
+      transition: all 0.2s ease;
+    }
+    
+    .lab-option-card:hover .lab-option-circle {
+      border-color: var(--muted);
+      color: var(--ink);
+    }
+    
+    /* Correct state */
+    .lab-option-card.is-correct {
+      border-color: var(--semantic-success) !important;
+      background-color: rgba(22, 163, 74, 0.05) !important;
+    }
+    .lab-option-card.is-correct .lab-option-circle {
+      border-color: var(--semantic-success) !important;
+      background-color: var(--semantic-success) !important;
+      color: white !important;
+    }
+    
+    /* Incorrect state */
+    .lab-option-card.is-incorrect {
+      border-color: var(--semantic-error) !important;
+      background-color: rgba(220, 38, 38, 0.05) !important;
+    }
+    .lab-option-card.is-incorrect .lab-option-circle {
+      border-color: var(--semantic-error) !important;
+      background-color: var(--semantic-error) !important;
+      color: white !important;
+    }
+    
+    /* Highlight correct answer hint when user guessed wrong */
+    .lab-option-card.is-correct-hint {
+      border-color: var(--semantic-success) !important;
+      background-color: rgba(22, 163, 74, 0.03) !important;
+      animation: pulse-border 1.5s infinite;
+    }
+    
+    .lab-option-card.is-disabled {
+      pointer-events: none;
+      opacity: 0.85;
+    }
+    
+    @keyframes pulse-border {
+      0% { box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.2); }
+      70% { box-shadow: 0 0 0 4px rgba(22, 163, 74, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(22, 163, 74, 0); }
+    }
+
     /* ── MISC OVERFLOW GUARDS ────────────────────────────────── */
     @media (max-width: 768px) {
       img, video, iframe {
@@ -4391,6 +4472,15 @@
           </button>
         `;
 
+        // INTERACTIVE LAB tab next to CONCLUSION
+        const isLabSelected = state.activeTab === "tp-lab";
+        const labLabel = state.lang === "zh" ? "互動實驗室" : "Interactive Lab";
+        navHtml += `
+          <button class="tab-btn" type="button" role="tab" data-tab-id="tp-lab" aria-selected="${isLabSelected}">
+            ${labLabel}
+          </button>
+        `;
+
         nav.innerHTML = navHtml;
 
         nav.querySelectorAll("[data-tab-id]").forEach(btn => {
@@ -4416,6 +4506,8 @@
           renderTP3(panel);
         } else if (state.activeTab === "tp-conclusion") {
           renderTPConclusion(panel);
+        } else if (state.activeTab === "tp-lab") {
+          renderTPLab(panel);
         }
       }
 
@@ -6668,6 +6760,537 @@
 
         container.innerHTML = html;
       }
+
+      /* RENDER QUIZ LAB: STRATEGIC CHALLENGE */
+      function renderTPLab(container) {
+        if (state.activeLabSection === undefined) {
+          state.activeLabSection = "tp0";
+        }
+        if (state.labAnswers === undefined) {
+          state.labAnswers = {};
+        }
+
+        const questions = [
+          // TP0 Milestones & Finance (5 questions)
+          {
+            id: "q1",
+            section: "tp0",
+            titleZh: "【戰略選擇】台塑在 1954 年創立之初，選擇了大宗聚合物 PVC 作為核心事業。以安索夫矩陣（Ansoff Matrix）來看，這在當時台灣市場屬於何種策略？",
+            titleEn: "[Strategic Choice] FPC chose bulk polymer PVC as its core business upon its founding in 1954. In the Ansoff Matrix framework, what type of strategy was this for the Taiwan market at that time?",
+            options: [
+              { key: "A", zh: "市場滲透 (Market Penetration)", en: "Market Penetration" },
+              { key: "B", zh: "產品開發 (Product Development)", en: "Product Development" },
+              { key: "C", zh: "市場開發 (Market Development)", en: "Market Development" },
+              { key: "D", zh: "多角化策略 (Diversification)", en: "Diversification" }
+            ],
+            correct: "D",
+            explainZh: "當時台灣完全沒有塑料加工業與聚合物需求。台塑創辦人同時設立南亞塑膠進行二次加工，藉此開拓並創造全新的聚合物與塑料產品市場，屬於典型的新產品與新市場多角化/開創行為。",
+            explainEn: "There was zero plastic processing or polymer demand in Taiwan in 1954. The founders simultaneously established Nan Ya Plastics for secondary processing to create and capture a brand new polymer market, representing a classic Diversification strategy."
+          },
+          {
+            id: "q2",
+            section: "tp0",
+            titleZh: "【資本結構】TP0 提到台塑近年因大宗石化品週期下行導致財務比率惡化。若以權益乘數（Equity Multiplier）的財務槓桿理論來看，當權益乘數上升時代表？",
+            titleEn: "[Capital Structure] TP0 highlights FPC's declining operational margins. In leverage theory, an increasing Equity Multiplier indicates that the company?",
+            options: [
+              { key: "A", zh: "財務風險降低，資產安全度提高", en: "Has lower financial risk and higher asset security" },
+              { key: "B", zh: "債務融資比例上升，財務槓桿與風險相應提高", en: "Has increased its debt ratio, thereby raising financial leverage and risk" },
+              { key: "C", zh: "股東權益報酬率（ROE）必然呈下行趨勢", en: "Will inevitably suffer from a declining Return on Equity (ROE)" },
+              { key: "D", zh: "資產週轉率與流動資產變現能力提高", en: "Has improved its asset turnover and short-term liquidity" }
+            ],
+            correct: "B",
+            explainZh: "權益乘數 = 總資產 / 總權益。乘數越高代表債務比例越高，財務槓桿與風險相應提高，是大宗商品週期下行時需警戒的財務指標。",
+            explainEn: "Equity Multiplier = Total Assets / Total Equity. A higher multiplier signifies a higher debt-to-equity ratio, indicating increased financial leverage and risk, a key warning signal during structural downcycles."
+          },
+          {
+            id: "q3",
+            section: "tp0",
+            titleZh: "【利潤空間壓力】台塑 2025 年創下歷史性淨損 100.49 億元，其主因以策略管理角度分析，最符合下列哪項？",
+            titleEn: "[Margin Squeeze] FPC recorded a historic NT$10.05B net loss in 2025. Analyzed from a strategic management perspective, which of the following is the most primary cause?",
+            options: [
+              { key: "A", zh: "外部全球產能爆發低價傾銷與結構性週期下行", en: "External global capacity explosions, cheap dumping, and structural downcycles" },
+              { key: "B", zh: "內部新產品研發支出過高導致毛利被稀釋", en: "Excessive internal R&D expenditure diluting gross margins" },
+              { key: "C", zh: "國際化多角化與海外直接投資（FDI）宣告完全失敗", en: "Total failure of international diversification and Foreign Direct Investment (FDI)" },
+              { key: "D", zh: "品牌行銷與全球公關預算失控膨脹", en: "Uncontrolled inflation of branding and global public relations budgets" }
+            ],
+            correct: "A",
+            explainZh: "大宗化學品高度同質化，其利差（Spread）極度依賴全球供需。近年中國產能爆發與需求疲軟雙重擠壓，導致大宗利差嚴重縮減，為外部環境驅動的結構性危機。",
+            explainEn: "Bulk chemicals are highly commoditized, meaning spreads are heavily dependent on global demand/supply. Huge capacity expansions in China coupled with weak demand squeezed margins, representing an externally driven downcycle."
+          },
+          {
+            id: "q4",
+            section: "tp0",
+            titleZh: "【營運資金策略】當面臨嚴重的外部景氣下行時，企業為了維持流動性與生存，在營運資金管理（Working Capital）上應優先採取何種防禦策略？",
+            titleEn: "[Working Capital] During a severe industry downcycle, what working capital strategy should a firm prioritize to maximize cash flow and ensure survival?",
+            options: [
+              { key: "A", zh: "主動拉長存貨周轉天數以備後市回溫", en: "Prolonging Days Inventory Outstanding to hoard goods for future market spikes" },
+              { key: "B", zh: "縮短應收帳款回收期並合理拉長應付帳款付現期", en: "Shortening Days Sales Outstanding (DSO) and extending Days Payable Outstanding (DPO)" },
+              { key: "C", zh: "向商業銀行申請擴大無擔保短期高息融資", en: "Expanding unsecured short-term high-interest debt from commercial banks" },
+              { key: "D", zh: "大量配發放現金股利以穩定投資人信心", en: "Distributing massive cash dividends to stabilize investor sentiment" }
+            ],
+            correct: "B",
+            explainZh: "縮短應收帳款回收期（DSO）以快速收回資金，同時合理拉長應付帳款（DPO）以延遲現金流出，是防禦期確保現金流安全的金科玉律。",
+            explainEn: "Accelerating accounts receivable collection (shortening DSO) and extending payables (prolonging DPO) keeps cash in the business, which is the gold standard for survival during a liquidity squeeze."
+          },
+          {
+            id: "q5",
+            section: "tp0",
+            titleZh: "【營運槓桿效應】台塑屬於資本密集型重工業。在市場不景氣、產能利用率下降時，其高營運槓桿（Operating Leverage）會帶來何種財務效應？",
+            titleEn: "[Operating Leverage] Formosa Plastics is a highly capital-intensive heavy industry. When capacity utilization drops due to bad market conditions, what financial effect does high operating leverage produce?",
+            options: [
+              { key: "A", zh: "息稅折舊攤銷前利潤（EBITDA）波動大幅減緩", en: "Significantly dampening fluctuations in EBITDA" },
+              { key: "B", zh: "因高額固定資產折舊無法隨銷量下滑，導致利潤跌幅數倍於營收跌幅", en: "Heavy fixed depreciation cannot scale down, causing profits to drop much faster than revenues" },
+              { key: "C", zh: "製造成本中的變動成本比例大幅攀升", en: "Causing the proportion of variable costs in manufacturing to spike" },
+              { key: "D", zh: "企業的損益兩平點（Break-even Point）會自動下移", en: "Automatically lowering the firm's break-even point" }
+            ],
+            correct: "B",
+            explainZh: "高固定成本（重工業廠房折舊）代表高營運槓桿。當銷量略微下滑時，固定折舊依然存在，導致營業利潤以數倍的劇烈幅度下跌，這是 2025 年淨損的財務結構根源。",
+            explainEn: "High fixed assets (depreciation of chemical plants) translate into high operating leverage. When revenue drops slightly, fixed costs remain constant, multiplying profit losses, which is the structural root of the 2025 deficit."
+          },
+          // TP1 External Environment (5 questions)
+          {
+            id: "q6",
+            section: "tp1",
+            titleZh: "【總體環境】中國大陸近年中止 ECFA 對台灣石化產品的關稅優惠，這在 PESTEL 外部環境分析框架中，主要屬於哪兩個維度的衝擊？",
+            titleEn: "[Macro Environment] The termination of ECFA tariff benefits for Taiwanese chemicals primarily represents shocks in which two PESTEL dimensions?",
+            options: [
+              { key: "A", zh: "經濟 (Economic) 與 技術 (Technological)", en: "Economic and Technological" },
+              { key: "B", zh: "政治法律 (Political/Legal) 與 經濟 (Economic)", en: "Political/Legal and Economic" },
+              { key: "C", zh: "社會 (Social) 與 環境 (Environmental)", en: "Social and Environmental" },
+              { key: "D", zh: "技術 (Technological) 與 社會 (Social)", en: "Technological and Social" }
+            ],
+            correct: "B",
+            explainZh: "關稅優惠終止屬於政治決策與法律貿易協定變更（Political/Legal），進而直接衝擊台塑的出口銷售毛利與競爭力（Economic）。",
+            explainEn: "Tariff adjustments and treaty terminations stem from geopolitical policy shifts (Political/Legal) and directly impact trade margins, sales, and cross-border capital flows (Economic)."
+          },
+          {
+            id: "q7",
+            section: "tp1",
+            titleZh: "【碳管制法規】台灣「氣候變遷因應法」將正式對排碳大戶課徵每噸 300 元碳費。台塑可透過提出何種策略行動，將碳費負擔降至 50-100 元的優惠費率？",
+            titleEn: "[Carbon Regulation] Under the Taiwan Climate Act, major carbon emitters face a NT$300/ton fee. How can FPC strategically lower this charge to a discounted NT$50-100/ton rate?",
+            options: [
+              { key: "A", zh: "向環境部申報自主減量計畫並承諾達成指定的減碳目標", en: "Submitting a voluntary carbon reduction plan and meeting specified targets" },
+              { key: "B", zh: "主動縮小麥寮與高雄廠區的整體生產規模以減少排碳量", en: "Voluntarily downsizing production capacities at Mailiao and Kaohsiung plants" },
+              { key: "C", zh: "購買大量國際黃金標準碳權以完全抵消國內排碳申報", en: "Purchasing huge volumes of international Gold Standard carbon offsets" },
+              { key: "D", zh: "直接將碳費成本 100% 轉嫁給下游加工客戶", en: "Directly passing 100% of the carbon fee cost onto downstream buyers" }
+            ],
+            correct: "A",
+            explainZh: "法規明定，排碳大戶若主動向政府申報自主減量計畫，並切實執行、達成指定減排門檻，即可適用 50 元或 100 元的優惠碳費費率，這是轉型期生存的必備手段。",
+            explainEn: "The regulation stipulates that major emitters who submit a voluntary carbon reduction plan and achieve designated decarbonization targets can apply for discounted fee rates (NT$50-100/ton) to mitigate financial friction."
+          },
+          {
+            id: "q8",
+            section: "tp1",
+            titleZh: "【行業生命週期】傳統大宗塑料產品（如 bulk polymers PVC, PE）在歐美及亞太市場，以產業生命週期理論（Industry Life Cycle）來看，目前正處於哪一個階段？",
+            titleEn: "[Industry Life Cycle] Bulk polymer plastics (e.g. PVC, PE) in mature regions are currently positioned in which stage of the Industry Life Cycle?",
+            options: [
+              { key: "A", zh: "導入期 (Introduction)", en: "Introduction" },
+              { key: "B", zh: "成長期 (Growth)", en: "Growth" },
+              { key: "C", zh: "成熟期至衰退期邊緣 (Maturity to declining edge)", en: "Maturity to Declining Edge" },
+              { key: "D", zh: "再次繁榮期 (Rejuvenation)", en: "Rejuvenation" }
+            ],
+            correct: "C",
+            explainZh: "大宗塑料產能嚴重過剩、價格戰白熱化，且面臨全球限塑與強制減碳法規雙重限制，傳統石化品產業已處於高度成熟甚至衰退期的邊緣，急需高值化轉型。",
+            explainEn: "With massive capacity surpluses and intense price wars combined with strict global plastics restrictions and carbon regulations, the traditional bulk petrochemical sector is at a mature to declining stage."
+          },
+          {
+            id: "q9",
+            section: "tp1",
+            titleZh: "【波特五力分析】近年中國大宗石化產能極限擴張、低價傾銷亞洲。以波特五力分析（Five Forces）來看，這會直接導致台灣石化業面臨何種最嚴重的威脅？",
+            titleEn: "[Porter's Five Forces] Extreme petrochemical capacity expansions in China have led to cheap polymer dumping in Asia. In Porter's Five Forces framework, this primarily intensifies which threat?",
+            options: [
+              { key: "A", zh: "現有競爭者之間的激烈競爭 (Rivalry among Existing Competitors)", en: "Rivalry among Existing Competitors" },
+              { key: "B", zh: "新進入者的潛在威脅 (Threat of New Entrants)", en: "Threat of New Entrants" },
+              { key: "C", zh: "購買者的議價能力降低 (Decreased Buyer Bargaining Power)", en: "Decreased Buyer Bargaining Power" },
+              { key: "D", zh: "替代品與互補品的威脅 (Threat of Substitutes)", en: "Threat of Substitutes" }
+            ],
+            correct: "A",
+            explainZh: "中國大宗產能極限擴張，直接白熱化了區域現有生產商（如台塑、日韓石化廠）之間的存亡價格競爭，屬於極度激烈的現有競爭者對抗。",
+            explainEn: "Huge regional capacity surges spark aggressive price-cutting among existing regional manufacturers (FPC, Japanese, and Korean chemical crackers), severely heating up peer Rivalry."
+          },
+          {
+            id: "q10",
+            section: "tp1",
+            titleZh: "【貿易壁壘】歐盟自 2026 年全面實施「碳邊境調整機制（CBAM）」，進口高碳排產品必須申報並購買碳憑證。這對台塑的國際出口策略而言屬於？",
+            titleEn: "[Trade Barriers] The EU's Carbon Border Adjustment Mechanism (CBAM) requires importing carbon certificates for high-emission goods. For FPC's export strategy, this acts as a?",
+            options: [
+              { key: "A", zh: "綠色非關稅貿易壁壘 (Green Non-tariff Barrier)", en: "Green Non-tariff Barrier" },
+              { key: "B", zh: "自由貿易雙邊優惠協定 (Bilateral Free Trade Agreement)", en: "Bilateral Free Trade Agreement" },
+              { key: "C", zh: "跨國投資租稅雙重豁免機制 (Double Taxation Relief)", en: "Double Taxation Relief" },
+              { key: "D", zh: "全球化技術外溢效應 (Global Technology Spillover)", en: "Global Technology Spillover" }
+            ],
+            correct: "A",
+            explainZh: "CBAM 強制對進口至歐盟的高碳排產品課徵碳關稅，實質上是以環境保護為名的非關稅貿易壁壘，極大化了傳統石化出口的跨國進入門檻。",
+            explainEn: "CBAM targets imported high-carbon goods by imposing carbon equalization tariffs at the European border, representing a prominent Green Non-tariff Barrier that penalizes traditional exporters."
+          },
+          // TP2 Resource Capability (5 questions)
+          {
+            id: "q11",
+            section: "tp2",
+            titleZh: "【資源基礎觀點】根據資源基礎觀點（RBV），台塑擁有的高純度高分子材料合成與催化核心技術，若能持續產生超額利潤，必須具備 VRIO 框架中的哪些特性？",
+            titleEn: "[Resource-Based View] According to RBV, FPC's proprietary polymer synthesis and catalytic technologies can generate sustainable premiums only if they satisfy which VRIO criteria?",
+            options: [
+              { key: "A", zh: "有價值 (Value)、稀有 (Rarity)、難以模仿 (Inimitability)、組織吸收配合 (Organization)", en: "Value, Rarity, Inimitability, and Organization" },
+              { key: "B", zh: "波動性 (Volatility)、稀有、低廉、全球化配置", en: "Volatility, Rarity, Inexpensiveness, and Global Dispersion" },
+              { key: "C", zh: "專利保護、低成本、高負債槓桿、分權管理", en: "Patent protection, Low Cost, High Debt Leverage, and Decentralization" },
+              { key: "D", zh: "規模化生產、標準化流程、垂直整合、在地通路", en: "Scale, Standardization, Vertical Integration, and Local Distribution Channels" }
+            ],
+            correct: "A",
+            explainZh: "巴尼（Jay Barney）提出的 VRIO 框架明定，只有當資源與能力同時滿足有價值、稀有、具備模仿障礙（模仿成本極高），且組織結構能有效配合吸收時，方能產生可持續的競爭優勢。",
+            explainEn: "Barney's VRIO framework states that sustainable competitive advantage is achieved only when resources and capabilities are simultaneously Valuable, Rare, Inimitable, and supported by the Organization."
+          },
+          {
+            id: "q12",
+            section: "tp2",
+            titleZh: "【價值鏈理論】在波特（Michael Porter）的企業價值鏈中，台塑與日本特化龍頭德山合資在高雄生產半導體級超高純度電子級化學品，在主要活動（Primary Activities）中屬於哪一環？",
+            titleEn: "[Value Chain] FPC's joint venture with Japanese Tokuyama in Kaohsiung to purify TSMC-grade semiconductor reagents falls under which Primary Activity in Porter's Value Chain?",
+            options: [
+              { key: "A", zh: "內部物流 (Inbound Logistics)", en: "Inbound Logistics" },
+              { key: "B", zh: "生產營運 (Operations)", en: "Operations" },
+              { key: "C", zh: "外部物流 (Outbound Logistics)", en: "Outbound Logistics" },
+              { key: "D", zh: "售後服務 (Service)", en: "Service" }
+            ],
+            correct: "B",
+            explainZh: "高純度特用化學品的精煉、合成與製造，直接屬於價值鏈中的生產營運（Operations）環節，透過技術升級將粗原料加工為高價值電子特用化學品。",
+            explainEn: "The refinery, compounding, and manufacturing of ultra-pure specialized chemical reagents fall directly under Operations, upgrading basic monomers to high-value foundry chemicals."
+          },
+          {
+            id: "q13",
+            section: "tp2",
+            titleZh: "【多角化戰略】台塑整合資源成立「台塑新智能」，跨足彰濱鋰鐵（LFP）電池芯與高規電解液量產，這在企業策略中屬於何種多角化類型？",
+            titleEn: "[Diversification] FPC formed Formosa Smart Energy to construct LFP battery cell gigafactories and compound electrolytes. What type of diversification is this?",
+            options: [
+              { key: "A", zh: "相關 / 集中多角化 (Concentric / Related Diversification)", en: "Concentric / Related Diversification" } ,
+              { key: "B", zh: "非相關 / 控股多角化 (Unrelated / Conglomerate Diversification)", en: "Unrelated / Conglomerate Diversification" },
+              { key: "C", zh: "水平整合策略 (Horizontal Integration)", en: "Horizontal Integration" },
+              { key: "D", zh: "向後整合策略 (Backward Integration)", en: "Backward Integration" }
+            ],
+            correct: "A",
+            explainZh: "憑藉集團在高分子化學合成與電化學的核心技術基礎，向相鄰且具備高技術關聯的新能源特化材料領域延伸，屬於典型相關 / 集中多角化（Concentric/Related Diversification）。",
+            explainEn: "Leveraging core polymer synthesis and electrochemistry capabilities to expand into adjacent, technically linked battery materials constitutes concentric/related diversification."
+          },
+          {
+            id: "q14",
+            section: "tp2",
+            titleZh: "【模仿障礙】下列哪一項要素是台塑特用碳纖維（用於儲氫高壓瓶與風電大葉片）能抵抗競爭對手低價傾銷、構築 VRIO「難以模仿性（Inimitability）」的關鍵？",
+            titleEn: "[Imitability Moat] What is the primary VRIO Inimitability moat enabling FPC's specialty carbon fibers to resist competitor price wars?",
+            options: [
+              { key: "A", zh: "高端特種專利壁壘與航太/風電巨頭漫長苛刻的客戶認證時間成本", en: "Proprietary patent barriers and long, stringent client qualification timelines" },
+              { key: "B", zh: "大規模電視媒體與網路社交廣告推廣", en: "Massive television and social media advertising campaigns" },
+              { key: "C", zh: "極度低廉的非技術性勞動成本優勢", en: "Extremely cheap, low-skilled labor cost advantages" },
+              { key: "D", zh: "放寬工廠排碳與環保合規標準以降低生產費用", en: "Relaxing factory carbon limits and environmental compliance targets" }
+            ],
+            correct: "A",
+            explainZh: "航太級與高端風電 PAN 碳纖維研發難度極高，且客戶認證期動輒 3 至 5 年，形成了極高的專利壁壘與時間模仿障礙（Time-compression diseconomies）。",
+            explainEn: "High-grade carbon fibers require highly complex PAN synthetic patents, and testing by wind turbine or aviation giants takes 3-5 years, creating formidable technological moats."
+          },
+          {
+            id: "q15",
+            section: "tp2",
+            titleZh: "【協同效應】「台塑四寶」共享彰濱與麥寮基礎建設、集中聯合採購原料。這在價值鏈的支持活動（Support Activities）中主要創造了？",
+            titleEn: "[Synergy] The four core Formosa FPG companies share Mailiao utilities infrastructure and centralize material procurement. This support activity generates?",
+            options: [
+              { key: "A", zh: "範疇經濟與高度的集團內部協同效應 (Economies of Scope & Synergies)", en: "Economies of Scope and Synergies" },
+              { key: "B", zh: "規模不經濟與內部溝通壁壘", en: "Diseconomies of scale and communication friction" },
+              { key: "C", zh: "組織管理層級的極度膨脹與外部交易摩擦", en: "Managerial layer inflation and external trade friction" },
+              { key: "D", zh: "技術相互排斥與專利侵權風險", en: "Technological conflict and patent infringement risks" }
+            ],
+            correct: "A",
+            explainZh: "四寶共享基礎建設（採購、物流、公用工程），能極大化降低分攤成本，發揮範疇經濟（Economies of Scope）並產生巨大的內部協同效應（Synergies）。",
+            explainEn: "Sharing infrastructure (procurement, power, logistics) maximizes cost amortization, cultivating strong Economies of Scope and capturing valuable group-wide synergies."
+          },
+          // TP3 Global Strategy (5 questions)
+          {
+            id: "q16",
+            section: "tp3",
+            titleZh: "【OLI 折衷理論】鄧寧（John Dunning）指出海外直接投資（FDI）必須具備三種優勢。台塑在美國德州設廠利用當地低價頁岩氣裂解乙烯，發揮了哪種優勢？",
+            titleEn: "[OLI Paradigm] Dunning's Eclectic Paradigm states FDI requires O, L, and I advantages. FPC's massive Texas crackers using cheap local shale-gas ethane primarily leverage which advantage?",
+            options: [
+              { key: "A", zh: "所有權優勢 (Ownership)", en: "Ownership Advantage" },
+              { key: "B", zh: "內部化優勢 (Internalization)", en: "Internalization Advantage" },
+              { key: "C", zh: "區位優勢 (Location)", en: "Location Advantage" },
+              { key: "D", zh: "在地化適應優勢 (Localization)", en: "Localization Advantage" }
+            ],
+            correct: "C",
+            explainZh: "德州豐富且極低成本的頁岩氣自然資源，屬於美國當地的特定地理資源優勢，在 OLI 框架中是典型的區位優勢（Location Advantage）。",
+            explainEn: "Abundant and low-cost shale gas resources in Texas represent a classic geographical asset unique to that territory, reflecting a Location (L) advantage under OLI."
+          },
+          {
+            id: "q17",
+            section: "tp3",
+            titleZh: "【交易成本理論】威廉姆森（Oliver Williamson）指出交易成本由三個特徵決定。台塑與台塑化透過「直供管線」輸送乙烯，主要是為了防範何種交易風險？",
+            titleEn: "[Transaction Cost Theory] Williamson's TCE theory notes transaction friction is driven by three variables. FPC's captive pipelines with FPCC to transfer monomer feedstocks directly prevent?",
+            options: [
+              { key: "A", zh: "高度資產專屬性（Asset Specificity）可能招致的外部機會主義與「敲竹槓風險」", en: "External opportunism and 'hold-up' risks driven by high Asset Specificity" },
+              { key: "B", zh: "市場完全競爭所帶來的多方價格波動", en: "Perfect competition market price fluctuations" },
+              { key: "C", zh: "跨國海運港口擠塞所引發的遲延損害", en: "Delays caused by congestion in international maritime ports" },
+              { key: "D", zh: "資訊高度對稱所帶來的超額利潤消失", en: "Erosion of super-profits due to perfect information symmetry" }
+            ],
+            correct: "A",
+            explainZh: "直供管線具有極高的「場地與資產專屬性（Asset Specificity）」。若向外部獨立供應商採購，極易面臨機會主義的敲竹槓風險（Hold-up risk）。台塑四寶透過一體化管網將外部交易內部化，極小化外部交易成本（TCE）。",
+            explainEn: "Pipelines are physically anchored, creating high asset specificity. Buying from independent third parties risks opportunism/hold-up behaviors. Captive pipeline integration internalizes transaction costs."
+          },
+          {
+            id: "q18",
+            section: "tp3",
+            titleZh: "【國際進入模式】台塑引進日本特化龍頭德山（Tokuyama）技術，在台成立「合資企業（Joint Venture, JV）」生產電子特用化學品，其核心策略動機是？",
+            titleEn: "[Entry Modes] FPC partnered with Japanese Tokuyama to build a Joint Venture (JV) in Taiwan. What is the core strategic motivation for choosing a JV?",
+            options: [
+              { key: "A", zh: "稀釋母公司控制權以規避政府的反壟斷審查", en: "Diluting parent control to bypass antitrust investigations" },
+              { key: "B", zh: "結合德山的特種專利純化技術與台塑的原料直供與本土通路優勢，共擔資本風險", en: "Combining Tokuyama's purification tech and FPC's local feedstock/channel access while sharing capital risks" },
+              { key: "C", zh: "在短期內徹底收購德山並將其全面下市", en: "Fully acquiring Tokuyama and delisting the company in the short term" },
+              { key: "D", zh: "免除母公司的所有環境污染合規連帶責任", en: "Shielding the parent company from all environmental liabilities" }
+            ],
+            correct: "B",
+            explainZh: "合資公司（JV）是國際擴張中分擔巨額風險的經典戰略聯盟，能完美互補日本的先進高純度專利技術與台灣石化龍頭的低成本原料直供。",
+            explainEn: "Joint Ventures are classic strategic alliances, combining foreign proprietary tech with local feedstock and channel access to share risk and capitalize on complementary strengths."
+          },
+          {
+            id: "q19",
+            section: "tp3",
+            titleZh: "【價值鏈全球配置】跨國企業在全球配置價值鏈時，台塑將大宗基礎化學品製造配在德州（原料便宜），而將半導體特化材料研發與生產放在台灣（靠近台積電）。這屬於？",
+            titleEn: "[Global Value Chain] FPC manufactures bulk chemicals in Texas (low feedstock cost) but retains semiconductor chemical R&D and refining in Taiwan (near TSMC). This represents?",
+            options: [
+              { key: "A", zh: "多國在地化分散管理策略 (Multidomestic Strategy)", en: "Multidomestic Strategy" },
+              { key: "B", zh: "全球資源最優化配置：生產要素成本優勢與產業聚落近接效應的完美配置", en: "Global optimization: matching factor cost advantages with industrial cluster proximity" },
+              { key: "C", zh: "以關稅套利為單一目的的跨國洗產地行為", en: "Cross-border tariff arbitrage and labeling evasion" },
+              { key: "D", zh: "跨國外包與虛擬整合策略 (Virtual Integration)", en: "Virtual Integration" }
+            ],
+            correct: "B",
+            explainZh: "將生產價值鏈的製造與研發分別配置在生產要素成本最低的地方（德州頁岩氣）與客戶集中的產業聚落（台灣科學園區），是全球化價值鏈配置（Value Chain Configuration）的經典示範。",
+            explainEn: "Configuring the value chain by placing factories where factor costs are lowest (Texas shale gas) and R&D near major client hubs (Taiwan TSMC foundry ecosystem) optimizes global value creation."
+          },
+          {
+            id: "q20",
+            section: "tp3",
+            titleZh: "【國際多角化風險】跨國企業進行國際多角化（International Diversification）能分散風險，但同時必須承擔下列哪一項特有風險？",
+            titleEn: "[International Risk] International Diversification helps disperse risks but exposes multinational corporations to which unique challenge?",
+            options: [
+              { key: "A", zh: "地緣政治變局、跨國匯率波動與外來者劣勢 (Liability of Foreignness)", en: "Geopolitical instability, exchange rate fluctuations, and Liability of Foreignness" },
+              { key: "B", zh: "海外分支機構的利潤必須 100% 繳還給地主國政府", en: "100% compulsory profit repatriation to the host country government" },
+              { key: "C", zh: "外部交易摩擦成本會自動歸零", en: "External transaction costs automatically dropping to zero" },
+              { key: "D", zh: "跨國員工因時差導致的生產力完全崩潰", en: "Total collapse of productivity due to employee jet lag" }
+            ],
+            correct: "A",
+            explainZh: "國際化能分散單一市場波動，但跨國直接投資伴隨地緣政治（如關稅協定中止）、匯率波動風險，以及不熟悉當地法規與文化所帶來的「外來者劣勢（Liability of Foreignness）」。",
+            explainEn: "While FDI spreads market-specific risks, it introduces multinational friction: exchange rate exposures, geopolitical conflicts, and the Liability of Foreignness due to unfamiliar regulations."
+          }
+        ];
+
+        // 1. Calculate General Stats
+        const totalQ = questions.length;
+        const answeredQ = Object.keys(state.labAnswers).length;
+        
+        let correctCount = 0;
+        Object.entries(state.labAnswers).forEach(([qId, ans]) => {
+          const q = questions.find(item => item.id === qId);
+          if (q && q.correct === ans) correctCount++;
+        });
+
+        const accuracy = answeredQ > 0 ? Math.round((correctCount / answeredQ) * 100) : 0;
+        const progressPct = Math.round((answeredQ / totalQ) * 100);
+
+        // 2. Separate active section questions
+        const activeQuestions = questions.filter(q => q.section === state.activeLabSection);
+
+        // 3. Render section counts
+        const getSectionStats = (sec) => {
+          const secQ = questions.filter(q => q.section === sec);
+          let secAnswered = 0;
+          let secCorrect = 0;
+          secQ.forEach(q => {
+            if (state.labAnswers[q.id] !== undefined) {
+              secAnswered++;
+              if (state.labAnswers[q.id] === q.correct) secCorrect++;
+            }
+          });
+          return { answered: secAnswered, correct: secCorrect, total: secQ.length };
+        };
+
+        const stats0 = getSectionStats("tp0");
+        const stats1 = getSectionStats("tp1");
+        const stats2 = getSectionStats("tp2");
+        const stats3 = getSectionStats("tp3");
+
+        const tpTabs = [
+          { key: "tp0", label: "TP0 公司歷史與財務", stats: stats0 },
+          { key: "tp1", label: "TP1 總體環境與關稅", stats: stats1 },
+          { key: "tp2", label: "TP2 資源能力與價值鏈", stats: stats2 },
+          { key: "tp3", label: "TP3 國際化與直供管線", stats: stats3 }
+        ];
+
+        // 4. HTML Template Assembly
+        let html = `
+        <div class="section-block">
+          <p class="eyebrow">${state.lang === 'zh' ? '戰略挑戰 · 國際策略管理' : 'Strategic Challenge · Global Management'}</p>
+          <h2>${state.lang === 'zh' ? '戰略互動實驗室：全球企業策略知識對抗' : 'Strategic Interactive Lab: Global Corporate Strategy'}</h2>
+          <p style="font-size:15px; color:var(--body); max-width:800px; margin-bottom:28px;">
+            ${state.lang === 'zh'
+              ? '本實驗室彙整本研究報告 TP0 至 TP3 所涉核心學術理論（安索夫矩陣、財務比率、PESTEL、波特五力與價值鏈、VRIO、OLI 折衷與交易成本理論等），設計出 20 道高擬真策略決策挑戰，供您檢驗與學習策略管理的精髓。'
+              : 'Test your grasp of core international strategic frameworks (Ansoff, RBV VRIO, PESTEL, Porter\'s Five Forces & Value Chain, Dunning\'s OLI, and Williamson\'s TCE) through 20 realistic decision-making multiple-choice questions.'}
+          </p>
+
+          <!-- QUIZ STATISTICS DASHBOARD -->
+          <div style="background:var(--surface-strong); border: 1px solid var(--hairline-strong); border-radius:var(--radius-lg); padding:20px; margin-bottom:32px; display:grid; grid-template-columns: 1fr 1fr 1fr; gap:20px; align-items:center;" class="conclusion-grid">
+            
+            <!-- Progress Tracker -->
+            <div>
+              <div style="display:flex; justify-content:space-between; margin-bottom:6px; font-size:13px; font-weight:600; color:var(--ink);">
+                <span>${state.lang === 'zh' ? '測驗整體進度' : 'Overall Quiz Progress'}</span>
+                <span>${answeredQ} / ${totalQ}</span>
+              </div>
+              <div style="width:100%; height:8px; background:var(--hairline-strong); border-radius:4px; overflow:hidden;">
+                <div style="width:${progressPct}%; height:100%; background:linear-gradient(to right, var(--gradient-peach), var(--gradient-rose)); border-radius:4px; transition: width 0.3s ease;"></div>
+              </div>
+            </div>
+
+            <!-- Accuracy Gauge -->
+            <div style="display:flex; flex-direction:column; align-items:center;">
+              <span style="font-size:12px; color:var(--muted); font-weight:600; text-transform:uppercase; margin-bottom:4px;">
+                ${state.lang === 'zh' ? '答對正確率' : 'Accuracy Rate'}
+              </span>
+              <span style="font-size:28px; font-family:'EB Garamond',serif; font-weight:400; color:${accuracy >= 80 ? 'var(--semantic-success)' : 'var(--ink)'}; line-height:1;">
+                ${accuracy}%
+              </span>
+            </div>
+
+            <!-- Quiz Grade and Reset -->
+            <div style="display:flex; justify-content:space-between; align-items:center; gap:16px;">
+              <div style="flex:1;">
+                <span class="badge ${answeredQ === totalQ ? 'badge--success' : 'badge--warning'}" style="display:block; text-align:center; padding:6px 12px; font-size:12px;">
+                  ${answeredQ === totalQ 
+                    ? (state.lang === 'zh' ? '🏆 測驗完成！' : '🏆 Completed!') 
+                    : (state.lang === 'zh' ? '挑戰進行中' : 'In Progress')}
+                </span>
+              </div>
+              <button class="btn btn--outline btn--small" onclick="resetQuiz()" style="font-size:11px; height:32px;">
+                ${state.lang === 'zh' ? '重置測驗' : 'Reset Quiz'}
+              </button>
+            </div>
+
+          </div>
+
+          <!-- TP SECTION NAV SELECTOR -->
+          <div style="display:flex; border-bottom:1px solid var(--hairline); margin-bottom:28px; overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; -ms-overflow-style:none; gap:4px;" class="lens-tabs-container">
+            ${tpTabs.map(tab => {
+              const isActive = state.activeLabSection === tab.key;
+              return `
+                <button type="button" 
+                        onclick="switchLabSection('${tab.key}')"
+                        style="background: ${isActive ? 'var(--primary)' : 'transparent'}; 
+                               color: ${isActive ? 'var(--on-primary)' : 'var(--body-strong)'}; 
+                               border: none; 
+                               padding: 10px 16px; 
+                               font-size: 13px; 
+                               font-weight: 600; 
+                               cursor: pointer; 
+                               white-space: nowrap; 
+                               border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+                               transition: all 0.2s ease;"
+                        class="tab-btn">
+                  ${tab.label} (${tab.stats.answered}/${tab.stats.total})
+                </button>
+              `;
+            }).join("")}
+          </div>
+
+          <!-- ACTIVE TP QUESTIONS LIST -->
+          <div style="display:flex; flex-direction:column; gap:28px;">
+            ${activeQuestions.map((q, idx) => {
+              const userAnswer = state.labAnswers[q.id];
+              const isAnswered = userAnswer !== undefined;
+              const isUserCorrect = isAnswered && userAnswer === q.correct;
+
+              return `
+              <div class="editorial-card" style="border-top: 3px solid var(--primary); padding:24px;">
+                <!-- Card Header -->
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+                  <span class="badge" style="background:var(--canvas); color:var(--muted); font-size:11px; font-weight:600;">
+                    QUESTION 0${idx + 1}
+                  </span>
+                  ${isAnswered 
+                    ? (isUserCorrect 
+                        ? `<span class="badge badge--success" style="font-size:11px; font-weight:600;">✓ ${state.lang === 'zh' ? '答對' : 'Correct'}</span>` 
+                        : `<span class="badge badge--error" style="font-size:11px; font-weight:600;">✗ ${state.lang === 'zh' ? '答錯' : 'Incorrect'}</span>`)
+                    : `<span class="badge badge--warning" style="font-size:11px; font-weight:600;">${state.lang === 'zh' ? '待答' : 'Pending'}</span>`
+                  }
+                </div>
+
+                <!-- Question Title -->
+                <h3 style="font-size:16px; font-weight:600; line-height:1.5; color:var(--ink); margin-bottom:18px;">
+                  ${state.lang === 'zh' ? q.titleZh : q.titleEn}
+                </h3>
+
+                <!-- Options Grid -->
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-bottom:20px;" class="conclusion-grid">
+                  ${q.options.map(opt => {
+                    let cardClass = "lab-option-card";
+                    if (isAnswered) {
+                      cardClass += " is-disabled";
+                      if (opt.key === q.correct) {
+                        cardClass += " is-correct";
+                      } else if (opt.key === userAnswer) {
+                        cardClass += " is-incorrect";
+                      }
+                    }
+
+                    return `
+                      <div class="${cardClass}" onclick="selectLabOption('${q.id}', '${opt.key}')">
+                        <div class="lab-option-circle">${opt.key}</div>
+                        <span style="font-size:13.5px; font-weight:500; color:var(--body-strong);">${state.lang === 'zh' ? opt.zh : opt.en}</span>
+                      </div>
+                    `;
+                  }).join("")}
+                </div>
+
+                <!-- Explanation Box -->
+                <div id="explain-${q.id}" style="display: ${isAnswered ? 'block' : 'none'}; border-top: 1px solid var(--hairline-strong); padding-top:16px; margin-top:16px;">
+                  <div style="background:var(--canvas-soft); padding:16px; border-radius:var(--radius-md); border-left:3px solid ${isUserCorrect ? 'var(--semantic-success)' : 'var(--semantic-error)'};">
+                    <h4 style="font-size:13px; font-weight:700; color:var(--ink); margin-bottom:6px; display:flex; align-items:center; gap:6px;">
+                      ${isUserCorrect 
+                        ? `<span style="color:var(--semantic-success);">✓ ${state.lang === 'zh' ? '答對了！正確答案是' : 'Correct! The answer is'} [ ${q.correct} ]</span>`
+                        : `<span style="color:var(--semantic-error);">✗ 答錯囉！正確答案應該是</span> <span style="background:rgba(22, 163, 74, 0.1); color:var(--semantic-success); padding:2px 6px; border-radius:4px; font-size:12px;">[ ${q.correct} ]</span>`
+                      }
+                    </h4>
+                    <p style="font-size:13px; line-height:1.6; color:var(--body); margin:0;">
+                      <strong>${state.lang === 'zh' ? '策略解析：' : 'Strategic Analysis:'}</strong>
+                      ${state.lang === 'zh' ? q.explainZh : q.explainEn}
+                    </p>
+                  </div>
+                </div>
+
+              </div>
+              `;
+            }).join("")}
+          </div>
+
+        </div>
+        `;
+
+        container.innerHTML = html;
+      }
+
+      // Globally bindable handlers for vanilla JS inline execution
+      window.switchLabSection = function(secKey) {
+        state.activeLabSection = secKey;
+        const panel = document.getElementById("tab-panel");
+        if (panel) renderTPLab(panel);
+      };
+
+      window.selectLabOption = function(qId, key) {
+        if (state.labAnswers[qId] !== undefined) return; // Answer locked
+        state.labAnswers[qId] = key;
+        const panel = document.getElementById("tab-panel");
+        if (panel) renderTPLab(panel);
+      };
+
+      window.resetQuiz = function() {
+        if (confirm(state.lang === 'zh' ? "您確定要清除測驗紀錄，重頭開始挑戰嗎？" : "Are you sure you want to reset the quiz and start over?")) {
+          state.labAnswers = {};
+          const panel = document.getElementById("tab-panel");
+          if (panel) renderTPLab(panel);
+        }
+      };
 
       /* WIDGET: STRATEGY LENS ENGINE */
       function updateStrategyLensUI() {
