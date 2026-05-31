@@ -2435,8 +2435,8 @@
           </button>
           
           <div class="audio-meta">
-            <span class="audio-title" id="audio-voice-title">Rachel — calm narrator</span>
-            <span class="audio-subtitle" id="audio-voice-subtitle">English (American) · Adult · Studio</span>
+            <span class="audio-title" id="audio-voice-title">語音導覽 (繁體中文)</span>
+            <span class="audio-subtitle" id="audio-voice-subtitle">繁體中文 · 系統預設語音</span>
           </div>
           
           <div class="audio-waveform">
@@ -3865,6 +3865,47 @@
       }
 
       /* WEB SPEECH AUDIO GUIDE INTEGRATION */
+      function getCleanVoiceName(voice, index) {
+        const langUpper = voice.lang.toUpperCase();
+        let langName = "";
+        
+        // Detect gender from name heuristics
+        const nameLower = voice.name.toLowerCase();
+        const isMale = nameLower.includes("male") || nameLower.includes("david") || nameLower.includes("george") || nameLower.includes("danny") || nameLower.includes("shaun") || nameLower.includes("daniel") || nameLower.includes("ravi") || nameLower.includes("mark");
+        const isFemale = nameLower.includes("female") || nameLower.includes("zira") || nameLower.includes("yating") || nameLower.includes("hanhan") || nameLower.includes("huihui") || nameLower.includes("yaoyao") || nameLower.includes("karen") || nameLower.includes("tessa") || nameLower.includes("susan") || nameLower.includes("hazel") || nameLower.includes("heera");
+        
+        let genderStr = "";
+        if (state.lang === "zh") {
+          genderStr = isMale ? "男聲" : (isFemale ? "女聲" : "語音");
+        } else {
+          genderStr = isMale ? "Male" : (isFemale ? "Female" : "Voice");
+        }
+
+        if (langUpper.includes("ZH-TW") || langUpper.includes("ZH-HANT-TW")) {
+          langName = state.lang === "zh" ? `繁體中文 (台灣) - ${genderStr}` : `Traditional Chinese (Taiwan) - ${genderStr}`;
+        } else if (langUpper.includes("ZH-HK") || langUpper.includes("ZH-HANT-HK")) {
+          langName = state.lang === "zh" ? `繁體中文 (香港) - ${genderStr}` : `Traditional Chinese (Hong Kong) - ${genderStr}`;
+        } else if (langUpper.includes("ZH-CN") || langUpper.includes("ZH-HANS-CN") || langUpper.includes("ZH-SG")) {
+          langName = state.lang === "zh" ? `普通話 (簡體) - ${genderStr}` : `Mandarin (Simplified) - ${genderStr}`;
+        } else if (langUpper.startsWith("ZH")) {
+          langName = state.lang === "zh" ? `中文 - ${genderStr}` : `Chinese - ${genderStr}`;
+        } else if (langUpper.includes("EN-US")) {
+          langName = state.lang === "zh" ? `英語 (美國) - ${genderStr}` : `English (United States) - ${genderStr}`;
+        } else if (langUpper.includes("EN-GB") || langUpper.includes("EN-UK")) {
+          langName = state.lang === "zh" ? `英語 (英國) - ${genderStr}` : `English (United Kingdom) - ${genderStr}`;
+        } else if (langUpper.includes("EN-CA")) {
+          langName = state.lang === "zh" ? `英語 (加拿大) - ${genderStr}` : `English (Canada) - ${genderStr}`;
+        } else if (langUpper.includes("EN-AU")) {
+          langName = state.lang === "zh" ? `英語 (澳洲) - ${genderStr}` : `English (Australia) - ${genderStr}`;
+        } else if (langUpper.startsWith("EN")) {
+          langName = state.lang === "zh" ? `英語 - ${genderStr}` : `English - ${genderStr}`;
+        } else {
+          langName = `${voice.lang} - ${genderStr}`;
+        }
+        
+        return `${langName} #${index + 1}`;
+      }
+
       function loadSpeechVoices() {
         if (!state.speechSynth) return;
         state.voices = state.speechSynth.getVoices();
@@ -3880,28 +3921,15 @@
           }
         });
 
-        if (filteredVoices.length === 0) {
-          state.voices.forEach((v, index) => {
-            const opt = document.createElement("option");
-            opt.value = index;
-            opt.textContent = `${v.name} (${v.lang})`;
-            select.appendChild(opt);
-          });
-        } else {
-          filteredVoices.forEach(v => {
-            const opt = document.createElement("option");
-            opt.value = state.voices.indexOf(v);
+        const voicesToRender = filteredVoices.length === 0 ? state.voices : filteredVoices;
 
-            let displayName = v.name;
-            if (v.name.includes("Yating")) displayName = "Taiwan Yating (Pro)";
-            if (v.name.includes("Taiwan")) displayName = "Traditional Mandarin (TW)";
-            if (v.name.includes("Daniel") || v.name.includes("George") || v.name.includes("Great Britain")) displayName = "British Male (EN-GB)";
+        voicesToRender.forEach((v, index) => {
+          const opt = document.createElement("option");
+          opt.value = state.voices.indexOf(v);
+          opt.textContent = getCleanVoiceName(v, index);
+          select.appendChild(opt);
+        });
 
-            opt.textContent = `${displayName} (${v.lang})`;
-
-            select.appendChild(opt);
-          });
-        }
         updateSelectedVoiceDisplay();
       }
 
@@ -3909,39 +3937,68 @@
         const select = document.getElementById("audio-voice-select");
         if (!select) return;
         const selectedOpt = select.options[select.selectedIndex];
-        if (!selectedOpt) return;
         
-        const voiceIndex = selectedOpt.value;
-        const voice = state.voices[voiceIndex];
-        if (!voice) return;
-        
-        // 1. Format Voice Title
-        let title = voice.name;
-        // Clean up common system voice prefixes/suffixes for sleek aesthetics
-        title = title.replace(/Microsoft|Google|Apple|Natural/gi, "").trim();
-        title = title.replace(/^\-+|\-+$/g, "").trim(); // clean dashes
-        if (title.indexOf(" -") !== -1) {
-          title = title.split(" -")[0];
-        } else if (title.indexOf(" (") !== -1) {
-          title = title.split(" (")[0];
-        }
-        title = title.trim() || voice.name;
-        
-        // 2. Format Voice Subtitle
+        let title = "";
         let subtitle = "";
-        const langUpper = voice.lang.toUpperCase();
-        if (langUpper.startsWith("ZH-TW") || langUpper.startsWith("ZH-HK")) {
-          subtitle = state.lang === "zh" ? "繁體中文 · 成人聲音 · 標準" : "Traditional Chinese · Adult · Standard";
-        } else if (langUpper.startsWith("ZH")) {
-          subtitle = state.lang === "zh" ? "普通話 · 成人聲音 · 標準" : "Mandarin Chinese · Adult · Standard";
-        } else if (langUpper.startsWith("EN-US")) {
-          subtitle = state.lang === "zh" ? "英語 (美國) · 成人聲音 · 錄音室" : "English (American) · Adult · Studio";
-        } else if (langUpper.startsWith("EN-GB") || langUpper.startsWith("EN-UK")) {
-          subtitle = state.lang === "zh" ? "英語 (英國) · 成人聲音 · 錄音室" : "English (British) · Adult · Studio";
-        } else if (langUpper.startsWith("EN")) {
-          subtitle = state.lang === "zh" ? "英語 · 成人聲音 · 標準" : "English · Adult · Standard";
+        
+        if (!selectedOpt) {
+          if (state.lang === "zh") {
+            title = "語音導覽 (繁體中文)";
+            subtitle = "繁體中文 · 系統預設語音";
+          } else {
+            title = "Audio Guide (English)";
+            subtitle = "English · System Default Voice";
+          }
         } else {
-          subtitle = `${voice.lang} · ${state.lang === "zh" ? "系統內建語音" : "System Engine"}`;
+          const voiceIndex = selectedOpt.value;
+          const voice = state.voices[voiceIndex];
+          if (voice) {
+            const langUpper = voice.lang.toUpperCase();
+            
+            // Detect gender from name heuristics
+            const nameLower = voice.name.toLowerCase();
+            const isMale = nameLower.includes("male") || nameLower.includes("david") || nameLower.includes("george") || nameLower.includes("danny") || nameLower.includes("shaun") || nameLower.includes("daniel") || nameLower.includes("ravi") || nameLower.includes("mark");
+            const isFemale = nameLower.includes("female") || nameLower.includes("zira") || nameLower.includes("yating") || nameLower.includes("hanhan") || nameLower.includes("huihui") || nameLower.includes("yaoyao") || nameLower.includes("karen") || nameLower.includes("tessa") || nameLower.includes("susan") || nameLower.includes("hazel") || nameLower.includes("heera");
+            
+            let genderStr = "";
+            if (state.lang === "zh") {
+              genderStr = isMale ? "男聲" : (isFemale ? "女聲" : "標準語音");
+            } else {
+              genderStr = isMale ? "Male" : (isFemale ? "Female" : "Standard Voice");
+            }
+
+            if (langUpper.includes("ZH-TW") || langUpper.includes("ZH-HANT-TW")) {
+              title = state.lang === "zh" ? "語音導覽 (繁體中文)" : "Audio Guide (Traditional Chinese)";
+              subtitle = state.lang === "zh" ? `台灣地區 · ${genderStr}` : `Taiwan · ${genderStr}`;
+            } else if (langUpper.includes("ZH-HK") || langUpper.includes("ZH-HANT-HK")) {
+              title = state.lang === "zh" ? "語音導覽 (繁體中文)" : "Audio Guide (Traditional Chinese)";
+              subtitle = state.lang === "zh" ? `香港地區 · ${genderStr}` : `Hong Kong · ${genderStr}`;
+            } else if (langUpper.includes("ZH-CN") || langUpper.includes("ZH-HANS-CN") || langUpper.includes("ZH-SG")) {
+              title = state.lang === "zh" ? "語音導覽 (普通話)" : "Audio Guide (Mandarin)";
+              subtitle = state.lang === "zh" ? `標準普通話 · ${genderStr}` : `Standard Mandarin · ${genderStr}`;
+            } else if (langUpper.startsWith("ZH")) {
+              title = state.lang === "zh" ? "語音導覽 (中文)" : "Audio Guide (Chinese)";
+              subtitle = state.lang === "zh" ? `中文 · ${genderStr}` : `Chinese · ${genderStr}`;
+            } else if (langUpper.includes("EN-US")) {
+              title = state.lang === "zh" ? "語音導覽 (英語)" : "Audio Guide (English)";
+              subtitle = state.lang === "zh" ? `美國口音 · ${genderStr}` : `United States · ${genderStr}`;
+            } else if (langUpper.includes("EN-GB") || langUpper.includes("EN-UK")) {
+              title = state.lang === "zh" ? "語音導覽 (英語)" : "Audio Guide (English)";
+              subtitle = state.lang === "zh" ? `英國口音 · ${genderStr}` : `United Kingdom · ${genderStr}`;
+            } else if (langUpper.includes("EN-CA")) {
+              title = state.lang === "zh" ? "語音導覽 (英語)" : "Audio Guide (English)";
+              subtitle = state.lang === "zh" ? `加拿大口音 · ${genderStr}` : `Canada · ${genderStr}`;
+            } else if (langUpper.includes("EN-AU")) {
+              title = state.lang === "zh" ? "語音導覽 (英語)" : "Audio Guide (English)";
+              subtitle = state.lang === "zh" ? `澳洲口音 · ${genderStr}` : `Australia · ${genderStr}`;
+            } else if (langUpper.startsWith("EN")) {
+              title = state.lang === "zh" ? "語音導覽 (英語)" : "Audio Guide (English)";
+              subtitle = state.lang === "zh" ? `英語 · ${genderStr}` : `English · ${genderStr}`;
+            } else {
+              title = state.lang === "zh" ? `語音導覽 (${voice.lang})` : `Audio Guide (${voice.lang})`;
+              subtitle = state.lang === "zh" ? `系統語音 · ${genderStr}` : `System Voice · ${genderStr}`;
+            }
+          }
         }
         
         document.getElementById("audio-voice-title").textContent = title;
