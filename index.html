@@ -4547,7 +4547,7 @@
         const videos = [
           {
             nameZh: "Angela 劉馥瑄",
-            nameEn: "Angela Chen (劉馥瑄)",
+            nameEn: "Angela Chen",
             id: "112212082",
             videoId: "IJUdxkn7E9A",
             url: "https://youtu.be/IJUdxkn7E9A",
@@ -4565,8 +4565,8 @@
             }
           },
           {
-            nameZh: "Tina Wang 王怡婷",
-            nameEn: "Tina Wang (王怡婷)",
+            nameZh: "Tina 王怡婷",
+            nameEn: "Tina Wang",
             id: "112212015",
             videoId: "N7V0fcwVZsI",
             url: "https://youtu.be/N7V0fcwVZsI",
@@ -4584,8 +4584,8 @@
             }
           },
           {
-            nameZh: "Tina Lin 林庭伃",
-            nameEn: "Tina Lin (林庭伃)",
+            nameZh: "Tina 林庭伃",
+            nameEn: "Tina Lin",
             id: "113212016",
             videoId: "EnPkUirJ1i8",
             url: "https://www.youtube.com/watch?v=EnPkUirJ1i8",
@@ -4604,7 +4604,7 @@
           },
           {
             nameZh: "Alex 楊承逸",
-            nameEn: "Alex Yang (楊承逸)",
+            nameEn: "Alex Yang",
             id: "112212007",
             videoId: "p_xiqRoxXtE",
             url: "https://www.youtube.com/watch?v=p_xiqRoxXtE",
@@ -4623,7 +4623,7 @@
           },
           {
             nameZh: "Julia 邱泱慈 (決慈)",
-            nameEn: "Julia Qiu (邱泱慈 / 邱決慈)",
+            nameEn: "Julia Qiu",
             id: "112212023",
             videoId: "IG1NRMUJAQQ",
             url: "https://www.youtube.com/watch?v=IG1NRMUJAQQ",
@@ -4642,7 +4642,7 @@
           },
           {
             nameZh: "Miranda 顏郁珊",
-            nameEn: "Miranda Yen (顏郁珊)",
+            nameEn: "Miranda Yen",
             id: "1112120225",
             videoId: "lw-7xPK1ZGs",
             url: "https://www.youtube.com/watch?v=lw-7xPK1ZGs&t=2s",
@@ -4692,7 +4692,7 @@
                   <h3 style="font-family:'Inter', sans-serif; font-size:16px; font-weight:700; color:var(--ink); margin:0;">
                     <strong>${name}</strong>
                   </h3>
-                  <div style="font-size:12px; font-weight:600; color:var(--muted); letter-spacing:0.5px; margin-bottom:8px;">學號 Student ID: ${v.id}</div>
+                  <div style="font-size:12px; font-weight:600; color:var(--muted); letter-spacing:0.5px; margin-bottom:8px;">${state.lang === 'zh' ? '學號' : 'Student ID'}: ${v.id}</div>
                   
                   <!-- Member Specific Work Content Details -->
                   <div style="margin-top:8px; border-top:1px solid var(--hairline-soft); padding-top:8px; display:flex; flex-direction:column; gap:6px; font-size:12px; line-height:1.4;">
@@ -4730,7 +4730,7 @@
             <table style="width: 100%; border-collapse: collapse; min-width: 800px; text-align: left; font-size: 13px;">
               <thead>
                 <tr style="background: var(--surface-strong); border-bottom: 1px solid var(--hairline-strong);">
-                  <th style="padding: 16px 20px; font-weight: 700; color: var(--ink); width: 15%;">${state.lang === 'zh' ? '成員 Member' : 'Member'}</th>
+                  <th style="padding: 16px 20px; font-weight: 700; color: var(--ink); width: 15%;">${state.lang === 'zh' ? '成員' : 'Member'}</th>
                   <th style="padding: 16px 20px; font-weight: 700; color: var(--ink); width: 28%;">TP0 ${state.lang === 'zh' ? '歷史與財務' : 'History & Financials'}</th>
                   <th style="padding: 16px 20px; font-weight: 700; color: var(--ink); width: 28%;">TP1 & TP2 ${state.lang === 'zh' ? '外部與內部能耐' : 'External & Internal Moats'}</th>
                   <th style="padding: 16px 20px; font-weight: 700; color: var(--ink); width: 29%;">TP3 & ${state.lang === 'zh' ? '總網頁整合' : 'Web Hub Integration'}</th>
