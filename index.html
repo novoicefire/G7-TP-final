@@ -4737,7 +4737,7 @@
               const name = state.lang === 'zh' ? v.nameZh.split(" ")[1] || v.nameZh.split(" ")[0] : v.nameEn.split(" (")[0];
               return `
               <button class="tab-btn" 
-                      style="padding: 8px 18px; font-size: 13px; border-radius: var(--radius-pill); font-family: 'Inter', sans-serif; font-weight:600; border:none; cursor:pointer; background:${isSelected ? 'var(--primary)' : 'transparent'}; color:${isSelected ? 'var(--on-primary)' : 'var(--muted)'}; transition:all 0.25s;" 
+                      style="padding: 8px 18px; font-size: 15px; border-radius: var(--radius-pill); font-family: 'Inter', sans-serif; font-weight:500; border:none; cursor:pointer; background:${isSelected ? 'var(--primary)' : 'transparent'}; color:${isSelected ? 'var(--on-primary)' : 'var(--muted)'}; transition:all 0.25s;" 
                       type="button" 
                       onclick="window.selectIntroMember(${index})">
                 ${name}
@@ -4751,7 +4751,7 @@
             
             <!-- Left Column: Natively Embedded YouTube Frame -->
             <div style="display:flex; flex-direction:column; gap:12px; width:100%;">
-              <div style="position:relative; width:100%; aspect-ratio:16/9; border-radius:var(--radius-xl); overflow:hidden; box-shadow:0 12px 40px rgba(0,0,0,0.18); background-color:#000; border:1px solid var(--hairline-strong);">
+              <div style="position:relative; width:100%; aspect-ratio:16/9; border-radius:var(--radius-xl); overflow:hidden; box-shadow:0 4px 16px rgba(0,0,0,0.06); background-color:#000; border:1px solid var(--hairline-strong);">
                 <iframe 
                   src="https://www.youtube.com/embed/${selectedVideo.videoId}?rel=0&autoplay=1" 
                   title="${selectedName} Video" 
@@ -4760,7 +4760,7 @@
                   allowfullscreen>
                 </iframe>
               </div>
-              <div style="font-size:13px; color:var(--muted); text-align:center; font-style:italic; margin-top:4px;">
+              <div style="font-size:14px; color:var(--muted); text-align:center; font-style:italic; margin-top:4px;">
                 ${state.lang === 'zh' 
                   ? `正在播放：${selectedName} 的 D-ID 自我介紹影音` 
                   : `Now Playing: ${selectedName}'s D-ID Self-Introduction`}
@@ -4768,12 +4768,12 @@
             </div>
 
             <!-- Right Column: Member scorecard & Workloads -->
-            <div class="editorial-card" style="padding:28px; border-radius:var(--radius-xl); border:1px solid var(--hairline-strong); background-color:var(--surface-card); box-shadow:0 6px 24px rgba(0,0,0,0.03); display:flex; flex-direction:column; gap:20px;">
+            <div class="editorial-card" style="padding:28px; border-radius:var(--radius-xl); border:1px solid var(--hairline-strong); background-color:var(--surface-card); box-shadow:none; display:flex; flex-direction:column; gap:20px;">
               <div>
                 <span class="badge" style="background:var(--primary); color:var(--on-primary); font-size:11px; margin-bottom:8px;">
                   ${state.lang === 'zh' ? '成員詳細職責' : 'MEMBER WORKLOAD'}
                 </span>
-                <h3 style="font-family:'EB Garamond', serif; font-size:24px; font-weight:700; color:var(--ink); margin:0 0-6px 0;">
+                <h3 style="font-family:'EB Garamond', serif; font-size:24px; font-weight:300; color:var(--ink); margin:0 0 6px 0;">
                   ${selectedName}
                 </h3>
                 <div style="font-size:13px; font-weight:600; color:var(--muted); letter-spacing:0.5px; margin-top:8px;">
