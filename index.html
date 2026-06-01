@@ -4041,22 +4041,48 @@
         const select = document.getElementById("audio-voice-select");
         select.innerHTML = "";
 
-        const filteredVoices = state.voices.filter(v => {
-          if (state.lang === "zh") {
-            return v.lang.startsWith("zh") || v.lang.startsWith("zho");
-          } else {
-            return v.lang.startsWith("en");
-          }
-        });
+        // Find the single best Chinese voice
+        const zhVoices = state.voices.filter(v => v.lang.startsWith("zh") || v.lang.startsWith("zho"));
+        const bestZh = zhVoices.find(v => v.lang.toUpperCase().includes("ZH-TW") || v.lang.toUpperCase().includes("ZH-HANT")) || zhVoices[0];
 
-        const voicesToRender = filteredVoices.length === 0 ? state.voices : filteredVoices;
+        // Find the single best English voice
+        const enVoices = state.voices.filter(v => v.lang.startsWith("en"));
+        const bestEn = enVoices.find(v => v.lang.toUpperCase().includes("EN-US")) || enVoices[0];
 
-        voicesToRender.forEach((v, index) => {
+        // Create the final list of exactly one voice per language
+        const voicesToRender = [];
+        if (bestZh) voicesToRender.push(bestZh);
+        if (bestEn) voicesToRender.push(bestEn);
+
+        // Fallback to all voices if none found
+        const finalVoices = voicesToRender.length > 0 ? voicesToRender : state.voices;
+
+        finalVoices.forEach((v, index) => {
           const opt = document.createElement("option");
           opt.value = state.voices.indexOf(v);
-          opt.textContent = getCleanVoiceName(v, index);
+          
+          const langUpper = v.lang.toUpperCase();
+          let displayName = "";
+          if (langUpper.startsWith("ZH")) {
+            displayName = state.lang === "zh" ? "語音導覽 (繁體中文)" : "Audio Guide (Traditional Chinese)";
+          } else if (langUpper.startsWith("EN")) {
+            displayName = state.lang === "zh" ? "語音導覽 (英語)" : "Audio Guide (English)";
+          } else {
+            displayName = `${v.name} (${v.lang})`;
+          }
+
+          opt.textContent = displayName;
           select.appendChild(opt);
         });
+
+        // Set default selection based on current active language
+        if (state.lang === "zh" && bestZh) {
+          const index = finalVoices.indexOf(bestZh);
+          if (index !== -1) select.selectedIndex = index;
+        } else if (state.lang === "en" && bestEn) {
+          const index = finalVoices.indexOf(bestEn);
+          if (index !== -1) select.selectedIndex = index;
+        }
 
         updateSelectedVoiceDisplay();
       }
