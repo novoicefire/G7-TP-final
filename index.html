@@ -4732,58 +4732,6 @@
           </div>
         </div>
 
-        <!-- DETAILED DIVISION OF LABOR TABLE SECTION -->
-        <div class="section-block" style="margin-top: 48px; border-top: 1px solid var(--hairline-strong); padding-top: 48px;">
-          <p class="eyebrow">${state.lang === 'zh' ? '職責矩陣 · 團隊分工' : 'RESPONSIBILITY MATRIX · TEAM WORKLOAD'}</p>
-          <h2>${state.lang === 'zh' ? '成員詳細分工明細表' : 'Detailed Project Responsibility Matrix'}</h2>
-          <p style="font-size:15px; color:var(--body); max-width:800px; margin-bottom:24px;">
-            ${state.lang === 'zh'
-              ? '本表彙整第七組全體研究團隊成員於各個研究階段 (TP0、TP1 & TP2、TP3、TP總網頁) 的分工細節，展現協同合作與專業化分工。'
-              : 'This matrix aggregates the specific project tasks, academic research topics, and web implementations executed by each G7 member across all milestones (TP0, TP1 & TP2, TP3, TP Main Web).'}
-          </p>
-          
-          <div style="overflow-x: auto; border: 1px solid var(--hairline-strong); border-radius: var(--radius-xl); background: var(--surface-card); box-shadow: 0 4px 20px rgba(0,0,0,0.03);">
-            <table style="width: 100%; border-collapse: collapse; min-width: 800px; text-align: left; font-size: 13px;">
-              <thead>
-                <tr style="background: var(--surface-strong); border-bottom: 1px solid var(--hairline-strong);">
-                  <th style="padding: 16px 20px; font-weight: 700; color: var(--ink); width: 12%;">${state.lang === 'zh' ? '成員 Member' : 'Member'}</th>
-                  <th style="padding: 16px 20px; font-weight: 700; color: var(--ink); width: 22%;">TP0 ${state.lang === 'zh' ? '歷史與財務' : 'History & Financials'}</th>
-                  <th style="padding: 16px 20px; font-weight: 700; color: var(--ink); width: 22%;">TP1 & TP2 ${state.lang === 'zh' ? '外部與內部能耐' : 'External & Internal Moats'}</th>
-                  <th style="padding: 16px 20px; font-weight: 700; color: var(--ink); width: 22%;">TP3 ${state.lang === 'zh' ? '國際策略分析' : 'Global Strategy'}</th>
-                  <th style="padding: 16px 20px; font-weight: 700; color: var(--ink); width: 22%;">TP ${state.lang === 'zh' ? '總網頁整合' : 'Web Hub Integration'}</th>
-                </tr>
-              </thead>
-              <tbody>
-                ${videos.map((v, index) => {
-                  const name = state.lang === "zh" ? v.nameZh : v.nameEn;
-                  const rowBg = index % 2 === 0 ? 'var(--canvas-soft)' : 'var(--surface-card)';
-                  return `
-                  <tr style="background: ${rowBg}; border-bottom: 1px solid var(--hairline-soft); transition: background-color 0.2s;" onmouseover="this.style.backgroundColor='var(--surface-strong)'" onmouseout="this.style.backgroundColor='${rowBg}'">
-                    <td style="padding: 16px 20px; font-weight: 700; color: var(--ink);">
-                      <div style="display:flex; flex-direction:column; gap:2px;">
-                        <span>${name}</span>
-                        <span style="font-size:11px; font-weight:500; color:var(--muted);">ID: ${v.id}</span>
-                      </div>
-                    </td>
-                    <td style="padding: 16px 20px; color: var(--body-strong); line-height: 1.5;">
-                      ${state.lang === 'zh' ? v.tasksZh.tp0 : v.tasksEn.tp0}
-                    </td>
-                    <td style="padding: 16px 20px; color: var(--body-strong); line-height: 1.5;">
-                      ${state.lang === 'zh' ? v.tasksZh.tp12 : v.tasksEn.tp12}
-                    </td>
-                    <td style="padding: 16px 20px; color: var(--body-strong); line-height: 1.5;">
-                      ${state.lang === 'zh' ? v.tasksZh.tp3 : v.tasksEn.tp3}
-                    </td>
-                    <td style="padding: 16px 20px; color: var(--body-strong); line-height: 1.5;">
-                      ${state.lang === 'zh' ? v.tasksZh.tpWeb : v.tasksEn.tpWeb}
-                    </td>
-                  </tr>
-                  `;
-                }).join("")}
-              </tbody>
-            </table>
-          </div>
-        </div>
         `;
 
         container.innerHTML = html;
